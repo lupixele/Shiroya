@@ -87,53 +87,50 @@ COMMIT;
 ### 1. List Computer Science students
 
 ```sql
-SELECT Student.StudentName
-FROM Student
-JOIN Department ON Student.DeptID = Department.DeptID
-WHERE Department.DeptName = 'Computer Science';
+SELECT StudentName FROM Student
+WHERE DeptID = (SELECT DeptID FROM Department WHERE DeptName = 'Computer Science');
 ```
 
 **Output:** Alice, Charlie.
 
-**Remember:** `JOIN` matches department IDs; `WHERE` selects Computer Science.
+**Remember:** The subquery finds the DeptID for Computer Science; the outer query selects students from that department.
 
 ### 2. List courses with faculty names
 
 ```sql
-SELECT Course.CourseName, Faculty.FacultyName
-FROM Course
-JOIN Faculty ON Course.DeptID = Faculty.DeptID;
+SELECT c.CourseName, f.FacultyName
+FROM Course c, Faculty f
+WHERE c.DeptID = f.DeptID;
 ```
 
 **Output:** DBMS — Kumar; Circuits — Meena.
 
-**Explanation:** Matches courses and faculty from the same department. In our sample, each department has one faculty member. The given schema does not identify who teaches each course, so this is a department-based match, not a confirmed teaching assignment.
+**Explanation:** Use a comma-separated list of tables and a WHERE condition to match courses and faculty from the same department.
 
 ### 3. Display student enrollments with grades
 
 ```sql
-SELECT Student.StudentName, Course.CourseName, Enrollment.Grade
-FROM Enrollment
-JOIN Student ON Enrollment.StudentID = Student.StudentID
-JOIN Course ON Enrollment.CourseID = Course.CourseID;
+SELECT s.StudentName, c.CourseName, e.Grade
+FROM Student s, Enrollment e, Course c
+WHERE s.StudentID = e.StudentID AND e.CourseID = c.CourseID;
 ```
 
 **Output:** Alice — DBMS — A; Bob — Circuits — B; Charlie — DBMS — A.
 
-**Remember:** `Enrollment` connects `Student` and `Course`.
+**Remember:** Multiple WHERE conditions connect the three tables.
 
 ### 4. Count students in each department
 
 ```sql
-SELECT Department.DeptName, COUNT(Student.StudentID)
-FROM Department
-LEFT JOIN Student ON Department.DeptID = Student.DeptID
-GROUP BY Department.DeptID, Department.DeptName;
+SELECT d.DeptName, COUNT(s.StudentID)
+FROM Department d, Student s
+WHERE d.DeptID = s.DeptID
+GROUP BY d.DeptID, d.DeptName;
 ```
 
 **Output:** Computer Science — 2; Electronics — 1.
 
-**Remember:** `LEFT JOIN` includes departments with no students; `GROUP BY` counts by department.
+**Remember:** `GROUP BY` groups results by department; `COUNT` counts students in each group.
 
 ### 5. Display departments with locations
 
@@ -146,9 +143,9 @@ SELECT DeptName, Location FROM Department;
 ### 6. Display faculty with department names
 
 ```sql
-SELECT Faculty.FacultyName, Department.DeptName
-FROM Faculty
-JOIN Department ON Faculty.DeptID = Department.DeptID;
+SELECT f.FacultyName, d.DeptName
+FROM Faculty f, Department d
+WHERE f.DeptID = d.DeptID;
 ```
 
 **Output:** Kumar — Computer Science; Meena — Electronics.
@@ -950,5 +947,3 @@ COMMIT;
 **Explanation:** Oracle removes the deleted record's index entries automatically; the indexes themselves remain available.
 
 ---
-EVOKE, COMMIT, ROLLBACK |
-| 10 | Indexes | PRIMARY KEY, CREATE INDEX |

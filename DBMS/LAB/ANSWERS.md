@@ -1,22 +1,20 @@
 # DBMS Lab Internal — Complete Answers & Revision Guide
 
-> **Scope:** All 10 experiments and their subquestions from the supplied **DBMS Lab Internal Question Paper** (3 pages).  
-> **SQL dialect:** Oracle SQL (including Oracle materialized views, `MINUS`, `DUAL`, and `TO_DATE`).  
-> **Exam method:** Read the **Idea**, practice the **SQL**, then revise the **Remember** line.  
-> **Important:** Run each experiment **separately**. Some use the same table names with different columns. Do not execute all experiments in one shared schema without renaming/recreating those tables.
+**SQL:** Oracle Database 10g
+
+> Run the table setup **once** for each main question, then run its numbered parts. If you have already created a table with the same name, use a fresh schema or remove the old table first.
 >
-> Get Oracle10g.exe from [here](https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb)
+> [Oracle 10g installer](https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb)
+
 ---
 
 # 1. University Database — Schema Creation and SQL Queries
 
-## 1(a) Create the University database tables
+## 1(a) Create the university tables
 
-**Idea:** A **primary key (PK)** uniquely identifies a row; a **foreign key (FK)** links a row to another table.
+**Idea:** A **primary key** identifies each record. `DeptID` identifies a department; `StudentID`, `FacultyID`, and `CourseID` identify their respective records.
 
-The question paper specifies these tables and columns:
-
-| Table | Columns |
+| Table | Attributes |
 |---|---|
 | Department | DeptID, DeptName, Location |
 | Faculty | FacultyID, FacultyName, DeptID, Email |
@@ -27,182 +25,156 @@ The question paper specifies these tables and columns:
 ```sql
 CREATE TABLE Department (
     DeptID NUMBER PRIMARY KEY,
-    DeptName VARCHAR2(50) NOT NULL,
-    Location VARCHAR2(50)
+    DeptName VARCHAR2(30),
+    Location VARCHAR2(30)
 );
 
 CREATE TABLE Faculty (
     FacultyID NUMBER PRIMARY KEY,
-    FacultyName VARCHAR2(50) NOT NULL,
+    FacultyName VARCHAR2(30),
     DeptID NUMBER,
-    Email VARCHAR2(100),
-    FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
+    Email VARCHAR2(50)
 );
 
 CREATE TABLE Student (
     StudentID NUMBER PRIMARY KEY,
-    StudentName VARCHAR2(50) NOT NULL,
+    StudentName VARCHAR2(30),
     DOB DATE,
     DeptID NUMBER,
-    Email VARCHAR2(100),
-    FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
+    Email VARCHAR2(50)
 );
 
 CREATE TABLE Course (
     CourseID NUMBER PRIMARY KEY,
-    CourseName VARCHAR2(100) NOT NULL,
+    CourseName VARCHAR2(30),
     DeptID NUMBER,
-    Credits NUMBER,
-    FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
+    Credits NUMBER
 );
 
 CREATE TABLE Enrollment (
     EnrollmentID NUMBER PRIMARY KEY,
     StudentID NUMBER,
     CourseID NUMBER,
-    Semester VARCHAR2(20),
-    Grade VARCHAR2(5),
-    FOREIGN KEY (StudentID) REFERENCES Student(StudentID),
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID)
+    Semester VARCHAR2(10),
+    Grade VARCHAR2(5)
 );
 ```
 
-### Sample records (run in this order)
+### Sample records — run once
 
 ```sql
 INSERT INTO Department VALUES (1, 'Computer Science', 'Block A');
 INSERT INTO Department VALUES (2, 'Electronics', 'Block B');
 
-INSERT INTO Faculty VALUES (101, 'Dr. Kumar', 1, 'kumar@uni.edu');
-INSERT INTO Faculty VALUES (102, 'Dr. Meena', 2, 'meena@uni.edu');
+INSERT INTO Faculty VALUES (101, 'Kumar', 1, 'kumar@uni.com');
+INSERT INTO Faculty VALUES (102, 'Meena', 2, 'meena@uni.com');
 
-INSERT INTO Student VALUES
-(1, 'Alice', TO_DATE('2005-04-12', 'YYYY-MM-DD'), 1, 'alice@uni.edu');
-INSERT INTO Student VALUES
-(2, 'Bob', TO_DATE('2005-09-21', 'YYYY-MM-DD'), 2, 'bob@uni.edu');
-INSERT INTO Student VALUES
-(3, 'Charlie', TO_DATE('2004-11-05', 'YYYY-MM-DD'), 1, 'charlie@uni.edu');
+INSERT INTO Student VALUES (1, 'Alice', DATE '2005-01-10', 1, 'alice@uni.com');
+INSERT INTO Student VALUES (2, 'Bob', DATE '2005-02-10', 2, 'bob@uni.com');
+INSERT INTO Student VALUES (3, 'Charlie', DATE '2005-03-10', 1, 'charlie@uni.com');
 
 INSERT INTO Course VALUES (10, 'DBMS', 1, 4);
 INSERT INTO Course VALUES (20, 'Circuits', 2, 3);
 
-INSERT INTO Enrollment VALUES (1001, 1, 10, 'III', 'A');
-INSERT INTO Enrollment VALUES (1002, 3, 10, 'III', 'B');
-INSERT INTO Enrollment VALUES (1003, 2, 20, 'III', 'A');
-
+INSERT INTO Enrollment VALUES (1, 1, 10, 'III', 'A');
+INSERT INTO Enrollment VALUES (2, 2, 20, 'III', 'B');
+INSERT INTO Enrollment VALUES (3, 3, 10, 'III', 'A');
 COMMIT;
 ```
 
-## 1(b) Six queries
+## 1(b) Write SQL queries
 
 ### 1. List Computer Science students
 
 ```sql
-SELECT s.StudentID, s.StudentName
-FROM Student s
-JOIN Department d ON s.DeptID = d.DeptID
+SELECT s.StudentName
+FROM Student s JOIN Department d ON s.DeptID = d.DeptID
 WHERE d.DeptName = 'Computer Science';
 ```
 
-**Result from sample data:** Alice, Charlie.
+**Output:** Alice, Charlie.
 
-**Remember:** `JOIN` tables, `WHERE` department name.
+**Remember:** `JOIN` connects tables; `WHERE` picks the department.
 
 ### 2. List courses with faculty names
 
-**Schema limitation:** The paper does **not** include `FacultyID` in `Course`, nor a course–faculty mapping table. It is therefore **not possible to identify which faculty member actually teaches each course** from the given five tables.
-
-For a correct implementation, add this **extra mapping table** (not part of the question paper):
-
 ```sql
-CREATE TABLE Course_Faculty (
-    CourseID NUMBER,
-    FacultyID NUMBER,
-    PRIMARY KEY (CourseID, FacultyID),
-    FOREIGN KEY (CourseID) REFERENCES Course(CourseID),
-    FOREIGN KEY (FacultyID) REFERENCES Faculty(FacultyID)
-);
-
-INSERT INTO Course_Faculty VALUES (10, 101);
-INSERT INTO Course_Faculty VALUES (20, 102);
-
 SELECT c.CourseName, f.FacultyName
-FROM Course c
-JOIN Course_Faculty cf ON c.CourseID = cf.CourseID
-JOIN Faculty f ON cf.FacultyID = f.FacultyID;
+FROM Course c JOIN Faculty f ON c.DeptID = f.DeptID;
 ```
 
-**Result:** DBMS — Dr. Kumar; Circuits — Dr. Meena.
+**Output:** DBMS — Kumar; Circuits — Meena.
 
-> Some simplified lab solutions join `Course` and `Faculty` by `DeptID`. That only lists faculty from the **same department**; it does **not** prove who teaches the course.
+**Explanation:** This shows courses and faculty **in the same department**. The given schema has no information about which faculty actually teaches each course, so teaching assignments cannot be verified from these tables alone.
 
-### 3. Display students' enrollments and grades
+### 3. Display student enrollments with grades
 
 ```sql
-SELECT s.StudentName, c.CourseName, e.Semester, e.Grade
+SELECT s.StudentName, c.CourseName, e.Grade
 FROM Enrollment e
 JOIN Student s ON e.StudentID = s.StudentID
 JOIN Course c ON e.CourseID = c.CourseID;
 ```
 
-**Remember:** `Enrollment` links students and courses.
+**Output:** Alice — DBMS — A; Bob — Circuits — B; Charlie — DBMS — A.
+
+**Remember:** `Enrollment` connects `Student` and `Course`.
 
 ### 4. Count students in each department
 
 ```sql
-SELECT d.DeptName, COUNT(s.StudentID) AS TotalStudents
-FROM Department d
-LEFT JOIN Student s ON d.DeptID = s.DeptID
-GROUP BY d.DeptID, d.DeptName;
+SELECT d.DeptName, COUNT(s.StudentID)
+FROM Department d LEFT JOIN Student s ON d.DeptID = s.DeptID
+GROUP BY d.DeptName;
 ```
 
-**Result:** Computer Science = 2; Electronics = 1.
+**Output:** Computer Science — 2; Electronics — 1.
 
-**Remember:** `COUNT + GROUP BY`. `LEFT JOIN` also shows departments with zero students.
+**Remember:** `COUNT` counts students; `GROUP BY` separates departments.
 
-### 5. Show departments and locations
+### 5. Display departments with locations
 
 ```sql
-SELECT DeptName, Location
-FROM Department;
+SELECT DeptName, Location FROM Department;
 ```
 
-### 6. Show faculty with department names
+**Output:** Computer Science — Block A; Electronics — Block B.
+
+### 6. Display faculty with department names
 
 ```sql
 SELECT f.FacultyName, d.DeptName
-FROM Faculty f
-JOIN Department d ON f.DeptID = d.DeptID;
+FROM Faculty f JOIN Department d ON f.DeptID = d.DeptID;
 ```
 
-**Quick memory:** **CREATE → INSERT → JOIN → COUNT**.
+**Output:** Kumar — Computer Science; Meena — Electronics.
 
 ---
 
 # 2. Data Manipulation Language (DML)
 
-**Idea:** DML works with **rows**.
+**Idea:** DML commands add, read, change, and delete records.
 
-| Command | Purpose |
+| Command | Action |
 |---|---|
-| `INSERT` | Add a row |
-| `SELECT` | Read rows |
-| `UPDATE` | Change existing rows |
-| `DELETE` | Remove rows |
+| `INSERT` | Add a record |
+| `SELECT` | Display records |
+| `UPDATE` | Change a record |
+| `DELETE` | Remove a record |
 
 ## Create the Employee table
 
 ```sql
 CREATE TABLE Employee (
     EmpID NUMBER PRIMARY KEY,
-    Name VARCHAR2(50),
-    Department VARCHAR2(40),
+    Name VARCHAR2(30),
+    Department VARCHAR2(30),
     Salary NUMBER,
-    City VARCHAR2(40)
+    City VARCHAR2(30)
 );
 ```
 
-## 1. INSERT the six records specified in the paper
+### 1. Insert the given employee records
 
 ```sql
 INSERT INTO Employee VALUES (201, 'John', 'HR', 50000, 'Hyderabad');
@@ -211,624 +183,489 @@ INSERT INTO Employee VALUES (203, 'Bob', 'Finance', 55000, 'Bangalore');
 INSERT INTO Employee VALUES (204, 'Emma', 'IT', 65000, 'Pune');
 INSERT INTO Employee VALUES (205, 'David', 'Marketing', 48000, 'Delhi');
 INSERT INTO Employee VALUES (206, 'Sophia', 'IT', 70000, 'Chennai');
-
 COMMIT;
 ```
 
-## 2. SELECT all employees
+**Explanation:** `INSERT INTO ... VALUES` adds one employee per statement.
+
+### 2. Display all employees using SELECT
 
 ```sql
 SELECT * FROM Employee;
 ```
 
-`*` means **all columns**.
+**Output:** All 6 employee records.
 
-## 3. SELECT with WHERE
+**Remember:** `*` means all columns.
+
+### 3. Display employees using WHERE
 
 ```sql
-SELECT * FROM Employee
-WHERE Department = 'IT';
+SELECT * FROM Employee WHERE Department = 'IT';
 ```
 
-**Result:** Alice (202), Emma (204), Sophia (206).
+**Output:** Alice, Emma, Sophia.
 
-## 4. UPDATE an employee's city
+**Remember:** `WHERE` filters records.
+
+### 4. Change a specified employee's city
 
 ```sql
-UPDATE Employee
-SET City = 'Mumbai'
-WHERE EmpID = 201;
+UPDATE Employee SET City = 'Mumbai' WHERE EmpID = 201;
+SELECT * FROM Employee WHERE EmpID = 201;
 ```
 
-**Result:** John's city changes from Hyderabad to Mumbai.
+**Output:** John's city is now Mumbai.
 
-## 5. DELETE an employee
+**Remember:** `SET` changes the value; `WHERE` chooses the row.
 
-```sql
-DELETE FROM Employee
-WHERE EmpID = 205;
-```
-
-**Result:** David (205) is deleted.
+### 5. Delete a specified employee
 
 ```sql
+DELETE FROM Employee WHERE EmpID = 205;
+SELECT * FROM Employee;
 COMMIT;
 ```
 
-**Remember:** `UPDATE` uses `SET`, `DELETE` uses `WHERE`. **Without WHERE, UPDATE/DELETE may affect all rows.**
+**Output:** David (EmpID 205) is no longer in the table.
+
+**Remember:** Always check the `WHERE` condition before `DELETE` or `UPDATE`.
 
 ---
 
 # 3. SQL Functions
 
-**Idea:** Functions take input and return a calculated or transformed value.
+**Idea:** A function performs an operation and returns a result. Oracle uses the built-in `DUAL` table for these examples.
 
 ## 1. String functions
 
 ```sql
-SELECT UPPER('database') AS UpperText FROM DUAL;
--- DATABASE
-
-SELECT LOWER('SQL LAB') AS LowerText FROM DUAL;
--- sql lab
-
-SELECT INITCAP('hello world') AS TitleCase FROM DUAL;
--- Hello World
-
-SELECT LENGTH('ORACLE') AS LengthValue FROM DUAL;
--- 6
-
-SELECT SUBSTR('DATABASE', 1, 4) AS Part FROM DUAL;
--- DATA
-
-SELECT CONCAT('Data', 'base') AS Combined FROM DUAL;
--- Database
-
-SELECT TRIM('  SQL  ') AS CleanText FROM DUAL;
--- SQL
+SELECT UPPER('hello') FROM DUAL;
+SELECT LOWER('HELLO') FROM DUAL;
+SELECT LENGTH('ORACLE') FROM DUAL;
+SELECT SUBSTR('DATABASE', 1, 4) FROM DUAL;
+SELECT CONCAT('SQL', 'LAB') FROM DUAL;
 ```
 
-**Remember:** `UPPER` big letters, `LOWER` small letters, `LENGTH` count, `SUBSTR` extract.
+| Function | Output |
+|---|---|
+| UPPER | HELLO |
+| LOWER | hello |
+| LENGTH | 6 |
+| SUBSTR | DATA |
+| CONCAT | SQLLAB |
+
+**Remember:** Uppercase, lowercase, count letters, take a portion, join text.
 
 ## 2. Numeric functions
 
 ```sql
-SELECT ABS(-15) AS Answer FROM DUAL;
--- 15
-
-SELECT ROUND(12.567, 2) AS Answer FROM DUAL;
--- 12.57
-
-SELECT TRUNC(12.567, 2) AS Answer FROM DUAL;
--- 12.56
-
-SELECT CEIL(4.2) AS Answer FROM DUAL;
--- 5
-
-SELECT FLOOR(4.9) AS Answer FROM DUAL;
--- 4
-
-SELECT MOD(10, 3) AS Answer FROM DUAL;
--- 1
-
-SELECT POWER(2, 3) AS Answer FROM DUAL;
--- 8
-
-SELECT SQRT(25) AS Answer FROM DUAL;
--- 5
+SELECT ABS(-10) FROM DUAL;
+SELECT ROUND(12.567, 2) FROM DUAL;
+SELECT MOD(10, 3) FROM DUAL;
+SELECT CEIL(4.2) FROM DUAL;
+SELECT FLOOR(4.9) FROM DUAL;
 ```
 
-**Remember:** `ROUND` changes by rounding; `TRUNC` simply cuts off extra decimal digits.
+| Function | Output |
+|---|---:|
+| ABS | 10 |
+| ROUND | 12.57 |
+| MOD | 1 |
+| CEIL | 5 |
+| FLOOR | 4 |
+
+**Remember:** `ABS` removes minus; `ROUND` rounds; `MOD` gives remainder; `CEIL` rounds up; `FLOOR` rounds down.
 
 ## 3. Date and time functions
 
 ```sql
-SELECT SYSDATE AS CurrentDate FROM DUAL;
--- Current date/time from the database server
-
-SELECT CURRENT_TIMESTAMP AS CurrentTime FROM DUAL;
--- Current timestamp with session time zone
-
-SELECT ADD_MONTHS(DATE '2026-01-15', 2) AS NewDate FROM DUAL;
--- 15-MAR-2026 (display format depends on session)
-
-SELECT MONTHS_BETWEEN(DATE '2026-03-15', DATE '2026-01-15')
-       AS MonthGap FROM DUAL;
--- 2
-
-SELECT EXTRACT(YEAR FROM DATE '2026-10-08') AS YearValue FROM DUAL;
--- 2026
-
-SELECT TO_CHAR(DATE '2026-10-08', 'DD-MM-YYYY') AS FormattedDate
-FROM DUAL;
--- 08-10-2026
-
-SELECT LAST_DAY(DATE '2026-02-10') AS MonthEnd FROM DUAL;
--- 28-FEB-2026
+SELECT SYSDATE FROM DUAL;
+SELECT ADD_MONTHS(SYSDATE, 2) FROM DUAL;
+SELECT LAST_DAY(SYSDATE) FROM DUAL;
+SELECT TO_CHAR(SYSDATE, 'DD-MM-YYYY') FROM DUAL;
+SELECT MONTHS_BETWEEN(DATE '2026-03-01', DATE '2026-01-01') FROM DUAL;
 ```
 
-**Remember:** Oracle uses `DUAL` for simple expressions; use `TO_CHAR` for predictable date display.
+**Output:** The first four depend on today's database date. `MONTHS_BETWEEN` returns **2**.
+
+**Remember:** `SYSDATE` = today; `ADD_MONTHS` = move forward; `LAST_DAY` = month end; `TO_CHAR` = date format.
 
 ---
 
-# 4. Aggregate Functions, GROUP BY, HAVING
+# 4. Aggregate Functions — GROUP BY and HAVING
 
-**Idea:** Aggregates calculate results over many rows.
+**Idea:** Aggregate functions calculate results from several rows.
 
 | Function | Meaning |
 |---|---|
-| `SUM` | Total |
-| `AVG` | Average |
-| `MIN` | Smallest |
-| `MAX` | Largest |
-| `COUNT` | Number |
+| SUM | Total |
+| AVG | Average |
+| MIN | Smallest |
+| MAX | Largest |
+| COUNT | Number of rows |
 
-**Setup:** Use a fresh copy of the experiment 2 `Employee` table with **all six original rows**, before its UPDATE and DELETE.
-
-## Basic aggregates
+## Create and fill the table
 
 ```sql
-SELECT
-    SUM(Salary) AS TotalSalary,
-    AVG(Salary) AS AverageSalary,
-    MIN(Salary) AS MinimumSalary,
-    MAX(Salary) AS MaximumSalary,
-    COUNT(*) AS TotalEmployees
-FROM Employee;
+CREATE TABLE Employee4 (
+    EmpID NUMBER,
+    EmpName VARCHAR2(30),
+    Department VARCHAR2(20),
+    Salary NUMBER
+);
+
+INSERT INTO Employee4 VALUES (1, 'Alice', 'IT', 60000);
+INSERT INTO Employee4 VALUES (2, 'Bob', 'IT', 50000);
+INSERT INTO Employee4 VALUES (3, 'John', 'HR', 40000);
+INSERT INTO Employee4 VALUES (4, 'Emma', 'HR', 45000);
+INSERT INTO Employee4 VALUES (5, 'David', 'Finance', 55000);
+COMMIT;
 ```
 
-**Expected results from the original six rows:**
+### 1. SUM, AVG, MIN, MAX and COUNT
+
+```sql
+SELECT SUM(Salary), AVG(Salary), MIN(Salary),
+       MAX(Salary), COUNT(*)
+FROM Employee4;
+```
 
 | SUM | AVG | MIN | MAX | COUNT |
 |---:|---:|---:|---:|---:|
-| 348000 | 58000 | 48000 | 70000 | 6 |
+| 250000 | 50000 | 40000 | 60000 | 5 |
 
-## GROUP BY — group employees department-wise
+### 2. Use GROUP BY
 
 ```sql
-SELECT Department,
-       COUNT(*) AS Employees,
-       SUM(Salary) AS TotalSalary,
-       AVG(Salary) AS AverageSalary
-FROM Employee
+SELECT Department, COUNT(*), SUM(Salary)
+FROM Employee4
 GROUP BY Department;
 ```
 
-For the IT department: **3 employees**, salary total **195000**, average **65000**.
+**Output:** IT — 2 employees, 110000; HR — 2, 85000; Finance — 1, 55000.
 
-## HAVING — filter groups
+**Remember:** `GROUP BY` makes one result group per department.
+
+### 3. Use HAVING
 
 ```sql
-SELECT Department, COUNT(*) AS Total
-FROM Employee
+SELECT Department, COUNT(*)
+FROM Employee4
 GROUP BY Department
 HAVING COUNT(*) > 1;
 ```
 
-**Result:** IT — 3. All other departments have 1 employee.
+**Output:** IT — 2; HR — 2.
 
-## GROUP BY + HAVING + ORDER BY
-
-```sql
-SELECT Department, AVG(Salary) AS AvgSalary
-FROM Employee
-GROUP BY Department
-HAVING AVG(Salary) > 55000
-ORDER BY AvgSalary DESC;
-```
-
-**Result:** IT — 65000.
-
-**Remember:**
-- `WHERE` filters **rows before grouping**.
-- `GROUP BY` creates **groups**.
-- `HAVING` filters **groups after aggregation**.
-- `ORDER BY` sorts the result.
+**Remember:** `WHERE` filters rows; `HAVING` filters groups.
 
 ---
 
 # 5. Joins and Set Operations
 
-**Idea:** A **JOIN** combines columns from tables; a **set operation** combines/compares result rows.
+**Idea:** Joins combine related rows from two tables. Set operations combine or compare the results of two SELECT statements.
 
-## Setup (independent of other experiments)
+## Create and fill the tables
 
 ```sql
-CREATE TABLE Dept5 (
-    DeptID NUMBER PRIMARY KEY,
+CREATE TABLE Department5 (
+    DeptID NUMBER,
     DeptName VARCHAR2(30)
 );
 
-CREATE TABLE Emp5 (
-    EmpID NUMBER PRIMARY KEY,
+CREATE TABLE Employee5 (
+    EmpID NUMBER,
     EmpName VARCHAR2(30),
     DeptID NUMBER
 );
 
-INSERT INTO Dept5 VALUES (1, 'HR');
-INSERT INTO Dept5 VALUES (2, 'IT');
-INSERT INTO Dept5 VALUES (3, 'Finance');
+INSERT INTO Department5 VALUES (1, 'HR');
+INSERT INTO Department5 VALUES (2, 'IT');
+INSERT INTO Department5 VALUES (3, 'Finance');
 
-INSERT INTO Emp5 VALUES (101, 'Alice', 1);
-INSERT INTO Emp5 VALUES (102, 'Bob', 2);
-INSERT INTO Emp5 VALUES (103, 'Charlie', 2);
-INSERT INTO Emp5 VALUES (104, 'David', NULL);
+INSERT INTO Employee5 VALUES (101, 'Alice', 1);
+INSERT INTO Employee5 VALUES (102, 'Bob', 2);
+INSERT INTO Employee5 VALUES (103, 'Charlie', 2);
+INSERT INTO Employee5 VALUES (104, 'David', 4);
 COMMIT;
 ```
 
-`Finance` has no employee, and `David` has no assigned department. This makes unmatched rows easy to observe.
+## 5(1) Join operations
 
-## 1. NATURAL JOIN
-
-Automatically joins columns with the **same name** (`DeptID` here).
+### 1. Natural join
 
 ```sql
 SELECT EmpName, DeptName
-FROM Emp5 NATURAL JOIN Dept5;
+FROM Employee5 NATURAL JOIN Department5;
 ```
 
-**Result:** Alice–HR, Bob–IT, Charlie–IT.
+**Output:** Alice — HR; Bob — IT; Charlie — IT.
 
-**Remember:** `NATURAL` matches shared column names. Use cautiously if tables have several identically named columns.
+**Remember:** `NATURAL JOIN` matches columns with the same name (`DeptID`).
 
-## 2. EQUI-JOIN
-
-A join whose condition uses `=`.
+### 2. Equi-join
 
 ```sql
 SELECT e.EmpName, d.DeptName
-FROM Emp5 e, Dept5 d
+FROM Employee5 e, Department5 d
 WHERE e.DeptID = d.DeptID;
 ```
 
-**Result:** Three matched employee–department pairs.
+**Output:** Alice — HR; Bob — IT; Charlie — IT.
 
-**Remember:** **Equi** means **equal (`=`)**.
+**Remember:** Equi-join uses `=` to match rows.
 
-## 3. OUTER JOIN (FULL OUTER JOIN example)
-
-```sql
-SELECT e.EmpName, d.DeptName
-FROM Emp5 e
-FULL OUTER JOIN Dept5 d ON e.DeptID = d.DeptID;
-```
-
-**Result:** Matched employees, **David with NULL department**, and **Finance with NULL employee**.
-
-**Remember:** `FULL` keeps unmatched rows from **both** tables.
-
-## 4. LEFT OUTER JOIN
+### 3. Outer join (full outer join)
 
 ```sql
 SELECT e.EmpName, d.DeptName
-FROM Emp5 e
-LEFT OUTER JOIN Dept5 d ON e.DeptID = d.DeptID;
+FROM Employee5 e FULL OUTER JOIN Department5 d
+ON e.DeptID = d.DeptID;
 ```
 
-**Result:** All four employees, including **David–NULL**.
+**Output:** Three matches, plus David — NULL and NULL — Finance.
 
-**Remember:** `LEFT` keeps **all left-table** rows (`Emp5`).
+**Remember:** `FULL OUTER JOIN` includes unmatched records from both tables.
 
-## 5. RIGHT OUTER JOIN
+### 4. Left outer join
 
 ```sql
 SELECT e.EmpName, d.DeptName
-FROM Emp5 e
-RIGHT OUTER JOIN Dept5 d ON e.DeptID = d.DeptID;
+FROM Employee5 e LEFT JOIN Department5 d
+ON e.DeptID = d.DeptID;
 ```
 
-**Result:** HR, IT, and Finance are present; **Finance has NULL employee**.
+**Output:** All four employees, including David — NULL.
 
-**Remember:** `RIGHT` keeps **all right-table** rows (`Dept5`).
+**Remember:** `LEFT JOIN` keeps all rows from the left table.
 
-## 6. INNER JOIN
+### 5. Right outer join
 
 ```sql
 SELECT e.EmpName, d.DeptName
-FROM Emp5 e
-INNER JOIN Dept5 d ON e.DeptID = d.DeptID;
+FROM Employee5 e RIGHT JOIN Department5 d
+ON e.DeptID = d.DeptID;
 ```
 
-**Result:** Three matched pairs; no David and no empty Finance row.
+**Output:** HR and IT matches, plus NULL — Finance.
 
-**Remember:** `INNER` keeps **matches only**.
+**Remember:** `RIGHT JOIN` keeps all rows from the right table.
 
-### Join cheat sheet
-
-| Join | Rows kept |
-|---|---|
-| INNER | Only matching |
-| LEFT | All left + matching right |
-| RIGHT | All right + matching left |
-| FULL OUTER | All rows from either side |
-| NATURAL | Automatically matches common column names |
-| EQUI | Joins on equality condition |
-
-## Set operations — setup
+### 6. Inner join
 
 ```sql
-CREATE TABLE SetA (Value NUMBER);
-CREATE TABLE SetB (Value NUMBER);
-
-INSERT INTO SetA VALUES (1);
-INSERT INTO SetA VALUES (2);
-INSERT INTO SetA VALUES (3);
-
-INSERT INTO SetB VALUES (2);
-INSERT INTO SetB VALUES (3);
-INSERT INTO SetB VALUES (4);
-COMMIT;
+SELECT e.EmpName, d.DeptName
+FROM Employee5 e INNER JOIN Department5 d
+ON e.DeptID = d.DeptID;
 ```
 
-### 1. UNION — all unique values from both
+**Output:** Alice — HR; Bob — IT; Charlie — IT.
+
+**Remember:** `INNER JOIN` returns only matching rows.
+
+## 5(2) Set operations
+
+### 1. UNION
 
 ```sql
-SELECT Value FROM SetA
+SELECT DeptID FROM Employee5
 UNION
-SELECT Value FROM SetB;
+SELECT DeptID FROM Department5;
 ```
 
-**Result (regardless of order):** 1, 2, 3, 4.
+**Output:** 1, 2, 3, 4.
 
-### 2. INTERSECTION — common values
+**Remember:** `UNION` combines values and removes duplicates.
+
+### 2. INTERSECTION (INTERSECT)
 
 ```sql
-SELECT Value FROM SetA
+SELECT DeptID FROM Employee5
 INTERSECT
-SELECT Value FROM SetB;
+SELECT DeptID FROM Department5;
 ```
 
-**Result:** 2, 3.
+**Output:** 1, 2.
 
-### 3. SET DIFFERENCE — first set only
+**Remember:** `INTERSECT` returns values present in both results.
 
-In **Oracle SQL**, set difference is `MINUS` (other database products may use `EXCEPT`).
+### 3. SET DIFFERENCE (MINUS)
 
 ```sql
-SELECT Value FROM SetA
+SELECT DeptID FROM Department5
 MINUS
-SELECT Value FROM SetB;
+SELECT DeptID FROM Employee5;
 ```
 
-**Result:** 1.
+**Output:** 3.
 
-**Remember:** `UNION` = both, `INTERSECT` = common, `MINUS` = left-only. Set queries must have compatible column counts and data types.
+**Remember:** Oracle `MINUS` returns values from the first SELECT that are missing from the second.
 
 ---
 
 # 6. Correlated Subqueries and Nested Queries
 
-**Idea:** A **nested query** is a query inside another query. A **correlated query** refers to a row in the outer query.
+**Idea:** A nested query is a `SELECT` inside another query. A correlated query uses a value from the outer query.
 
-## Create the exact sample dataset given in the paper
-
-> **Note:** This experiment's `Employee` table is **different** from the Employee table used in experiments 2 and 4. Use a fresh schema or drop/recreate that table.
+## Create the tables and insert the question-paper data
 
 ```sql
-CREATE TABLE Department (
-    DeptID NUMBER PRIMARY KEY,
+CREATE TABLE Department6 (
+    DeptID NUMBER,
     DeptName VARCHAR2(30)
 );
 
-CREATE TABLE Employee (
-    EmpID NUMBER PRIMARY KEY,
-    EmpName VARCHAR2(30),
-    DeptID NUMBER,
-    Salary NUMBER,
-    FOREIGN KEY (DeptID) REFERENCES Department(DeptID)
-);
-
-INSERT INTO Department VALUES (1, 'HR');
-INSERT INTO Department VALUES (2, 'IT');
-INSERT INTO Department VALUES (3, 'Finance');
-
-INSERT INTO Employee VALUES (101, 'Alice', 1, 50000);
-INSERT INTO Employee VALUES (102, 'Bob', 2, 60000);
-INSERT INTO Employee VALUES (103, 'Charlie', 2, 70000);
-INSERT INTO Employee VALUES (104, 'David', 3, 55000);
-INSERT INTO Employee VALUES (105, 'Eve', 1, 45000);
-COMMIT;
-```
-
-## 1. Employees earning more than the average salary
-
-```sql
-SELECT EmpName, Salary
-FROM Employee
-WHERE Salary > (SELECT AVG(Salary) FROM Employee);
-```
-
-**Average = 56000. Result:** Bob (60000), Charlie (70000).
-
-**Remember:** Compare each salary against the inner `AVG`.
-
-## 2. Highest-paid employee(s)
-
-```sql
-SELECT EmpName, Salary
-FROM Employee
-WHERE Salary = (SELECT MAX(Salary) FROM Employee);
-```
-
-**Result:** Charlie (70000). `=` allows ties to appear if more than one employee earns the maximum.
-
-## 3. Employees in Finance
-
-```sql
-SELECT EmpName
-FROM Employee
-WHERE DeptID = (
-    SELECT DeptID
-    FROM Department
-    WHERE DeptName = 'Finance'
-);
-```
-
-**Result:** David.
-
-## 4. Employees in IT
-
-```sql
-SELECT EmpName
-FROM Employee
-WHERE DeptID = (
-    SELECT DeptID
-    FROM Department
-    WHERE DeptName = 'IT'
-);
-```
-
-**Result:** Bob, Charlie.
-
-## 5. Employees earning less than David
-
-```sql
-SELECT EmpName, Salary
-FROM Employee
-WHERE Salary < (
-    SELECT Salary
-    FROM Employee
-    WHERE EmpName = 'David'
-);
-```
-
-**Result:** Alice (50000), Eve (45000).
-
-**Note:** Assumes the name David uniquely identifies the intended employee in the sample data. For real databases, use `EmpID`.
-
-## 6. Departments that have employees — using IN
-
-```sql
-SELECT DeptName
-FROM Department
-WHERE DeptID IN (
-    SELECT DeptID
-    FROM Employee
-);
-```
-
-**Result:** HR, IT, Finance.
-
-## Extra example: a true CORRELATED subquery
-
-The six requested queries above are conveniently solved using ordinary nested queries. To demonstrate **correlation** explicitly, find employees earning more than the average salary **in their own department**:
-
-```sql
-SELECT e.EmpName, e.Salary, e.DeptID
-FROM Employee e
-WHERE e.Salary > (
-    SELECT AVG(e2.Salary)
-    FROM Employee e2
-    WHERE e2.DeptID = e.DeptID
-);
-```
-
-**Result:** Alice (HR), Charlie (IT).
-
-**Why correlated?** `e.DeptID` comes from the **outer query**, so the inner average depends on the employee being examined.
-
-**Remember:** **Nested = query within query; correlated = inner query refers to outer row.**
-
----
-
-# 7. Views and Materialized Views
-
-**Idea:**
-- **View:** A saved query; normally does **not** separately store its output rows.
-- **Materialized view:** Stores the query result physically and can be **refreshed**.
-
-## Setup
-
-Use a fresh experiment 6 `Employee` table, or create:
-
-```sql
-CREATE TABLE Employee7 (
-    EmpID NUMBER PRIMARY KEY,
+CREATE TABLE Employee6 (
+    EmpID NUMBER,
     EmpName VARCHAR2(30),
     DeptID NUMBER,
     Salary NUMBER
 );
 
-INSERT INTO Employee7 VALUES (101, 'Alice', 1, 50000);
-INSERT INTO Employee7 VALUES (102, 'Bob', 2, 60000);
-INSERT INTO Employee7 VALUES (103, 'Charlie', 2, 70000);
+INSERT INTO Department6 VALUES (1, 'HR');
+INSERT INTO Department6 VALUES (2, 'IT');
+INSERT INTO Department6 VALUES (3, 'Finance');
+
+INSERT INTO Employee6 VALUES (101, 'Alice', 1, 50000);
+INSERT INTO Employee6 VALUES (102, 'Bob', 2, 60000);
+INSERT INTO Employee6 VALUES (103, 'Charlie', 2, 70000);
+INSERT INTO Employee6 VALUES (104, 'David', 3, 55000);
+INSERT INTO Employee6 VALUES (105, 'Eve', 1, 45000);
 COMMIT;
 ```
 
-## 1. Create and query a normal view
+### 1. Employees earning above the average salary
 
 ```sql
-CREATE OR REPLACE VIEW HighSalaryEmployees AS
-SELECT EmpID, EmpName, Salary
-FROM Employee7
-WHERE Salary > 55000;
-
-SELECT * FROM HighSalaryEmployees;
+SELECT EmpName FROM Employee6
+WHERE Salary > (SELECT AVG(Salary) FROM Employee6);
 ```
 
-**Result:** Bob (60000), Charlie (70000).
+**Output:** Bob, Charlie. The average salary is 56000.
 
-A query against a regular view reflects the current underlying table data, subject to transaction visibility.
+**Remember:** The inner query calculates `AVG`; the outer query compares salaries.
 
-## 2. Create and query a materialized view (Oracle)
+### 2. Employees with the highest salary
 
 ```sql
-CREATE MATERIALIZED VIEW EmployeeSalarySummary
-BUILD IMMEDIATE
-REFRESH COMPLETE ON DEMAND
-AS
-SELECT DeptID,
-       COUNT(*) AS EmployeeCount,
-       SUM(Salary) AS TotalSalary
-FROM Employee7
-GROUP BY DeptID;
-
-SELECT * FROM EmployeeSalarySummary;
+SELECT EmpName FROM Employee6
+WHERE Salary = (SELECT MAX(Salary) FROM Employee6);
 ```
 
-**Initial result:**
+**Output:** Charlie (70000).
 
-| DeptID | EmployeeCount | TotalSalary |
-|---:|---:|---:|
-| 1 | 1 | 50000 |
-| 2 | 2 | 130000 |
+**Remember:** `MAX` finds the highest value.
 
-## 3. Modify source data, then refresh
+### 3. Employees in the Finance department
 
 ```sql
-UPDATE Employee7
-SET Salary = 65000
-WHERE EmpID = 102;
+SELECT EmpName FROM Employee6
+WHERE DeptID = (SELECT DeptID FROM Department6
+                WHERE DeptName = 'Finance');
+```
 
+**Output:** David.
+
+### 4. Employees in the IT department
+
+```sql
+SELECT EmpName FROM Employee6
+WHERE DeptID = (SELECT DeptID FROM Department6
+                WHERE DeptName = 'IT');
+```
+
+**Output:** Bob, Charlie.
+
+### 5. Employees earning less than David
+
+```sql
+SELECT EmpName FROM Employee6
+WHERE Salary < (SELECT Salary FROM Employee6
+                WHERE EmpName = 'David');
+```
+
+**Output:** Alice, Eve. David earns 55000.
+
+**Remember:** The inner query first finds David's salary.
+
+### 6. Departments with employees using IN
+
+```sql
+SELECT DeptName FROM Department6
+WHERE DeptID IN (SELECT DeptID FROM Employee6);
+```
+
+**Output:** HR, IT, Finance.
+
+**Remember:** `IN` checks whether a value appears in the subquery result.
+
+### Correlated subquery example
+
+```sql
+SELECT e.EmpName FROM Employee6 e
+WHERE e.Salary > (SELECT AVG(Salary) FROM Employee6 x
+                  WHERE x.DeptID = e.DeptID);
+```
+
+**Output:** Alice, Charlie.
+
+**Explanation:** For each employee, the inner query calculates the average salary **of that employee's department** using `e.DeptID` from the outer query.
+
+---
+
+# 7. Views and Materialized Views
+
+**Idea:** A view is a saved query. A materialized view stores a copy of the query result.
+
+## Create the Employee table
+
+```sql
+CREATE TABLE Employee7 (
+    EmpID NUMBER,
+    EmpName VARCHAR2(30),
+    Salary NUMBER
+);
+
+INSERT INTO Employee7 VALUES (1, 'Alice', 50000);
+INSERT INTO Employee7 VALUES (2, 'Bob', 60000);
+INSERT INTO Employee7 VALUES (3, 'Charlie', 70000);
 COMMIT;
 ```
 
-Because the materialized view uses **ON DEMAND**, the stored result may still show IT's previous total (**130000**) until refreshed.
+### 1. Create and query a view
 
 ```sql
-BEGIN
-    DBMS_MVIEW.REFRESH('EMPLOYEESALARYSUMMARY', 'C');
-END;
-/
+CREATE VIEW HighSalary AS
+SELECT * FROM Employee7 WHERE Salary > 55000;
 
-SELECT * FROM EmployeeSalarySummary;
+SELECT * FROM HighSalary;
 ```
 
-**After refresh:** IT total becomes **135000**.
+**Output:** Bob, Charlie.
 
-> **Oracle note:** Creating materialized views requires appropriate privileges. The materialized-view refresh procedure is run in an Oracle-compatible environment.
+**Remember:** A view displays rows returned by its saved `SELECT`.
 
-**Remember:** **View = saved query. Materialized view = saved results + refresh.**
+### 2. Create and query a materialized view
+
+```sql
+CREATE MATERIALIZED VIEW SalaryCopy AS
+SELECT * FROM Employee7;
+
+SELECT * FROM SalaryCopy;
+```
+
+**Output:** Alice, Bob, Charlie and their salaries.
+
+**Remember:** Materialized views store results. Your Oracle user must have `CREATE MATERIALIZED VIEW` privilege.
 
 ---
 
 # 8. SQL Queries on a Normalized Database Schema
 
-**Idea:** **Normalization** separates information into related tables to reduce duplication.
+**Idea:** The five tables separate student, course, enrollment, and instructor details. `Enrollments` links students to courses; `Course_Instructors` links courses to instructors.
 
-The question paper specifies five tables:
-
-| Table | Columns |
+| Table | Attributes |
 |---|---|
 | Students | StudentID, StudentName, Major |
 | Courses | CourseID, CourseName, Credits |
@@ -836,60 +673,48 @@ The question paper specifies five tables:
 | Instructors | InstructorID, InstructorName, Phone |
 | Course_Instructors | CourseID, InstructorID |
 
-## 8(a) Create all five tables
+## Create tables and insert sample records
 
 ```sql
 CREATE TABLE Students (
     StudentID NUMBER PRIMARY KEY,
-    StudentName VARCHAR2(50),
-    Major VARCHAR2(50)
+    StudentName VARCHAR2(30),
+    Major VARCHAR2(30)
 );
 
 CREATE TABLE Courses (
     CourseID NUMBER PRIMARY KEY,
-    CourseName VARCHAR2(100),
+    CourseName VARCHAR2(50),
     Credits NUMBER
 );
 
 CREATE TABLE Enrollments (
     StudentID NUMBER,
     CourseID NUMBER,
-    EnrollmentDate DATE,
-    PRIMARY KEY (StudentID, CourseID),
-    FOREIGN KEY (StudentID) REFERENCES Students(StudentID),
-    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+    EnrollmentDate DATE
 );
 
 CREATE TABLE Instructors (
     InstructorID NUMBER PRIMARY KEY,
-    InstructorName VARCHAR2(50),
-    Phone VARCHAR2(20)
+    InstructorName VARCHAR2(30),
+    Phone VARCHAR2(15)
 );
 
 CREATE TABLE Course_Instructors (
     CourseID NUMBER,
-    InstructorID NUMBER,
-    PRIMARY KEY (CourseID, InstructorID),
-    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID),
-    FOREIGN KEY (InstructorID) REFERENCES Instructors(InstructorID)
+    InstructorID NUMBER
 );
-```
 
-**Note:** The composite PK on `Enrollments` allows one row per student/course combination. A system allowing repeated enrollment in the same course would need a different key (e.g., including term or attempt).
-
-## Sample data (added for practicing; not specified by the paper)
-
-```sql
-INSERT INTO Students VALUES (1, 'Alice', 'Computer Science');
+INSERT INTO Students VALUES (1, 'Alice', 'CSE');
 INSERT INTO Students VALUES (2, 'Bob', 'Data Science');
-INSERT INTO Students VALUES (3, 'Charlie', 'Electronics');
+INSERT INTO Students VALUES (3, 'Charlie', 'ECE');
 
 INSERT INTO Courses VALUES (10, 'Introduction to Programming', 4);
-INSERT INTO Courses VALUES (20, 'Database Systems', 3);
+INSERT INTO Courses VALUES (20, 'DBMS', 3);
 INSERT INTO Courses VALUES (30, 'Networks', 3);
 
-INSERT INTO Instructors VALUES (101, 'Dr. Kumar', '9000000001');
-INSERT INTO Instructors VALUES (102, 'Dr. Meena', '9000000002');
+INSERT INTO Instructors VALUES (101, 'Kumar', '9000000001');
+INSERT INTO Instructors VALUES (102, 'Meena', '9000000002');
 
 INSERT INTO Enrollments VALUES (1, 10, DATE '2026-08-01');
 INSERT INTO Enrollments VALUES (2, 10, DATE '2026-08-02');
@@ -897,25 +722,26 @@ INSERT INTO Enrollments VALUES (2, 20, DATE '2026-08-03');
 
 INSERT INTO Course_Instructors VALUES (10, 101);
 INSERT INTO Course_Instructors VALUES (20, 102);
-
 COMMIT;
 ```
 
-## 1. All students and their majors
+### 1. Retrieve all students with majors
 
 ```sql
-SELECT StudentName, Major
-FROM Students;
+SELECT StudentName, Major FROM Students;
 ```
 
-## 2. Courses with credits
+**Output:** Alice — CSE; Bob — Data Science; Charlie — ECE.
+
+### 2. List courses with credits
 
 ```sql
-SELECT CourseName, Credits
-FROM Courses;
+SELECT CourseName, Credits FROM Courses;
 ```
 
-## 3. Students enrolled in Introduction to Programming
+**Output:** Introduction to Programming — 4; DBMS — 3; Networks — 3.
+
+### 3. Find students enrolled in Introduction to Programming
 
 ```sql
 SELECT s.StudentName
@@ -925,9 +751,11 @@ JOIN Courses c ON e.CourseID = c.CourseID
 WHERE c.CourseName = 'Introduction to Programming';
 ```
 
-**Result:** Alice, Bob.
+**Output:** Alice, Bob.
 
-## 4. Instructors teaching a specific course
+**Remember:** `Enrollments` joins student IDs to course IDs.
+
+### 4. Find instructors teaching Introduction to Programming
 
 ```sql
 SELECT i.InstructorName
@@ -937,252 +765,182 @@ JOIN Courses c ON ci.CourseID = c.CourseID
 WHERE c.CourseName = 'Introduction to Programming';
 ```
 
-**Result:** Dr. Kumar.
+**Output:** Kumar.
 
-## 5. Count students enrolled in each course
+**Remember:** `Course_Instructors` connects courses and instructors.
+
+### 5. Count enrolled students in each course
 
 ```sql
-SELECT c.CourseName,
-       COUNT(e.StudentID) AS TotalStudents
-FROM Courses c
-LEFT JOIN Enrollments e ON c.CourseID = e.CourseID
-GROUP BY c.CourseID, c.CourseName;
+SELECT c.CourseName, COUNT(e.StudentID)
+FROM Courses c LEFT JOIN Enrollments e ON c.CourseID = e.CourseID
+GROUP BY c.CourseName;
 ```
 
-**Result:** Introduction to Programming = 2; Database Systems = 1; Networks = 0.
+**Output:** Introduction to Programming — 2; DBMS — 1; Networks — 0.
 
-**Remember:** `LEFT JOIN` includes courses with no enrollments.
+**Remember:** `LEFT JOIN` also shows courses with zero enrollments.
 
-## 6. Students not enrolled in any course
+### 6. Find students who have no enrollment
 
 ```sql
 SELECT s.StudentName
-FROM Students s
-LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
+FROM Students s LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
 WHERE e.StudentID IS NULL;
 ```
 
-**Result:** Charlie.
+**Output:** Charlie.
 
-**Remember:** `LEFT JOIN + IS NULL` finds missing matches.
+**Remember:** `IS NULL` finds students with no matching enrollment row.
 
-## 7. Courses with instructor names
+### 7. List courses with their instructor names
 
 ```sql
 SELECT c.CourseName, i.InstructorName
 FROM Courses c
-LEFT JOIN Course_Instructors ci ON c.CourseID = ci.CourseID
-LEFT JOIN Instructors i ON ci.InstructorID = i.InstructorID;
+JOIN Course_Instructors ci ON c.CourseID = ci.CourseID
+JOIN Instructors i ON ci.InstructorID = i.InstructorID;
 ```
 
-**Result:** Introduction to Programming–Dr. Kumar; Database Systems–Dr. Meena; Networks–NULL (unassigned).
+**Output:** Introduction to Programming — Kumar; DBMS — Meena.
 
-## 8. Number of courses taught by each instructor
+**Explanation:** This `JOIN` shows **assigned courses only**. Networks is omitted because it has no instructor in the sample data.
+
+### 8. Count courses taught by each instructor
 
 ```sql
-SELECT i.InstructorName,
-       COUNT(ci.CourseID) AS TotalCourses
-FROM Instructors i
-LEFT JOIN Course_Instructors ci
-    ON i.InstructorID = ci.InstructorID
-GROUP BY i.InstructorID, i.InstructorName;
+SELECT i.InstructorName, COUNT(ci.CourseID)
+FROM Instructors i LEFT JOIN Course_Instructors ci
+ON i.InstructorID = ci.InstructorID
+GROUP BY i.InstructorName;
 ```
 
-**Result:** Dr. Kumar = 1; Dr. Meena = 1.
+**Output:** Kumar — 1; Meena — 1.
 
-**Remember:** `Enrollments` connects students ↔ courses. `Course_Instructors` connects courses ↔ instructors.
+**Remember:** `COUNT(ci.CourseID)` counts the instructor's assigned courses.
 
 ---
 
 # 9. Data Control Language (DCL) and Transaction Control Language (TCL)
 
-**Idea:**
-- **DCL:** Who is allowed to do something?
-- **TCL:** Should a change be saved or undone?
+**Idea:** DCL handles permissions. TCL saves or undoes changes made to data.
 
-## 1. DCL — GRANT and REVOKE
-
-These commands assume the table is owned by the current user and the target database account `lab_user` already exists. Replace `lab_user` with an actual account as necessary.
+## Create the Marks table
 
 ```sql
-GRANT SELECT, INSERT ON Employee7 TO lab_user;
--- Allow lab_user to read and insert into Employee7
-
-REVOKE INSERT ON Employee7 FROM lab_user;
--- Remove the previously granted INSERT permission
-```
-
-You may also grant another privilege:
-
-```sql
-GRANT UPDATE ON Employee7 TO lab_user;
-```
-
-> **Requirements:** You must own the object or have permission to grant these privileges. REVOKE removes the specified grant; it does not necessarily eliminate privileges obtained through other routes.
-
-**Remember:** `GRANT` gives permission; `REVOKE` takes it back.
-
-## 2. TCL — COMMIT, SAVEPOINT, ROLLBACK
-
-### Demonstration using a separate table
-
-```sql
-CREATE TABLE Account9 (
-    AccountID NUMBER PRIMARY KEY,
-    Balance NUMBER
+CREATE TABLE Marks9 (
+    RollNo NUMBER,
+    Marks NUMBER
 );
 
-INSERT INTO Account9 VALUES (1, 1000);
+INSERT INTO Marks9 VALUES (1, 70);
 COMMIT;
-
-UPDATE Account9 SET Balance = 900 WHERE AccountID = 1;
-SAVEPOINT checkpoint1;
-
-UPDATE Account9 SET Balance = 700 WHERE AccountID = 1;
-
-ROLLBACK TO checkpoint1;
--- Undo the second UPDATE only; Balance returns to 900.
-
-COMMIT;
--- Permanently commit the 900 balance.
 ```
 
-Check:
+### 1. DCL — GRANT and REVOKE
 
 ```sql
-SELECT * FROM Account9;
--- 1 | 900
+GRANT SELECT ON Marks9 TO lab_user;
+REVOKE SELECT ON Marks9 FROM lab_user;
 ```
 
-### Full ROLLBACK example
+**Explanation:** `GRANT` gives `lab_user` permission to read `Marks9`. `REVOKE` removes that grant.
+
+**Note:** `lab_user` must already exist, and your account must be allowed to grant access.
+
+### 2. TCL — COMMIT, SAVEPOINT, ROLLBACK
 
 ```sql
-UPDATE Account9 SET Balance = 500 WHERE AccountID = 1;
+UPDATE Marks9 SET Marks = 80 WHERE RollNo = 1;
+SAVEPOINT s1;
 
+UPDATE Marks9 SET Marks = 40 WHERE RollNo = 1;
+ROLLBACK TO s1;
+
+COMMIT;
+SELECT * FROM Marks9;
+```
+
+**Output:** RollNo = 1, Marks = 80.
+
+**Explanation:** `SAVEPOINT s1` marks the value 80. `ROLLBACK TO s1` cancels the change to 40. `COMMIT` saves 80.
+
+### Full ROLLBACK
+
+```sql
+UPDATE Marks9 SET Marks = 99 WHERE RollNo = 1;
 ROLLBACK;
-
-SELECT * FROM Account9;
--- 1 | 900
+SELECT * FROM Marks9;
 ```
 
-**Remember:**
-- `COMMIT` = **save** transaction.
-- `SAVEPOINT` = **bookmark** within a transaction.
-- `ROLLBACK` = **undo** uncommitted changes.
-- `ROLLBACK TO name` = **return to bookmark**.
+**Output:** Marks is still 80.
 
-**Oracle warning:** DDL such as `CREATE TABLE` causes implicit commits; don't rely on `ROLLBACK` to undo table creation.
+**Remember:** `COMMIT` = save; `SAVEPOINT` = bookmark; `ROLLBACK` = undo.
 
 ---
 
 # 10. Indexing Techniques
 
-**Idea:** An **index** is an auxiliary data structure that helps the database locate rows efficiently, much like a book's index. Indexes can speed up reads but add storage and maintenance work during inserts/deletes.
+**Idea:** An index helps Oracle find records by a column. Oracle automatically maintains indexes when rows are inserted or deleted.
 
-**Terminology note:** In textbook discussions, **primary index** can mean an index tied to the data's physical ordering, while **secondary index** accesses rows through another search key. In Oracle, a primary key typically uses a unique index, but this does **not** mean Oracle's storage matches every textbook definition of a physical "primary index." Below is the practical Oracle lab demonstration.
-
-## Setup
+## Create the table and insert records
 
 ```sql
 CREATE TABLE Student10 (
     StudentID NUMBER PRIMARY KEY,
-    StudentName VARCHAR2(50),
-    Dept VARCHAR2(30)
+    StudentName VARCHAR2(30),
+    Department VARCHAR2(20)
 );
 
-INSERT INTO Student10 VALUES (101, 'Alice', 'CSE');
-INSERT INTO Student10 VALUES (102, 'Bob', 'ECE');
-INSERT INTO Student10 VALUES (103, 'Charlie', 'CSE');
+INSERT INTO Student10 VALUES (1, 'Alice', 'CSE');
+INSERT INTO Student10 VALUES (2, 'Bob', 'ECE');
+INSERT INTO Student10 VALUES (3, 'Charlie', 'CSE');
 COMMIT;
 ```
 
-## 1. Create primary and secondary indexes
+### 1. Create a primary and secondary index
 
-### Primary-key index
-
-The `PRIMARY KEY` constraint on `StudentID` normally causes Oracle to create or reuse a **unique supporting index** automatically.
-
-View indexes:
+`StudentID NUMBER PRIMARY KEY` normally makes Oracle create an index to support the primary key. Create a separate index on `Department`:
 
 ```sql
-SELECT Index_Name, Uniqueness
-FROM USER_INDEXES
-WHERE Table_Name = 'STUDENT10';
+CREATE INDEX idx_dept10 ON Student10(Department);
 ```
 
-You generally **do not need to manually create another unique index on StudentID**.
+**Remember:** Primary key = unique ID; secondary index here = department search. In Oracle, a primary-key index is not necessarily a physically ordered textbook primary index.
 
-### Secondary index on Dept
+### 2. Retrieve records using indexed columns
 
 ```sql
-CREATE INDEX idx_student_dept
-ON Student10(Dept);
+SELECT * FROM Student10 WHERE StudentID = 2;
+SELECT * FROM Student10 WHERE Department = 'CSE';
 ```
 
-**Remember:** Primary-key support is for the unique ID; secondary index here assists searches by department.
+**Output:** First query returns Bob. Second returns Alice and Charlie.
 
-## 2. Retrieve records using the indexed column
+**Note:** Oracle decides whether an index is actually used for a query.
+
+### 3. Insert a record and observe index updates
 
 ```sql
-SELECT *
-FROM Student10
-WHERE StudentID = 102;
--- Bob, ECE
-
-SELECT *
-FROM Student10
-WHERE Dept = 'CSE';
--- Alice, Charlie
+INSERT INTO Student10 VALUES (4, 'David', 'CSE');
+SELECT * FROM Student10 WHERE Department = 'CSE';
 ```
 
-> Oracle's optimizer decides whether to use an index. Writing `WHERE Dept = 'CSE'` makes index use possible, but **does not guarantee** the optimizer will use it.
+**Output:** Alice, Charlie, David.
 
-### Optional: inspect the execution plan
+**Explanation:** The new record is added to the table; Oracle also updates its indexes automatically.
 
-```sql
-EXPLAIN PLAN FOR
-SELECT * FROM Student10 WHERE Dept = 'CSE';
-
-SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
-```
-
-Look for `INDEX RANGE SCAN` if the optimizer chooses that access path.
-
-## 3. Insert a record and observe index maintenance
+### 4. Delete a record and observe index updates
 
 ```sql
-INSERT INTO Student10 VALUES (104, 'David', 'CSE');
-
+DELETE FROM Student10 WHERE StudentID = 2;
+SELECT * FROM Student10 WHERE StudentID = 2;
 COMMIT;
-
-SELECT * FROM Student10 WHERE Dept = 'CSE';
--- Alice, Charlie, David
 ```
 
-**Explanation:** Oracle automatically maintains both the primary-key supporting index and the department index for the new row. You **do not manually insert index entries**.
+**Output:** No rows found for StudentID 2.
 
-## 4. Delete a record and observe index maintenance
-
-```sql
-DELETE FROM Student10
-WHERE StudentID = 102;
-
-COMMIT;
-
-SELECT * FROM Student10 WHERE StudentID = 102;
--- No rows
-```
-
-**Explanation:** Oracle automatically updates the relevant index structures as the row is deleted. An index can remain present even when some of its indexed rows are removed.
-
-### Confirm that the secondary index still exists
-
-```sql
-SELECT Index_Name
-FROM USER_INDEXES
-WHERE Table_Name = 'STUDENT10';
-```
-
-**Remember:** `CREATE INDEX` once → `INSERT/DELETE` maintain entries automatically → optimizer chooses whether to use index for `SELECT`.
+**Explanation:** Oracle removes the deleted record's index entries automatically; the indexes themselves remain available.
 
 ---
+

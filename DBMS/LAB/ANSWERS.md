@@ -87,50 +87,48 @@ COMMIT;
 ### 1. List Computer Science students
 
 ```sql
-SELECT s.StudentName
-FROM Student s JOIN Department d ON s.DeptID = d.DeptID
-WHERE d.DeptName = 'Computer Science';
+SELECT StudentName FROM Student
+WHERE DeptID = 1;
 ```
 
 **Output:** Alice, Charlie.
 
-**Remember:** `JOIN` connects tables; `WHERE` picks the department.
+**Remember:** In the sample data, `DeptID = 1` is Computer Science.
 
 ### 2. List courses with faculty names
 
 ```sql
-SELECT c.CourseName, f.FacultyName
-FROM Course c JOIN Faculty f ON c.DeptID = f.DeptID;
+SELECT Course.CourseName, Faculty.FacultyName
+FROM Course, Faculty
+WHERE Course.DeptID = Faculty.DeptID;
 ```
 
 **Output:** DBMS — Kumar; Circuits — Meena.
 
-**Explanation:** This shows courses and faculty **in the same department**. The given schema has no information about which faculty actually teaches each course, so teaching assignments cannot be verified from these tables alone.
+**Explanation:** `WHERE` matches the same `DeptID` in both tables. This shows faculty in each course's department. The given tables do not say who actually teaches a course.
 
 ### 3. Display student enrollments with grades
 
 ```sql
-SELECT s.StudentName, c.CourseName, e.Grade
-FROM Enrollment e
-JOIN Student s ON e.StudentID = s.StudentID
-JOIN Course c ON e.CourseID = c.CourseID;
+SELECT StudentID, CourseID, Grade
+FROM Enrollment;
 ```
 
-**Output:** Alice — DBMS — A; Bob — Circuits — B; Charlie — DBMS — A.
+**Output:** Student 1 — Course 10 — A; Student 2 — Course 20 — B; Student 3 — Course 10 — A.
 
-**Remember:** `Enrollment` connects `Student` and `Course`.
+**Remember:** `Enrollment` already contains student ID, course ID, and grade.
 
 ### 4. Count students in each department
 
 ```sql
-SELECT d.DeptName, COUNT(s.StudentID)
-FROM Department d LEFT JOIN Student s ON d.DeptID = s.DeptID
-GROUP BY d.DeptName;
+SELECT DeptID, COUNT(*)
+FROM Student
+GROUP BY DeptID;
 ```
 
-**Output:** Computer Science — 2; Electronics — 1.
+**Output:** DeptID 1 (Computer Science) — 2; DeptID 2 (Electronics) — 1.
 
-**Remember:** `COUNT` counts students; `GROUP BY` separates departments.
+**Remember:** `COUNT(*)` counts students; `GROUP BY DeptID` counts each department separately.
 
 ### 5. Display departments with locations
 
@@ -143,8 +141,9 @@ SELECT DeptName, Location FROM Department;
 ### 6. Display faculty with department names
 
 ```sql
-SELECT f.FacultyName, d.DeptName
-FROM Faculty f JOIN Department d ON f.DeptID = d.DeptID;
+SELECT Faculty.FacultyName, Department.DeptName
+FROM Faculty, Department
+WHERE Faculty.DeptID = Department.DeptID;
 ```
 
 **Output:** Kumar — Computer Science; Meena — Electronics.
@@ -407,9 +406,9 @@ FROM Employee5 NATURAL JOIN Department5;
 ### 2. Equi-join
 
 ```sql
-SELECT e.EmpName, d.DeptName
-FROM Employee5 e, Department5 d
-WHERE e.DeptID = d.DeptID;
+SELECT Employee5.EmpName, Department5.DeptName
+FROM Employee5, Department5
+WHERE Employee5.DeptID = Department5.DeptID;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
@@ -419,9 +418,9 @@ WHERE e.DeptID = d.DeptID;
 ### 3. Outer join (full outer join)
 
 ```sql
-SELECT e.EmpName, d.DeptName
-FROM Employee5 e FULL OUTER JOIN Department5 d
-ON e.DeptID = d.DeptID;
+SELECT Employee5.EmpName, Department5.DeptName
+FROM Employee5 FULL OUTER JOIN Department5
+ON Employee5.DeptID = Department5.DeptID;
 ```
 
 **Output:** Three matches, plus David — NULL and NULL — Finance.
@@ -431,9 +430,9 @@ ON e.DeptID = d.DeptID;
 ### 4. Left outer join
 
 ```sql
-SELECT e.EmpName, d.DeptName
-FROM Employee5 e LEFT JOIN Department5 d
-ON e.DeptID = d.DeptID;
+SELECT Employee5.EmpName, Department5.DeptName
+FROM Employee5 LEFT JOIN Department5
+ON Employee5.DeptID = Department5.DeptID;
 ```
 
 **Output:** All four employees, including David — NULL.
@@ -443,9 +442,9 @@ ON e.DeptID = d.DeptID;
 ### 5. Right outer join
 
 ```sql
-SELECT e.EmpName, d.DeptName
-FROM Employee5 e RIGHT JOIN Department5 d
-ON e.DeptID = d.DeptID;
+SELECT Employee5.EmpName, Department5.DeptName
+FROM Employee5 RIGHT JOIN Department5
+ON Employee5.DeptID = Department5.DeptID;
 ```
 
 **Output:** HR and IT matches, plus NULL — Finance.
@@ -455,9 +454,9 @@ ON e.DeptID = d.DeptID;
 ### 6. Inner join
 
 ```sql
-SELECT e.EmpName, d.DeptName
-FROM Employee5 e INNER JOIN Department5 d
-ON e.DeptID = d.DeptID;
+SELECT Employee5.EmpName, Department5.DeptName
+FROM Employee5 INNER JOIN Department5
+ON Employee5.DeptID = Department5.DeptID;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
@@ -689,7 +688,7 @@ CREATE TABLE Courses (
 );
 
 CREATE TABLE Enrollments (
-    StudentID NUMBER,
+    StudentID NUMBER NOT NULL,
     CourseID NUMBER,
     EnrollmentDate DATE
 );
@@ -744,80 +743,80 @@ SELECT CourseName, Credits FROM Courses;
 ### 3. Find students enrolled in Introduction to Programming
 
 ```sql
-SELECT s.StudentName
-FROM Students s
-JOIN Enrollments e ON s.StudentID = e.StudentID
-JOIN Courses c ON e.CourseID = c.CourseID
-WHERE c.CourseName = 'Introduction to Programming';
+SELECT StudentName FROM Students
+WHERE StudentID IN (
+    SELECT StudentID FROM Enrollments
+    WHERE CourseID = 10
+);
 ```
 
 **Output:** Alice, Bob.
 
-**Remember:** `Enrollments` joins student IDs to course IDs.
+**Remember:** CourseID 10 is Introduction to Programming. `IN` finds its enrolled student IDs.
 
 ### 4. Find instructors teaching Introduction to Programming
 
 ```sql
-SELECT i.InstructorName
-FROM Instructors i
-JOIN Course_Instructors ci ON i.InstructorID = ci.InstructorID
-JOIN Courses c ON ci.CourseID = c.CourseID
-WHERE c.CourseName = 'Introduction to Programming';
+SELECT InstructorName FROM Instructors
+WHERE InstructorID IN (
+    SELECT InstructorID FROM Course_Instructors
+    WHERE CourseID = 10
+);
 ```
 
 **Output:** Kumar.
 
-**Remember:** `Course_Instructors` connects courses and instructors.
+**Remember:** CourseID 10 is Introduction to Programming. `Course_Instructors` stores its teacher IDs.
 
-### 5. Count enrolled students in each course
+### 5. Count students in each course (with enrollments)
 
 ```sql
-SELECT c.CourseName, COUNT(e.StudentID)
-FROM Courses c LEFT JOIN Enrollments e ON c.CourseID = e.CourseID
-GROUP BY c.CourseName;
+SELECT CourseID, COUNT(*)
+FROM Enrollments
+GROUP BY CourseID;
 ```
 
-**Output:** Introduction to Programming — 2; DBMS — 1; Networks — 0.
+**Output:** CourseID 10 (Introduction to Programming) — 2; CourseID 20 (DBMS) — 1. CourseID 30 (Networks) has no enrollment, so it does not appear.
 
-**Remember:** `LEFT JOIN` also shows courses with zero enrollments.
+**Remember:** `GROUP BY CourseID` counts enrollments for each course with students. Courses with zero enrollments are not listed by this simple query.
 
 ### 6. Find students who have no enrollment
 
 ```sql
-SELECT s.StudentName
-FROM Students s LEFT JOIN Enrollments e ON s.StudentID = e.StudentID
-WHERE e.StudentID IS NULL;
+SELECT StudentName FROM Students
+WHERE StudentID NOT IN (
+    SELECT StudentID FROM Enrollments
+);
 ```
 
 **Output:** Charlie.
 
-**Remember:** `IS NULL` finds students with no matching enrollment row.
+**Remember:** `NOT IN` finds student IDs that are missing from `Enrollments`.
 
 ### 7. List courses with their instructor names
 
 ```sql
-SELECT c.CourseName, i.InstructorName
-FROM Courses c
-JOIN Course_Instructors ci ON c.CourseID = ci.CourseID
-JOIN Instructors i ON ci.InstructorID = i.InstructorID;
+SELECT Courses.CourseName, Instructors.InstructorName
+FROM Courses, Course_Instructors, Instructors
+WHERE Courses.CourseID = Course_Instructors.CourseID
+AND Course_Instructors.InstructorID = Instructors.InstructorID;
 ```
 
 **Output:** Introduction to Programming — Kumar; DBMS — Meena.
 
-**Explanation:** This `JOIN` shows **assigned courses only**. Networks is omitted because it has no instructor in the sample data.
+**Explanation:** The two `WHERE` conditions match course IDs and instructor IDs. Networks is not shown because it has no assigned instructor.
 
 ### 8. Count courses taught by each instructor
 
 ```sql
-SELECT i.InstructorName, COUNT(ci.CourseID)
-FROM Instructors i LEFT JOIN Course_Instructors ci
-ON i.InstructorID = ci.InstructorID
-GROUP BY i.InstructorName;
+SELECT InstructorID, COUNT(*)
+FROM Course_Instructors
+GROUP BY InstructorID;
 ```
 
-**Output:** Kumar — 1; Meena — 1.
+**Output:** InstructorID 101 (Kumar) — 1; InstructorID 102 (Meena) — 1.
 
-**Remember:** `COUNT(ci.CourseID)` counts the instructor's assigned courses.
+**Remember:** `GROUP BY InstructorID` counts courses for each instructor with an assignment.
 
 ---
 
@@ -944,3 +943,17 @@ COMMIT;
 
 ---
 
+# Quick Revision
+
+| Question | Main topic | Key words |
+|---:|---|---|
+| 1 | University database | CREATE, SELECT, WHERE, GROUP BY |
+| 2 | DML | INSERT, SELECT, UPDATE, DELETE |
+| 3 | SQL functions | UPPER, ROUND, SYSDATE |
+| 4 | Aggregates | SUM, AVG, MIN, MAX, COUNT, HAVING |
+| 5 | Joins and sets | LEFT, RIGHT, FULL, UNION, INTERSECT, MINUS |
+| 6 | Subqueries | SELECT inside SELECT, IN |
+| 7 | Views | VIEW, MATERIALIZED VIEW |
+| 8 | Normalized database | IN, NOT IN, WHERE, GROUP BY |
+| 9 | DCL/TCL | GRANT, REVOKE, COMMIT, ROLLBACK |
+| 10 | Indexes | PRIMARY KEY, CREATE INDEX |

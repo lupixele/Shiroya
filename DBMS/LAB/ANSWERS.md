@@ -1,9 +1,6 @@
-# DBMS Lab Internal — Complete Answers & Revision Guide
+# DBMS Lab Internal — Complete Answers
 
 **SQL:** Oracle Database 10g
-
-> Run the table setup once for your assigned question, then run its numbered parts. Each question is independent.
->
 > [Oracle 10g installer](https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb)
 
 ---

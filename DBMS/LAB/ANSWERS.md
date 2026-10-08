@@ -898,7 +898,7 @@ Database indexing works similarly. It helps Oracle find records faster without c
 
 ### Example: Student Table
 
-```
+```sql
 CREATE TABLE Student (
     StudentID NUMBER PRIMARY KEY,
     StudentName VARCHAR2(30),
@@ -922,7 +922,7 @@ Our table contains:
 
 Primary key index
 
-```
+```sql
 StudentID NUMBER PRIMARY KEY
 ```
 
@@ -932,7 +932,7 @@ Oracle normally creates an index automatically to enforce this primary key.
 
 Secondary index
 
-```
+```sql
 CREATE INDEX idx_dept ON Student(Department);
 ```
 
@@ -948,7 +948,7 @@ Why? Because we might frequently search for students belonging to a particular d
 
 Search by StudentID:
 
-```
+```sql
 SELECT * FROM Student WHERE StudentID = 2;
 ```
 
@@ -960,7 +960,7 @@ Output:
 
 Search by Department:
 
-```
+```sql
 SELECT * FROM Student WHERE Department = 'CSE';
 ```
 
@@ -975,7 +975,7 @@ Both queries search columns that have indexes. Oracle can use those indexes to f
 
 ### 3. Insert a record and observe index updates
 
-```
+```sql
 INSERT INTO Student VALUES (4, 'David', 'CSE');
 
 SELECT * FROM Student WHERE Department = 'CSE';
@@ -999,7 +999,7 @@ We don't need to create the index again.
 
 ### 4. Delete a record and observe index updates
 
-```
+```sql
 DELETE FROM Student WHERE StudentID = 2;
 
 SELECT * FROM Student WHERE StudentID = 2;
@@ -1009,7 +1009,7 @@ COMMIT;
 
 Output:
 
-```
+```sql
 No rows selected.
 ```
 

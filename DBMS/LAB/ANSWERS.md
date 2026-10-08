@@ -1,4 +1,4 @@
-# DBMS Lab Internal — Complete Answers & Revision Guide
+# DBMS Lab Internal — Complete Answers
 
 **SQL:** Oracle Database 10g
 
@@ -950,18 +950,5 @@ COMMIT;
 **Explanation:** Oracle removes the deleted record's index entries automatically; the indexes themselves remain available.
 
 ---
-
-# Quick Revision
-
-| Question | Main topic | Key words |
-|---:|---|---|
-| 1 | University database | CREATE, JOIN, WHERE, GROUP BY |
-| 2 | DML | INSERT, SELECT, UPDATE, DELETE |
-| 3 | SQL functions | UPPER, ROUND, SYSDATE |
-| 4 | Aggregates | SUM, AVG, MIN, MAX, COUNT, HAVING |
-| 5 | Joins and sets | LEFT, RIGHT, FULL, UNION, INTERSECT, MINUS |
-| 6 | Subqueries | SELECT inside SELECT, IN |
-| 7 | Views | VIEW, MATERIALIZED VIEW |
-| 8 | Normalized database | JOIN, LEFT JOIN, GROUP BY |
-| 9 | DCL/TCL | GRANT, REVOKE, COMMIT, ROLLBACK |
+EVOKE, COMMIT, ROLLBACK |
 | 10 | Indexes | PRIMARY KEY, CREATE INDEX |

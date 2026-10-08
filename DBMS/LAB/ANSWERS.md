@@ -1,6 +1,9 @@
-# DBMS Lab Internal — Complete Answers
+# DBMS Lab Internal — Complete Answers & Revision Guide
 
 **SQL:** Oracle Database 10g
+
+> Run the table setup once for your assigned question, then run its numbered parts. Each question is independent.
+>
 > [Oracle 10g installer](https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb)
 
 ---
@@ -84,48 +87,53 @@ COMMIT;
 ### 1. List Computer Science students
 
 ```sql
-SELECT StudentName FROM Student
-WHERE DeptID = 1;
+SELECT Student.StudentName
+FROM Student
+JOIN Department ON Student.DeptID = Department.DeptID
+WHERE Department.DeptName = 'Computer Science';
 ```
 
 **Output:** Alice, Charlie.
 
-**Remember:** In the sample data, `DeptID = 1` is Computer Science.
+**Remember:** `JOIN` matches department IDs; `WHERE` selects Computer Science.
 
 ### 2. List courses with faculty names
 
 ```sql
 SELECT Course.CourseName, Faculty.FacultyName
-FROM Course, Faculty
-WHERE Course.DeptID = Faculty.DeptID;
+FROM Course
+JOIN Faculty ON Course.DeptID = Faculty.DeptID;
 ```
 
 **Output:** DBMS — Kumar; Circuits — Meena.
 
-**Explanation:** `WHERE` matches the same `DeptID` in both tables. This shows faculty in each course's department. The given tables do not say who actually teaches a course.
+**Explanation:** Matches courses and faculty from the same department. In our sample, each department has one faculty member. The given schema does not identify who teaches each course, so this is a department-based match, not a confirmed teaching assignment.
 
 ### 3. Display student enrollments with grades
 
 ```sql
-SELECT StudentID, CourseID, Grade
-FROM Enrollment;
+SELECT Student.StudentName, Course.CourseName, Enrollment.Grade
+FROM Enrollment
+JOIN Student ON Enrollment.StudentID = Student.StudentID
+JOIN Course ON Enrollment.CourseID = Course.CourseID;
 ```
 
-**Output:** Student 1 — Course 10 — A; Student 2 — Course 20 — B; Student 3 — Course 10 — A.
+**Output:** Alice — DBMS — A; Bob — Circuits — B; Charlie — DBMS — A.
 
-**Remember:** `Enrollment` already contains student ID, course ID, and grade.
+**Remember:** `Enrollment` connects `Student` and `Course`.
 
 ### 4. Count students in each department
 
 ```sql
-SELECT DeptID, COUNT(*)
-FROM Student
-GROUP BY DeptID;
+SELECT Department.DeptName, COUNT(Student.StudentID)
+FROM Department
+LEFT JOIN Student ON Department.DeptID = Student.DeptID
+GROUP BY Department.DeptID, Department.DeptName;
 ```
 
-**Output:** DeptID 1 (Computer Science) — 2; DeptID 2 (Electronics) — 1.
+**Output:** Computer Science — 2; Electronics — 1.
 
-**Remember:** `COUNT(*)` counts students; `GROUP BY DeptID` counts each department separately.
+**Remember:** `LEFT JOIN` includes departments with no students; `GROUP BY` counts by department.
 
 ### 5. Display departments with locations
 
@@ -139,8 +147,8 @@ SELECT DeptName, Location FROM Department;
 
 ```sql
 SELECT Faculty.FacultyName, Department.DeptName
-FROM Faculty, Department
-WHERE Faculty.DeptID = Department.DeptID;
+FROM Faculty
+JOIN Department ON Faculty.DeptID = Department.DeptID;
 ```
 
 **Output:** Kumar — Computer Science; Meena — Electronics.
@@ -404,13 +412,13 @@ FROM Employee NATURAL JOIN Department;
 
 ```sql
 SELECT Employee.EmpName, Department.DeptName
-FROM Employee, Department
-WHERE Employee.DeptID = Department.DeptID;
+FROM Employee
+JOIN Department ON Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
 
-**Remember:** Equi-join uses `=` to match rows.
+**Remember:** Equi-join uses `=` to match columns.
 
 ### 3. Outer join (full outer join)
 
@@ -740,80 +748,83 @@ SELECT CourseName, Credits FROM Courses;
 ### 3. Find students enrolled in Introduction to Programming
 
 ```sql
-SELECT StudentName FROM Students
-WHERE StudentID IN (
-    SELECT StudentID FROM Enrollments
-    WHERE CourseID = 10
-);
+SELECT Students.StudentName
+FROM Students
+JOIN Enrollments ON Students.StudentID = Enrollments.StudentID
+JOIN Courses ON Enrollments.CourseID = Courses.CourseID
+WHERE Courses.CourseName = 'Introduction to Programming';
 ```
 
 **Output:** Alice, Bob.
 
-**Remember:** CourseID 10 is Introduction to Programming. `IN` finds its enrolled student IDs.
+**Remember:** Join students to enrollments, then enrollments to courses.
 
 ### 4. Find instructors teaching Introduction to Programming
 
 ```sql
-SELECT InstructorName FROM Instructors
-WHERE InstructorID IN (
-    SELECT InstructorID FROM Course_Instructors
-    WHERE CourseID = 10
-);
+SELECT Instructors.InstructorName
+FROM Instructors
+JOIN Course_Instructors ON Instructors.InstructorID = Course_Instructors.InstructorID
+JOIN Courses ON Course_Instructors.CourseID = Courses.CourseID
+WHERE Courses.CourseName = 'Introduction to Programming';
 ```
 
 **Output:** Kumar.
 
-**Remember:** CourseID 10 is Introduction to Programming. `Course_Instructors` stores its teacher IDs.
+**Remember:** `Course_Instructors` connects courses and instructors.
 
-### 5. Count students in each course (with enrollments)
+### 5. Count students enrolled in each course
 
 ```sql
-SELECT CourseID, COUNT(*)
-FROM Enrollments
-GROUP BY CourseID;
+SELECT Courses.CourseName, COUNT(Enrollments.StudentID)
+FROM Courses
+LEFT JOIN Enrollments ON Courses.CourseID = Enrollments.CourseID
+GROUP BY Courses.CourseID, Courses.CourseName;
 ```
 
-**Output:** CourseID 10 (Introduction to Programming) — 2; CourseID 20 (DBMS) — 1. CourseID 30 (Networks) has no enrollment, so it does not appear.
+**Output:** Introduction to Programming — 2; DBMS — 1; Networks — 0.
 
-**Remember:** `GROUP BY CourseID` counts enrollments for each course with students. Courses with zero enrollments are not listed by this simple query.
+**Remember:** `LEFT JOIN` also displays a course with zero enrollments.
 
 ### 6. Find students who have no enrollment
 
 ```sql
-SELECT StudentName FROM Students
-WHERE StudentID NOT IN (
-    SELECT StudentID FROM Enrollments
-);
+SELECT Students.StudentName
+FROM Students
+LEFT JOIN Enrollments ON Students.StudentID = Enrollments.StudentID
+WHERE Enrollments.StudentID IS NULL;
 ```
 
 **Output:** Charlie.
 
-**Remember:** `NOT IN` finds student IDs that are missing from `Enrollments`.
+**Remember:** `LEFT JOIN` plus `IS NULL` finds students without an enrollment.
 
 ### 7. List courses with their instructor names
 
 ```sql
 SELECT Courses.CourseName, Instructors.InstructorName
-FROM Courses, Course_Instructors, Instructors
-WHERE Courses.CourseID = Course_Instructors.CourseID
-AND Course_Instructors.InstructorID = Instructors.InstructorID;
+FROM Courses
+LEFT JOIN Course_Instructors ON Courses.CourseID = Course_Instructors.CourseID
+LEFT JOIN Instructors ON Course_Instructors.InstructorID = Instructors.InstructorID;
 ```
 
-**Output:** Introduction to Programming — Kumar; DBMS — Meena.
+**Output:** Introduction to Programming — Kumar; DBMS — Meena; Networks — NULL (no instructor assigned).
 
-**Explanation:** The two `WHERE` conditions match course IDs and instructor IDs. Networks is not shown because it has no assigned instructor.
+**Remember:** Join course → course-instructor table → instructor.
 
 ### 8. Count courses taught by each instructor
 
 ```sql
-SELECT InstructorID, COUNT(*)
-FROM Course_Instructors
-GROUP BY InstructorID;
+SELECT Instructors.InstructorName, COUNT(Course_Instructors.CourseID)
+FROM Instructors
+LEFT JOIN Course_Instructors
+ON Instructors.InstructorID = Course_Instructors.InstructorID
+GROUP BY Instructors.InstructorID, Instructors.InstructorName;
 ```
 
-**Output:** InstructorID 101 (Kumar) — 1; InstructorID 102 (Meena) — 1.
+**Output:** Kumar — 1; Meena — 1.
 
-**Remember:** `GROUP BY InstructorID` counts courses for each instructor with an assignment.
+**Remember:** `GROUP BY` counts courses for each instructor; `LEFT JOIN` includes instructors with zero courses.
 
 ---
 
@@ -944,13 +955,13 @@ COMMIT;
 
 | Question | Main topic | Key words |
 |---:|---|---|
-| 1 | University database | CREATE, SELECT, WHERE, GROUP BY |
+| 1 | University database | CREATE, JOIN, WHERE, GROUP BY |
 | 2 | DML | INSERT, SELECT, UPDATE, DELETE |
 | 3 | SQL functions | UPPER, ROUND, SYSDATE |
 | 4 | Aggregates | SUM, AVG, MIN, MAX, COUNT, HAVING |
 | 5 | Joins and sets | LEFT, RIGHT, FULL, UNION, INTERSECT, MINUS |
 | 6 | Subqueries | SELECT inside SELECT, IN |
 | 7 | Views | VIEW, MATERIALIZED VIEW |
-| 8 | Normalized database | IN, NOT IN, WHERE, GROUP BY |
+| 8 | Normalized database | JOIN, LEFT JOIN, GROUP BY |
 | 9 | DCL/TCL | GRANT, REVOKE, COMMIT, ROLLBACK |
 | 10 | Indexes | PRIMARY KEY, CREATE INDEX |

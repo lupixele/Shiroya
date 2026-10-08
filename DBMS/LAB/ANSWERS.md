@@ -2,7 +2,7 @@
 
 **SQL:** Oracle Database 10g
 
-> Run the table setup **once** for each main question, then run its numbered parts. If you have already created a table with the same name, use a fresh schema or remove the old table first.
+> Run the table setup once for your assigned question, then run its numbered parts. Each question is independent.
 >
 > [Oracle 10g installer](https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb)
 
@@ -307,18 +307,18 @@ SELECT MONTHS_BETWEEN(DATE '2026-03-01', DATE '2026-01-01') FROM DUAL;
 ## Create and fill the table
 
 ```sql
-CREATE TABLE Employee4 (
+CREATE TABLE Employee (
     EmpID NUMBER,
     EmpName VARCHAR2(30),
     Department VARCHAR2(20),
     Salary NUMBER
 );
 
-INSERT INTO Employee4 VALUES (1, 'Alice', 'IT', 60000);
-INSERT INTO Employee4 VALUES (2, 'Bob', 'IT', 50000);
-INSERT INTO Employee4 VALUES (3, 'John', 'HR', 40000);
-INSERT INTO Employee4 VALUES (4, 'Emma', 'HR', 45000);
-INSERT INTO Employee4 VALUES (5, 'David', 'Finance', 55000);
+INSERT INTO Employee VALUES (1, 'Alice', 'IT', 60000);
+INSERT INTO Employee VALUES (2, 'Bob', 'IT', 50000);
+INSERT INTO Employee VALUES (3, 'John', 'HR', 40000);
+INSERT INTO Employee VALUES (4, 'Emma', 'HR', 45000);
+INSERT INTO Employee VALUES (5, 'David', 'Finance', 55000);
 COMMIT;
 ```
 
@@ -327,7 +327,7 @@ COMMIT;
 ```sql
 SELECT SUM(Salary), AVG(Salary), MIN(Salary),
        MAX(Salary), COUNT(*)
-FROM Employee4;
+FROM Employee;
 ```
 
 | SUM | AVG | MIN | MAX | COUNT |
@@ -338,7 +338,7 @@ FROM Employee4;
 
 ```sql
 SELECT Department, COUNT(*), SUM(Salary)
-FROM Employee4
+FROM Employee
 GROUP BY Department;
 ```
 
@@ -350,7 +350,7 @@ GROUP BY Department;
 
 ```sql
 SELECT Department, COUNT(*)
-FROM Employee4
+FROM Employee
 GROUP BY Department
 HAVING COUNT(*) > 1;
 ```
@@ -368,25 +368,25 @@ HAVING COUNT(*) > 1;
 ## Create and fill the tables
 
 ```sql
-CREATE TABLE Department5 (
+CREATE TABLE Department (
     DeptID NUMBER,
     DeptName VARCHAR2(30)
 );
 
-CREATE TABLE Employee5 (
+CREATE TABLE Employee (
     EmpID NUMBER,
     EmpName VARCHAR2(30),
     DeptID NUMBER
 );
 
-INSERT INTO Department5 VALUES (1, 'HR');
-INSERT INTO Department5 VALUES (2, 'IT');
-INSERT INTO Department5 VALUES (3, 'Finance');
+INSERT INTO Department VALUES (1, 'HR');
+INSERT INTO Department VALUES (2, 'IT');
+INSERT INTO Department VALUES (3, 'Finance');
 
-INSERT INTO Employee5 VALUES (101, 'Alice', 1);
-INSERT INTO Employee5 VALUES (102, 'Bob', 2);
-INSERT INTO Employee5 VALUES (103, 'Charlie', 2);
-INSERT INTO Employee5 VALUES (104, 'David', 4);
+INSERT INTO Employee VALUES (101, 'Alice', 1);
+INSERT INTO Employee VALUES (102, 'Bob', 2);
+INSERT INTO Employee VALUES (103, 'Charlie', 2);
+INSERT INTO Employee VALUES (104, 'David', 4);
 COMMIT;
 ```
 
@@ -396,7 +396,7 @@ COMMIT;
 
 ```sql
 SELECT EmpName, DeptName
-FROM Employee5 NATURAL JOIN Department5;
+FROM Employee NATURAL JOIN Department;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
@@ -406,9 +406,9 @@ FROM Employee5 NATURAL JOIN Department5;
 ### 2. Equi-join
 
 ```sql
-SELECT Employee5.EmpName, Department5.DeptName
-FROM Employee5, Department5
-WHERE Employee5.DeptID = Department5.DeptID;
+SELECT Employee.EmpName, Department.DeptName
+FROM Employee, Department
+WHERE Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
@@ -418,9 +418,9 @@ WHERE Employee5.DeptID = Department5.DeptID;
 ### 3. Outer join (full outer join)
 
 ```sql
-SELECT Employee5.EmpName, Department5.DeptName
-FROM Employee5 FULL OUTER JOIN Department5
-ON Employee5.DeptID = Department5.DeptID;
+SELECT Employee.EmpName, Department.DeptName
+FROM Employee FULL OUTER JOIN Department
+ON Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** Three matches, plus David — NULL and NULL — Finance.
@@ -430,9 +430,9 @@ ON Employee5.DeptID = Department5.DeptID;
 ### 4. Left outer join
 
 ```sql
-SELECT Employee5.EmpName, Department5.DeptName
-FROM Employee5 LEFT JOIN Department5
-ON Employee5.DeptID = Department5.DeptID;
+SELECT Employee.EmpName, Department.DeptName
+FROM Employee LEFT JOIN Department
+ON Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** All four employees, including David — NULL.
@@ -442,9 +442,9 @@ ON Employee5.DeptID = Department5.DeptID;
 ### 5. Right outer join
 
 ```sql
-SELECT Employee5.EmpName, Department5.DeptName
-FROM Employee5 RIGHT JOIN Department5
-ON Employee5.DeptID = Department5.DeptID;
+SELECT Employee.EmpName, Department.DeptName
+FROM Employee RIGHT JOIN Department
+ON Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** HR and IT matches, plus NULL — Finance.
@@ -454,9 +454,9 @@ ON Employee5.DeptID = Department5.DeptID;
 ### 6. Inner join
 
 ```sql
-SELECT Employee5.EmpName, Department5.DeptName
-FROM Employee5 INNER JOIN Department5
-ON Employee5.DeptID = Department5.DeptID;
+SELECT Employee.EmpName, Department.DeptName
+FROM Employee INNER JOIN Department
+ON Employee.DeptID = Department.DeptID;
 ```
 
 **Output:** Alice — HR; Bob — IT; Charlie — IT.
@@ -468,9 +468,9 @@ ON Employee5.DeptID = Department5.DeptID;
 ### 1. UNION
 
 ```sql
-SELECT DeptID FROM Employee5
+SELECT DeptID FROM Employee
 UNION
-SELECT DeptID FROM Department5;
+SELECT DeptID FROM Department;
 ```
 
 **Output:** 1, 2, 3, 4.
@@ -480,9 +480,9 @@ SELECT DeptID FROM Department5;
 ### 2. INTERSECTION (INTERSECT)
 
 ```sql
-SELECT DeptID FROM Employee5
+SELECT DeptID FROM Employee
 INTERSECT
-SELECT DeptID FROM Department5;
+SELECT DeptID FROM Department;
 ```
 
 **Output:** 1, 2.
@@ -492,9 +492,9 @@ SELECT DeptID FROM Department5;
 ### 3. SET DIFFERENCE (MINUS)
 
 ```sql
-SELECT DeptID FROM Department5
+SELECT DeptID FROM Department
 MINUS
-SELECT DeptID FROM Employee5;
+SELECT DeptID FROM Employee;
 ```
 
 **Output:** 3.
@@ -510,35 +510,35 @@ SELECT DeptID FROM Employee5;
 ## Create the tables and insert the question-paper data
 
 ```sql
-CREATE TABLE Department6 (
+CREATE TABLE Department (
     DeptID NUMBER,
     DeptName VARCHAR2(30)
 );
 
-CREATE TABLE Employee6 (
+CREATE TABLE Employee (
     EmpID NUMBER,
     EmpName VARCHAR2(30),
     DeptID NUMBER,
     Salary NUMBER
 );
 
-INSERT INTO Department6 VALUES (1, 'HR');
-INSERT INTO Department6 VALUES (2, 'IT');
-INSERT INTO Department6 VALUES (3, 'Finance');
+INSERT INTO Department VALUES (1, 'HR');
+INSERT INTO Department VALUES (2, 'IT');
+INSERT INTO Department VALUES (3, 'Finance');
 
-INSERT INTO Employee6 VALUES (101, 'Alice', 1, 50000);
-INSERT INTO Employee6 VALUES (102, 'Bob', 2, 60000);
-INSERT INTO Employee6 VALUES (103, 'Charlie', 2, 70000);
-INSERT INTO Employee6 VALUES (104, 'David', 3, 55000);
-INSERT INTO Employee6 VALUES (105, 'Eve', 1, 45000);
+INSERT INTO Employee VALUES (101, 'Alice', 1, 50000);
+INSERT INTO Employee VALUES (102, 'Bob', 2, 60000);
+INSERT INTO Employee VALUES (103, 'Charlie', 2, 70000);
+INSERT INTO Employee VALUES (104, 'David', 3, 55000);
+INSERT INTO Employee VALUES (105, 'Eve', 1, 45000);
 COMMIT;
 ```
 
 ### 1. Employees earning above the average salary
 
 ```sql
-SELECT EmpName FROM Employee6
-WHERE Salary > (SELECT AVG(Salary) FROM Employee6);
+SELECT EmpName FROM Employee
+WHERE Salary > (SELECT AVG(Salary) FROM Employee);
 ```
 
 **Output:** Bob, Charlie. The average salary is 56000.
@@ -548,8 +548,8 @@ WHERE Salary > (SELECT AVG(Salary) FROM Employee6);
 ### 2. Employees with the highest salary
 
 ```sql
-SELECT EmpName FROM Employee6
-WHERE Salary = (SELECT MAX(Salary) FROM Employee6);
+SELECT EmpName FROM Employee
+WHERE Salary = (SELECT MAX(Salary) FROM Employee);
 ```
 
 **Output:** Charlie (70000).
@@ -559,8 +559,8 @@ WHERE Salary = (SELECT MAX(Salary) FROM Employee6);
 ### 3. Employees in the Finance department
 
 ```sql
-SELECT EmpName FROM Employee6
-WHERE DeptID = (SELECT DeptID FROM Department6
+SELECT EmpName FROM Employee
+WHERE DeptID = (SELECT DeptID FROM Department
                 WHERE DeptName = 'Finance');
 ```
 
@@ -569,8 +569,8 @@ WHERE DeptID = (SELECT DeptID FROM Department6
 ### 4. Employees in the IT department
 
 ```sql
-SELECT EmpName FROM Employee6
-WHERE DeptID = (SELECT DeptID FROM Department6
+SELECT EmpName FROM Employee
+WHERE DeptID = (SELECT DeptID FROM Department
                 WHERE DeptName = 'IT');
 ```
 
@@ -579,8 +579,8 @@ WHERE DeptID = (SELECT DeptID FROM Department6
 ### 5. Employees earning less than David
 
 ```sql
-SELECT EmpName FROM Employee6
-WHERE Salary < (SELECT Salary FROM Employee6
+SELECT EmpName FROM Employee
+WHERE Salary < (SELECT Salary FROM Employee
                 WHERE EmpName = 'David');
 ```
 
@@ -591,8 +591,8 @@ WHERE Salary < (SELECT Salary FROM Employee6
 ### 6. Departments with employees using IN
 
 ```sql
-SELECT DeptName FROM Department6
-WHERE DeptID IN (SELECT DeptID FROM Employee6);
+SELECT DeptName FROM Department
+WHERE DeptID IN (SELECT DeptID FROM Employee);
 ```
 
 **Output:** HR, IT, Finance.
@@ -602,8 +602,8 @@ WHERE DeptID IN (SELECT DeptID FROM Employee6);
 ### Correlated subquery example
 
 ```sql
-SELECT e.EmpName FROM Employee6 e
-WHERE e.Salary > (SELECT AVG(Salary) FROM Employee6 x
+SELECT e.EmpName FROM Employee e
+WHERE e.Salary > (SELECT AVG(Salary) FROM Employee x
                   WHERE x.DeptID = e.DeptID);
 ```
 
@@ -620,15 +620,15 @@ WHERE e.Salary > (SELECT AVG(Salary) FROM Employee6 x
 ## Create the Employee table
 
 ```sql
-CREATE TABLE Employee7 (
+CREATE TABLE Employee (
     EmpID NUMBER,
     EmpName VARCHAR2(30),
     Salary NUMBER
 );
 
-INSERT INTO Employee7 VALUES (1, 'Alice', 50000);
-INSERT INTO Employee7 VALUES (2, 'Bob', 60000);
-INSERT INTO Employee7 VALUES (3, 'Charlie', 70000);
+INSERT INTO Employee VALUES (1, 'Alice', 50000);
+INSERT INTO Employee VALUES (2, 'Bob', 60000);
+INSERT INTO Employee VALUES (3, 'Charlie', 70000);
 COMMIT;
 ```
 
@@ -636,7 +636,7 @@ COMMIT;
 
 ```sql
 CREATE VIEW HighSalary AS
-SELECT * FROM Employee7 WHERE Salary > 55000;
+SELECT * FROM Employee WHERE Salary > 55000;
 
 SELECT * FROM HighSalary;
 ```
@@ -649,7 +649,7 @@ SELECT * FROM HighSalary;
 
 ```sql
 CREATE MATERIALIZED VIEW SalaryCopy AS
-SELECT * FROM Employee7;
+SELECT * FROM Employee;
 
 SELECT * FROM SalaryCopy;
 ```
@@ -827,37 +827,37 @@ GROUP BY InstructorID;
 ## Create the Marks table
 
 ```sql
-CREATE TABLE Marks9 (
+CREATE TABLE Marks (
     RollNo NUMBER,
     Marks NUMBER
 );
 
-INSERT INTO Marks9 VALUES (1, 70);
+INSERT INTO Marks VALUES (1, 70);
 COMMIT;
 ```
 
 ### 1. DCL — GRANT and REVOKE
 
 ```sql
-GRANT SELECT ON Marks9 TO lab_user;
-REVOKE SELECT ON Marks9 FROM lab_user;
+GRANT SELECT ON Marks TO lab_user;
+REVOKE SELECT ON Marks FROM lab_user;
 ```
 
-**Explanation:** `GRANT` gives `lab_user` permission to read `Marks9`. `REVOKE` removes that grant.
+**Explanation:** `GRANT` gives `lab_user` permission to read `Marks`. `REVOKE` removes that grant.
 
 **Note:** `lab_user` must already exist, and your account must be allowed to grant access.
 
 ### 2. TCL — COMMIT, SAVEPOINT, ROLLBACK
 
 ```sql
-UPDATE Marks9 SET Marks = 80 WHERE RollNo = 1;
+UPDATE Marks SET Marks = 80 WHERE RollNo = 1;
 SAVEPOINT s1;
 
-UPDATE Marks9 SET Marks = 40 WHERE RollNo = 1;
+UPDATE Marks SET Marks = 40 WHERE RollNo = 1;
 ROLLBACK TO s1;
 
 COMMIT;
-SELECT * FROM Marks9;
+SELECT * FROM Marks;
 ```
 
 **Output:** RollNo = 1, Marks = 80.
@@ -867,9 +867,9 @@ SELECT * FROM Marks9;
 ### Full ROLLBACK
 
 ```sql
-UPDATE Marks9 SET Marks = 99 WHERE RollNo = 1;
+UPDATE Marks SET Marks = 99 WHERE RollNo = 1;
 ROLLBACK;
-SELECT * FROM Marks9;
+SELECT * FROM Marks;
 ```
 
 **Output:** Marks is still 80.
@@ -885,15 +885,15 @@ SELECT * FROM Marks9;
 ## Create the table and insert records
 
 ```sql
-CREATE TABLE Student10 (
+CREATE TABLE Student (
     StudentID NUMBER PRIMARY KEY,
     StudentName VARCHAR2(30),
     Department VARCHAR2(20)
 );
 
-INSERT INTO Student10 VALUES (1, 'Alice', 'CSE');
-INSERT INTO Student10 VALUES (2, 'Bob', 'ECE');
-INSERT INTO Student10 VALUES (3, 'Charlie', 'CSE');
+INSERT INTO Student VALUES (1, 'Alice', 'CSE');
+INSERT INTO Student VALUES (2, 'Bob', 'ECE');
+INSERT INTO Student VALUES (3, 'Charlie', 'CSE');
 COMMIT;
 ```
 
@@ -902,7 +902,7 @@ COMMIT;
 `StudentID NUMBER PRIMARY KEY` normally makes Oracle create an index to support the primary key. Create a separate index on `Department`:
 
 ```sql
-CREATE INDEX idx_dept10 ON Student10(Department);
+CREATE INDEX idx_dept ON Student(Department);
 ```
 
 **Remember:** Primary key = unique ID; secondary index here = department search. In Oracle, a primary-key index is not necessarily a physically ordered textbook primary index.
@@ -910,8 +910,8 @@ CREATE INDEX idx_dept10 ON Student10(Department);
 ### 2. Retrieve records using indexed columns
 
 ```sql
-SELECT * FROM Student10 WHERE StudentID = 2;
-SELECT * FROM Student10 WHERE Department = 'CSE';
+SELECT * FROM Student WHERE StudentID = 2;
+SELECT * FROM Student WHERE Department = 'CSE';
 ```
 
 **Output:** First query returns Bob. Second returns Alice and Charlie.
@@ -921,8 +921,8 @@ SELECT * FROM Student10 WHERE Department = 'CSE';
 ### 3. Insert a record and observe index updates
 
 ```sql
-INSERT INTO Student10 VALUES (4, 'David', 'CSE');
-SELECT * FROM Student10 WHERE Department = 'CSE';
+INSERT INTO Student VALUES (4, 'David', 'CSE');
+SELECT * FROM Student WHERE Department = 'CSE';
 ```
 
 **Output:** Alice, Charlie, David.
@@ -932,8 +932,8 @@ SELECT * FROM Student10 WHERE Department = 'CSE';
 ### 4. Delete a record and observe index updates
 
 ```sql
-DELETE FROM Student10 WHERE StudentID = 2;
-SELECT * FROM Student10 WHERE StudentID = 2;
+DELETE FROM Student WHERE StudentID = 2;
+SELECT * FROM Student WHERE StudentID = 2;
 COMMIT;
 ```
 

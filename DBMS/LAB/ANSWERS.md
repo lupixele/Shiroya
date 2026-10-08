@@ -883,13 +883,22 @@ SELECT * FROM Marks;
 
 ---
 
-# 10. Indexing Techniques
+## 10. Indexing Techniques in DBMS
 
-**Idea:** An index helps Oracle find records by a column. Oracle automatically maintains indexes when rows are inserted or deleted.
+### What is an index?
 
-## Create the table and insert records
+Think of an index in a textbook.
 
-```sql
+Suppose you want to find information about "Database" in a 500-page book.
+
+- Without an index: You may have to search every page.
+- With an index: You look up "Database" in the index and go directly to the relevant page.
+
+Database indexing works similarly. It helps Oracle find records faster without checking every row.
+
+### Example: Student Table
+
+```
 CREATE TABLE Student (
     StudentID NUMBER PRIMARY KEY,
     StudentName VARCHAR2(30),
@@ -899,51 +908,127 @@ CREATE TABLE Student (
 INSERT INTO Student VALUES (1, 'Alice', 'CSE');
 INSERT INTO Student VALUES (2, 'Bob', 'ECE');
 INSERT INTO Student VALUES (3, 'Charlie', 'CSE');
-COMMIT;
 ```
+
+Our table contains:
+
+| StudentID | StudentName | Department |
+| --------- | ----------- | ---------- |
+| 1         | Alice       | CSE        |
+| 2         | Bob         | ECE        |
+| 3         | Charlie     | CSE        |
 
 ### 1. Create a primary and secondary index
 
-`StudentID NUMBER PRIMARY KEY` normally makes Oracle create an index to support the primary key. Create a separate index on `Department`:
+Primary key index
 
-```sql
+```
+StudentID NUMBER PRIMARY KEY
+```
+
+We already declared `StudentID` as the primary key when creating the table.
+
+Oracle normally creates an index automatically to enforce this primary key.
+
+Secondary index
+
+```
 CREATE INDEX idx_dept ON Student(Department);
 ```
 
-**Remember:** Primary key = unique ID; secondary index here = department search. In Oracle, a primary-key index is not necessarily a physically ordered textbook primary index.
+Breakdown:
+
+- `CREATE INDEX` → Creates an index.
+- `idx_dept` → Name of the index.
+- `ON Student(Department)` → Creates the index on the Department column.
+
+Why? Because we might frequently search for students belonging to a particular department.
 
 ### 2. Retrieve records using indexed columns
 
-```sql
+Search by StudentID:
+
+```
 SELECT * FROM Student WHERE StudentID = 2;
+```
+
+Output:
+
+| StudentID | StudentName | Department |
+| --------- | ----------- | ---------- |
+| 2         | Bob         | ECE        |
+
+Search by Department:
+
+```
 SELECT * FROM Student WHERE Department = 'CSE';
 ```
 
-**Output:** First query returns Bob. Second returns Alice and Charlie.
+Output:
 
-**Note:** Oracle decides whether an index is actually used for a query.
+| StudentID | StudentName | Department |
+| --------- | ----------- | ---------- |
+| 1         | Alice       | CSE        |
+| 3         | Charlie     | CSE        |
+
+Both queries search columns that have indexes. Oracle can use those indexes to find records faster, although it decides whether to use them.
 
 ### 3. Insert a record and observe index updates
 
-```sql
+```
 INSERT INTO Student VALUES (4, 'David', 'CSE');
+
 SELECT * FROM Student WHERE Department = 'CSE';
 ```
 
-**Output:** Alice, Charlie, David.
+Output:
 
-**Explanation:** The new record is added to the table; Oracle also updates its indexes automatically.
+| StudentID | StudentName | Department |
+| --------- | ----------- | ---------- |
+| 1         | Alice       | CSE        |
+| 3         | Charlie     | CSE        |
+| 4         | David       | CSE        |
+
+What happened?
+
+We inserted David into the Student table.
+
+Because Oracle maintains indexes automatically, David's information is also reflected in the relevant indexes.
+
+We don't need to create the index again.
 
 ### 4. Delete a record and observe index updates
 
-```sql
+```
 DELETE FROM Student WHERE StudentID = 2;
+
 SELECT * FROM Student WHERE StudentID = 2;
+
 COMMIT;
 ```
 
-**Output:** No rows found for StudentID 2.
+Output:
 
-**Explanation:** Oracle removes the deleted record's index entries automatically; the indexes themselves remain available.
+```
+No rows selected.
+```
 
----
+What happened?
+
+- Bob (StudentID = 2) was deleted.
+- Oracle automatically updated the indexes.
+- Searching for StudentID 2 no longer returns Bob.
+- `COMMIT` saves the changes permanently.
+
+## What you actually need to remember
+
+| Command        | Meaning                                                           |
+| -------------- | ----------------------------------------------------------------- |
+| `PRIMARY KEY`  | Uniquely identifies each record; Oracle normally creates an index |
+| `CREATE INDEX` | Creates an index on a column                                      |
+| `SELECT`       | Retrieves records                                                 |
+| `INSERT`       | Adds a record; indexes update automatically                       |
+| `DELETE`       | Removes a record; indexes update automatically                    |
+| `COMMIT`       | Saves changes permanently                                         |
+
+Most important concept: An index is a separate database structure that helps Oracle locate records faster. You create it once, and Oracle automatically maintains it when data changes.

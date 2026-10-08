@@ -883,7 +883,7 @@ SELECT * FROM Marks;
 
 ---
 
-## 10. Indexing Techniques in DBMS
+# 10. Indexing Techniques in DBMS
 
 ### What is an index?
 

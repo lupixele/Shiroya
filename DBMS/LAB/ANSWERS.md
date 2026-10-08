@@ -4,7 +4,7 @@
 > **SQL dialect:** Oracle SQL (including Oracle materialized views, `MINUS`, `DUAL`, and `TO_DATE`).  
 > **Exam method:** Read the **Idea**, practice the **SQL**, then revise the **Remember** line.  
 > **Important:** Run each experiment **separately**. Some use the same table names with different columns. Do not execute all experiments in one shared schema without renaming/recreating those tables.
-
+> Get Oracle10g.exe from (here)[https://adityagroup-my.sharepoint.com/:u:/g/personal/25b11ds190_adityauniversity_in/IQCHlMTn8svaTJv08O6BrD0qAZ2WJvZsQjqBFXPhKE1Mqdc?e=FMSYlb]
 ---
 
 # 1. University Database — Schema Creation and SQL Queries

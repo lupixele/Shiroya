@@ -24,14 +24,4 @@ This repository organizes **12 provided PowerPoint presentations** into beginner
 3. Re-attempt the problems without looking at the answers.
 4. Use the notes under **Tricks and tips** for revision.
 
-## Coverage and limitations
 
-- **427 slides** indexed from all **12 uploaded PPTX files**.
-- **676 embedded image objects** extracted and linked in slide references.
-- Source decks sometimes contain wrong choices, contradictory numeric values or image-only questions. These are preserved instead of silently rewritten.
-- Chapter guides are explanatory syntheses, **not a claim that every image-only problem has a verified step-by-step solution**. For image-only questions, consult the slide reference.
-- Content that appears only as unextractable drawing shapes or layered charts may require checking the original PowerPoint file.
-
-## GitHub upload
-
-Extract the ZIP and upload the whole `Aptitude_III_Sem_Complete_Notes` directory to a repository. GitHub automatically displays `README.md`; relative links and the stored visual assets work there.

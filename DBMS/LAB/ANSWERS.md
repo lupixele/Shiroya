@@ -87,8 +87,10 @@ COMMIT;
 ### 1. List Computer Science students
 
 ```sql
-SELECT StudentName FROM Student
-WHERE DeptID = (SELECT DeptID FROM Department WHERE DeptName = 'Computer Science');
+SELECT StudentName
+FROM Student, Department
+WHERE Student.DeptID = Department.DeptID
+AND Department.DeptName = 'Computer Science';
 ```
 
 **Output:** Alice, Charlie.

@@ -1,0 +1,110 @@
+[
+  {
+    "code": "01",
+    "title": "Time and Work",
+    "original_deck": "Time and Work  Aditya University III Sem.pptx",
+    "slides": 35,
+    "visual_objects": 10,
+    "study_guide": "topics/01-time-and-work.md",
+    "slide_reference": "slide_reference/01-time-and-work.md"
+  },
+  {
+    "code": "02",
+    "title": "Pipes and Cisterns",
+    "original_deck": "pipesandcisterns3rdsem.pptx",
+    "slides": 35,
+    "visual_objects": 52,
+    "study_guide": "topics/02-pipes-and-cisterns.md",
+    "slide_reference": "slide_reference/02-pipes-and-cisterns.md"
+  },
+  {
+    "code": "03",
+    "title": "Mixture and Alligation",
+    "original_deck": "MIXTURE & ALLIGATION.pptx",
+    "slides": 34,
+    "visual_objects": 1,
+    "study_guide": "topics/03-mixture-and-alligation.md",
+    "slide_reference": "slide_reference/03-mixture-and-alligation.md"
+  },
+  {
+    "code": "04",
+    "title": "Partnership",
+    "original_deck": "partnership.pptx",
+    "slides": 33,
+    "visual_objects": 90,
+    "study_guide": "topics/04-partnership.md",
+    "slide_reference": "slide_reference/04-partnership.md"
+  },
+  {
+    "code": "05",
+    "title": "Permutations and Combinations",
+    "original_deck": "permutation and combination-2.pptx",
+    "slides": 35,
+    "visual_objects": 0,
+    "study_guide": "topics/05-permutations-and-combinations.md",
+    "slide_reference": "slide_reference/05-permutations-and-combinations.md"
+  },
+  {
+    "code": "06",
+    "title": "Quadratic Equations",
+    "original_deck": "quadratic equation.pptx",
+    "slides": 33,
+    "visual_objects": 90,
+    "study_guide": "topics/06-quadratic-equations.md",
+    "slide_reference": "slide_reference/06-quadratic-equations.md"
+  },
+  {
+    "code": "07",
+    "title": "Ranking and Sequence",
+    "original_deck": "ranking & sequence-New.pptx",
+    "slides": 41,
+    "visual_objects": 0,
+    "study_guide": "topics/07-ranking-and-sequence.md",
+    "slide_reference": "slide_reference/07-ranking-and-sequence.md"
+  },
+  {
+    "code": "08",
+    "title": "Seating Arrangement",
+    "original_deck": "seating arrangement 3rd and 5th sem-1.pptx",
+    "slides": 37,
+    "visual_objects": 10,
+    "study_guide": "topics/08-seating-arrangement.md",
+    "slide_reference": "slide_reference/08-seating-arrangement.md"
+  },
+  {
+    "code": "09",
+    "title": "Puzzles, Numbers and Symbols",
+    "original_deck": "Puzzles_Numbers_and_Syllabus.pptx",
+    "slides": 31,
+    "visual_objects": 12,
+    "study_guide": "topics/09-puzzles-numbers-and-symbols.md",
+    "slide_reference": "slide_reference/09-puzzles-numbers-and-symbols.md"
+  },
+  {
+    "code": "10",
+    "title": "Data Interpretation",
+    "original_deck": "Data Interpretation Final-1.pptx",
+    "slides": 34,
+    "visual_objects": 360,
+    "study_guide": "topics/10-data-interpretation.md",
+    "slide_reference": "slide_reference/10-data-interpretation.md"
+  },
+  {
+    "code": "11",
+    "title": "Data Sufficiency",
+    "original_deck": "Data Sufficiency-1.pptx",
+    "slides": 30,
+    "visual_objects": 1,
+    "study_guide": "topics/11-data-sufficiency.md",
+    "slide_reference": "slide_reference/11-data-sufficiency.md"
+  },
+  {
+    "code": "12",
+    "title": "Clocks and Calendars",
+    "original_deck": "DOC-20261005-WA0018.pptx",
+    "slides": 49,
+    "visual_objects": 50,
+    "study_guide": "topics/12-clocks-and-calendars.md",
+    "slide_reference": "slide_reference/12-clocks-and-calendars.md"
+  }
+]

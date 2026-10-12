@@ -203,13 +203,7 @@ $R(0,4) = 2$, so the root is $a_2 = \text{if}$. Left subtree $=$ keys $(0,1)$, w
 
 ### Final Optimal BST
 
-```text
-          if
-         /  \
-       do    int
-                \
-                while
-```
+![Optimal Binary Search Tree](figures/unit4_q4_obst_tree.png)
 
 Minimum cost $C(0,4) = 32$, i.e. the minimum expected search cost $= C / W = 32 / 16 = \mathbf{2}$ comparisons per search (weighted). **Time:** $O(n^3)$ ($O(n^2)$ with Knuth's optimisation).
 

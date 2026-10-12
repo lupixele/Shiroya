@@ -203,5 +203,7 @@ Bucket capacity $= 2$, using the last bits of the binary key. Initial global dep
 | `01` | $B_1 = \{1, 5\}$ | 2 |
 | `11` | $B_2 = \{7\}$ | 2 |
 
+![Extendible Hashing Directory and Split Buckets](figures/unit1_q6_extendible_hashing.png)
+
 - **Advantages:** no full rehash, grows gracefully, at most two disk accesses.
 - **Disadvantage:** the directory itself can become large.

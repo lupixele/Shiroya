@@ -69,29 +69,16 @@ Search key $= 81$. $\text{mid} = \lfloor (\text{low} + \text{high}) / 2 \rfloor$
 
 **Q2. Demonstrate the Merge Sort algorithm on the dataset `42, 17, 8, 33, 25, 61, 14, 50, 9, 37`. Draw the splitting and merging stages. Explain the recurrence relation and derive the time complexity.**
 
-### Splitting (divide) stages
+### Splitting (divide) and Merging (combine) stages
 
-```text
-          [42 17 8 33 25 | 61 14 50 9 37]
-               /                    \
-     [42 17 8 | 33 25]        [61 14 50 | 9 37]
-        /          \             /          \
-   [42 17 | 8]  [33 | 25]   [61 14 | 50]  [9 | 37]
-     /    \                   /    \
-  [42]  [17]               [61]  [14]
-```
+![Merge Sort Splitting and Merging Tree](figures/unit3_q2_merge_sort_tree.png)
 
-### Merging (combine) stages
-
-```text
-[42] + [17]          -> [17 42]             [61] + [14]          -> [14 61]
-[17 42] + [8]        -> [8 17 42]           [14 61] + [50]       -> [14 50 61]
-[33] + [25]          -> [25 33]             [9] + [37]           -> [9 37]
-[8 17 42] + [25 33]  -> [8 17 25 33 42]     [14 50 61] + [9 37]  -> [9 14 37 50 61]
-
-[8 17 25 33 42] + [9 14 37 50 61]
--> [8, 9, 14, 17, 25, 33, 37, 42, 50, 61]
-```
+- **Merging steps:**
+  - `[42] + [17] → [17, 42]` and `[61] + [14] → [14, 61]`
+  - `[17, 42] + [8] → [8, 17, 42]` and `[14, 61] + [50] → [14, 50, 61]`
+  - `[33] + [25] → [25, 33]` and `[9] + [37] → [9, 37]`
+  - `[8, 17, 42] + [25, 33] → [8, 17, 25, 33, 42]` and `[14, 50, 61] + [9, 37] → [9, 14, 37, 50, 61]`
+  - `[8, 17, 25, 33, 42] + [9, 14, 37, 50, 61] → [8, 9, 14, 17, 25, 33, 37, 42, 50, 61]`
 
 **Sorted output:** `8, 9, 14, 17, 25, 33, 37, 42, 50, 61`
 
@@ -285,13 +272,7 @@ $$
 
 ### Minimum Spanning Tree (cost 16)
 
-```text
-A --4-- B --3-- C --6-- D --1-- F
-                        |
-                        2
-                        |
-                        E
-```
+![Minimum Spanning Tree Result](figures/unit3_q6_mst_tree.png)
 
 **Complexities:** Kruskal $O(E \log E)$; Prim $O(E \log V)$ with a heap ($O(V^2)$ with an array).
 

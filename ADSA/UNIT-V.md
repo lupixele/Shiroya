@@ -84,18 +84,7 @@ $$
 
 ### State-space tree (partial)
 
-```text
-                      root
-           /        |       |        \
-        Q1=1       Q1=2    Q1=3      Q1=4
-         |          |       |         |
-  Q2=3 x(dead)     Q2=4    Q2=1     (dead)
-  Q2=4              |       |
-   |               Q3=1    Q3=4
-  Q3=2              |       |
-   |               Q4=3 *  Q4=2 *
-(no Q4: dead)    SOLUTION SOLUTION
-```
+![4-Queens State-Space Tree](figures/unit5_q2_4queens_tree.png)
 
 ### The two distinct solutions (`Q` = queen)
 
@@ -127,32 +116,7 @@ Solution 1: (2, 4, 1, 3)      Solution 2: (3, 1, 4, 2)
 
 ### State-space tree (include branch first). Each node shown as $(s, r)$
 
-```text
-(0,73)
-|-- include 5 --> (5,68)
-|   |-- include 10 --> (15,58)
-|   |   |-- include 12 --> (27,46)
-|   |   |   |-- include 13 --> 40 > 30 X pruned
-|   |   |   '-- exclude 13 --> (27,33): 15 -> 42, 18 -> 45 > 30 X (no solution)
-|   |   '-- exclude 12 --> (15,46)
-|   |       |-- include 13 --> (28,33): add 15 or 18 exceeds 30 X
-|   |       '-- exclude 13 --> (15,33)
-|   |           |-- include 15 --> (30,18) *** SOLUTION {5,10,15} ***
-|   |           '-- exclude 15 --> (15,18): +18 = 33 > 30 X
-|   '-- exclude 10 --> (5,58)
-|       |-- include 12 --> (17,46)
-|       |   |-- include 13 --> (30,33) *** SOLUTION {5,12,13} ***
-|       |   '-- exclude 13 --> 17+15 = 32 > 30, 17+18 = 35 > 30 X
-|       '-- exclude 12 --> (5,46): 13, 15, 18 combinations give 18, 20, 23, 5+... < 30 or > 30 X
-'-- exclude 5 --> (0,68)
-    |-- include 10 --> (10,58): every extension is 22, 25, 23, 28, 35+ ... X (no 30)
-    '-- exclude 10 --> (0,58)
-        |-- include 12 --> (12,46)
-        |   |-- include 13 --> (25,33) X (25 + 15 = 40 > 30)
-        |   '-- exclude 13 --> (12,33): include 15 -> 27 (no); exclude 15 -> include 18 -> (30,0)
-        |                      *** SOLUTION {12,18} ***
-        '-- exclude 12 --> (0,46): 13+15 = 28, 13+18 = 31, 15+18 = 33, 13+15+18 = 46 X
-```
+![Sum of Subsets State-Space Tree](figures/unit5_q3_subset_sum_tree.png)
 
 ### Examples of non-promising (pruned) nodes
 
@@ -187,19 +151,7 @@ The given graph has vertices `A, B, C, D, E`, and every pair of vertices is join
 
 ### State-space tree (order A, B, C, D, E)
 
-```text
-A = 1 (by symmetry, any colour for A gives the same outcome; 3 choices)
-|-- B = 1 : X (adjacent to A)
-|-- B = 2
-|   |-- C = 1 : X (A)    C = 2 : X (B)
-|   |-- C = 3
-|       |-- D = 1 : X (A)    D = 2 : X (B)    D = 3 : X (C)
-|       '-- no colour available for D -> BACKTRACK
-'-- B = 3
-    |-- C = 2
-        '-- D: 1 X (A), 2 X (C), 3 X (B) -> BACKTRACK
-(similarly for the other branches: every branch fails at vertex D)
-```
+![3-Coloring State-Space Tree](figures/unit5_q4_coloring_tree.png)
 
 - The first three vertices `A, B, C` are mutually adjacent, so they must use three different colours ($3! = 6$ ways).
 - Vertex `D` is adjacent to `A, B` and `C`, so all three colours are already used by its neighbours: no colour is available $\to$ backtrack to the previous levels, try all alternatives, and every path fails at `D`.
@@ -225,40 +177,7 @@ A Hamiltonian cycle visits every vertex exactly once and returns to the start. A
 
 ### State-space tree (paths from A)
 
-```text
-A
-|-- B
-|   |-- C
-|   |   '-- E
-|   |       '-- D --> D is not adjacent to A X (cannot close the cycle)
-|   |-- D
-|   |   '-- E
-|   |       '-- C --> C adjacent to A *** A-B-D-E-C-A ***
-|   '-- E
-|       |-- C --> D left, but C-D is not an edge X (dead end)
-|       '-- D --> C left, but D-C is not an edge X (dead end)
-|-- C
-|   |-- B
-|   |   |-- D
-|   |   |   '-- E --> E adjacent to A *** A-C-B-D-E-A ***
-|   |   '-- E
-|   |       '-- D --> D not adjacent to A X
-|   '-- E
-|       |-- D
-|       |   '-- B --> B adjacent to A *** A-C-E-D-B-A ***
-|       '-- B
-|           '-- D --> D not adjacent to A X
-'-- E
-    |-- B
-    |   |-- C --> D unreachable from C X
-    |   '-- D --> C unreachable from D X
-    |-- C
-    |   '-- B
-    |       '-- D --> D not adjacent to A X
-    '-- D
-        '-- B
-            '-- C --> C adjacent to A *** A-E-D-B-C-A ***
-```
+![Hamiltonian Cycles State-Space Tree](figures/unit5_q5_hamiltonian_tree.png)
 
 **How invalid paths are rejected:** a partial path is abandoned when the next vertex is not adjacent to the current one, when it was already visited, or when the last vertex has no edge back to A. Vertex D has only two neighbours (B and E), so any Hamiltonian cycle must use both edges `B–D` and `D–E`; every path that visits D in another way is a dead end.
 
@@ -289,6 +208,8 @@ Arrange items in decreasing profit/weight order: `I1 (2, 40), I5 (4, 25), I2 (5,
 - **Pruning rule:** kill a node if its $UB \le$ the best feasible profit already found (equivalently $c(x) > U$). The live node with the least cost (largest $UB$) is expanded next.
 
 ### State-space tree (node: weight, profit, UB)
+
+![0/1 Knapsack LC Branch and Bound State-Space Tree](figures/unit5_q6_bb_knapsack_tree.png)
 
 | Node | Decision | Weight | Profit | UB | Status |
 |---|---|---:|---:|---|---|
@@ -357,6 +278,8 @@ $$
 $$
 
 ### State-space tree with lower bounds
+
+![TSP Branch and Bound State-Space Tree](figures/unit5_q7_bb_tsp_tree.png)
 
 | Level | Node (path) | Computation | Lower bound | Status |
 |---:|---|---|---:|---|

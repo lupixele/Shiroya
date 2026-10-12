@@ -8,7 +8,7 @@ Academic exam preparation notes, unit-wise questions, and complete worked answer
 
 | Markdown Document | Raw Source File(s) with Path | Description |
 | :--- | :--- | :--- |
-| [`questions.md`](questions.md) | [`CPP/raw/Question Bank_CPP_Unit 3_4_5.pdf`](raw/Question%20Bank_CPP_Unit%203_4_5.pdf)<br>[`CPP/raw/MID - 1 QUESTIONS.pdf`](raw/MID%20-%201%20QUESTIONS.pdf) | Combined unit-wise question bank (Units 1–5) with direct navigation links to every worked answer |
+| [`question.md`](question.md) | [`CPP/raw/Question Bank_CPP_Unit 3_4_5.pdf`](raw/Question%20Bank_CPP_Unit%203_4_5.pdf) | Unit-wise question bank (Units 3, 4 & 5) with direct navigation links to each answer |
 | [`unit 3 answers.md`](unit%203%20answers.md) | [`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf)<br>[`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf) | **Unit 3 Answers:** Operator overloading (member vs. friend, binary, complex numbers), inheritance types, virtual functions, abstract classes |
 | [`unit 4 answers.md`](unit%204%20answers.md) | [`CPP/raw/UNIT 4(CPP).pdf`](raw/UNIT%204(CPP).pdf)<br>[`CPP/raw/Unit_4_Handwritten_Answers (1).pdf`](raw/Unit_4_Handwritten_Answers%20(1).pdf)<br>[`CPP/raw/Unit_3_Handwritten_Answers.pdf` (Page 6)](raw/Unit_3_Handwritten_Answers.pdf) | **Unit 4 Answers:** Generic programming, function templates, template overloading, bubble sort using templates, templates vs. macros |
 | [`unit 5 answers.md`](unit%205%20answers.md) | [`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf)<br>[`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf) | **Unit 5 Answers:** Exception handling principles & flowchart, multiple catch, `try`/`throw`/`catch`, file stream I/O, STL components & programming model, iterators, `vector`/`list`/`map` |
@@ -24,7 +24,7 @@ Academic exam preparation notes, unit-wise questions, and complete worked answer
 ### UNIT 3
 
 > **Raw Source:** [`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf) · [`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf)  
-> **Questions:** [`questions.md` — UNIT 3](questions.md#unit-3)  
+> **Questions:** [`question.md` — UNIT 3](question.md#unit-3)  
 > **Worked Answers:** [`unit 3 answers.md`](unit%203%20answers.md)
 
 | Q# | Topic | Worked Answer Link | Raw Source File |
@@ -41,7 +41,7 @@ Academic exam preparation notes, unit-wise questions, and complete worked answer
 ### UNIT 4
 
 > **Raw Source:** [`CPP/raw/UNIT 4(CPP).pdf`](raw/UNIT%204(CPP).pdf) · [`CPP/raw/Unit_4_Handwritten_Answers (1).pdf`](raw/Unit_4_Handwritten_Answers%20(1).pdf) · [`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf)  
-> **Questions:** [`questions.md` — UNIT 4](questions.md#unit-4)  
+> **Questions:** [`question.md` — UNIT 4](question.md#unit-4)  
 > **Worked Answers:** [`unit 4 answers.md`](unit%204%20answers.md)
 
 | Q# | Topic | Worked Answer Link | Raw Source File |
@@ -57,7 +57,7 @@ Academic exam preparation notes, unit-wise questions, and complete worked answer
 ### UNIT 5
 
 > **Raw Source:** [`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf) · [`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf)  
-> **Questions:** [`questions.md` — UNIT 5](questions.md#unit-5)  
+> **Questions:** [`question.md` — UNIT 5](question.md#unit-5)  
 > **Worked Answers:** [`unit 5 answers.md`](unit%205%20answers.md)
 
 | Q# | Topic | Worked Answer Link | Raw Source File |

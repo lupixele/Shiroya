@@ -233,50 +233,295 @@ $$
 
 ![Minimum Spanning Tree Weighted Undirected Graph](figures/unit3_q6_mst.png)
 
-**Edges of the graph:** `F–D 1, E–D 2, B–C 3, A–B 4, F–E 5, C–D 6, A–F 7, A–E 8, C–E 8, B–F 9, B–E 10, B–D 11`.
+### Graph Summary & Problem Objective
+- **Vertices ($V$):** 6 vertices — $\{A, B, C, D, E, F\}$
+- **Objective:** Find a spanning tree connecting all 6 vertices with minimum total edge weight.
+- **MST Property:** For a graph with $|V| = 6$ vertices, an MST must contain exactly:
+  $$|V| - 1 = 6 - 1 = \mathbf{5 \text{ edges}}$$
+  with zero cycles.
+- **All 12 Edges sorted by weight:**
+  1. `(F, D)` = 1
+  2. `(E, D)` = 2
+  3. `(B, C)` = 3
+  4. `(A, B)` = 4
+  5. `(F, E)` = 5
+  6. `(C, D)` = 6
+  7. `(A, F)` = 7
+  8. `(A, E)` = 8
+  9. `(C, E)` = 8
+  10. `(B, F)` = 9
+  11. `(B, E)` = 10
+  12. `(B, D)` = 11
+
+---
 
 ### A. Kruskal's algorithm (sort edges by weight; add an edge if it does not form a cycle)
 
-| Step | Edge | Weight | Decision | Reason |
-|---:|---|---:|---|---|
-| 1 | F–D | 1 | Accept | joins F, D |
-| 2 | E–D | 2 | Accept | joins E to `{F, D}` |
-| 3 | B–C | 3 | Accept | new component `{B, C}` |
-| 4 | A–B | 4 | Accept | joins A to `{B, C}` |
-| 5 | F–E | 5 | Reject | forms cycle `F–D–E` |
-| 6 | C–D | 6 | Accept | joins `{A, B, C}` with `{D, E, F}` |
-| 7 | A–F | 7 | Reject | cycle |
-| 8 | A–E | 8 | Reject | cycle |
-| 9 | C–E | 8 | Reject | cycle |
-| 10 | B–F | 9 | Reject | cycle |
-| 11 | B–E | 10 | Reject | cycle |
-| 12 | B–D | 11 | Reject | cycle |
+#### Intuition & Mechanism
+1. Start with 6 separate singleton components: `"{A}", "{B}", "{C}", "{D}", "{E}", "{F}"`.
+2. Consider edges one by one in non-decreasing order of weight.
+3. If an edge connects two **different components**, **ACCEPT** it and union the components.
+4. If an edge connects vertices already in the **same component**, **REJECT** it (it would form a cycle).
+5. Stop as soon as **5 edges** are accepted.
 
-**MST edges:** `F–D (1), E–D (2), B–C (3), A–B (4), C–D (6)`.
+---
 
-$$
-\text{Total cost} = 1 + 2 + 3 + 4 + 6 = \boxed{16}
-$$
+#### Step-by-Step Execution of Kruskal's Algorithm
+
+##### Step 1: Consider Edge `(F, D)` — Weight = 1
+- **Component of F:** `{F}` | **Component of D:** `{D}`
+- **Action:** **ACCEPT** (connects two separate components).
+- **Union:** Merge `{F}` and `{D}` $\rightarrow$ `{D, F}`.
+- **Visual Forest in Text:**
+  ```text
+  Component 1: (F) ----- [1] ----- (D)
+  Isolated:    (A)   (B)   (C)   (E)
+  ```
+- **Current MST Edges (1/5):** `{(F, D)}` | **Running Cost:** $1$
+
+---
+
+##### Step 2: Consider Edge `(E, D)` — Weight = 2
+- **Component of E:** `{E}` | **Component of D:** `{D, F}`
+- **Action:** **ACCEPT** (connects vertex `E` to component `{D, F}`).
+- **Union:** Merge `{E}` and `{D, F}` $\rightarrow$ `{D, E, F}`.
+- **Visual Forest in Text:**
+  ```text
+  Component 1: (F) ----- [1] ----- (D) ----- [2] ----- (E)
+  Isolated:    (A)   (B)   (C)
+  ```
+- **Current MST Edges (2/5):** `{(F, D), (E, D)}` | **Running Cost:** $1 + 2 = 3$
+
+---
+
+##### Step 3: Consider Edge `(B, C)` — Weight = 3
+- **Component of B:** `{B}` | **Component of C:** `{C}`
+- **Action:** **ACCEPT** (creates a new connected component `{B, C}`).
+- **Union:** Merge `{B}` and `{C}` $\rightarrow$ `{B, C}`.
+- **Visual Forest in Text (2 Trees Growing):**
+  ```text
+  Component 1: (B) ----- [3] ----- (C)
+
+  Component 2: (F) ----- [1] ----- (D) ----- [2] ----- (E)
+
+  Isolated:    (A)
+  ```
+- **Current MST Edges (3/5):** `{(F, D), (E, D), (B, C)}` | **Running Cost:** $1 + 2 + 3 = 6$
+
+---
+
+##### Step 4: Consider Edge `(A, B)` — Weight = 4
+- **Component of A:** `{A}` | **Component of B:** `{B, C}`
+- **Action:** **ACCEPT** (connects singleton `{A}` to component `{B, C}`).
+- **Union:** Merge `{A}` and `{B, C}` $\rightarrow$ `{A, B, C}`.
+- **Visual Forest in Text (2 Major Trees):**
+  ```text
+  Component 1: (A) ----- [4] ----- (B) ----- [3] ----- (C)
+
+  Component 2: (F) ----- [1] ----- (D) ----- [2] ----- (E)
+  ```
+- **Current MST Edges (4/5):** `{(F, D), (E, D), (B, C), (A, B)}` | **Running Cost:** $1 + 2 + 3 + 4 = 10$
+
+---
+
+##### Step 5: Consider Edge `(F, E)` — Weight = 5
+- **Component of F:** `{D, E, F}` | **Component of E:** `{D, E, F}`
+- **Action:** ❌ **REJECT (Cycle Detected!)**
+- **Reason:** Both `F` and `E` already belong to the same connected component via path `F — D — E`. Adding `(F, E)` would close the loop `F — D — E — F`.
+- **Visual State:** No change to the tree structure.
+
+---
+
+##### Step 6: Consider Edge `(C, D)` — Weight = 6
+- **Component of C:** `{A, B, C}` | **Component of D:** `{D, E, F}`
+- **Action:** **ACCEPT** (bridges Component 1 and Component 2 together!).
+- **Union:** Merge `{A, B, C}` and `{D, E, F}` $\rightarrow$ `{A, B, C, D, E, F}` (All 6 vertices now united into 1 single spanning tree).
+- **Visual Full Spanning Tree in Text:**
+  ```text
+  (A) ---[4]--- (B) ---[3]--- (C) ---[6]--- (D) ---[2]--- (E)
+                                             |
+                                            [1]
+                                             |
+                                            (F)
+  ```
+- **Current MST Edges (5/5):** `{(F, D), (E, D), (B, C), (A, B), (C, D)}`
+- **Total Minimum Cost:** $1 + 2 + 3 + 4 + 6 = \mathbf{16}$
+
+> **Early Termination:** Exactly 5 edges ($|V| - 1$) have been selected. All remaining edges (`A–F 7`, `A–E 8`, `C–E 8`, `B–F 9`, `B–E 10`, `B–D 11`) are discarded because any further addition would create cycles.
+
+---
+
+#### Kruskal's Decision Table Summary
+
+| Step | Edge Examined | Weight | Endpoints Components | Decision | Reason & Cycle Analysis | Running Cost |
+|:---:|:---:|:---:|:---:|:---:|:---|:---:|
+| **1** | `F–D` | 1 | `{F}` vs `{D}` | **ACCEPT** | Connects separate components | **1** |
+| **2** | `E–D` | 2 | `{E}` vs `{D, F}` | **ACCEPT** | Connects `E` to `{D, F}` | **3** |
+| **3** | `B–C` | 3 | `{B}` vs `{C}` | **ACCEPT** | Connects `B` and `C` | **6** |
+| **4** | `A–B` | 4 | `{A}` vs `{B, C}` | **ACCEPT** | Connects `A` to `{B, C}` | **10** |
+| **5** | `F–E` | 5 | `{D, E, F}` vs `{D, E, F}` | ❌ **REJECT** | Creates cycle `F–D–E–F` | 10 |
+| **6** | `C–D` | 6 | `{A, B, C}` vs `{D, E, F}` | **ACCEPT** | Bridges all 6 vertices into 1 tree | **16** |
+| 7–12 | `A–F`, `A–E`, etc. | $\ge 7$ | Same component | ❌ **SKIP** | $V-1=5$ edges already acquired | **16** |
+
+---
 
 ### B. Prim's algorithm (start at A; repeatedly add the cheapest edge connecting the tree to a new vertex)
 
-| Step | Tree vertices | Cheapest crossing edge | Added |
-|---:|---|---|---|
-| 1 | `{A}` | `A–B (4)` | B |
-| 2 | `{A, B}` | `B–C (3)` | C |
-| 3 | `{A, B, C}` | `C–D (6)` | D |
-| 4 | `{A, B, C, D}` | `D–F (1)` | F |
-| 5 | `{A, B, C, D, F}` | `D–E (2)` | E |
+#### Intuition & Mechanism
+1. Start with an arbitrary seed vertex: **Start at vertex A**.
+2. Define the tree set: $S = \{A\}$. Non-tree vertices: $V \setminus S = \{B, C, D, E, F\}$.
+3. At each step, examine all **cut/crossing edges** connecting a vertex in $S$ to a vertex in $V \setminus S$.
+4. Greedily pick the **cheapest crossing edge**, add the newly connected vertex to $S$, and expand the tree.
+5. Repeat until all 6 vertices are included in $S$.
 
-$$
-\text{Total cost} = 4 + 3 + 6 + 1 + 2 = \boxed{16} \quad \text{(same MST)}
-$$
+---
 
-### Minimum Spanning Tree (cost 16)
+#### Step-by-Step Execution of Prim's Algorithm
+
+##### Initial State:
+- **Tree Vertices ($S$):** `{A}`
+- **Unvisited Vertices ($V \setminus S$):** `{B, C, D, E, F}`
+- **Visual in Text:**
+  ```text
+  [Tree S] : (A)
+  ```
+
+---
+
+##### Step 1: Grow from `{A}`
+- **Available Crossing Edges from A:**
+  - `A — B` (weight 4)
+  - `A — F` (weight 7)
+  - `A — E` (weight 8)
+- **Minimum Choice:** `A — B` with weight **4**.
+- **Action:** Add vertex **B** and edge `(A, B)`.
+- **New Tree Vertices ($S$):** `{A, B}`
+- **Visual in Text:**
+  ```text
+  (A) ----- [4] ----- (B)
+  ```
+- **Running Cost:** $4$
+
+---
+
+##### Step 2: Grow from `{A, B}`
+- **Available Crossing Edges from `{A, B}` to `{C, D, E, F}`:**
+  - From A: `A — F (7)`, `A — E (8)`
+  - From B: `B — C (3)`, `B — F (9)`, `B — E (10)`, `B — D (11)`
+- **Minimum Choice:** `B — C` with weight **3**.
+- **Action:** Add vertex **C** and edge `(B, C)`.
+- **New Tree Vertices ($S$):** `{A, B, C}`
+- **Visual in Text:**
+  ```text
+  (A) ----- [4] ----- (B) ----- [3] ----- (C)
+  ```
+- **Running Cost:** $4 + 3 = 7$
+
+---
+
+##### Step 3: Grow from `{A, B, C}`
+- **Available Crossing Edges from `{A, B, C}` to `{D, E, F}`:**
+  - From A: `A — F (7)`, `A — E (8)`
+  - From B: `B — F (9)`, `B — E (10)`, `B — D (11)`
+  - From C: `C — D (6)`, `C — E (8)`
+- **Minimum Choice:** `C — D` with weight **6**.
+- **Action:** Add vertex **D** and edge `(C, D)`.
+- **New Tree Vertices ($S$):** `{A, B, C, D}`
+- **Visual in Text:**
+  ```text
+  (A) ----- [4] ----- (B) ----- [3] ----- (C) ----- [6] ----- (D)
+  ```
+- **Running Cost:** $4 + 3 + 6 = 13$
+
+---
+
+##### Step 4: Grow from `{A, B, C, D}`
+- **Available Crossing Edges from `{A, B, C, D}` to `{E, F}`:**
+  - From A: `A — F (7)`, `A — E (8)`
+  - From B: `B — F (9)`, `B — E (10)`
+  - From C: `C — E (8)`
+  - From D: `D — F (1)`, `D — E (2)`
+- **Minimum Choice:** `D — F` with weight **1**.
+- **Action:** Add vertex **F** and edge `(D, F)`.
+- **New Tree Vertices ($S$):** `{A, B, C, D, F}`
+- **Visual in Text:**
+  ```text
+  (A) ---[4]--- (B) ---[3]--- (C) ---[6]--- (D)
+                                             |
+                                            [1]
+                                             |
+                                            (F)
+  ```
+- **Running Cost:** $13 + 1 = 14$
+
+---
+
+##### Step 5: Grow from `{A, B, C, D, F}` to `{E}`
+- **Available Crossing Edges to unvisited vertex `{E}`:**
+  - From A: `A — E (8)`
+  - From B: `B — E (10)`
+  - From C: `C — E (8)`
+  - From D: `D — E (2)`
+  - From F: `F — E (5)`
+- **Minimum Choice:** `D — E` with weight **2**.
+- **Action:** Add vertex **E** and edge `(D, E)`.
+- **New Tree Vertices ($S$):** `{A, B, C, D, E, F}` (All 6 vertices reached!)
+- **Final Visual Tree in Text:**
+  ```text
+  (A) ---[4]--- (B) ---[3]--- (C) ---[6]--- (D) ---[2]--- (E)
+                                             |
+                                            [1]
+                                             |
+                                            (F)
+  ```
+- **Total Minimum Cost:** $4 + 3 + 6 + 1 + 2 = \mathbf{16}$
+
+---
+
+#### Prim's Step-by-Step Decision Table
+
+| Step | Tree Vertices ($S$) | Candidate Crossing Edges to ($V \setminus S$) | Cheapest Crossing Edge Selected | New Vertex Added | Step Cost | Total Cost |
+|:---:|:---|:---|:---:|:---:|:---:|:---:|
+| **1** | `{A}` | `(A,B):4`, `(A,F):7`, `(A,E):8` | `(A, B)` | **B** | 4 | **4** |
+| **2** | `{A, B}` | `(B,C):3`, `(A,F):7`, `(A,E):8`, `(B,F):9`, `(B,E):10`, `(B,D):11` | `(B, C)` | **C** | 3 | **7** |
+| **3** | `{A, B, C}` | `(C,D):6`, `(A,F):7`, `(A,E):8`, `(C,E):8`, `(B,F):9`, `(B,E):10`, `(B,D):11` | `(C, D)` | **D** | 6 | **13** |
+| **4** | `{A, B, C, D}` | `(D,F):1`, `(D,E):2`, `(A,F):7`, `(A,E):8`, `(C,E):8` | `(D, F)` | **F** | 1 | **14** |
+| **5** | `{A, B, C, D, F}` | `(D,E):2`, `(F,E):5`, `(A,E):8`, `(C,E):8`, `(B,E):10` | `(D, E)` | **E** | 2 | **16** |
+
+---
+
+### Final Minimum Spanning Tree Result (Cost = 16)
 
 ![Minimum Spanning Tree Result](figures/unit3_q6_mst_tree.png)
 
-**Complexities:** Kruskal $O(E \log E)$; Prim $O(E \log V)$ with a heap ($O(V^2)$ with an array).
+```text
+                  [B] -----------(3)----------- [C]
+                 /                                \
+               (4)                                (6)
+               /                                    \
+             [A]                                    [D]
+                                                   /   \
+                                                 (1)   (2)
+                                                 /       \
+                                               [F]       [E]
+```
+
+- **Selected Edges:** `(A, B): 4`, `(B, C): 3`, `(C, D): 6`, `(D, F): 1`, `(D, E): 2`.
+- **Total Minimum Weight:**
+  $$\text{Cost} = 4 + 3 + 6 + 1 + 2 = \mathbf{16}$$
+
+---
+
+### Comparison: Kruskal's vs. Prim's Algorithm
+
+| Feature | Kruskal's Algorithm | Prim's Algorithm |
+|---|---|---|
+| **Strategy** | Edge-driven (global sorted edge order) | Vertex-driven (grows a single contiguous tree) |
+| **Intermediate State** | May be a disconnected forest of multiple trees | Always a single connected tree at every step |
+| **Data Structures** | Disjoint Set Union (DSU / Find-Union) | Priority Queue (Min-Heap) + Adjacency List |
+| **Cycle Handling** | Explicit cycle check via DSU | Inherent (never picks an edge between two already-visited vertices) |
+| **Time Complexity** | $O(E \log E)$ or $O(E \log V)$ | $O(E \log V)$ with binary heap ($O(V^2)$ with adjacency matrix) |
+| **Best Suited For** | Sparse graphs (few edges) | Dense graphs (many edges) |
 
 ---
 

@@ -26,9 +26,7 @@ For a sorted array, compare the key with the middle element. If the key is small
 
 **General recurrence:** A divide-and-conquer algorithm is often described by
 
-\[
-T(n)=aT(n/b)+f(n)
-\]
+\[T(n)=aT(n/b)+f(n)]
 
 where `a` is the number of subproblems, `n/b` is the approximate size of each subproblem, and `f(n)` is the work required to divide and combine.
 
@@ -372,7 +370,7 @@ Fractional profit from I5:
 
 **Question:** Construct an MST for the given weighted undirected graph using both algorithms. Show selected and rejected edges and total cost. (8 marks)
 
-**Important:** The graph image was unavailable in the text available here. The following solution uses the explicit edge list previously used in this conversation; verify that it matches the original diagram.
+![Minimum Spanning Tree Weighted Undirected Graph](figures/unit3_q6_mst.png)
 
 ### Worked graph
 
@@ -447,7 +445,7 @@ Selected edges: `FD, DE, BC, AB, CD`.
 
 **Question:** Find shortest paths from A to every other vertex. Show the distance table after each iteration and explain the limitation with negative edges. (8 marks)
 
-**Important:** The graph image was unavailable in the text available here. This solution uses the explicit graph previously used in this conversation; verify the edge list against the original diagram.
+![Dijkstra Weighted Graph](figures/unit3_q7_dijkstra.png)
 
 ### Edge list
 

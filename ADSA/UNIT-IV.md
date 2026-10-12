@@ -55,9 +55,9 @@ A naive recursive calculation of `F(5)` computes `F(3)` more than once. DP store
 
 **Question:** Find shortest paths from S, show distances after iterations, and check for negative-weight cycles. (8 marks)
 
-### Edge list used
+![Bellman-Ford Directed Weighted Graph](figures/unit4_q2_bellman_ford.png)
 
-The original graph image is unavailable in the text. The following edge list is the one used for the worked solution:
+### Edge list used
 
 | Directed edge | Weight |
 |---|---:|

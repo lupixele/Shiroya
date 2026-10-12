@@ -135,6 +135,8 @@ $$
 | 4 | `51 42 46` | 51 | 9 | `46 42 51` |
 | 5 | `46 42` | 46 | 8 | `42 46` |
 
+![Quick Sort Partitioning and Recursion Tree](figures/unit3_q3_quicksort.png)
+
 **Sorted array:** `7, 13, 18, 24, 29, 35, 42, 46, 51`
 
 ### Complexity comparison

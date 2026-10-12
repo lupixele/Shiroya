@@ -111,6 +111,8 @@
 
    Show the partitioning process, identify the pivot positions after each pass, and obtain the sorted array. Compare the best-case and worst-case time complexities of Quick Sort.
 
+   ![Quick Sort Partitioning and Recursion Tree](figures/unit3_q3_quicksort.png)
+
 4. Apply the Greedy Job Sequencing algorithm to schedule the following jobs to maximize the total profit. Each job requires one unit of time. — **[→ Answer: `UNIT-III.md` §4](UNIT-III.md#4-greedy-job-sequencing-with-deadlines)**
 
    | Job | Deadline | Profit |

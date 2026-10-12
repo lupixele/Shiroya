@@ -10,53 +10,62 @@
 
 ## Q1. Distinguish between overloading using a member function and a friend function.
 
-### Explanation
-Operator overloading allows C++ operators (such as `+`, `-`, `==`) to work directly with user-defined class objects. It can be implemented using either a **member function** or a **friend function**.
+### Concept of Operator Overloading
+Operator overloading is a feature of C++ that allows existing operators (such as `+`, `-`, `==`, `<<`) to be given special user-defined meanings when applied to objects of user-defined classes. It enables intuitive, readable expressions like `c1 + c2` instead of cumbersome function calls like `c1.add(c2)`.
 
-### Comparison
+An overloaded operator can be implemented using either a **Member Function** or a **Friend Function**.
 
-| Feature | Member Function | Friend Function |
-| :--- | :--- | :--- |
-| **Declaration & Scope** | Defined inside the class scope. | Declared with keyword `friend` inside the class, defined outside. |
-| **Calling Mechanism** | Invoked using the left-hand object (`obj1.operator+(obj2)`). | Invoked like a normal function with objects passed as arguments. |
-| **`this` Pointer** | Has an implicit `this` pointer representing the left operand. | Does not have a `this` pointer. |
-| **Number of Parameters** | Unary: **0** explicit arguments<br>Binary: **1** explicit argument | Unary: **1** argument<br>Binary: **2** arguments |
-| **Access to Data** | Directly accesses private and protected members. | Can access private and protected members only because it is declared a friend. |
-| **Symmetry** | Left operand must be an object of the class. | Allows mixed-mode arithmetic (e.g., `5 + obj`). |
+---
 
-### Example Program
+### Detailed Comparison
+
+| S.No. | Parameter | Member Function | Friend Function |
+| :---: | :--- | :--- | :--- |
+| **1** | **Definition & Scope** | Defined within the class scope as a regular member function. | Declared inside the class using the `friend` keyword, but defined outside the class scope. |
+| **2** | **Invocation Mechanism** | Invoked by the left-hand operand object using the implicit `this` pointer: `obj1.operator+(obj2)`. | Invoked like a normal global function with all operands passed explicitly as arguments: `operator+(obj1, obj2)`. |
+| **3** | **`this` Pointer** | An implicit `this` pointer is always passed, representing the invoking object. | No `this` pointer is available because the friend function is not a member of the class. |
+| **4** | **Number of Arguments** | • **Unary Operator:** Takes **0** explicit arguments (`*this` is the operand).<br>• **Binary Operator:** Takes **1** explicit argument (the right operand). | • **Unary Operator:** Takes **1** explicit argument.<br>• **Binary Operator:** Takes **2** explicit arguments. |
+| **5** | **Private Data Access** | Has direct, native access to all `private` and `protected` members of the class. | Can access `private` and `protected` members only because it is explicitly declared a friend. |
+| **6** | **Operand Symmetry** | **Asymmetric:** The left-hand operand *must* be an object of the defining class. Expressions like `5 + obj` will fail. | **Symmetric:** Both operands are treated equally. Expressions like `5 + obj` are easily supported. |
+| **7** | **Best Used For** | Operators where the left operand is naturally modified, such as assignment (`=`), subscript (`[]`), and compound assignments (`+=`). | Commutative arithmetic operators (`+`, `-`, `*`), comparison operators, and I/O stream operators (`<<`, `>>`). |
+
+---
+
+### Code Demonstration
+The following program demonstrates both approaches in a single class: binary `+` overloaded via a **member function** and binary `-` overloaded via a **friend function**.
+
 ```cpp
 #include <iostream>
 using namespace std;
 
 class Demo {
-    int x;
+    int val;
 public:
-    Demo(int a = 0) { x = a; }
+    Demo(int v = 0) { val = v; }
 
-    // Overloading '+' using a Member Function (1 argument)
+    // 1. Member Function: takes 1 explicit parameter
     Demo operator+(Demo d) {
-        return Demo(x + d.x);
+        return Demo(val + d.val);
     }
 
-    // Overloading '-' using a Friend Function (2 arguments)
+    // 2. Friend Function: declared inside class, takes 2 explicit parameters
     friend Demo operator-(Demo a, Demo b);
 
     void display() {
-        cout << x << endl;
+        cout << val << endl;
     }
 };
 
-// Friend function definition
+// Friend function defined outside class (no Demo:: scope resolution)
 Demo operator-(Demo a, Demo b) {
-    return Demo(a.x - b.x);
+    return Demo(a.val - b.val);
 }
 
 int main() {
-    Demo d1(20), d2(10);
+    Demo d1(30), d2(10);
 
-    Demo d3 = d1 + d2; // calls member function: d1.operator+(d2)
-    Demo d4 = d1 - d2; // calls friend function: operator-(d1, d2)
+    Demo d3 = d1 + d2; // Invokes member function: d1.operator+(d2)
+    Demo d4 = d1 - d2; // Invokes friend function: operator-(d1, d2)
 
     cout << "Sum (Member function)        : ";
     d3.display();
@@ -70,32 +79,49 @@ int main() {
 
 ### Output
 ```text
-Sum (Member function)        : 30
-Difference (Friend function) : 10
+Sum (Member function)        : 40
+Difference (Friend function) : 20
 ```
+
+### Summary
+Member functions are concise and natural when the operation modifies the left-hand object, whereas friend functions offer flexibility and symmetry, especially when dealing with mixed-type operations and commutative expressions.
 
 ---
 
 ## Q2. Explain binary operator overloading with a suitable example.
 
-### Explanation
-**Binary operator overloading** is the process of giving custom meaning to an operator that operates on two operands (such as `+`, `-`, `*`, `/`, `==`) when applied to class objects.
+### Definition & Working Principle
+A **binary operator** operates on two operands (for example, `+`, `-`, `*`, `/`, `<`, `==`). In C++, **binary operator overloading** allows programmers to redefine the behavior of these operators when used with class objects.
 
-When overloading a binary operator using a member function:
-- The left operand calls the operator function.
-- The right operand is passed as an argument.
+When overloading a binary operator as a **member function**:
+1. The **left-hand operand** becomes the calling object (`*this`).
+2. The **right-hand operand** is passed as the single formal parameter to the operator function.
+3. The function returns a new object containing the result of the operation.
 
 ### Syntax
 ```cpp
 class ClassName {
 public:
-    ReturnType operator op(const ClassName &obj) {
+    ReturnType operator op(const ClassName &rightOperand) {
         // operation logic
+        return result;
     }
 };
 ```
 
-### Example Program
+### Rules for Operator Overloading
+1. Only existing C++ operators can be overloaded; new operators cannot be created.
+2. The **precedence**, **associativity**, and **number of operands (arity)** of the operator cannot be altered.
+3. Operators that **cannot be overloaded** in C++:
+   - Scope resolution operator (`::`)
+   - Member access / dot operator (`.`)
+   - Pointer-to-member operator (`.*`)
+   - Ternary / conditional operator (`?:`)
+   - `sizeof` and `typeid` operators
+
+---
+
+### Exam-Ready Program (Adding Complex Numbers)
 ```cpp
 #include <iostream>
 using namespace std;
@@ -108,9 +134,12 @@ public:
         imag = i;
     }
 
-    // Binary '+' operator overloading
-    Complex operator+(const Complex &c) {
-        return Complex(real + c.real, imag + c.imag);
+    // Binary '+' operator overloading as a member function
+    Complex operator+(Complex c) {
+        Complex temp;
+        temp.real = real + c.real; // 'real' belongs to *this; 'c.real' belongs to parameter
+        temp.imag = imag + c.imag;
+        return temp;
     }
 
     void display() {
@@ -119,11 +148,12 @@ public:
 };
 
 int main() {
-    Complex c1(3, 4), c2(5, 6);
-    Complex c3 = c1 + c2; // Evaluated as c1.operator+(c2)
+    Complex c1(3, 4), c2(2, 5);
+    Complex c3 = c1 + c2; // Evaluates to c1.operator+(c2)
 
-    cout << "Result: ";
-    c3.display();
+    cout << "First Complex Number  : "; c1.display();
+    cout << "Second Complex Number : "; c2.display();
+    cout << "Sum Result            : "; c3.display();
 
     return 0;
 }
@@ -131,170 +161,246 @@ int main() {
 
 ### Output
 ```text
-Result: 8 + 10i
+First Complex Number  : 3 + 4i
+Second Complex Number : 2 + 5i
+Sum Result            : 5 + 9i
 ```
+
+### Explanation of Code
+- `c1 + c2` triggers `c1.operator+(c2)`.
+- Inside `operator+`, `real` refers to `c1.real` (via `this`), and `c.real` refers to `c2.real`.
+- The real parts and imaginary parts are added separately and returned as a new `Complex` object `c3`.
 
 ---
 
 ## Q3. Explain operator overloading using friend functions with syntax and an example.
 
-### Explanation
-An operator can be overloaded using a **friend function**. A friend function is not a member of the class, but is given special permission to access its `private` and `protected` data members.
-
-Friend functions are especially useful when:
-1. Both operands must be treated symmetrically.
-2. The left-hand operand is a built-in type or an object of another class (e.g., `5 + obj`).
+### Why Use a Friend Function for Operator Overloading?
+While member functions handle most operator overloading needs, a **friend function** is required in two major scenarios:
+1. **Commutative / Mixed-Mode Arithmetic:** When adding a primitive value to an object, such as `5 + obj`. A member function cannot handle this because `5` is a primitive integer and cannot invoke a member function (`5.operator+(obj)` is invalid). A friend function receives both operands as parameters and handles `operator+(int, Object)` easily.
+2. **I/O Stream Operator Overloading:** The `<<` and `>>` operators have `std::ostream` or `std::istream` as their left-hand operand, which cannot be modified to add member functions. Hence, friend functions are mandatory.
 
 ### Syntax
 ```cpp
 class ClassName {
-    // data members
+    // Data members
 public:
-    friend ReturnType operator op(const ClassName &a, const ClassName &b);
+    // Declaration inside the class with 'friend' keyword:
+    friend ReturnType operator op(Type1 operand1, Type2 operand2);
 };
 
-// Outside class definition
-ReturnType operator op(const ClassName &a, const ClassName &b) {
-    // implementation
+// Definition outside the class (no ClassName:: scope resolution needed):
+ReturnType operator op(Type1 operand1, Type2 operand2) {
+    // implementation code
 }
 ```
 
-### Example Program
+---
+
+### Exam-Ready Program (Friend Operator Overloading)
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Demo {
-    int x;
+class Distance {
+    int meters;
 public:
-    Demo(int a = 0) {
-        x = a;
-    }
+    Distance(int m = 0) { meters = m; }
 
-    // Friend function declaration
-    friend Demo operator+(Demo d1, Demo d2);
+    // Friend function declaration: takes both operands explicitly
+    friend Distance operator+(Distance d1, Distance d2);
 
     void display() {
-        cout << "Result = " << x << endl;
+        cout << meters << " meters" << endl;
     }
 };
 
-// Friend function definition
-Demo operator+(Demo d1, Demo d2) {
-    return Demo(d1.x + d2.x);
+// Friend function definition outside the class
+Distance operator+(Distance d1, Distance d2) {
+    // Accesses private data 'meters' directly
+    return Distance(d1.meters + d2.meters);
 }
 
 int main() {
-    Demo d1(10), d2(20);
-    Demo d3 = d1 + d2; // calls operator+(d1, d2)
+    Distance dist1(15), dist2(25);
+    Distance total = dist1 + dist2; // Evaluates to operator+(dist1, dist2)
 
-    d3.display();
+    cout << "Distance 1: "; dist1.display();
+    cout << "Distance 2: "; dist2.display();
+    cout << "Total     : "; total.display();
+
     return 0;
 }
 ```
 
 ### Output
 ```text
-Result = 30
+Distance 1: 15 meters
+Distance 2: 25 meters
+Total     : 40 meters
 ```
+
+### Key Points for Full Marks
+- The friend function is declared inside the class with the `friend` prefix.
+- It is defined outside without the class name and without `::`.
+- It receives two explicit arguments for binary operators and one explicit argument for unary operators.
 
 ---
 
 ## Q4. Explain different types of inheritance supported by C++ with examples.
 
-### Explanation
-**Inheritance** is the process where a new class (derived class) inherits data members and member functions from an existing class (base class). It promotes code reusability and creates a hierarchical classification.
+### Definition of Inheritance
+**Inheritance** is an Object-Oriented Programming concept by which a new class (**derived class** or child class) inherits the properties and methods of an existing class (**base class** or parent class).
 
-C++ supports 5 types of inheritance:
+### Key Advantages
+1. **Code Reusability:** Existing, tested logic is reused without rewriting.
+2. **Extensibility:** New features can be added without modifying existing classes.
+3. **Establishes "is-a" Relationships:** Models real-world hierarchical relationships (e.g., `Dog` is an `Animal`).
 
-### 1. Single Inheritance
-A single derived class inherits from a single base class.
+---
+
+### The 5 Types of Inheritance in C++
+
+```text
+1. Single          2. Multiple          3. Multilevel       4. Hierarchical        5. Hybrid
+   [ A ]             [ A ]   [ B ]          [ A ]                [ A ]               [ A ]
+     │                 └───┬───┘              │                ┌───┴───┐           ┌───┴───┐
+     ▼                     ▼                  ▼                ▼       ▼           ▼       ▼
+   [ B ]                 [ C ]              [ B ]            [ B ]   [ C ]       [ B ]   [ C ]
+                                              │                                    └───┬───┘
+                                              ▼                                        ▼
+                                            [ C ]                                    [ D ]
+```
+
+#### 1. Single Inheritance
+One derived class inherits directly from a single base class.
 ```cpp
-class A {
+class Animal {
 public:
-    void showA() { cout << "Base Class A" << endl; }
+    void eat() { cout << "Eating..." << endl; }
 };
 
-class B : public A {
+class Dog : public Animal {
 public:
-    void showB() { cout << "Derived Class B" << endl; }
+    void bark() { cout << "Barking..." << endl; }
 };
 ```
 
-### 2. Multiple Inheritance
-A single derived class inherits from more than one base class.
+#### 2. Multiple Inheritance
+One derived class inherits from more than one base class simultaneously.
 ```cpp
-class A { };
-class B { };
+class Printer {
+public:
+    void print() { cout << "Printing document" << endl; }
+};
 
-class C : public A, public B {
-    // Inherits members of both A and B
+class Scanner {
+public:
+    void scan() { cout << "Scanning document" << endl; }
+};
+
+class AllInOne : public Printer, public Scanner {
+    // Inherits both print() and scan()
 };
 ```
 
-### 3. Multilevel Inheritance
-A class is derived from a class that is already derived from another class (forming an inheritance chain).
+#### 3. Multilevel Inheritance
+A class is derived from another derived class, forming an inheritance chain.
 ```cpp
-class A { };
-class B : public A { };
-class C : public B { }; // C inherits from B, which inherits from A
+class Person {
+public:
+    void info() { cout << "Person info" << endl; }
+};
+
+class Student : public Person {
+public:
+    void study() { cout << "Studying" << endl; }
+};
+
+class GraduateStudent : public Student {
+public:
+    void research() { cout << "Conducting research" << endl; }
+};
 ```
 
-### 4. Hierarchical Inheritance
-Multiple derived classes inherit from a single base class.
+#### 4. Hierarchical Inheritance
+Multiple derived classes inherit from a single common base class.
 ```cpp
-class A { };
+class Shape {
+public:
+    void color() { cout << "Applying color" << endl; }
+};
 
-class B : public A { };
-class C : public A { }; // Both B and C inherit from A
+class Circle : public Shape {
+    // Inherits Shape
+};
+
+class Rectangle : public Shape {
+    // Inherits Shape
+};
 ```
 
-### 5. Hybrid Inheritance
-A combination of two or more types of inheritance (such as hierarchical and multiple inheritance combined).
+#### 5. Hybrid Inheritance
+A combination of two or more types of inheritance (typically combining hierarchical and multiple inheritance).
 ```cpp
 class A { };
 class B : public A { };
 class C : public A { };
-class D : public B, public C { }; // Combines hierarchical and multiple
+class D : public B, public C { }; // Diamond pattern
 ```
+> **Note on Diamond Problem:** In hybrid inheritance, when two derived classes share a base class and are inherited together into a fourth class, ambiguity arises. In C++, this is solved using **`virtual` base classes** (`class B : virtual public A`).
 
-### Summary of Inheritance Types
-- **Single:** 1 Base $\rightarrow$ 1 Derived
-- **Multiple:** Multiple Bases $\rightarrow$ 1 Derived
-- **Multilevel:** Base $\rightarrow$ Intermediate $\rightarrow$ Derived
-- **Hierarchical:** 1 Base $\rightarrow$ Multiple Derived
-- **Hybrid:** Combination of two or more types
+---
+
+### Comparison Summary
+
+| Type | Base Classes | Derived Classes | Description |
+| :--- | :---: | :---: | :--- |
+| **Single** | 1 | 1 | Simple 1-to-1 derivation. |
+| **Multiple** | 2 or more | 1 | Combines capabilities of several base classes. |
+| **Multilevel** | 1 per level | 1 per level | Linear ancestor chain ($A \rightarrow B \rightarrow C$). |
+| **Hierarchical** | 1 | 2 or more | Single parent with multiple independent children. |
+| **Hybrid** | Multiple | Multiple | Composite structure mixing multiple inheritance types. |
 
 ---
 
 ## Q5. Explain the use of Virtual Functions with an example program.
 
-### Explanation
-A **virtual function** is a member function in a base class that is declared with the keyword `virtual` and redefined (overridden) in a derived class.
+### What is a Virtual Function?
+A **virtual function** is a member function declared in a base class using the `virtual` keyword and redefined (overridden) in one or more derived classes.
 
-When a base class pointer points to a derived class object and calls a virtual function, C++ determines which function to execute at **run time** based on the actual object type, rather than the pointer type. This is known as **Runtime Polymorphism** or **Late Binding**.
+When a virtual function is called through a **base class pointer or reference**, C++ determines which version of the function to execute at **run time** based on the actual object being pointed to, rather than the type of the pointer. This capability is called **Runtime Polymorphism**, **Dynamic Binding**, or **Late Binding**.
 
-### Key Uses
-1. Enables runtime polymorphism.
-2. Supports function overriding across inheritance hierarchies.
-3. Allows a common interface to manipulate different derived class objects dynamically.
+### Why are Virtual Functions Used?
+1. **Achieves Runtime Polymorphism:** Enables the system to decide the appropriate function call dynamically during program execution.
+2. **Extensible Architecture:** Base class pointers can process collections of different derived objects uniformly (e.g., an array of `Shape*` holding `Circle`, `Square`, `Triangle`).
+3. **Prevents Early Binding:** Without `virtual`, the compiler performs static (compile-time) binding, always executing the base class version regardless of the actual object.
 
-### Example Program
+### Internal Mechanism (vtable & vptr)
+- For every class containing virtual functions, the compiler creates a **Virtual Table (`vtable`)** containing function pointers to the virtual methods.
+- Every object of such a class contains an invisible pointer called **`vptr`** that points to its class's `vtable`.
+- At runtime, function calls through pointers are resolved by looking up the correct entry in the `vtable`.
+
+---
+
+### Exam-Ready Program
 ```cpp
 #include <iostream>
 using namespace std;
 
 class Base {
 public:
-    virtual void show() {
-        cout << "Base class show()" << endl;
+    // Virtual function enables late binding
+    virtual void display() {
+        cout << "Display from Base class" << endl;
     }
 };
 
 class Derived : public Base {
 public:
-    void show() override {
-        cout << "Derived class show()" << endl;
+    // Overriding the virtual function
+    void display() override {
+        cout << "Display from Derived class" << endl;
     }
 };
 
@@ -302,8 +408,10 @@ int main() {
     Base *ptr;     // Base class pointer
     Derived obj;   // Derived class object
 
-    ptr = &obj;    // Pointer points to derived object
-    ptr->show();   // Calls Derived's show() at runtime
+    ptr = &obj;    // Base pointer points to Derived object
+
+    // Because display() is virtual, Derived's version is executed at runtime:
+    ptr->display();
 
     return 0;
 }
@@ -311,29 +419,42 @@ int main() {
 
 ### Output
 ```text
-Derived class show()
+Display from Derived class
 ```
+
+### Key Differences: Virtual vs Non-Virtual Binding
+
+| Feature | Non-Virtual Function | Virtual Function |
+| :--- | :--- | :--- |
+| **Binding Type** | Early / Static (Compile-time) binding. | Late / Dynamic (Run-time) binding. |
+| **Decision Factor** | Type of the pointer variable. | Type of the actual object pointed to. |
+| **Keyword** | No special keyword. | Declared with `virtual` in base class. |
+| **Performance** | Slightly faster (direct jump). | Slight overhead due to `vptr` and `vtable` lookup. |
 
 ---
 
 ## Q6. What is an abstract class? Demonstrate with an example.
 
-### Explanation
-An **abstract class** is a class designed specifically to be used as a base class and cannot be instantiated directly (no objects can be created from it).
+### Definition of an Abstract Class
+An **abstract class** in C++ is a class designed specifically to serve as a base class and **cannot be used to instantiate objects directly**.
 
-A class becomes abstract when it contains at least one **pure virtual function**. A pure virtual function has no definition in the base class and is declared by assigning `= 0`.
+A class is automatically recognized as abstract if it contains at least one **pure virtual function**.
 
-Derived classes must provide an implementation for all pure virtual functions, otherwise they also become abstract.
-
-### Syntax
+### Pure Virtual Function
+A **pure virtual function** is a function declared in a base class that has no implementation (body) in that base class. It is declared by appending `= 0` to its prototype:
 ```cpp
-class Shape {
-public:
-    virtual void draw() = 0; // Pure virtual function
-};
+virtual ReturnType functionName(parameters) = 0;
 ```
 
-### Example Program
+### Important Characteristics of Abstract Classes
+1. **No Instantiation:** Attempting to create an object of an abstract class (`Shape s;`) produces a compilation error.
+2. **Pointers & References Allowed:** While objects cannot be instantiated, **pointers and references of an abstract class type are fully allowed** (`Shape *ptr;`), allowing polymorphic manipulation of derived objects.
+3. **Obligation to Override:** Any concrete derived class *must* provide an implementation for all pure virtual functions. If it fails to do so, it also becomes an abstract class.
+4. **Concrete Members Permitted:** An abstract class can still contain regular variables, constructors, destructors, and non-virtual or normal virtual functions.
+
+---
+
+### Exam-Ready Program (Abstract Base Class `Shape`)
 ```cpp
 #include <iostream>
 using namespace std;
@@ -341,24 +462,45 @@ using namespace std;
 // Abstract Base Class
 class Shape {
 public:
-    virtual void draw() = 0; // Pure virtual function
+    // Pure virtual function makes Shape an abstract class
+    virtual void draw() = 0;
+
+    // Normal concrete function inside abstract class
+    void info() {
+        cout << "This is a 2D Shape." << endl;
+    }
 };
 
-// Concrete Derived Class
+// Concrete Derived Class 1
 class Circle : public Shape {
 public:
     void draw() override {
-        cout << "Drawing Circle" << endl;
+        cout << "Drawing a Circle" << endl;
+    }
+};
+
+// Concrete Derived Class 2
+class Rectangle : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing a Rectangle" << endl;
     }
 };
 
 int main() {
-    // Shape s; // Error: Cannot declare variable of abstract type 'Shape'
-    Circle c;
-    c.draw();
+    // Shape s; // ERROR: Cannot instantiate abstract class Shape
 
-    Shape *ptr = &c;
-    ptr->draw();
+    Shape *shapePtr; // OK: Base class pointer
+
+    Circle c;
+    Rectangle r;
+
+    shapePtr = &c;
+    shapePtr->info();
+    shapePtr->draw();
+
+    shapePtr = &r;
+    shapePtr->draw();
 
     return 0;
 }
@@ -366,6 +508,10 @@ int main() {
 
 ### Output
 ```text
-Drawing Circle
-Drawing Circle
+This is a 2D Shape.
+Drawing a Circle
+Drawing a Rectangle
 ```
+
+### Summary
+An abstract class enforces a common interface across an entire hierarchy of derived classes while preventing incomplete base abstractions from being instantiated directly.

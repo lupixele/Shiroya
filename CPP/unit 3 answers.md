@@ -10,19 +10,21 @@
 
 ## Q1. Distinguish between overloading using a member function and a friend function.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 2–3)
+### Explanation
+Operator overloading allows C++ operators (such as `+`, `-`, `==`) to work directly with user-defined class objects. It can be implemented using either a **member function** or a **friend function**.
 
-Operator overloading allows an operator such as `+`, `-`, `==`, etc., to work with user-defined objects.
+### Comparison
 
-| Member Function | Friend Function |
-| :--- | :--- |
-| 1. The operator function is defined inside the class. | 1. The operator function is declared as a friend inside the class but defined outside. |
-| 2. It is called using the left-hand object. | 2. It can be called with objects passed as arguments. |
-| 3. It accesses private/protected members directly. | 3. It can access private/protected members because it is declared as a friend. |
-| 4. It generally requires one less parameter for binary operators. | 4. It generally requires two parameters for binary operators. |
-| 5. `*this` represents the left operand. | 5. Both operands are explicitly passed as arguments. |
+| Feature | Member Function | Friend Function |
+| :--- | :--- | :--- |
+| **Declaration & Scope** | Defined inside the class scope. | Declared with keyword `friend` inside the class, defined outside. |
+| **Calling Mechanism** | Invoked using the left-hand object (`obj1.operator+(obj2)`). | Invoked like a normal function with objects passed as arguments. |
+| **`this` Pointer** | Has an implicit `this` pointer representing the left operand. | Does not have a `this` pointer. |
+| **Number of Parameters** | Unary: **0** explicit arguments<br>Binary: **1** explicit argument | Unary: **1** argument<br>Binary: **2** arguments |
+| **Access to Data** | Directly accesses private and protected members. | Can access private and protected members only because it is declared a friend. |
+| **Symmetry** | Left operand must be an object of the class. | Allows mixed-mode arithmetic (e.g., `5 + obj`). |
 
-#### Example
+### Example Program
 ```cpp
 #include <iostream>
 using namespace std;
@@ -30,161 +32,70 @@ using namespace std;
 class Demo {
     int x;
 public:
-    Demo(int a) { x = a; }
+    Demo(int a = 0) { x = a; }
 
-    // Member function
+    // Overloading '+' using a Member Function (1 argument)
     Demo operator+(Demo d) {
         return Demo(x + d.x);
     }
 
-    // Friend function
+    // Overloading '-' using a Friend Function (2 arguments)
     friend Demo operator-(Demo a, Demo b);
 
-    void show() { cout << x; }
+    void display() {
+        cout << x << endl;
+    }
 };
 
+// Friend function definition
 Demo operator-(Demo a, Demo b) {
     return Demo(a.x - b.x);
 }
 
 int main() {
     Demo d1(20), d2(10);
-    Demo d3 = d1 + d2; // Member
-    Demo d4 = d1 - d2; // Friend
-    d3.show();
-    cout << endl;
-    d4.show();
+
+    Demo d3 = d1 + d2; // calls member function: d1.operator+(d2)
+    Demo d4 = d1 - d2; // calls friend function: operator-(d1, d2)
+
+    cout << "Sum (Member function)        : ";
+    d3.display();
+
+    cout << "Difference (Friend function) : ";
+    d4.display();
+
+    return 0;
 }
 ```
 
-#### Output
+### Output
 ```text
-30
-10
-```
-*(Note: The PDF prints `Output: 30` at the bottom of page 3.)*
-
----
-
-### Version 2 — Handwritten Notes ([`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf), Page 1)
-
-Operator overloading in C++ can be done using either a member function or a friend function.
-
-#### 1. Definition
-- **Member function:** The operator function is defined inside the class.
-- **Friend function:** The operator function is declared with `friend` inside the class and defined outside the class.
-
-#### 2. Left-hand operand
-- **Member function:** The left operand must be an object of the class.
-- **Friend function:** The left operand need not be a class object; both operands are passed as arguments.
-
-#### 3. Arguments
-- **For unary operators:**
-  - Member function $\rightarrow$ no explicit argument
-  - Friend function $\rightarrow$ one argument
-- **For binary operators:**
-  - Member function $\rightarrow$ one explicit argument
-  - Friend function $\rightarrow$ two arguments
-
-#### 4. Access
-- **Member function:** Can access class members directly.
-- **Friend function:** Can also access private and protected members because it is a friend of the class.
-
-#### 5. Use
-- **Member function:** Best when the left operand is the class object.
-- **Friend function:** Useful when symmetry is needed or when the left operand is not a class object.
-
-Hence, both methods are used for operator overloading, but friend functions give more flexibility, while member functions are simpler when the operator naturally belongs to the class object.
-
-#### Example
-
-**Member function:**
-```cpp
-class Complex {
-    int real, imag;
-public:
-    Complex(int r = 0, int i = 0) { real = r; imag = i; }
-    Complex operator+(const Complex &c) {
-        return Complex(real + c.real, imag + c.imag);
-    }
-};
-```
-
-**Friend function:**
-```cpp
-class Complex {
-    int real, imag;
-public:
-    Complex(int r = 0, int i = 0) { real = r; imag = i; }
-    friend Complex operator+(const Complex &a, const Complex &b);
-};
-
-Complex operator+(const Complex &a, const Complex &b) {
-    return Complex(a.real + b.real, a.imag + b.imag);
-}
+Sum (Member function)        : 30
+Difference (Friend function) : 10
 ```
 
 ---
 
 ## Q2. Explain binary operator overloading with a suitable example.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 4–5)
+### Explanation
+**Binary operator overloading** is the process of giving custom meaning to an operator that operates on two operands (such as `+`, `-`, `*`, `/`, `==`) when applied to class objects.
 
-Binary operator overloading is the process of giving a special meaning to a binary operator such as `+`, `-`, `*`, `/`, etc., when it is used with objects of a class.
+When overloading a binary operator using a member function:
+- The left operand calls the operator function.
+- The right operand is passed as an argument.
 
-A binary operator works on two operands. In C++, it can be overloaded using a member function or friend function.
-
-#### Example
-```cpp
-#include <iostream>
-using namespace std;
-
-class Demo {
-    int x;
-public:
-    Demo(int a) {
-        x = a;
-    }
-
-    // Binary + operator overloading
-    Demo operator+(Demo d) {
-        return Demo(x + d.x);
-    }
-
-    void display() {
-        cout << "Result = " << x;
-    }
-};
-
-int main() {
-    Demo d1(10), d2(20);
-    Demo d3 = d1 + d2;
-    d3.display();
-    return 0;
-}
-```
-
-#### Output
-```text
-30
-```
-
----
-
-### Version 2 — Complex Number Example
-
-#### 1. Syntax (using Member Function)
+### Syntax
 ```cpp
 class ClassName {
 public:
-    ClassName operator op(const ClassName &obj) {
-        // perform operation and return result object
+    ReturnType operator op(const ClassName &obj) {
+        // operation logic
     }
 };
 ```
 
-#### 2. Example
-Program to overload the binary `'+'` operator using a member function to add two complex numbers:
+### Example Program
 ```cpp
 #include <iostream>
 using namespace std;
@@ -197,7 +108,7 @@ public:
         imag = i;
     }
 
-    // Overloading binary '+' operator using member function
+    // Binary '+' operator overloading
     Complex operator+(const Complex &c) {
         return Complex(real + c.real, imag + c.imag);
     }
@@ -208,39 +119,47 @@ public:
 };
 
 int main() {
-    Complex c1(3, 4), c2(5, 6), c3;
-    c3 = c1 + c2; // equivalent to c1.operator+(c2)
-    cout << "Sum = ";
+    Complex c1(3, 4), c2(5, 6);
+    Complex c3 = c1 + c2; // Evaluated as c1.operator+(c2)
+
+    cout << "Result: ";
     c3.display();
+
     return 0;
 }
 ```
 
-#### Output
+### Output
 ```text
-Sum = 8 + 10i
+Result: 8 + 10i
 ```
-
-#### 3. Conclusion
-Thus, binary operator overloading allows intuitive arithmetic and comparison expressions like `c1 + c2` to work seamlessly with user-defined class objects.
 
 ---
 
 ## Q3. Explain operator overloading using friend functions with syntax and an example.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 5–6)
+### Explanation
+An operator can be overloaded using a **friend function**. A friend function is not a member of the class, but is given special permission to access its `private` and `protected` data members.
 
-Operator overloading using a friend function means defining an overloaded operator as a friend function of a class. A friend function is not a member of the class, but it can access the class's private and protected data members.
+Friend functions are especially useful when:
+1. Both operands must be treated symmetrically.
+2. The left-hand operand is a built-in type or an object of another class (e.g., `5 + obj`).
 
-#### Syntax
+### Syntax
 ```cpp
 class ClassName {
     // data members
-    friend ReturnType operator op(ClassName, ClassName);
+public:
+    friend ReturnType operator op(const ClassName &a, const ClassName &b);
 };
+
+// Outside class definition
+ReturnType operator op(const ClassName &a, const ClassName &b) {
+    // implementation
+}
 ```
 
-#### Example
+### Example Program
 ```cpp
 #include <iostream>
 using namespace std;
@@ -248,185 +167,119 @@ using namespace std;
 class Demo {
     int x;
 public:
-    Demo(int a) {
+    Demo(int a = 0) {
         x = a;
     }
 
+    // Friend function declaration
     friend Demo operator+(Demo d1, Demo d2);
 
     void display() {
-        cout << "Result = " << x;
+        cout << "Result = " << x << endl;
     }
 };
 
-// Friend function
+// Friend function definition
 Demo operator+(Demo d1, Demo d2) {
     return Demo(d1.x + d2.x);
 }
 
 int main() {
     Demo d1(10), d2(20);
-    Demo d3 = d1 + d2;
+    Demo d3 = d1 + d2; // calls operator+(d1, d2)
+
     d3.display();
     return 0;
 }
 ```
 
-#### Output
+### Output
 ```text
 Result = 30
 ```
 
 ---
 
-### Version 2 — Handwritten Notes ([`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf), Page 2)
-
-Operator overloading in C++ allows us to give special meaning to an existing operator for user-defined data types. A friend function can also be used to overload operators. A friend function is declared inside the class using the keyword `friend`, but it is defined outside the class. It is not a member of the class, yet it can access private and protected members of the class.
-
-#### 1. Syntax
-```cpp
-class ClassName {
-private:
-    // data members
-public:
-    friend return_type operator_symbol(arguments);
-};
-
-return_type operator_symbol(arguments) {
-    // function body
-}
-```
-
-#### 2. Example
-Program to overload `'+'` operator using a friend function to add two complex numbers.
-```cpp
-#include <iostream>
-using namespace std;
-
-class Complex {
-    int real, imag;
-public:
-    Complex(int r = 0, int i = 0) { real = r; imag = i; }
-    friend Complex operator+(const Complex &a, const Complex &b);
-    void display() {
-        cout << real << " + " << imag << "i";
-    }
-};
-
-Complex operator+(const Complex &a, const Complex &b) {
-    return Complex(a.real + b.real, a.imag + b.imag);
-}
-
-int main() {
-    Complex c1(2, 3), c2(4, 5), c3;
-    c3 = c1 + c2;
-    cout << "Sum = ";
-    c3.display();
-    return 0;
-}
-```
-
-#### Output
-```text
-Sum = 6 + 8i
-```
-
-#### 3. Conclusion
-Thus, friend functions are useful in operator overloading when both operands need to be treated equally and when the function needs access to private data of the class.
-
----
-
 ## Q4. Explain different types of inheritance supported by C++ with examples.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 6–8)
+### Explanation
+**Inheritance** is the process where a new class (derived class) inherits data members and member functions from an existing class (base class). It promotes code reusability and creates a hierarchical classification.
 
-Inheritance is an OOP concept in which a new class (derived class) acquires the properties and functions of an existing class (base class). It promotes code reusability.
+C++ supports 5 types of inheritance:
 
-C++ supports the following types of inheritance:
-
-#### 1. Single Inheritance
-One derived class inherits from one base class.
+### 1. Single Inheritance
+A single derived class inherits from a single base class.
 ```cpp
 class A {
 public:
-    void show() {
-        cout << "Base class";
-    }
+    void showA() { cout << "Base Class A" << endl; }
 };
 
 class B : public A {
+public:
+    void showB() { cout << "Derived Class B" << endl; }
 };
 ```
 
-#### 2. Multiple Inheritance
-One derived class inherits from more than one base class.
+### 2. Multiple Inheritance
+A single derived class inherits from more than one base class.
 ```cpp
 class A { };
 class B { };
+
 class C : public A, public B {
+    // Inherits members of both A and B
 };
 ```
 
-#### 3. Multilevel Inheritance
-A class is derived from another derived class, forming a chain.
+### 3. Multilevel Inheritance
+A class is derived from a class that is already derived from another class (forming an inheritance chain).
 ```cpp
 class A { };
 class B : public A { };
-class C : public B { };
+class C : public B { }; // C inherits from B, which inherits from A
 ```
 
-#### 4. Hierarchical Inheritance
-Multiple derived classes inherit from one base class.
+### 4. Hierarchical Inheritance
+Multiple derived classes inherit from a single base class.
+```cpp
+class A { };
+
+class B : public A { };
+class C : public A { }; // Both B and C inherit from A
+```
+
+### 5. Hybrid Inheritance
+A combination of two or more types of inheritance (such as hierarchical and multiple inheritance combined).
 ```cpp
 class A { };
 class B : public A { };
 class C : public A { };
+class D : public B, public C { }; // Combines hierarchical and multiple
 ```
 
-#### 5. Hybrid Inheritance
-It is a combination of two or more types of inheritance, such as multiple and multilevel inheritance.
-```cpp
-class A { };
-class B : public A { };
-class C : public A { };
-class D : public B, public C { };
-```
-
----
-
-### Version 2 — Handwritten Notes ([`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf), Page 3)
-
-Inheritance is the process by which one class acquires the properties and behavior of another class. The existing class is called the base class and the new class is called the derived class. C++ supports the following types of inheritance.
-
-1. **Single Inheritance:** In single inheritance, one derived class inherits from one base class.
-2. **Multiple Inheritance:** In multiple inheritance, one derived class inherits from more than one base class.
-3. **Multilevel Inheritance:** In multilevel inheritance, a derived class becomes the base class for another class.
-4. **Hierarchical Inheritance:** In hierarchical inheritance, more than one derived class inherit from the same base class.
-5. **Hybrid Inheritance:** In hybrid inheritance, it is a combination of two or more types of inheritance.
-
-#### Summary
-- **Single** $\rightarrow$ one base, one derived
-- **Multiple** $\rightarrow$ many bases, one derived
-- **Multilevel** $\rightarrow$ inheritance in levels
-- **Hierarchical** $\rightarrow$ one base, many derived
-- **Hybrid** $\rightarrow$ combination of inheritance types
-
-Thus, inheritance promotes code reusability and helps in building relationships among classes in C++.
+### Summary of Inheritance Types
+- **Single:** 1 Base $\rightarrow$ 1 Derived
+- **Multiple:** Multiple Bases $\rightarrow$ 1 Derived
+- **Multilevel:** Base $\rightarrow$ Intermediate $\rightarrow$ Derived
+- **Hierarchical:** 1 Base $\rightarrow$ Multiple Derived
+- **Hybrid:** Combination of two or more types
 
 ---
 
 ## Q5. Explain the use of Virtual Functions with an example program.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 8–9)
+### Explanation
+A **virtual function** is a member function in a base class that is declared with the keyword `virtual` and redefined (overridden) in a derived class.
 
-A virtual function is a member function in a base class that is declared using the keyword `virtual`. It allows function overriding and supports runtime polymorphism.
+When a base class pointer points to a derived class object and calls a virtual function, C++ determines which function to execute at **run time** based on the actual object type, rather than the pointer type. This is known as **Runtime Polymorphism** or **Late Binding**.
 
-#### Uses of Virtual Functions
-- They allow the derived class function to be called using a base class pointer.
-- They provide runtime polymorphism.
-- They allow different derived classes to provide their own implementation of the same function.
+### Key Uses
+1. Enables runtime polymorphism.
+2. Supports function overriding across inheritance hierarchies.
+3. Allows a common interface to manipulate different derived class objects dynamically.
 
-#### Example Program
+### Example Program
 ```cpp
 #include <iostream>
 using namespace std;
@@ -434,168 +287,85 @@ using namespace std;
 class Base {
 public:
     virtual void show() {
-        cout << "Base class";
-    }
-};
-
-class Derived : public Base {
-public:
-    void show() {
-        cout << "Derived class";
-    }
-};
-
-int main() {
-    Base *ptr;
-    Derived obj;
-    ptr = &obj;
-    ptr->show();
-    return 0;
-}
-```
-
-#### Output
-```text
-Derived class
-```
-
----
-
-### Version 2 — Handwritten Notes ([`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf), Page 4)
-
-#### Virtual Function
-A virtual function is a member function in a base class that is declared using the keyword `virtual`. It is redefined in the derived class. When a base class pointer points to a derived class object, the virtual function helps call the derived class version at run time. This is called runtime polymorphism or late binding.
-
-#### Use of Virtual Functions
-1. To achieve runtime polymorphism.
-2. To allow function overriding in derived classes.
-3. To decide at run time which function should be executed.
-4. Useful when the same interface is used for different types of objects.
-
-#### Example
-Program to demonstrate virtual function in C++
-```cpp
-#include <iostream>
-using namespace std;
-
-class Base {
-public:
-    virtual void show() {
-        cout << "Display from Base class" << endl;
+        cout << "Base class show()" << endl;
     }
 };
 
 class Derived : public Base {
 public:
     void show() override {
-        cout << "Display from Derived class" << endl;
+        cout << "Derived class show()" << endl;
     }
 };
 
 int main() {
-    Base *ptr;
-    Derived d;
-    ptr = &d;
-    ptr->show();
+    Base *ptr;     // Base class pointer
+    Derived obj;   // Derived class object
+
+    ptr = &obj;    // Pointer points to derived object
+    ptr->show();   // Calls Derived's show() at runtime
+
     return 0;
 }
 ```
 
-#### Output
+### Output
 ```text
-Display from Derived class
+Derived class show()
 ```
-
-Thus, virtual functions are used to implement runtime polymorphism in C++. They ensure that the correct function is called based on the object type, not the pointer type.
 
 ---
 
 ## Q6. What is an abstract class? Demonstrate with an example.
 
-### Version 1 — Typed Notes ([`CPP/raw/cpp-3.pdf`](raw/cpp-3.pdf), Pages 9–11)
+### Explanation
+An **abstract class** is a class designed specifically to be used as a base class and cannot be instantiated directly (no objects can be created from it).
 
-An abstract class is a class that contains at least one pure virtual function. It is used as a base class and cannot be used to create objects directly.
+A class becomes abstract when it contains at least one **pure virtual function**. A pure virtual function has no definition in the base class and is declared by assigning `= 0`.
 
-A pure virtual function is declared by assigning `= 0`.
+Derived classes must provide an implementation for all pure virtual functions, otherwise they also become abstract.
 
-#### Syntax
+### Syntax
 ```cpp
-class ClassName {
+class Shape {
 public:
-    virtual void functionName() = 0;
+    virtual void draw() = 0; // Pure virtual function
 };
 ```
 
-#### Example Program
+### Example Program
 ```cpp
 #include <iostream>
 using namespace std;
 
+// Abstract Base Class
 class Shape {
 public:
     virtual void draw() = 0; // Pure virtual function
 };
 
+// Concrete Derived Class
 class Circle : public Shape {
 public:
-    void draw() {
-        cout << "Drawing Circle";
-    }
-};
-
-int main() {
-    Circle c;
-    c.draw();
-    return 0;
-}
-```
-
-#### Output
-```text
-Drawing Circle
-```
-
----
-
-### Version 2 — Handwritten Notes ([`CPP/raw/Unit_3_Handwritten_Answers.pdf`](raw/Unit_3_Handwritten_Answers.pdf), Page 5)
-
-An abstract class in C++ is a class that contains at least one pure virtual function. A pure virtual function is declared using `= 0`. Objects of an abstract class cannot be created. Abstract classes are used as base classes and derived classes must implement the pure virtual function.
-
-#### Syntax
-```cpp
-class Base {
-public:
-    virtual void show() = 0;
-};
-```
-
-#### Example
-```cpp
-#include <iostream>
-using namespace std;
-
-class Shape {
-public:
-    virtual void draw() = 0;
-};
-
-class Circle : public Shape {
-public:
-    void draw() {
+    void draw() override {
         cout << "Drawing Circle" << endl;
     }
 };
 
 int main() {
+    // Shape s; // Error: Cannot declare variable of abstract type 'Shape'
     Circle c;
     c.draw();
+
+    Shape *ptr = &c;
+    ptr->draw();
+
     return 0;
 }
 ```
 
-#### Output
+### Output
 ```text
 Drawing Circle
+Drawing Circle
 ```
-
-Thus, an abstract class provides a common interface for derived classes and supports runtime polymorphism in C++.

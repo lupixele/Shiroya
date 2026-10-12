@@ -108,44 +108,29 @@ $$
 
 ---
 
-### 1. The GeeksforGeeks "Cross-Highlight" Method (Simplifying the Calculation)
+### 1. How It Works (The Simple GfG Method)
 
-Floyd–Warshall is a Dynamic Programming algorithm that solves the **All-Pairs Shortest Path (APSP)** problem in $O(V^3)$ time.
-
-#### The Formula (From the GeeksforGeeks image):
+Formula:
 $$
 \text{dist}[i][j] = \min(\text{dist}[i][j],\ \text{dist}[i][k] + \text{dist}[k][j])
 $$
 
-**In plain words:**
-> Is it shorter to go directly from $i$ to $j$ ($\text{dist}[i][j]$)?  
-> OR take a stop at node $k$ ($\text{dist}[i][k] + \text{dist}[k][j]$)?  
-> Pick whichever is smaller! That's the whole formula. Zero powers, zero complex math.
+In simple words: **Is it faster to go directly ($i \to j$), or take a stop at node $k$ ($i \to k \to j$)? Pick whichever is smaller.**
 
-#### 💡 The 3 GfG Shortcut Rules (Saves 80% Manual Effort):
-In each iteration $k$ (where vertex $k$ is treated as the intermediate vertex):
-
-1. **Rule 1 — The Protected Cross & Diagonal (Never Change):**
-   - **Row $k$ never changes**: Moving from $k$ to $j$ through $k$ costs $D[k][k] + D[k][j] = 0 + D[k][j]$.
-   - **Column $k$ never changes**: Moving from $i$ to $k$ through $k$ costs $D[i][k] + D[k][k] = D[i][k] + 0$.
-   - **Main diagonal ($D[i][i] = 0$) never changes**: Self-loops cost $0$.
-   - *Action:* Highlight Row $k$ and Column $k$ as a **cross (`+`)** and copy them directly to the next matrix!
-
-2. **Rule 2 — The $\infty$ Shortcut (Zero Work):**
-   - If an incoming cell in Column $k$ is $\infty$ ($D[i][k] = \infty$), vertex $i$ cannot reach $k$. Therefore, **Row $i$ can NEVER be improved through $k$**. Copy all entries in Row $i$ directly!
-   - If an outgoing cell in Row $k$ is $\infty$ ($D[k][j] = \infty$), vertex $k$ cannot reach $j$. Therefore, **Column $j$ can NEVER be improved through $k$**. Copy all entries in Column $j$ directly!
-
-3. **Rule 3 — The Single Intersection Addition for Remaining Cells:**
-   - For any cell $(i, j)$ outside the cross, simply add the intersection values:
-     $$\text{New Candidate Cost} = (\text{Row } i \text{ entry in highlighted Col } k) + (\text{Col } j \text{ entry in highlighted Row } k)$$
-     $$\text{New } D^{(k)}[i][j] = \min(\text{Current } D^{(k-1)}[i][j],\ \text{New Candidate Cost})$$
+#### How to fill the matrix in 2 easy steps:
+In each step $k$:
+1. **Highlight Row $k$ and Column $k$:**
+   - Row $k$, Column $k$, and the diagonal (`0`) **never change**. Copy them straight to the next table.
+2. **For the other cells:**
+   - Add the two highlighted numbers from that cell's row and column.
+   - If that sum is smaller than what's already there, write the smaller number! (If either number is $\infty$, skip it).
 
 ---
 
-### 2. Step-by-Step Matrix Execution
+### 2. Step-by-Step Walkthrough
 
-#### Initial Graph & Cost Matrix $D^{(0)}$:
-Direct edges: $1 \to 2$ (wt 4), $1 \to 4$ (wt 10), $2 \to 3$ (wt 3), $3 \to 4$ (wt 2).
+#### Initial Matrix $D^{(0)}$:
+Direct roads: $1 \to 2$ (4), $1 \to 4$ (10), $2 \to 3$ (3), $3 \to 4$ (2).
 
 $$
 D^{(0)} =
@@ -159,18 +144,13 @@ $$
 
 ---
 
-#### Iteration 1: $k = 1$ (Treating Vertex 1 as Intermediate)
-
-- **Highlight Cross:** Row 1 and Column 1.
-  - Row 1: `[0, 4, ∞, 10]`
-  - Column 1: `[0, ∞, ∞, ∞]ᵀ`
-- **Apply Rule 2 (Infinity Shortcut):**
-  - Look at Column 1: $D[2][1] = \infty$, $D[3][1] = \infty$, $D[4][1] = \infty$.
-  - Since no vertex has a directed path into vertex 1, no path $i \to 1 \to j$ can exist!
-  - **Result:** No additions needed; zero cells change!
+#### Step 1: Intermediate Node $k = 1$
+- Highlight Row 1 and Column 1.
+- Can any node reach node 1? No (Column 1 is all $\infty$).
+- **No road changes.**
 
 $$
-D^{(1)} = D^{(0)} =
+D^{(1)} =
 \begin{bmatrix}
 0 & 4 & \infty & 10 \\
 \infty & 0 & 3 & \infty \\
@@ -181,19 +161,12 @@ $$
 
 ---
 
-#### Iteration 2: $k = 2$ (Treating Vertex 2 as Intermediate)
-
-- **Highlight Cross:** Row 2 and Column 2.
-  - Row 2: `[∞, 0, 3, ∞]`
-  - Column 2: `[4, 0, ∞, ∞]ᵀ`
-- **Copy Unchanged:** Row 2, Column 2, and diagonal ($0$).
-- **Evaluate Remaining Cells:**
-  - Notice in Column 2, only **Row 1** has a finite incoming value: $D[1][2] = 4$. Rows 3 and 4 have $\infty$ (copy them unchanged by Rule 2).
-  - In Row 2, the only finite destination is **Col 3**: $D[2][3] = 3$.
-  - Therefore, the **only cell that can update is $(1, 3)$**:
-    $$D^{(2)}[1][3] = \min\left(D^{(1)}[1][3],\ D^{(1)}[1][2] + D^{(1)}[2][3]\right)$$
-    $$D^{(2)}[1][3] = \min(\infty,\ 4 + 3) = \min(\infty, 7) = \mathbf{7}$$
-    *(Path formed: $1 \to 2 \to 3$ with cost 7).*
+#### Step 2: Intermediate Node $k = 2$
+- Highlight Row 2 and Column 2.
+- Check path through 2:
+  - From 1 to 2 is **4**, and from 2 to 3 is **3**.
+  - So from 1 to 3 via 2 costs $4 + 3 = \mathbf{7}$.
+  - Previous cost was $\infty$, so **update cell $(1, 3) = 7$**.
 
 $$
 D^{(2)} =
@@ -203,29 +176,17 @@ D^{(2)} =
 \infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
-\quad (*\text{updated from } \infty \text{ to } 7)
 $$
 
 ---
 
-#### Iteration 3: $k = 3$ (Treating Vertex 3 as Intermediate)
-
-- **Highlight Cross:** Row 3 and Column 3.
-  - Row 3: `[∞, ∞, 0, 2]`
-  - Column 3: `[7, 3, 0, ∞]ᵀ`
-- **Copy Unchanged:** Row 3, Column 3, and diagonal ($0$).
-- **Evaluate Remaining Cells:**
-  - Incoming into Column 3: Row 1 ($D[1][3] = 7$) and Row 2 ($D[2][3] = 3$).
-  - Outgoing from Row 3: Column 4 ($D[3][4] = 2$).
-  - Only two candidate intersections exist:
-    1. **Cell $(1, 4)$:**
-       $$D^{(3)}[1][4] = \min\left(D^{(2)}[1][4],\ D^{(2)}[1][3] + D^{(2)}[3][4]\right)$$
-       $$D^{(3)}[1][4] = \min(10,\ 7 + 2) = \min(10, 9) = \mathbf{9}$$
-       *(Path formed: $1 \to 2 \to 3 \to 4$ with cost 9, beating the direct edge $1 \to 4$ of cost 10!)*
-    2. **Cell $(2, 4)$:**
-       $$D^{(3)}[2][4] = \min\left(D^{(2)}[2][4],\ D^{(2)}[2][3] + D^{(2)}[3][4]\right)$$
-       $$D^{(3)}[2][4] = \min(\infty,\ 3 + 2) = \min(\infty, 5) = \mathbf{5}$$
-       *(Path formed: $2 \to 3 \to 4$ with cost 5, updated from $\infty$).*
+#### Step 3: Intermediate Node $k = 3$
+- Highlight Row 3 and Column 3.
+- Check paths through 3:
+  1. From 1 to 3 is **7**, and from 3 to 4 is **2** $\implies 7 + 2 = \mathbf{9}$.  
+     Old cost was 10, so **update cell $(1, 4) = 9$** (shorter than direct road 10!).
+  2. From 2 to 3 is **3**, and from 3 to 4 is **2** $\implies 3 + 2 = \mathbf{5}$.  
+     Old cost was $\infty$, so **update cell $(2, 4) = 5$**.
 
 $$
 D^{(3)} =
@@ -235,23 +196,17 @@ D^{(3)} =
 \infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
-\quad (*\text{updated via node 3})
 $$
 
 ---
 
-#### Iteration 4: $k = 4$ (Treating Vertex 4 as Intermediate)
-
-- **Highlight Cross:** Row 4 and Column 4.
-  - Row 4: `[∞, ∞, ∞, 0]`
-  - Column 4: `[9, 5, 2, 0]ᵀ`
-- **Apply Rule 2 (Infinity Shortcut):**
-  - Look at Row 4: Vertex 4 has **no outgoing edges** to any other vertex ($D[4][j] = \infty$ for all $j \in \{1, 2, 3\}$).
-  - Therefore, no path $i \to 4 \to j$ can reach any destination!
-  - **Result:** Zero additions needed; no cells change!
+#### Step 4: Intermediate Node $k = 4$
+- Highlight Row 4 and Column 4.
+- Does node 4 lead to anywhere? No (Row 4 is all $\infty$).
+- **No road changes.** All pairs are finished!
 
 $$
-D^{(4)} = D^{(3)} =
+D^{(4)} =
 \begin{bmatrix}
 0 & 4 & 7 & 9 \\
 \infty & 0 & 3 & 5 \\
@@ -278,14 +233,13 @@ $$
 
 ### 4. Significance of the Intermediate Vertex
 
-1. **Subset of Allowed Stepping Stones:**
-   In iteration $k$, the matrix element $D^{(k)}[i][j]$ represents the shortest distance from vertex $i$ to vertex $j$ such that **all intermediate vertices belong strictly to the subset $\{1, 2, \dots, k\}$**.
-2. **Optimal Substructure Principle:**
-   The shortest path using intermediate vertices from $\{1, \dots, k\}$ either:
-   - Does **not** pass through vertex $k$ $\implies$ cost is simply $D^{(k-1)}[i][j]$.
-   - Passes through vertex $k$ $\implies$ decomposes into shortest path $i \to k$ plus shortest path $k \to j$, both using only intermediate vertices from $\{1, \dots, k-1\}$.
-3. **Completeness:**
-   After $k = n$, all vertices in the graph have been considered as potential intermediate stepping stones, guaranteeing that $D^{(n)}$ contains the global shortest paths between all pairs of vertices.
+1. **Stepping Stones:**
+   At step $k$, we check whether stopping at node $k$ gives a shorter shortcut between any two cities.
+2. **Two Possibilities for Any Path:**
+   - If taking node $k$ does **not** help: keep the previous shortest distance.
+   - If stopping at node $k$ **is shorter**: update distance to $(\text{distance to } k) + (\text{distance from } k)$.
+3. **Final Result:**
+   After testing all vertices ($k = 1$ to $n$) as possible stops, every shortcut has been checked. The final matrix gives the shortest possible distance between every pair of nodes.
 
 ---
 

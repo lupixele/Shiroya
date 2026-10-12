@@ -112,21 +112,15 @@ $$
 
 Floyd–Warshall is a Dynamic Programming algorithm that solves the **All-Pairs Shortest Path (APSP)** problem in $O(V^3)$ time.
 
-#### Dynamic Programming Recurrence:
+#### The Formula (From the GeeksforGeeks image):
 $$
-D^{(k)}[i][j] = \min\left( D^{(k-1)}[i][j],\ D^{(k-1)}[i][k] + D^{(k-1)}[k][j] \right)
+\text{dist}[i][j] = \min(\text{dist}[i][j],\ \text{dist}[i][k] + \text{dist}[k][j])
 $$
 
-> [!IMPORTANT]
-> **What does $(k-1)$ mean? It is NOT a power (`pow`)!**  
-> In mathematics, when subscripts $[i][j]$ are already used for **row $i$** and **column $j$**, mathematicians use a superscript in parentheses `(k)` as a **step / version counter**, NOT an exponent.  
-> - $D^{(k-1)}$ simply means: **"the value from the PREVIOUS matrix / previous table"**
-> - $D^{(k)}$ simply means: **"the value in the CURRENT matrix / current table"**
-> 
-> In actual code (like on GeeksforGeeks), there is **zero power calculation**. It is literally just:
-> ```cpp
-> dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-> ```
+**In plain words:**
+> Is it shorter to go directly from $i$ to $j$ ($\text{dist}[i][j]$)?  
+> OR take a stop at node $k$ ($\text{dist}[i][k] + \text{dist}[k][j]$)?  
+> Pick whichever is smaller! That's the whole formula. Zero powers, zero complex math.
 
 #### 💡 The 3 GfG Shortcut Rules (Saves 80% Manual Effort):
 In each iteration $k$ (where vertex $k$ is treated as the intermediate vertex):

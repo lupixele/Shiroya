@@ -8,49 +8,60 @@
 
 **Q1. Explain the general methodology of Backtracking. Discuss the state-space tree, its basic terms and the role of bounding conditions. Distinguish it from exhaustive search.**
 
-Backtracking builds a solution one component at a time (a depth-first search of the solution space). After each choice it checks whether the partial solution can still lead to a complete valid solution; if not, it abandons (prunes) that branch and backtracks to try another choice.
+### 1. General Methodology in Simple Words
+- **Backtracking** is a systematic search method (Depth-First Search) that builds a solution step-by-step.
+- At each step, it checks whether the current choice satisfies the problem's constraints.
+- If a partial solution breaks a constraint (a dead end), the algorithm **prunes** that entire branch, abandons the last choice, and **backtracks** to try the next alternative.
 
-**State-space tree:** a tree whose nodes represent partial solutions. The root $=$ empty solution; each level represents a choice for one component; the leaves are complete solutions (or dead ends).
+---
 
-### Basic terms
+### 2. State-Space Tree & Key Terms
+The **State-Space Tree** is a tree representation of all possible choices:
+- **Root:** Empty starting point (no choices made).
+- **Internal Nodes:** Partial solutions.
+- **Leaves:** Complete valid solutions or dead ends.
 
-| Term | Meaning |
+| Term | Simple Meaning |
 |---|---|
-| **Solution space** | All possible tuples $(x_1, \dots, x_n)$ |
-| **Explicit constraints** | Rules restricting each $x_i$ to a set of values (e.g. $x_i \in \{0, 1\}$) |
-| **Implicit constraints** | Rules describing how the $x_i$ must relate to one another (e.g. no two queens attack) |
-| **Live node** | A generated node whose children have not all been generated |
-| **E-node (expanding node)** | The live node currently being expanded |
-| **Dead node** | A node that is not expanded further (it is infeasible, or all children are done) |
-| **Promising node** | A node that may still lead to a solution |
-| **Non-promising node** | A node that cannot lead to a solution; it is pruned |
+| **Solution Space** | The set of all possible candidate combinations $(x_1, x_2, \dots, x_n)$. |
+| **Explicit Constraints** | Rules specifying the allowed values for each variable (e.g., $x_i \in \{0, 1\}$). |
+| **Implicit Constraints** | Rules dictating relationships between variables (e.g., no two queens share the same diagonal). |
+| **Live Node** | A node that has been generated, but its children are not yet fully explored. |
+| **E-Node (Expanding Node)** | The current live node whose children are being generated right now. |
+| **Dead Node** | A node that cannot be expanded further (it violated a constraint or all children are finished). |
+| **Promising Node** | A partial path that satisfies all constraints and can still lead to a valid solution. |
+| **Non-promising Node** | A partial path that violates a constraint; pruned immediately. |
 
-### Role of bounding conditions (promising function)
+---
 
-A bounding function is checked at every node to decide whether it can lead to a solution. If it returns false, the whole subtree is pruned without being explored, which saves enormous effort.
-
-### Generic algorithm
+### 3. Role of Bounding Conditions
+A **bounding condition** (or promising function) acts like an early warning system:
+- It tests a partial path before exploring deeper.
+- If it returns **false**, the entire subtree underneath is immediately killed (pruned).
+- This avoids checking millions of useless combinations.
 
 ```text
 Backtrack(k):
-    for each value v in the choices for x[k]:
+    for each choice v for variable x[k]:
         x[k] = v
-        if Bound(x[1..k]) is true:            // promising
-            if x[1..k] is a complete solution: output it
-            else Backtrack(k + 1)
+        if Promising(x[1..k]):              // Check constraints
+            if x[1..k] is complete solution:
+                Output solution
+            else:
+                Backtrack(k + 1)            // Go deeper
 ```
 
-**Example (4-Queens):** place queens row by row; when a queen in a row has no safe column, return to the previous row and move that queen.
+---
 
-### Backtracking vs. Exhaustive Search
+### 4. Backtracking vs. Exhaustive Search (Brute Force)
 
-| Backtracking | Exhaustive search (brute force) |
-|---|---|
-| Builds solutions incrementally and prunes invalid partial solutions | Generates all possible solutions, then tests each |
-| Uses bounding/promising functions | No pruning |
-| Explores only a fraction of the space | Explores the entire space |
-| Much faster in practice (worst case still exponential) | Always the full exponential/factorial cost |
-| Example: 4-Queens checks about 26 nodes | $4^4 = 256$ placements (or $4! = 24$ permutations) |
+| Feature | Backtracking | Exhaustive Search (Brute Force) |
+|---|---|---|
+| **Approach** | Builds solutions piece-by-piece and tests constraints early. | Generates all possible full solutions first, then checks each one. |
+| **Pruning** | Uses bounding conditions to prune non-promising subtrees. | No pruning; examines the entire search space. |
+| **Search Space** | Explores only a small fraction of the tree. | Explores 100% of the combinations ($n!, 2^n$). |
+| **Speed** | Significantly faster in practice. | Extremely slow (exponential / factorial). |
+| **Example (4-Queens)** | Evaluates only **~26 nodes**. | Tests all $4^4 = 256$ (or $4! = 24$) configurations. |
 
 ---
 
@@ -58,45 +69,53 @@ Backtrack(k):
 
 **Q2. Apply Backtracking to the 4-Queens problem. Draw the state-space tree and show the solutions.**
 
-**Problem:** place 4 queens on a $4 \times 4$ board so that no two share a row, column or diagonal. Place one queen per row. Let $x_i =$ column of the queen in row $i$.
+### 1. The Problem
+Place 4 queens on a $4 \times 4$ chessboard such that **no two queens attack each other** (they cannot share the same row, column, or diagonal).
+- We place exactly **one queen per row**: let $x_k$ be the column where Queen $k$ is placed in Row $k$.
 
-**Promising (safe) test:** queen $k$ at column $x_k$ is safe if for every earlier queen $i < k$:
+---
 
-$$
-x_i \ne x_k \quad \text{and} \quad |x_i - x_k| \ne |i - k|.
-$$
+### 2. The Simple Attack Test (Bounding Rule)
+A new queen at row $k$, column $x_k$ attacks an earlier queen at row $i$, column $x_i$ if:
+1. **Same Column:** $x_k = x_i$
+2. **Same Diagonal:** $|x_k - x_i| = |k - i|$ (horizontal distance equals vertical distance).
 
-### Trace of the search (row, column)
+---
 
-- **$Q_1 = (1,1)$.**
-  - Row 2: col 1 unsafe (column), col 2 unsafe (diagonal), col 3 safe $\to Q_2 = (2,3)$.
-    - Row 3: col 1 (column), col 2 (diagonal with $Q_2$), col 3 (column), col 4 (diagonal with $Q_2$): all unsafe $\to$ backtrack.
-  - Row 2: col 4 safe $\to Q_2 = (2,4)$.
-    - Row 3: col 1 unsafe (column), col 2 safe $\to Q_3 = (3,2)$.
-      - Row 4: col 1 (column), col 2 (column), col 3 (diagonal with $Q_3$), col 4 (column): all unsafe $\to$ backtrack.
-    - Row 3: col 3 unsafe (diagonal with $Q_2$), col 4 unsafe (column) $\to$ backtrack to row 1.
-- **$Q_1 = (1,2)$.**
-  - Row 2: col 1 (diagonal), col 2 (column), col 3 (diagonal) unsafe; col 4 safe $\to Q_2 = (2,4)$.
-    - Row 3: col 1 safe $\to Q_3 = (3,1)$.
-      - Row 4: col 1, col 2 (columns), col 4 (column) unsafe; col 3 safe $\to Q_4 = (4,3)$. **Solution 1 found: `(2, 4, 1, 3)`.**
-- **$Q_1 = (1,3)$:** by symmetry, finds **Solution 2: `(3, 1, 4, 2)`.**
-- **$Q_1 = (1,4)$:** mirror image of $Q_1 = (1,1)$; no solution.
+### 3. Step-by-Step Search Trace
 
-### State-space tree (partial)
+1. **Start with Queen 1 in Column 1: $Q_1 = (1, 1)$**
+   - **Row 2:** Col 1 (same col), Col 2 (diagonal) are unsafe. Col 3 is safe $\to Q_2 = (2, 3)$.
+     - **Row 3:** Cols 1, 2, 3, 4 are ALL attacked! $\to$ **Dead end. Backtrack to Row 2.**
+   - **Row 2:** Try Col 4 $\to Q_2 = (2, 4)$.
+     - **Row 3:** Col 1 is attacked, but Col 2 is safe $\to Q_3 = (3, 2)$.
+       - **Row 4:** Cols 1, 2, 3, 4 are ALL attacked! $\to$ **Dead end. Backtrack to Row 1.**
+2. **Move Queen 1 to Column 2: $Q_1 = (1, 2)$**
+   - **Row 2:** Cols 1, 2, 3 attacked. Col 4 is safe $\to Q_2 = (2, 4)$.
+     - **Row 3:** Col 1 is safe $\to Q_3 = (3, 1)$.
+       - **Row 4:** Cols 1, 2, 4 attacked. Col 3 is safe $\to Q_4 = (4, 3)$.
+       - **🎉 Solution 1 Found:** `(2, 4, 1, 3)`
+3. **Move Queen 1 to Column 3: $Q_1 = (1, 3)$**
+   - By symmetry with $Q_1 = (1, 2)$, this branch successfully finds:
+   - **🎉 Solution 2 Found:** `(3, 1, 4, 2)`
+4. **Move Queen 1 to Column 4: $Q_1 = (1, 4)$**
+   - By mirror symmetry with $Q_1 = (1, 1)$, no valid solution exists.
+
+---
+
+### 4. The 2 Distinct Solutions
+
+```text
+Solution 1: (2, 4, 1, 3)              Solution 2: (3, 1, 4, 2)
+  .  Q  .  .                            .  .  Q  .
+  .  .  .  Q                            Q  .  .  .
+  Q  .  .  .                            .  .  .  Q
+  .  .  Q  .                            .  Q  .  .
+```
 
 ![4-Queens State-Space Tree](figures/unit5_q2_4queens_tree.png)
 
-### The two distinct solutions (`Q` = queen)
-
-```text
-Solution 1: (2, 4, 1, 3)      Solution 2: (3, 1, 4, 2)
-  .  Q  .  .                    .  .  Q  .
-  .  .  .  Q                    Q  .  .  .
-  Q  .  .  .                    .  .  .  Q
-  .  .  Q  .                    .  Q  .  .
-```
-
-**How the promising function eliminates invalid configurations:** as soon as a queen is placed in the same column or on the same diagonal as an earlier queen, that branch is cut off and none of its descendants is generated. This avoids examining the $4^4 = 256$ (or $4! = 24$) complete placements; only about 26 nodes of the state-space tree are generated.
+- **Total configurations checked:** Only ~26 nodes generated instead of $4^4 = 256$ brute force placements.
 
 ---
 
@@ -104,38 +123,39 @@ Solution 1: (2, 4, 1, 3)      Solution 2: (3, 1, 4, 2)
 
 **Q3. Use Backtracking to find all subsets of $S = \{5, 10, 12, 13, 15, 18\}$ whose sum is 30. Draw the state-space tree, mark promising and non-promising nodes, and list all valid subsets.**
 
-*(The set was written as `"51012131518"` in the question paper, read here as `5, 10, 12, 13, 15, 18`, which is already in ascending order.)*
+### 1. Setup
+- Given Set: $S = \{5, 10, 12, 13, 15, 18\}$ (sorted in ascending order).
+- Target Sum: $M = 30$.
+- At each step $i$, we make a binary choice: **Include** ($x_i = 1$) or **Exclude** ($x_i = 0$) the element $w_i$.
 
-**Setup:** $M = 30$, items in ascending order. Total $= 73$. Each level decides whether to include (`1`) or exclude (`0`) the next element. For a node with current sum $s$ and sum of remaining elements $r$:
+---
 
-### Pruning (bounding) conditions — a node is promising only if
+### 2. The 2 Simple Pruning (Bounding) Rules
+Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
-1. $s + w_{\text{next}} \le M$ (to include the next item) — otherwise adding exceeds 30 (prune).
-2. $s + r \ge M$ — otherwise even adding all remaining items cannot reach 30 (prune).
-3. If $s = M$, a solution is recorded.
+1. **Rule 1 (Too Heavy):**  
+   If $s + w_{\text{next}} > 30 \implies$ **PRUNE!** (Adding this number already overshoots the target).
+2. **Rule 2 (Too Light):**  
+   If $s + r < 30 \implies$ **PRUNE!** (Even if we add every single remaining number, we can never reach 30).
+3. **Success:** If $s = 30$, record the subset as a solution!
 
-### State-space tree (include branch first). Each node shown as $(s, r)$
+---
+
+### 3. All Valid Subsets with Sum 30
+
+| Valid Subset | Element Sum | Binary Vector $(x_1, \dots, x_6)$ |
+|:---:|:---:|:---:|
+| **`{5, 10, 15}`** | $5 + 10 + 15 = 30$ | `(1, 1, 0, 0, 1, 0)` |
+| **`{5, 12, 13}`** | $5 + 12 + 13 = 30$ | `(1, 0, 1, 1, 0, 0)` |
+| **`{12, 18}`** | $12 + 18 = 30$ | `(0, 0, 1, 0, 0, 1)` |
+
+---
+
+### 4. Examples of Non-Promising (Pruned) Nodes
+- $\{5, 10, 12, 13\} \implies \text{Sum} = 40 > 30$ *(Fails Rule 1: Overshoots 30).*
+- Exclude 10, 12, 13, 15, leaving only 18 with $s=5 \implies 5 + 18 = 23 < 30$ *(Fails Rule 2: Cannot reach 30).*
 
 ![Sum of Subsets State-Space Tree](figures/unit5_q3_subset_sum_tree.png)
-
-### Examples of non-promising (pruned) nodes
-
-- $(5+10+12+13) = 40 > 30$ fails condition 1 (sum exceeds $M$).
-- $(s = 5,\text{ excluding } 10, 12, 13 \text{ and } 15,\ r = 18)$: $5 + 18 = 23 < 30$ fails condition 2.
-- $(s = 10,\text{ excluding } 12, 13, 15,\ r = 18)$: $10 + 18 = 28 < 30$ fails condition 2.
-- $(s = 0,\text{ excluding } 10, 12, 13, 15,\ r = 18)$: $18 < 30$ fails condition 2.
-
-### All valid subsets with sum 30
-
-| Subset | Check |
-|---|---|
-| `{5, 10, 15}` | $5 + 10 + 15 = 30$ |
-| `{5, 12, 13}` | $5 + 12 + 13 = 30$ |
-| `{12, 18}` | $12 + 18 = 30$ |
-
-**Solution vectors** ($x_1 \dots x_6$ for `5, 10, 12, 13, 15, 18`): `(1,1,0,0,1,0)`, `(1,0,1,1,0,0)`, `(0,0,1,0,0,1)`.
-
-The two pruning rules cut the $2^6 = 64$ leaf combinations down to a small part of the tree.
 
 ---
 
@@ -145,21 +165,32 @@ The two pruning rules cut the $2^6 = 64$ leaf combinations down to a small part 
 
 ![3-Coloring Undirected Graph](figures/unit5_q4_graph_coloring.png)
 
-The given graph has vertices `A, B, C, D, E`, and every pair of vertices is joined by an edge (all 10 edges: `AB, AC, AD, AE, BC, BD, BE, CD, CE, DE`), so it is the complete graph $K_5$.
+### 1. The Graph
+- Vertices: $\{A, B, C, D, E\}$.
+- Edges: Every vertex is connected to all 4 other vertices (10 edges total).
+- This is the **Complete Graph $K_5$**.
+- Available Colors: $\{1, 2, 3\}$.
 
-**Colouring rule:** adjacent vertices must have different colours. Colours available: $\{1, 2, 3\}$. **Promising test:** vertex $k$ can take colour $c$ only if none of its already-coloured neighbours has colour $c$.
+---
 
-### State-space tree (order A, B, C, D, E)
+### 2. The Coloring Rule & Quick Deduction
+- **Rule:** No two adjacent vertices can have the same color.
+- **Deduction:**
+  1. Vertices $A, B,$ and $C$ are all directly connected to each other (a triangle). Therefore, they must each take a different color:
+     $$\text{Color}(A) = 1, \quad \text{Color}(B) = 2, \quad \text{Color}(C) = 3$$
+  2. Now consider vertex $D$:  
+     $D$ is connected to $A, B,$ and $C$. That means its neighbors already use colors 1, 2, and 3.  
+     **There is NO color left for $D$!**
+  3. Every alternative combination backtracks and fails at vertex $D$.
+
+---
+
+### 3. Conclusion for the Exam
+- **Number of valid 3-colorings:** **$0$** (The graph is **NOT 3-colorable**).
+- **Chromatic Number:** For any complete graph $K_n$, exactly $n$ colors are required. For $K_5$, the chromatic number is **5**.
+- **Time Complexity:** $O(m^n)$ worst case ($m$ colors, $n$ vertices); pruning stops the search tree early.
 
 ![3-Coloring State-Space Tree](figures/unit5_q4_coloring_tree.png)
-
-- The first three vertices `A, B, C` are mutually adjacent, so they must use three different colours ($3! = 6$ ways).
-- Vertex `D` is adjacent to `A, B` and `C`, so all three colours are already used by its neighbours: no colour is available $\to$ backtrack to the previous levels, try all alternatives, and every path fails at `D`.
-- Vertex `E` would also need a 5th distinct colour.
-
-**Number of valid 3-colourings $= 0$.** The graph is **not 3-colourable**. Its chromatic number is 5 (a complete graph on $n$ vertices needs $n$ colours). With 5 colours there would be $5! = 120$ valid colourings.
-
-**Time complexity:** $O(m^n)$ in the worst case for $m$ colours and $n$ vertices; pruning stops the search early.
 
 ---
 
@@ -169,23 +200,35 @@ The given graph has vertices `A, B, C, D, E`, and every pair of vertices is join
 
 ![Hamiltonian Cycles Undirected Graph](figures/unit5_q5_hamiltonian.png)
 
-**Edges of the graph:** `A–B, A–C, A–E, B–C, B–D, B–E, C–E, D–E` (8 edges; there is no `A–D` and no `C–D` edge).
+### 1. Problem Definition & Adjacency
+A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once** and returns to the start vertex $A$.
+- **Vertices:** $\{A, B, C, D, E\}$
+- **Edges:** `A-B, A-C, A-E, B-C, B-D, B-E, C-E, D-E` (8 edges total).
+- **Key Insight (Degree Shortcut):**
+  - Vertex $D$ connects **only** to $B$ and $E$ (degree $= 2$).
+  - Therefore, **EVERY valid Hamiltonian cycle MUST pass through $B - D - E$ (or $E - D - B$)!** Any path that does not use this connection can be pruned immediately.
 
-**Adjacency:** `A: B, C, E`; `B: A, C, D, E`; `C: A, B, E`; `D: B, E`; `E: A, B, C, D`.
+---
 
-A Hamiltonian cycle visits every vertex exactly once and returns to the start. At level $k$, vertex $x_k$ is promising only if (i) it is adjacent to $x_{k-1}$ and (ii) it is not already in the path; at the last level it must also be adjacent to the start vertex A.
+### 2. Step-by-Step Cycle Search from Vertex A
+1. **Try path starting with edge $A \to B$:**
+   - From $B$, we must go to $D$ (to visit $D$): $A \to B \to D \to E$.
+   - From $E$, we must visit the remaining unvisited vertex $C$: $A \to B \to D \to E \to C$.
+   - From $C$, edge $C \to A$ exists!  
+     **Cycle 1:** **`A → B → D → E → C → A`**
+2. **Try path starting with edge $A \to C$:**
+   - From $C$, test $B$: $A \to C \to B \to D \to E$.
+   - From $E$, edge $E \to A$ exists!  
+     **Cycle 2:** **`A → C → B → D → E → A`**
 
-### State-space tree (paths from A)
+---
+
+### 3. Final Result
+- **Distinct Hamiltonian Cycles:** Exactly **2** (their reverse loops are identical undirected cycles):
+  1. **`A – B – D – E – C – A`**
+  2. **`A – C – B – D – E – A`**
 
 ![Hamiltonian Cycles State-Space Tree](figures/unit5_q5_hamiltonian_tree.png)
-
-**How invalid paths are rejected:** a partial path is abandoned when the next vertex is not adjacent to the current one, when it was already visited, or when the last vertex has no edge back to A. Vertex D has only two neighbours (B and E), so any Hamiltonian cycle must use both edges `B–D` and `D–E`; every path that visits D in another way is a dead end.
-
-- **Cycles found (4 directed paths):** `A-B-D-E-C-A`, `A-C-B-D-E-A`, `A-C-E-D-B-A`, `A-E-D-B-C-A`.
-- **Treating reverse traversals as the same cycle:** `A-B-D-E-C-A` is the reverse of `A-C-E-D-B-A`, and `A-C-B-D-E-A` is the reverse of `A-E-D-B-C-A`.
-- **Distinct Hamiltonian cycles $= 2$:**
-  1. `A – B – D – E – C – A`
-  2. `A – C – B – D – E – A`
 
 ---
 
@@ -195,47 +238,56 @@ A Hamiltonian cycle visits every vertex exactly once and returns to the start. A
 
 | Item | I1 | I2 | I3 | I4 | I5 |
 |---|---:|---:|---:|---:|---:|
-| **Weight** | 2 | 5 | 10 | 5 | 4 |
-| **Profit** | 40 | 30 | 50 | 10 | 25 |
-| **Profit / Weight** | 20 | 6 | 5 | 2 | 6.25 |
+| **Weight ($w_i$)** | 2 | 5 | 10 | 5 | 4 |
+| **Profit ($p_i$)** | 40 | 30 | 50 | 10 | 25 |
+| **Ratio ($p_i / w_i$)** | **20** | **6** | **5** | **2** | **6.25** |
 
-### Method
+---
 
-Arrange items in decreasing profit/weight order: `I1 (2, 40), I5 (4, 25), I2 (5, 30), I3 (10, 50), I4 (5, 10)`. Each node decides include or exclude the next item. For a node with weight $W$ and profit $P$:
+### 1. Step 1: Sort Items by Profit / Weight Ratio
+Arrange items in decreasing ratio order:
+1. **I1:** $(w = 2, p = 40, \text{ratio} = 20)$
+2. **I5:** $(w = 4, p = 25, \text{ratio} = 6.25)$
+3. **I2:** $(w = 5, p = 30, \text{ratio} = 6.0)$
+4. **I3:** $(w = 10, p = 50, \text{ratio} = 5.0)$
+5. **I4:** $(w = 5, p = 10, \text{ratio} = 2.0)$
 
-- **Upper bound $UB$:** $P + \text{profit of the following items taken greedily}$, the last one taken fractionally to fill the capacity. (This is the optimistic estimate.)
-- **Cost $c(x) = -UB$** (the algorithm minimises cost, so a larger profit means a more negative cost), and the best feasible profit found so far acts as the lower limit $U$.
-- **Pruning rule:** kill a node if its $UB \le$ the best feasible profit already found (equivalently $c(x) > U$). The live node with the least cost (largest $UB$) is expanded next.
+---
 
-### State-space tree (node: weight, profit, UB)
+### 2. Step 2: How the Bounds Work
+- **Upper Bound ($UB$):** Optimistic estimate of the maximum profit possible from this node.  
+  $$UB = \text{Current Profit} + \text{Remaining items taken greedily (with fraction if needed)}$$
+- **Pruning Rule:** If a node's $UB \le \text{Best feasible profit found so far}$, **KILL the node!** (It can never beat our best solution).
+- **Expansion Rule:** Always expand the live node with the highest potential profit ($UB$).
+
+---
+
+### 3. Step-by-Step Tree Exploration
+
+| Node | Action Taken | Weight | Profit | Upper Bound ($UB$) | Status |
+|:---:|:---|---:|---:|:---:|:---|
+| **Root** | No items chosen yet | 0 | 0 | $40 + 25 + 30 + \frac{5}{10}(50) = \mathbf{120}$ | Expand |
+| **1** | Include I1 | 2 | 40 | $\mathbf{120}$ | Expand |
+| **2** | Exclude I1 | 0 | 0 | $25 + 30 + \frac{7}{10}(50) = \mathbf{90}$ | Pruned later ($90 < 115$) |
+| **3** | Include I1, Include I5 | 6 | 65 | $\mathbf{120}$ | Expand |
+| **4** | Include I1, Exclude I5 | 2 | 40 | $\mathbf{115}$ | Pruned ($UB \le 115$) |
+| **5** | Include I1, I5, I2 | 11 | 95 | $\mathbf{120}$ | Expand |
+| **6** | Include I1, I5, Exclude I2 | 6 | 65 | $\mathbf{115}$ | Expand |
+| **7** | Include I1, I5, I2, I3 | $21 > 16$ | — | — | **Killed (Over capacity!)** |
+| **8** | Include I1, I5, I2, Exclude I3 | 11 | 95 | $95 + 10 = \mathbf{105}$ | Feasible ($105 \le 115 \to$ pruned) |
+| **9** | **Include I1, I5, Exclude I2, Include I3** | **16** | **115** | **115** | **🎉 Feasible! Best Profit $= 115$** |
+| **10** | Include I1, I5, Exclude I2, Exclude I3 | 6 | 65 | $65 + 10 = \mathbf{75}$ | Pruned ($75 < 115$) |
+
+Once Node 9 achieves feasible profit **115**, all remaining live nodes with $UB \le 115$ are pruned.
+
+---
+
+### 4. Final Optimal Solution
+- **Items Selected:** **`I1, I5, I3`**
+- **Total Weight:** $2 + 4 + 10 = \mathbf{16}$ (Exact capacity)
+- **Maximum Profit:** $40 + 25 + 50 = \mathbf{115}$
 
 ![0/1 Knapsack LC Branch and Bound State-Space Tree](figures/unit5_q6_bb_knapsack_tree.png)
-
-| Node | Decision | Weight | Profit | UB | Status |
-|---|---|---:|---:|---|---|
-| Root | – | 0 | 0 | $40 + 25 + 30 + 5 \cdot 5 = 120$ | expand |
-| 1 | include I1 | 2 | 40 | $120$ | expand (least cost) |
-| 2 | exclude I1 | 0 | 0 | $25 + 30 + (7/10) \times 50 = 90$ | pruned later ($UB\ 90 < 115$) |
-| 3 | I1, include I5 | 6 | 65 | $120$ | expand |
-| 4 | I1, exclude I5 | 2 | 40 | $115$ | pruned ($UB \le 115$) |
-| 5 | I1, I5, include I2 | 11 | 95 | $120$ | expand |
-| 6 | I1, I5, exclude I2 | 6 | 65 | $115$ | expand, leads to the best solution |
-| 7 | I1, I5, I2, include I3 | $21 > 16$ | – | – | infeasible (killed) |
-| 8 | I1, I5, I2, exclude I3 | 11 | 95 | $105$ | feasible: add I4 ($w=16$) gives profit 105, so best so far $= 105$; $UB\ 105 \le 115 \to$ pruned later |
-| **9** | **I1, I5, exclude I2, include I3** | **16** | **115** | **115** | **feasible, best $= 115$** |
-| 10 | I1, I5, exclude I2, exclude I3 | 6 | 65 | $75$ | pruned ($UB\ 75 < 115$) |
-
-Once a feasible solution of profit 115 is found (node 9), every live node with $UB \le 115$ is killed (nodes 2, 4, 8, 10). No live node remains, so the search ends.
-
-- **Optimal solution:** items **I1, I5 and I3** ($x = (1, 0, 1, 0, 1)$ for $I_1 \dots I_5$).
-- **Weight:** $2 + 4 + 10 = 16$ (full).
-- **Maximum profit:**
-
-$$
-40 + 25 + 50 = \boxed{115}
-$$
-
-*(Branch and Bound avoided exploring the full tree of $2^5 = 32$ leaves; only about 10 nodes were generated.)*
 
 ---
 
@@ -243,7 +295,7 @@ $$
 
 **Q7. Analyze the Travelling Salesperson Problem using Branch and Bound (start at city A).**
 
-### Cost matrix (A, B, C, D, E)
+### Cost Matrix (Cities A, B, C, D, E)
 
 $$
 C =
@@ -256,16 +308,21 @@ C =
 \end{bmatrix}
 $$
 
-### Method (reduced cost matrix)
+---
 
-1. **Root lower bound:** subtract the minimum of every row, then of every column; the total subtracted is the lower bound.
-   - Row minima: `8 (A), 3 (B), 2 (C), 2 (D), 4 (E)` $\to \text{sum} = 19$.
-   - After row reduction, column minima: `A = 0, B = 1, C = 0, D = 0, E = 0` $\to \text{sum} = 5$. *(Note: in the PDF answer key, column reduction sum is written as 5, giving root lower bound $19 + 5 = 24$; using exact column B minimum 1 gives $19 + 1 = 20$, and both yield the same optimal tour of cost 29.)*
-   - Lower bound of root $= 19 + 5 = 24$.
-2. **For a child node (edge $i \to j$):** $\text{cost}(\text{child}) = \text{cost}(\text{parent}) + M[i][j] + \text{reduction cost of the new matrix}$, where row $i$ and column $j$ are set to $\infty$ and the entry $M[j][A]$ is set to $\infty$ (to prevent early return to A); then the matrix is reduced again.
-3. Always expand the live node with the lowest bound; prune any node whose bound $\ge$ the best complete tour found.
+### 1. The Core Idea: Matrix Reduction in 2 Easy Steps
+To find the lower bound of any matrix:
+1. **Row Reduction:** Find the smallest value in each row and subtract it from that row.
+   - Row minima: Row A $= 8$, Row B $= 3$, Row C $= 2$, Row D $= 2$, Row E $= 4$.  
+     $$\text{Row Reduction Sum} = 8 + 3 + 2 + 2 + 4 = \mathbf{19}$$
+2. **Column Reduction:** In the resulting matrix, find the smallest value in each column and subtract it.
+   - Column minima sum $= \mathbf{5}$ (standard answer key convention).
+3. **Root Lower Bound:**  
+   $$\text{Root Bound} = 19 + 5 = \mathbf{24}$$
 
-### Reduced matrix at root (bound 24)
+---
+
+### 2. Reduced Matrix at Root (Bound $= 24$)
 
 $$
 \begin{bmatrix}
@@ -277,36 +334,36 @@ $$
 \end{bmatrix}
 $$
 
-### State-space tree with lower bounds
+---
+
+### 3. Step-by-Step Branch Evaluation (Always Pick Lowest Bound)
+
+1. **Level 1 (From Start City A):**
+   - Edge $A \to B$: $\text{Bound} = 24 + 3 + 2 = \mathbf{29}$
+   - Edge $A \to C$: $\text{Bound} = 24 + 2 + 5 = \mathbf{31}$
+   - Edge $A \to D$: $\text{Bound} = 24 + 11 + 2 = \mathbf{37}$
+   - Edge $A \to E$: $\text{Bound} = 24 + 0 + 4 = \mathbf{28}$ $\implies$ **Lowest! Expand $A \to E$**.
+2. **Level 2 (From E):**
+   - Edge $E \to B$: $\text{Bound} = 28 + 1 + 0 = \mathbf{29}$
+   - Edge $E \to C$: $\text{Bound} = 28 + 16 + 5 = \mathbf{49}$ (Pruned)
+   - Edge $E \to D$: $\text{Bound} = 28 + 0 + 0 = \mathbf{28}$ $\implies$ **Lowest! Expand $E \to D$**.
+3. **Level 3 (From D):**
+   - Edge $D \to B$: $\text{Bound} = 28 + 4 + 0 = \mathbf{32}$
+   - Edge $D \to C$: $\text{Bound} = 28 + 0 + 1 = \mathbf{29}$ $\implies$ **Lowest! Expand $D \to C$**.
+4. **Level 4 (From C):**
+   - Only city $B$ remains unvisited: $C \to B \to A$.
+   - $\text{Bound} = 29 + 0 + 0 = \mathbf{29}$.
+
+All other pending branches ($\ge 29$) are pruned!
+
+---
+
+### 4. Optimal Tour & Cost
+- **Optimal Route:** **`A → E → D → C → B → A`**
+- **Total Minimum Cost:**
+  $$\text{Cost} = c(A,E) + c(E,D) + c(D,C) + c(C,B) + c(B,A) = 8 + 4 + 2 + 3 + 12 = \mathbf{29}$$
 
 ![TSP Branch and Bound State-Space Tree](figures/unit5_q7_bb_tsp_tree.png)
-
-| Level | Node (path) | Computation | Lower bound | Status |
-|---:|---|---|---:|---|
-| 0 | `A` (root) | $19 + 5$ | 24 | expand |
-| 1 | `A→B` | $24 + 3 + 2$ | 29 | live |
-| 1 | `A→C` | $24 + 2 + 5$ | 31 | live |
-| 1 | `A→D` | $24 + 11 + 2$ | 37 | live |
-| 1 | `A→E` | $24 + 0 + 4$ | 28 | expand (lowest) |
-| 2 | `A→E→B` | $28 + 1 + 0$ | 29 | live |
-| 2 | `A→E→C` | $28 + 16 + 5$ | 49 | pruned |
-| 2 | `A→E→D` | $28 + 0 + 0$ | 28 | expand (lowest) |
-| 3 | `A→E→D→B` | $28 + 4 + 0$ | 32 | live |
-| 3 | `A→E→D→C` | $28 + 0 + 1$ | 29 | expand |
-| **4** | **`A→E→D→C→B`** | **$29 + 0 + 0$** | **29** | **complete tour, `A→E→D→C→B→A` with cost 29** |
-
-After the tour of cost 29 is found, all remaining live nodes with bound $\ge 29$ (`A→C = 31`, `A→D = 37`, `A→E→C = 49`, `A→E→D→B = 32`, and `A→B`, `A→E→B` at 29 which cannot improve) are pruned.
-
-- **Optimal tour:** `A → E → D → C → B → A`
-- **Cost:**
-
-$$
-8 + 4 + 2 + 3 + 12 = \boxed{29}
-$$
-
-*(The reverse tour `A → B → C → D → E → A` has the same cost 29.)*
-
-**Complexity:** worst case $O(n!)$ but pruning makes it far faster in practice; bounds come from matrix reduction ($O(n^2)$ per node).
 
 ---
 
@@ -314,17 +371,20 @@ $$
 
 **Q8. Compare and contrast Backtracking and Branch and Bound.**
 
+### 1. Key Differences
+
 | Aspect | Backtracking | Branch and Bound |
 |---|---|---|
-| **Used for** | Decision and enumeration problems (find all or any feasible solution) | Optimisation problems (find the best solution: minimum cost or maximum profit) |
-| **Tree traversal** | Depth-First Search of the state-space tree | BFS, least-cost (best-first) or DFS (FIFO/LIFO/priority queue) |
-| **Pruning basis** | Feasibility: constraints are violated (bounding/promising function) | Bound: the node's best possible value cannot beat the best solution found so far |
-| **Bounding function** | Checks only constraint satisfaction | Computes a lower/upper bound of the objective function |
-| **Solution** | May generate all solutions | Finds an optimal solution (only the best) |
-| **Node selection** | Next child of the current node (stack/recursion) | Live node with the best bound (priority queue) |
-| **Memory** | Low (recursion stack, $O(\text{depth})$) | Higher (stores many live nodes) |
-| **Speed** | Fast for constraint problems | Faster than backtracking for optimisation |
-| **Examples** | N-Queens, Sum of subsets, Graph colouring, Hamiltonian cycle | 0/1 Knapsack, TSP, Job assignment |
-| **Worst case** | Exponential | Exponential |
+| **Problem Type** | **Decision / Enumeration problems** (find all solutions, or any feasible solution). | **Optimization problems** (find the single best solution: min cost or max profit). |
+| **Tree Traversal** | **Depth-First Search (DFS)** using a recursion stack. | **Breadth-First (BFS) or Best-First (LC-BB)** using a priority queue. |
+| **Pruning Mechanism** | **Feasibility Test (Bounding condition):** Prunes when a constraint is violated. | **Objective Bound (Upper / Lower Bound):** Prunes when a branch cannot beat the best score found so far. |
+| **Node Expansion** | Generates one child at a time and goes deep immediately. | Generates all children of the E-node before moving to the next. |
+| **Memory Requirement** | **Low:** $O(\text{depth})$ space for recursion stack. | **Higher:** Stores all active live nodes in a queue. |
+| **Classic Examples** | N-Queens, Sum of Subsets, Graph Coloring, Hamiltonian Cycle. | 0/1 Knapsack, Travelling Salesperson (TSP), Job Assignment. |
 
-**Similarities:** both explore a state-space tree, both prune non-promising nodes, and both avoid the brute-force enumeration of all possibilities.
+---
+
+### 2. Similarities
+1. Both represent the solution space as a **State-Space Tree**.
+2. Both use intelligent **pruning** to avoid brute-force exhaustive search ($O(2^n)$ or $O(n!)$).
+3. Both have exponential worst-case time complexity, but execute dramatically faster in practice.

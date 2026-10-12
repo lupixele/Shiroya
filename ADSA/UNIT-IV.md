@@ -263,49 +263,96 @@ $$
 
 **Q4. Optimal Binary Search Tree: $n = 4$, keys $\{\text{do}, \text{if}, \text{int}, \text{while}\}$, $p(1:4) = \{3, 3, 1, 1\}$, $q(0:4) = \{2, 3, 1, 1, 1\}$.**
 
-### Formulas
+### 1. The Core Idea in Simple Words
+- We have 4 words: $a_1 = \text{do},\ a_2 = \text{if},\ a_3 = \text{int},\ a_4 = \text{while}$.
+- We are given how often each word is searched ($p$) and how often unsuccessful searches fall between them ($q$).
+- **Goal:** Build a Binary Search Tree that minimizes total search comparisons. Words searched more often should be placed closer to the root!
 
-$$
-W(i, i) = q_i; \quad C(i, i) = 0; \quad R(i, i) = 0
-$$
+---
 
-$$
-W(i, j) = W(i, j-1) + p_j + q_j
-$$
+### 2. The 3 Simple Values to Compute
+For any range of keys $(i, j)$:
 
-$$
-C(i, j) = W(i, j) + \min_{i < k \le j} \left[ C(i, k-1) + C(k, j) \right]; \quad R(i, j) = \text{the } k \text{ giving the minimum.}
-$$
+1. **$W(i, j)$ (Weight):** Total search frequency in that range.  
+   $$W(i, j) = W(i, j-1) + p_j + q_j$$
+2. **$C(i, j)$ (Cost):** Minimum search cost.  
+   $$C(i, j) = W(i, j) + \min_{i < k \le j} \left[ C(i, k-1) + C(k, j) \right]$$
+3. **$R(i, j)$ (Root):** The key $k$ that gave the minimum cost becomes the root of that subtree.
 
-Keys: $a_1 = \text{do}, a_2 = \text{if}, a_3 = \text{int}, a_4 = \text{while}$.
+---
 
-### Cost table ($W, C, R$ for each $j - i$)
+### 3. Step-by-Step Table Construction (By Size $d = j - i$)
 
-| $j - i$ | $(i, j)$ | $W$ | $C$ | $R$ (root) |
-|---:|---|---|---|---:|
-| 0 | $(0,0)\ (1,1)\ (2,2)\ (3,3)\ (4,4)$ | $2, 3, 1, 1, 1$ | $0$ | $0$ |
-| 1 | $(0,1)$ | $2 + 3 + 3 = 8$ | $8$ | 1 |
-| 1 | $(1,2)$ | $3 + 3 + 1 = 7$ | $7$ | 2 |
-| 1 | $(2,3)$ | $1 + 1 + 1 = 3$ | $3$ | 3 |
-| 1 | $(3,4)$ | $1 + 1 + 1 = 3$ | $3$ | 4 |
-| 2 | $(0,2)$ | $8 + 3 + 1 = 12$ | $12 + \min(k=1: 0+7,\ k=2: 8+0) = 19$ | 1 |
-| 2 | $(1,3)$ | $7 + 1 + 1 = 9$ | $9 + \min(k=2: 0+3,\ k=3: 7+0) = 12$ | 2 |
-| 2 | $(2,4)$ | $3 + 1 + 1 = 5$ | $5 + \min(k=3: 0+3,\ k=4: 3+0) = 8$ | 3 |
-| 3 | $(0,3)$ | $12 + 1 + 1 = 14$ | $14 + \min(k=1: 0+12,\ k=2: 8+3,\ k=3: 19+0) = 25$ | 2 |
-| 3 | $(1,4)$ | $9 + 1 + 1 = 11$ | $11 + \min(k=2: 0+8,\ k=3: 7+3,\ k=4: 12+0) = 19$ | 2 |
-| 4 | $(0,4)$ | $14 + 1 + 1 = 16$ | $16 + \min(k=1: 0+19,\ k=2: 8+8,\ k=3: 19+3,\ k=4: 25+0) = \mathbf{32}$ | **2** |
+#### Size $d = 0$ (No keys — dummy leaves):
+$W(i, i) = q_i$, and $C(i, i) = 0$, $R(i, i) = 0$.
+- $(0,0)=2,\ (1,1)=3,\ (2,2)=1,\ (3,3)=1,\ (4,4)=1$.
 
-*($W(0,4) = W(0,3) + p_4 + q_4 = 14 + 1 + 1 = 16$. For $(2,4)$ the choices $k = 3$ and $k = 4$ tie at 8; $k = 3$ is taken.)*
+#### Size $d = 1$ (Subtrees with 1 key):
+Each key is its own root; cost equals its weight ($C = W$):
+- $(0, 1)$ [Key 1: **do**]: $W = 2 + 3 + 3 = \mathbf{8},\ C = \mathbf{8},\ R = \mathbf{1}$
+- $(1, 2)$ [Key 2: **if**]: $W = 3 + 3 + 1 = \mathbf{7},\ C = \mathbf{7},\ R = \mathbf{2}$
+- $(2, 3)$ [Key 3: **int**]: $W = 1 + 1 + 1 = \mathbf{3},\ C = \mathbf{3},\ R = \mathbf{3}$
+- $(3, 4)$ [Key 4: **while**]: $W = 1 + 1 + 1 = \mathbf{3},\ C = \mathbf{3},\ R = \mathbf{4}$
 
-### Finding the tree
+#### Size $d = 2$ (Subtrees with 2 keys):
+Try each key as root and take the minimum:
+- $(0, 2)$ [Keys 1, 2]: $W = 8 + 3 + 1 = \mathbf{12}$.  
+  Test $k=1: 0 + 7 = 7$ vs $k=2: 8 + 0 = 8 \implies \min = 7$ (at $k=1$).  
+  $C = 12 + 7 = \mathbf{19},\ R = \mathbf{1}$.
+- $(1, 3)$ [Keys 2, 3]: $W = 7 + 1 + 1 = \mathbf{9}$.  
+  Test $k=2: 0 + 3 = 3$ vs $k=3: 7 + 0 = 7 \implies \min = 3$ (at $k=2$).  
+  $C = 9 + 3 = \mathbf{12},\ R = \mathbf{2}$.
+- $(2, 4)$ [Keys 3, 4]: $W = 3 + 1 + 1 = \mathbf{5}$.  
+  Test $k=3: 0 + 3 = 3$ vs $k=4: 3 + 0 = 3 \implies \min = 3$ (tie; pick $k=3$).  
+  $C = 5 + 3 = \mathbf{8},\ R = \mathbf{3}$.
 
-$R(0,4) = 2$, so the root is $a_2 = \text{if}$. Left subtree $=$ keys $(0,1)$, whose root is $R(0,1) = 1$, i.e. $\text{do}$. Right subtree $=$ keys $(2,4)$, whose root is $R(2,4) = 3$, i.e. $\text{int}$; its right subtree is $(3,4)$ with root $R(3,4) = 4$, i.e. $\text{while}$.
+#### Size $d = 3$ (Subtrees with 3 keys):
+- $(0, 3)$ [Keys 1, 2, 3]: $W = 12 + 1 + 1 = \mathbf{14}$.  
+  Test $k=1: 0+12=12$, $k=2: 8+3=\mathbf{11}$, $k=3: 19+0=19 \implies \min = 11$ (at $k=2$).  
+  $C = 14 + 11 = \mathbf{25},\ R = \mathbf{2}$.
+- $(1, 4)$ [Keys 2, 3, 4]: $W = 9 + 1 + 1 = \mathbf{11}$.  
+  Test $k=2: 0+8=\mathbf{8}$, $k=3: 7+3=10$, $k=4: 12+0=12 \implies \min = 8$ (at $k=2$).  
+  $C = 11 + 8 = \mathbf{19},\ R = \mathbf{2}$.
 
-### Final Optimal BST
+#### Size $d = 4$ (Full Tree — All 4 keys):
+- $(0, 4)$ [Keys 1, 2, 3, 4]: $W = 14 + 1 + 1 = \mathbf{16}$.  
+  Test $k=1: 0+19=19$, $k=2: 8+8=\mathbf{16}$, $k=3: 19+3=22$, $k=4: 25+0=25 \implies \min = 16$ (at $k=2$).  
+  $C = 16 + 16 = \mathbf{32},\ R = \mathbf{2}$.
+
+---
+
+### 4. Summary Cost Table
+
+| $d = j - i$ | Subtree $(i, j)$ | Weight $W$ | Minimum Cost $C$ | Root $R$ |
+|:---:|:---:|:---:|:---:|:---:|
+| **0** | $(0,0), (1,1), (2,2), (3,3), (4,4)$ | $2, 3, 1, 1, 1$ | $0$ | $0$ |
+| **1** | $(0,1)$ [do]<br>$(1,2)$ [if]<br>$(2,3)$ [int]<br>$(3,4)$ [while] | $8$<br>$7$<br>$3$<br>$3$ | $8$<br>$7$<br>$3$<br>$3$ | $1$<br>$2$<br>$3$<br>$4$ |
+| **2** | $(0,2)$<br>$(1,3)$<br>$(2,4)$ | $12$<br>$9$<br>$5$ | $19$<br>$12$<br>$8$ | $1$<br>$2$<br>$3$ |
+| **3** | $(0,3)$<br>$(1,4)$ | $14$<br>$11$ | $25$<br>$19$ | $2$<br>$2$ |
+| **4** | **$(0,4)$ [Overall]** | **$16$** | **$32$** | **$2$** |
+
+---
+
+### 5. Constructing the Final Tree from Roots
+Look at the root values in reverse:
+1. Root of full range $(0, 4)$ is $R(0, 4) = 2 \implies \mathbf{a_2\ (\text{“if”})}$.
+2. **Left subtree of “if”** covers range $(0, 1) \implies R(0, 1) = 1 \implies \mathbf{a_1\ (\text{“do”})}$.
+3. **Right subtree of “if”** covers range $(2, 4) \implies R(2, 4) = 3 \implies \mathbf{a_3\ (\text{“int”})}$.
+4. **Right subtree of “int”** covers range $(3, 4) \implies R(3, 4) = 4 \implies \mathbf{a_4\ (\text{“while”})}$.
+
+```text
+            if
+           /  \
+         do    int
+                 \
+                while
+```
 
 ![Optimal Binary Search Tree](figures/unit4_q4_obst_tree.png)
 
-Minimum cost $C(0,4) = 32$, i.e. the minimum expected search cost $= C / W = 32 / 16 = \mathbf{2}$ comparisons per search (weighted). **Time:** $O(n^3)$ ($O(n^2)$ with Knuth's optimisation).
+- **Minimum Total Cost:** $C(0,4) = \mathbf{32}$
+- **Average Search Cost:** $\frac{C}{W} = \frac{32}{16} = \mathbf{2}$ comparisons per search.
+- **Complexity:** Time: $O(n^3)$ (reduces to $O(n^2)$ using Knuth's optimization), Space: $O(n^2)$.
 
 ---
 
@@ -315,47 +362,61 @@ Minimum cost $C(0,4) = 32$, i.e. the minimum expected search cost $= C / W = 32 
 
 | Item | I1 | I2 | I3 | I4 | I5 |
 |---|---:|---:|---:|---:|---:|
-| **Weight** | 2 | 3 | 4 | 5 | 6 |
-| **Profit** | 12 | 20 | 25 | 30 | 35 |
+| **Weight ($w_i$)** | 2 | 3 | 4 | 5 | 6 |
+| **Profit ($p_i$)** | 12 | 20 | 25 | 30 | 35 |
 
-### Recurrence
+---
 
-$$
-V[i][w] =
-\begin{cases}
-V[i-1][w] & \text{if } w_i > w, \\
-\max\left( V[i-1][w],\ p_i + V[i-1][w - w_i] \right) & \text{otherwise.}
-\end{cases}
-$$
+### 1. The Core Rule (Skip or Take)
+For each item $i$ and current capacity $w$:
 
-### DP table $V[i][w]$ (rows $=$ items considered, columns $=$ capacity 0 to 10)
+1. **Option 1 (Skip item):** We don't take it $\implies$ profit is simply the value from the row above: $V[i-1][w]$.
+2. **Option 2 (Take item):** If capacity allows ($w_i \le w$), we take it $\implies$ profit is its profit plus the best we could do with remaining capacity: $p_i + V[i-1][w - w_i]$.
+3. **Decision:** Pick whichever gives higher profit!
+   $$\mathbf{V[i][w] = \max(\text{Skip},\ \text{Take})}$$
 
-| $i \setminus w$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| **0** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| **1 (I1)** | 0 | 0 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 |
-| **2 (I2)** | 0 | 0 | 12 | 20 | 20 | 32 | 32 | 32 | 32 | 32 | 32 |
-| **3 (I3)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 45 | 57 | 57 |
-| **4 (I4)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | 62 |
-| **5 (I5)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | **62** |
+---
 
-$$
-\text{Maximum profit} = V[5][10] = \boxed{62}
-$$
+### 2. DP Table $V[i][w]$ (Items $\times$ Capacities 0 to 10)
 
-### Traceback (selected items)
+| Item $\setminus$ Capacity | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **0 (No item)** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1 (wt 2, pf 12)** | 0 | 0 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 |
+| **2 (wt 3, pf 20)** | 0 | 0 | 12 | 20 | 20 | 32 | 32 | 32 | 32 | 32 | 32 |
+| **3 (wt 4, pf 25)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 45 | 57 | 57 |
+| **4 (wt 5, pf 30)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | **62** |
+| **5 (wt 6, pf 35)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | **62** |
 
-- $V[5][10] = V[4][10] = 62$, so **I5 is not selected**.
-- $V[4][10] = 62 \ne V[3][10] = 57$, so **I4 is selected** ($w = 5$); remaining capacity $= 5$.
-- $V[3][5] = 32 = V[2][5]$, so **I3 is not selected**.
-- $V[2][5] = 32 \ne V[1][5] = 12$, so **I2 is selected** ($w = 3$); remaining capacity $= 2$.
-- $V[1][2] = 12 \ne V[0][2] = 0$, so **I1 is selected** ($w = 2$); remaining capacity $= 0$.
+$$\text{Maximum Profit} = V[5][10] = \mathbf{62}$$
 
-**Selected items:** `I1, I2, I4`. Total weight $= 2 + 3 + 5 = 10$, total profit $= 12 + 20 + 30 = \mathbf{62}$.
+---
 
-### Why ratio-based greedy may fail in 0/1 knapsack
+### 3. Finding Which Items Were Selected (Traceback)
+Start at bottom-right cell $V[5][10] = 62$ and work upwards:
+- **Rule:** If the cell equals the cell above it, the item was **NOT taken**. If it is bigger, the item **WAS taken** (subtract its weight and jump columns).
 
-Profit/weight ratios are $I_2 = 6.67, I_3 = 6.25, I_1 = 6.0, I_4 = 6.0, I_5 = 5.83$. Greedy takes `I2, I3, I1` (weight 9, profit 57); the remaining capacity 1 cannot hold any other item. Profit $= 57 < 62$. Items cannot be split, so the highest-ratio picks can leave unusable capacity, while the DP considers all combinations of items. **Time and space:** $O(n \cdot W)$.
+1. $V[5][10] = V[4][10] = 62 \implies$ **I5 NOT taken**.
+2. $V[4][10] = 62 \ne V[3][10] = 57 \implies$ **I4 TAKEN!**  
+   Remaining capacity $= 10 - 5 = \mathbf{5}$.
+3. Look at capacity 5: $V[3][5] = V[2][5] = 32 \implies$ **I3 NOT taken**.
+4. $V[2][5] = 32 \ne V[1][5] = 12 \implies$ **I2 TAKEN!**  
+   Remaining capacity $= 5 - 3 = \mathbf{2}$.
+5. Look at capacity 2: $V[1][2] = 12 \ne V[0][2] = 0 \implies$ **I1 TAKEN!**  
+   Remaining capacity $= 2 - 2 = \mathbf{0}$.
+
+**Selected Items:** **`I1, I2, I4`**  
+- **Total Weight:** $2 + 3 + 5 = \mathbf{10}$
+- **Total Profit:** $12 + 20 + 30 = \mathbf{62}$
+
+---
+
+### 4. Why Greedy Fails for 0/1 Knapsack
+- Greedy sorts by Profit/Weight ratio: $I_2(6.67) > I_3(6.25) > I_1(6.0) = I_4(6.0) > I_5(5.83)$.
+- Greedy picks $I_2, I_3, I_1$ (total weight $3+4+2=9$, profit $20+25+12=57$).
+- The remaining capacity $1$ is completely wasted because items cannot be divided.
+- Dynamic Programming tests all valid subset combinations to find the true optimal profit ($62 > 57$).
+- **Complexity:** Time: $O(n \cdot W)$, Space: $O(n \cdot W)$.
 
 ---
 
@@ -363,7 +424,7 @@ Profit/weight ratios are $I_2 = 6.67, I_3 = 6.25, I_1 = 6.0, I_4 = 6.0, I_5 = 5.
 
 **Q6. Analyze the Travelling Salesperson Problem using Dynamic Programming (Held–Karp), starting and ending at city A.**
 
-### Cost matrix (A, B, C, D)
+### Cost Matrix (Cities A, B, C, D)
 
 $$
 C =
@@ -375,35 +436,61 @@ C =
 \end{bmatrix}
 $$
 
-### Held–Karp recurrence
+---
 
-$$
-g(i, S) = \min_{j \in S} \left[ c(i, j) + g(j, S - \{j\}) \right], \quad \text{with } g(i, \emptyset) = c(i, A).
-$$
+### 1. The Core Idea in Simple Words
+- Start at city A, visit cities $\{B, C, D\}$ once each, and return to A with minimum total cost.
+- **Formula:**
+  $$g(i, S) = \min_{j \in S} \left[ \text{cost}(i \to j) + g(j, S - \{j\}) \right]$$
+  *(Meaning: From city $i$, try visiting each available city $j$, then add the best cost to finish the rest of the tour).*
 
-$g(i, S) =$ the shortest path starting at $i$, visiting all cities in $S$ exactly once and ending at A.
+---
 
-- **Step 1: $S = \emptyset$:**
-  - $g(B, \emptyset) = 10,\quad g(C, \emptyset) = 15,\quad g(D, \emptyset) = 20$.
-- **Step 2: $|S| = 1$:**
-  - $g(B, \{C\}) = c(B,C) + g(C, \emptyset) = 35 + 15 = 50;\quad g(B, \{D\}) = 25 + 20 = 45$
-  - $g(C, \{B\}) = 35 + 10 = 45;\quad g(C, \{D\}) = 30 + 20 = 50$
-  - $g(D, \{B\}) = 25 + 10 = 35;\quad g(D, \{C\}) = 30 + 15 = 45$
-- **Step 3: $|S| = 2$:**
-  - $g(B, \{C, D\}) = \min( c(B,C) + g(C,\{D\}),\ c(B,D) + g(D,\{C\}) ) = \min(35 + 50, 25 + 45) = \min(85, 70) = 70$ (via D)
-  - $g(C, \{B, D\}) = \min( c(C,B) + g(B,\{D\}),\ c(C,D) + g(D,\{B\}) ) = \min(35 + 45, 30 + 35) = \min(80, 65) = 65$ (via D)
-  - $g(D, \{B, C\}) = \min( c(D,B) + g(B,\{C\}),\ c(D,C) + g(C,\{B\}) ) = \min(25 + 50, 30 + 45) = \min(75, 75) = 75$
-- **Step 4: final:**
+### 2. Step-by-Step Calculation (From Small Subsets to Large)
 
+#### Step 1: 0 Cities Left ($S = \emptyset$) — Return Directly to A
+- $g(B, \emptyset) = \text{cost}(B \to A) = \mathbf{10}$
+- $g(C, \emptyset) = \text{cost}(C \to A) = \mathbf{15}$
+- $g(D, \emptyset) = \text{cost}(D \to A) = \mathbf{20}$
+
+#### Step 2: 1 City Left ($|S| = 1$)
+Go to that city, then return to A:
+- $g(B, \{C\}) = c(B,C) + g(C, \emptyset) = 35 + 15 = \mathbf{50}$
+- $g(B, \{D\}) = c(B,D) + g(D, \emptyset) = 25 + 20 = \mathbf{45}$
+- $g(C, \{B\}) = c(C,B) + g(B, \emptyset) = 35 + 10 = \mathbf{45}$
+- $g(C, \{D\}) = c(C,D) + g(D, \emptyset) = 30 + 20 = \mathbf{50}$
+- $g(D, \{B\}) = c(D,B) + g(B, \emptyset) = 25 + 10 = \mathbf{35}$
+- $g(D, \{C\}) = c(D,C) + g(C, \emptyset) = 30 + 15 = \mathbf{45}$
+
+#### Step 3: 2 Cities Left ($|S| = 2$)
+Try both options and take the minimum:
+- **From B through $\{C, D\}$:**  
+  $\min(c(B,C) + g(C,\{D\}),\ c(B,D) + g(D,\{C\})) = \min(35 + 50,\ 25 + 45) = \min(85, \mathbf{70}) = \mathbf{70}$ *(via D)*
+- **From C through $\{B, D\}$:**  
+  $\min(c(C,B) + g(B,\{D\}),\ c(C,D) + g(D,\{B\})) = \min(35 + 45,\ 30 + 35) = \min(80, \mathbf{65}) = \mathbf{65}$ *(via D)*
+- **From D through $\{B, C\}$:**  
+  $\min(c(D,B) + g(B,\{C\}),\ c(D,C) + g(C,\{B\})) = \min(25 + 50,\ 30 + 45) = \min(75, 75) = \mathbf{75}$
+
+#### Step 4: Final Tour from Start City A ($S = \{B, C, D\}$)
+Test each city as the first stop after A:
 $$
 \begin{aligned}
-g(A, \{B, C, D\}) &= \min\left( c(A,B) + g(B,\{C,D\}),\ c(A,C) + g(C,\{B,D\}),\ c(A,D) + g(D,\{B,C\}) \right) \\
-&= \min( 10 + 70,\ 15 + 65,\ 20 + 75 ) = \min(80, 80, 95) = \boxed{80}
+g(A, \{B, C, D\}) &= \min\Big( c(A,B) + g(B,\{C,D\}),\ c(A,C) + g(C,\{B,D\}),\ c(A,D) + g(D,\{B,C\}) \Big) \\
+&= \min\Big( 10 + 70,\ 15 + 65,\ 20 + 75 \Big) \\
+&= \min(80,\ 80,\ 95) = \mathbf{80}
 \end{aligned}
 $$
 
-**Optimal tour:** `A → B → D → C → A`, cost $= 10 + 25 + 30 + 15 = \mathbf{80}$. *(Its reverse `A → C → D → B → A` also costs 80.)*
+---
 
-### Use of overlapping subproblems
+### 3. Optimal Tour & Cost
+- **Optimal Route:** **`A → B → D → C → A`** (or its reverse `A → C → D → B → A`)
+- **Total Minimum Cost:** $10 + 25 + 30 + 15 = \mathbf{80}$
 
-Every $g(i, S)$ is computed once, stored in the table and then reused by all larger subsets that contain it. For example, the stored values $g(B,\{C,D\}) = 70$, $g(C,\{B,D\}) = 65$ and $g(D,\{B,C\}) = 75$ are all reused when computing $g(A,\{B,C,D\})$, instead of re-enumerating the underlying paths. With only 3 cities the sharing is small, but for $n$ cities a value $g(j, S)$ is shared by many different longer paths, which is why DP needs $O(n^2 \cdot 2^n)$ time instead of checking all $(n-1)!$ tours (here $3! = 6$). **Space:** $O(n \cdot 2^n)$.
+---
+
+### 4. Overlapping Subproblems & Complexity
+- Brute force checks all $(n-1)!$ tours ($O(n!)$ time — impractical for large graphs).
+- DP stores the computed costs of subsets in a table and reuses them repeatedly.
+- **Time Complexity:** $O(n^2 \cdot 2^n)$
+- **Space Complexity:** $O(n \cdot 2^n)$

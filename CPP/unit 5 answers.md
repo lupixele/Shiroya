@@ -10,262 +10,186 @@
 
 ## Q1. Explain the principles of exception handling in C++ with a simple flow example.
 
-### Definition of Exception Handling
-**Exception handling** is a built-in mechanism in C++ used to detect, report, and recover from runtime anomalies (errors such as division by zero, memory exhaustion, or file-not-found) without abruptly crashing the application.
+### Exception Handling
+Exception handling in C++ is a mechanism to handle runtime errors (such as division by zero) without abnormally terminating the program.
 
-Traditional error handling (like returning error codes) forces programs to mix error-checking logic with main computational logic. C++ exception handling separates normal program execution from error recovery.
-
----
-
-### The Four Principles of Exception Handling
-
-1. **Detecting the Error (`try` block):**
-   Code that is suspect or capable of causing a runtime error is enclosed within a `try` block. The program monitors this block during execution.
-2. **Throwing the Exception (`throw` statement):**
-   When an anomaly occurs, the `throw` statement creates and dispatches an exception object. Program execution in the `try` block is halted immediately, and control transfers outwards.
-3. **Catching and Handling (`catch` block):**
-   A matching `catch` block intercepts the thrown exception based on data type and executes recovery code (logging, warning the user, or cleaning up resources).
-4. **Resuming Normal Execution:**
-   Once the catch block completes, control does not jump back to the point of failure; instead, it resumes sequentially after the catch block.
+### Principles of Exception Handling
+1. **`try` block:** The code that may cause an error is placed inside the `try` block.
+2. **`throw` statement:** When an error occurs, the program throws an exception using `throw`.
+3. **`catch` block:** The matching `catch` block receives and handles the exception.
+4. **Normal execution:** After the exception is handled, the program continues executing normally past the catch block.
 
 ### Flow Diagram
 ![Exception Handling Simple Flow](figures/unit5_q1_exception_flow.png)
 
-```text
-       [ Start ]
-           │
-           ▼
-     [ try Block ] (Risky Code)
-           │
-      Error occurs?
-      ├─── No  ───► [ Continue Normal Execution ] ───┐
-      │                                              │
-     Yes                                             │
-      ▼                                              │
- [ throw Exception ]                                 │
-      │                                              │
-      ▼                                              │
- [ catch Block ] (Handle Error)                      │
-      │                                              │
-      ▼                                              │
- [ Resume Execution After catch ] ◄──────────────────┘
-      │
-      ▼
-   [ Stop ]
-```
-
----
-
-### Exam-Ready Program (Divide by Zero)
+### Code Example
 ```cpp
 #include <iostream>
 using namespace std;
 
 int main() {
-    int numerator = 10, denominator = 0;
+    int a = 10, b = 0;
 
     try {
-        // 1. Guarded region: check for condition that causes runtime error
-        if (denominator == 0) {
-            throw "Division by zero error!"; // 2. Throw exception
-        }
-        cout << "Result: " << (numerator / denominator) << endl;
+        if (b == 0)
+            throw "Division by zero error!";
+        cout << "Result = " << (a / b) << endl;
     }
-    catch (const char* errorMsg) {
-        // 3. Catch and handle exception
-        cout << "Caught Exception: " << errorMsg << endl;
+    catch (const char* msg) {
+        cout << "Exception: " << msg << endl;
     }
 
-    // 4. Normal execution resumes safely
-    cout << "Program resumes normal execution past the catch block." << endl;
+    cout << "Program continues normally." << endl;
     return 0;
 }
 ```
 
 ### Output
 ```text
-Caught Exception: Division by zero error!
-Program resumes normal execution past the catch block.
+Exception: Division by zero error!
+Program continues normally.
 ```
 
 ---
 
 ## Q2. What are multiple catch statements? Explain with an example.
 
-### Concept of Multiple Catch Blocks
-In C++, a single `try` block can be followed by multiple consecutive `catch` blocks. This allows a single section of code to handle different types of exceptions (`int`, `double`, `const char*`, custom exception classes) with specialized recovery logic for each type.
+### Multiple Catch Statements
+Multiple catch statements are used when a single `try` block can throw different types of exceptions. Each exception type has its own separate `catch` block.
 
-### How Multiple Catch Blocks Work
-1. When an exception is thrown, the runtime examines the catch blocks in **strict top-to-bottom order**.
-2. The **first** catch block whose parameter type matches the type of the thrown exception is executed.
-3. Once a matching catch block finishes, all remaining catch blocks are skipped.
-4. **Catch-All Handler (`catch(...)`):** A special catch block using ellipsis `catch(...)` can be placed at the very end to catch any unmatched exception.
+When an exception is thrown:
+- C++ inspects the catch blocks in top-to-bottom order.
+- The **first matching** catch block is executed.
+- All other catch blocks are skipped.
 
 ### Syntax
 ```cpp
 try {
-    // code that might throw different types
+    // risky code
 }
-catch (int errorVal) {
-    // handles integer error codes
+catch (int e) {
+    // handles integer exception
 }
-catch (double errorVal) {
-    // handles floating-point errors
+catch (double e) {
+    // handles double exception
 }
-catch (const char* msg) {
-    // handles string/message errors
-}
-catch (...) {
-    // default catch-all handler (must be placed last)
+catch (const char* e) {
+    // handles string exception
 }
 ```
 
----
-
-### Exam-Ready Program
+### Code Example
 ```cpp
 #include <iostream>
 using namespace std;
 
-void testException(int code) {
+void test(int choice) {
     try {
-        if (code == 1)
-            throw 404;                   // Throws integer
-        else if (code == 2)
-            throw 99.99;                 // Throws double
-        else if (code == 3)
-            throw "Access Denied";       // Throws C-string
+        if (choice == 1)
+            throw 10;           // int
+        else if (choice == 2)
+            throw 3.14;         // double
         else
-            throw 'X';                   // Throws char (caught by catch-all)
+            throw "Error";      // string
     }
     catch (int e) {
-        cout << "[Integer Exception] Error Code : " << e << endl;
+        cout << "Caught integer: " << e << endl;
     }
     catch (double e) {
-        cout << "[Double Exception] Value      : " << e << endl;
+        cout << "Caught double: " << e << endl;
     }
-    catch (const char* msg) {
-        cout << "[String Exception] Message     : " << msg << endl;
-    }
-    catch (...) {
-        cout << "[Default Handler] Unknown Exception Caught!" << endl;
+    catch (const char* e) {
+        cout << "Caught string: " << e << endl;
     }
 }
 
 int main() {
-    cout << "Test 1: "; testException(1);
-    cout << "Test 2: "; testException(2);
-    cout << "Test 3: "; testException(3);
-    cout << "Test 4: "; testException(4);
+    test(1);
+    test(2);
+    test(3);
     return 0;
 }
 ```
 
 ### Output
 ```text
-Test 1: [Integer Exception] Error Code : 404
-Test 2: [Double Exception] Value      : 99.99
-Test 3: [String Exception] Message     : Access Denied
-Test 4: [Default Handler] Unknown Exception Caught!
+Caught integer: 10
+Caught double: 3.14
+Caught string: Error
 ```
-
-### Important Exam Rule:
-When dealing with inheritance hierarchies, **derived class catch blocks must always be placed before base class catch blocks**. If the base class catch block is placed first, it will catch all derived exceptions, making the derived catch block unreachable dead code.
 
 ---
 
 ## Q3. Describe the role of try, throw, and catch in exception handling with syntax.
 
-### The Three Key Keywords
-
-### 1. `try` Keyword
-- **Role:** Designates a monitored block of statements where exceptions may occur. If any function called within the `try` block throws an exception, the `try` block immediately relinquishes control to an appropriate handler.
+### 1. `try`
+- **Role:** Encloses the block of code that may produce an error.
 - **Syntax:**
   ```cpp
   try {
-      // statements to monitor for exceptions
+      // code that may throw an exception
   }
   ```
 
-### 2. `throw` Keyword
-- **Role:** Explicitly raises or generates an exception. It takes an operand (an expression, primitive value, or object) and transfers program control directly to the matching catch block. Execution inside the `try` block halts immediately at the `throw` statement.
+### 2. `throw`
+- **Role:** Used to throw an exception when a problem is detected. Control immediately leaves the `try` block.
 - **Syntax:**
   ```cpp
-  throw exception_value;
+  throw value;
   ```
 
-### 3. `catch` Keyword
-- **Role:** Defines the exception handler. It accepts an argument specifying the data type it is designed to process. When a matching exception is thrown, the block executes recovery actions (cleaning up, notifying the user).
+### 3. `catch`
+- **Role:** Receives and handles the thrown exception based on data type.
 - **Syntax:**
   ```cpp
-  catch (Type parameter) {
-      // exception handling and recovery statements
+  catch (data_type variable) {
+      // handling code
   }
   ```
 
----
-
-### Complete Program Demonstrating All Three Roles
+### Code Example
 ```cpp
 #include <iostream>
 using namespace std;
 
-void checkAge(int age) {
-    // 1. try: marks the guarded code block
-    try {
-        if (age < 18) {
-            // 2. throw: raises an exception with the age value
-            throw age;
-        }
-        cout << "Access granted: You are eligible to vote." << endl;
-    }
-    // 3. catch: receives and handles the thrown integer value
-    catch (int rejectedAge) {
-        cout << "Access denied: Age " << rejectedAge 
-             << " is under 18 years old." << endl;
-    }
-}
-
 int main() {
-    cout << "Checking 20: "; checkAge(20);
-    cout << "Checking 15: "; checkAge(15);
+    int age = 15;
+
+    try {
+        if (age < 18)
+            throw age; // throw integer
+        cout << "Eligible to vote" << endl;
+    }
+    catch (int x) {
+        cout << "Not eligible to vote. Age: " << x << endl;
+    }
+
     return 0;
 }
 ```
 
 ### Output
 ```text
-Checking 20: Access granted: You are eligible to vote.
-Checking 15: Access denied: Age 15 is under 18 years old.
+Not eligible to vote. Age: 15
 ```
-
-### Summary of Sequence
-$$\text{try block executes} \xrightarrow{\text{error detected}} \text{throw raises exception} \xrightarrow{\text{type match}} \text{catch block recovers}$$
 
 ---
 
 ## Q4. Explain the steps to open, write, read, and close a file in C++ with sample code.
 
-### File Handling Classes in C++
-File input/output in C++ is managed through the `<fstream>` standard library header, which provides three primary stream classes:
-1. **`ofstream` (Output File Stream):** Used exclusively for **writing** data to files.
-2. **`ifstream` (Input File Stream):** Used exclusively for **reading** data from files.
-3. **`fstream` (File Stream):** Capable of **both reading and writing** to files.
+### File Handling Classes
+C++ provides file handling using `<fstream>`:
+- `ofstream`: Used for **writing** to files.
+- `ifstream`: Used for **reading** from files.
+- `fstream`: Used for **both reading and writing**.
 
----
+### Four Steps
+1. **Include `<fstream>`:** Header required for file operations.
+2. **Open the file:** Using `ofstream` or `ifstream`.
+3. **Write or Read data:** Using `<<` to write, or `getline()` / `>>` to read.
+4. **Close the file:** Using `.close()`.
 
-### The Four Sequential Steps
-
-| Step | Operation | Class / Method | Description |
-| :---: | :--- | :--- | :--- |
-| **1** | **Open File** | `open()` or Constructor | Connects the C++ stream object to a physical file on disk with a specified mode (e.g., `ios::out`, `ios::in`, `ios::app`). |
-| **2** | **Write Data** | `<<` operator or `write()` | Transfers data from program memory onto the opened file. |
-| **3** | **Read Data** | `>>` or `getline()` | Extracts stored content from the physical file into program variables. |
-| **4** | **Close File** | `close()` method | Flushes write buffers to disk and frees the file handle allocated by the operating system. |
-
----
-
-### Exam-Ready Program (Writing and Reading a File)
+### Code Example
 ```cpp
 #include <iostream>
 #include <fstream>
@@ -273,51 +197,25 @@ File input/output in C++ is managed through the `<fstream>` standard library hea
 using namespace std;
 
 int main() {
-    // ---------------------------------------------
-    // Step 1 & 2: Open and Write to a File
-    // ---------------------------------------------
-    ofstream outFile("student.txt"); // Opens file in write mode
+    // 1. Open and write to file
+    ofstream fout("sample.txt");
+    fout << "Welcome to C++ File Handling";
+    fout.close();
 
-    if (!outFile) {
-        cout << "Error creating file!" << endl;
-        return 1;
-    }
+    // 2. Open and read from file
+    ifstream fin("sample.txt");
+    string text;
+    getline(fin, text);
+    fin.close();
 
-    outFile << "Aditya University C++ Course" << endl; // Write data
-    outFile << "Roll: 101, Subject: OOP" << endl;
-    outFile.close(); // Step 4: Close file
-
-    cout << "File written and closed successfully." << endl;
-
-    // ---------------------------------------------
-    // Step 3 & 4: Open and Read from the File
-    // ---------------------------------------------
-    ifstream inFile("student.txt"); // Opens file in read mode
-
-    if (!inFile) {
-        cout << "Error opening file for reading!" << endl;
-        return 1;
-    }
-
-    cout << "\n--- Reading File Contents ---" << endl;
-    string line;
-    // Read file line by line using getline()
-    while (getline(inFile, line)) {
-        cout << line << endl;
-    }
-
-    inFile.close(); // Step 4: Close file
+    cout << "File Content: " << text << endl;
     return 0;
 }
 ```
 
 ### Output
 ```text
-File written and closed successfully.
-
---- Reading File Contents ---
-Aditya University C++ Course
-Roll: 101, Subject: OOP
+File Content: Welcome to C++ File Handling
 ```
 
 ---
@@ -325,58 +223,39 @@ Roll: 101, Subject: OOP
 ## Q5. What is STL? Explain its components and programming model.
 
 ### Definition of STL
-The **Standard Template Library (STL)** is a foundational software library included in C++. It provides a set of general-purpose, template-based classes and functions implementing common data structures and algorithms (such as dynamic arrays, linked lists, stacks, sorting, and searching).
+**STL (Standard Template Library)** is a collection of predefined template classes and functions in C++ used for common data structures and algorithms.
 
-### The Four Core Components of STL
+### Main Components of STL
+1. **Containers:** Store and organize data (e.g., `vector`, `list`, `map`, `set`).
+2. **Algorithms:** Predefined procedures that perform operations on containers (e.g., `sort()`, `find()`, `reverse()`).
+3. **Iterators:** Pointer-like objects used to access and step through elements in a container.
+4. **Function Objects (Functors):** Objects that can be used like functions.
 
-1. **Containers:**
-   Objects that store collections of data in memory.
-   - *Sequence Containers:* Store data sequentially (`vector`, `list`, `deque`).
-   - *Associative Containers:* Store sorted key-value pairs (`set`, `map`, `multiset`, `multimap`).
-   - *Container Adapters:* Provide restricted interfaces (`stack`, `queue`, `priority_queue`).
-
-2. **Algorithms:**
-   Over 100 template functions that carry out computational procedures on containers (`sort()`, `find()`, `reverse()`, `count()`, `binary_search()`).
-
-3. **Iterators:**
-   Generalized pointer-like objects used to step through container elements. They act as the **vital link** that connects algorithms to containers.
-
-4. **Function Objects (Functors):**
-   Objects of a class that overload the call operator `operator()`, allowing them to be invoked like functions and passed as arguments to customize algorithms.
-
----
-
-### The STL Programming Model
-The defining architecture of the STL is that **Algorithms do not operate on containers directly**. Instead, Algorithms operate via **Iterators**, ensuring that a single algorithm (such as `std::sort`) can work across multiple containers without rewriting code.
-
+### STL Programming Model
 ```text
-┌─────────────┐       Iterators (begin, end)       ┌─────────────┐
-│  CONTAINER  │ ◄────────────────────────────────► │  ALGORITHM  │ ──► Output Result
-│  (Data)     │                                    │  (Logic)    │
-└─────────────┘                                    └─────────────┘
+Container ──► Iterator ──► Algorithm ──► Result
 ```
+- **Containers** store the data.
+- **Iterators** access elements in the container.
+- **Algorithms** perform operations through iterators.
 
----
-
-### Exam-Ready Program (Container + Algorithm + Iterator)
+### Code Example
 ```cpp
 #include <iostream>
-#include <vector>    // Container
-#include <algorithm> // Algorithm
+#include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
-    // 1. Container: vector of integers
-    vector<int> numbers = {45, 12, 85, 32, 19};
+    // Container
+    vector<int> v = {30, 10, 20};
 
-    // 2. Algorithm: sort() operating through Iterators begin() and end()
-    sort(numbers.begin(), numbers.end());
+    // Algorithm working through iterators
+    sort(v.begin(), v.end());
 
-    cout << "Sorted STL Vector: ";
-    // 3. Iterators used for traversal
-    for (auto it = numbers.begin(); it != numbers.end(); ++it) {
-        cout << *it << " "; // dereferencing iterator
-    }
+    cout << "Sorted vector: ";
+    for (int x : v)
+        cout << x << " ";
     cout << endl;
 
     return 0;
@@ -385,62 +264,42 @@ int main() {
 
 ### Output
 ```text
-Sorted STL Vector: 12 19 32 45 85 
+Sorted vector: 10 20 30 
 ```
 
 ---
 
 ## Q6. What are iterators in STL? Explain their types and usage.
 
-### Definition & Purpose of Iterators
-An **iterator** is an object in C++ that points to an element within an STL container and provides pointer-like operators (`*`, `++`, `--`, `==`) to navigate and access container elements.
+### Iterators
+An **iterator** is a pointer-like object used to point to and traverse elements of an STL container.
 
-### Why Are Iterators Used?
-- **Decoupling:** Decouples algorithms from internal container memory layouts.
-- **Uniform Syntax:** Provides a universal traversal syntax (`for (auto it = c.begin(); it != c.end(); ++it)`) regardless of whether the container is an array, tree, or linked list.
+### Types of Iterators
 
----
+| Iterator Type | Movement | Access Mode | Example Containers |
+| :--- | :--- | :--- | :--- |
+| **Input Iterator** | Forward only | Read-only | Input streams |
+| **Output Iterator** | Forward only | Write-only | Output streams |
+| **Forward Iterator** | Forward only | Read & Write | `forward_list` |
+| **Bidirectional Iterator** | Forward & Backward (`++`, `--`) | Read & Write | `list`, `map`, `set` |
+| **Random Access Iterator** | Direct jumps (`+n`, `-n`, `[]`) | Read & Write | `vector`, `deque` |
 
-### The 5 Types of Iterators
-
-```text
-[ Input ]  ──┐
-             ├──► [ Forward ] ──► [ Bidirectional ] ──► [ Random Access ]
-[ Output ] ──┘
-```
-
-| Iterator Type | Movement | Access Mode | Supported Operations | Supported Containers |
-| :--- | :--- | :--- | :--- | :--- |
-| **1. Input Iterator** | Forward only | Read-only | `*it`, `++`, `==`, `!=` | `istream_iterator` |
-| **2. Output Iterator** | Forward only | Write-only | `*it = val`, `++` | `ostream_iterator` |
-| **3. Forward Iterator** | Forward only | Read & Write | Multi-pass `*it`, `++` | `forward_list`, `unordered_set` |
-| **4. Bidirectional Iterator** | Forward & Backward | Read & Write | `++`, `--`, `*it` | `list`, `map`, `set` |
-| **5. Random Access Iterator** | Arbitrary Jumps | Read & Write | `++`, `--`, `+n`, `-n`, `[]`, `<`, `>` | `vector`, `deque`, `array` |
-
----
-
-### Exam-Ready Program
+### Code Example
 ```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
 
 int main() {
-    vector<int> vec = {10, 20, 30, 40, 50};
+    vector<int> v = {10, 20, 30, 40};
 
-    // Declaring iterator explicitly
+    // Traversal using iterator
     vector<int>::iterator it;
-
-    cout << "Forward Traversal using Iterator: ";
-    for (it = vec.begin(); it != vec.end(); ++it) {
-        cout << *it << " "; // *it accesses the current value
+    cout << "Elements: ";
+    for (it = v.begin(); it != v.end(); it++) {
+        cout << *it << " ";
     }
     cout << endl;
-
-    // Random access demonstration:
-    it = vec.begin();
-    cout << "First Element  : " << *it << endl;
-    cout << "Third Element  : " << *(it + 2) << endl; // Random jump (+2)
 
     return 0;
 }
@@ -448,45 +307,36 @@ int main() {
 
 ### Output
 ```text
-Forward Traversal using Iterator: 10 20 30 40 50 
-First Element  : 10
-Third Element  : 30
+Elements: 10 20 30 40 
 ```
 
 ---
 
 ## Q7. Explain vectors, Lists, and maps in STL with syntax and suitable example.
 
-### 1. `std::vector` (Dynamic Array)
-- **Concept:** A sequence container encapsulating dynamic contiguous arrays. It automatically resizes when elements are inserted or deleted.
-- **Performance:** Constant-time $O(1)$ random access via index; $O(1)$ insertion/deletion at the end; $O(n)$ insertion in the middle.
-- **Syntax:** `vector<DataType> vecName;`
+### 1. Vector
+A **vector** is a dynamic array that stores elements in contiguous memory.
+- Fast random access using index.
+- **Syntax:** `vector<int> v;`
 
-### 2. `std::list` (Doubly Linked List)
-- **Concept:** A sequence container implemented as a doubly linked list. Elements are scattered non-contiguously in memory, linked via forward and backward pointers.
-- **Performance:** Constant-time $O(1)$ insertion and deletion anywhere once an iterator is obtained; sequential $O(n)$ access (does not support `[]` indexing).
-- **Syntax:** `list<DataType> listName;`
+### 2. List
+A **list** is a doubly linked list.
+- Fast insertion and deletion at any position.
+- **Syntax:** `list<int> l;`
 
-### 3. `std::map` (Associative Key-Value Map)
-- **Concept:** An associative container that stores key-value pairs sorted by unique keys. Implemented internally as a self-balancing binary search tree (Red-Black Tree).
-- **Performance:** Logarithmic-time $O(\log n)$ search, insertion, and deletion.
-- **Syntax:** `map<KeyType, ValueType> mapName;`
+### 3. Map
+A **map** stores data in sorted key-value pairs where each key is unique.
+- **Syntax:** `map<int, string> m;`
 
----
+### Comparison Table
 
-### Detailed Comparison Table
-
-| Feature | `vector` | `list` | `map` |
+| Container | Internal Structure | Access Speed | Main Feature |
 | :--- | :--- | :--- | :--- |
-| **Underlying Structure** | Dynamic contiguous array | Doubly linked list | Balanced Red-Black BST |
-| **Access Speed** | $O(1)$ Fast random access | $O(n)$ Sequential only | $O(\log n)$ Key lookup |
-| **Insertion / Deletion** | Slow in middle ($O(n)$), fast at end ($O(1)$) | Fast anywhere ($O(1)$) | Logarithmic ($O(\log n)$) |
-| **Memory Contiguity** | Strict contiguous memory | Non-contiguous (pointer overhead) | Non-contiguous tree nodes |
-| **Key Characteristics** | Replaces static C arrays | Efficient for frequent reordering | Key-to-value dictionaries |
+| **Vector** | Dynamic contiguous array | Fast random access ($O(1)$) | Replaces regular arrays |
+| **List** | Doubly linked list | Sequential access ($O(n)$) | Fast insert/delete anywhere |
+| **Map** | Balanced binary search tree | Key search ($O(\log n)$) | Unique key-value pairs |
 
----
-
-### Unified Exam-Ready Program
+### Code Example
 ```cpp
 #include <iostream>
 #include <vector>
@@ -496,37 +346,28 @@ Third Element  : 30
 using namespace std;
 
 int main() {
-    // ----------------------------------------------------
-    // 1. Vector: Dynamic Array
-    // ----------------------------------------------------
+    // 1. Vector
     vector<int> v = {10, 20, 30};
-    v.push_back(40); // Insert at end
-    cout << "Vector elements (contiguous) : ";
+    v.push_back(40);
+    cout << "Vector: ";
     for (int x : v) cout << x << " ";
     cout << endl;
 
-    // ----------------------------------------------------
-    // 2. List: Doubly Linked List
-    // ----------------------------------------------------
+    // 2. List
     list<int> l = {20, 30};
-    l.push_front(10); // Fast insert at front: O(1)
-    l.push_back(40);  // Fast insert at back: O(1)
-    cout << "List elements (doubly linked) : ";
+    l.push_front(10);
+    l.push_back(40);
+    cout << "List  : ";
     for (int x : l) cout << x << " ";
     cout << endl;
 
-    // ----------------------------------------------------
-    // 3. Map: Key-Value Pairs
-    // ----------------------------------------------------
-    map<int, string> studentMap;
-    studentMap[101] = "Alice";
-    studentMap[102] = "Bob";
-    studentMap[103] = "Charlie";
-
-    cout << "Map elements (Key -> Value)  : ";
-    for (auto entry : studentMap) {
-        cout << "[" << entry.first << " : " << entry.second << "] ";
-    }
+    // 3. Map
+    map<int, string> m;
+    m[1] = "C++";
+    m[2] = "Python";
+    cout << "Map   : ";
+    for (auto x : m)
+        cout << "[" << x.first << ": " << x.second << "] ";
     cout << endl;
 
     return 0;
@@ -535,7 +376,7 @@ int main() {
 
 ### Output
 ```text
-Vector elements (contiguous) : 10 20 30 40 
-List elements (doubly linked) : 10 20 30 40 
-Map elements (Key -> Value)  : [101 : Alice] [102 : Bob] [103 : Charlie] 
+Vector: 10 20 30 40 
+List  : 10 20 30 40 
+Map   : [1: C++] [2: Python] 
 ```

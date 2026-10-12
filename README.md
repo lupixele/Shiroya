@@ -24,18 +24,20 @@ Shiroya/
 ├── SEM-2/
 ├── THUB/
 ├── codevita/
-├── 416b8a54-fb68-4d0d-8ca5-1e4c0d6a47a9.webp
-├── Academic calendar_.pdf
-├── ds-total-syllabus-2025.pdf
-├── Time Table for  B.Tech III Semester Internal Examinations - II OCT 2026.pdf
+├── raw/
+├── academic-calendar.md
+├── ds-syllabus.md
+├── exam-schedule.md
+├── exam-timetable.md
 ├── README.md
 ```
 
 ## Recently added resources
 
-- `Academic calendar_.pdf` — academic calendar reference
-- `ds-total-syllabus-2025.pdf` — total syllabus document
-- `Time Table for B.Tech III Semester Internal Examinations - II OCT 2026.pdf` — exam timetable
+- [`academic-calendar.md`](academic-calendar.md) — B.Tech 2025–2029 academic calendar schedule & holidays (converted from [`raw/academic-calendar.pdf`](raw/academic-calendar.pdf))
+- [`ds-syllabus.md`](ds-syllabus.md) — B.Tech CSE (Data Science) complete program curriculum & syllabus (converted from [`raw/ds-syllabus.pdf`](raw/ds-syllabus.pdf))
+- [`exam-timetable.md`](exam-timetable.md) — B.Tech III Semester Internal Examinations-II timetable (converted from [`raw/exam-timetable.pdf`](raw/exam-timetable.pdf))
+- [`exam-schedule.md`](exam-schedule.md) — CSE (DS) III Semester Mid-2 & End-Sem exam dates (converted from [`raw/exam-schedule.webp`](raw/exam-schedule.webp))
 - `ASE/`, `CPP/`, `DAE/`, `FDS/`, `RECAP/`, `SEM-2/`, `THUB/`, and `codevita/` — newly added subject and study folders
 
 ## Subjects included

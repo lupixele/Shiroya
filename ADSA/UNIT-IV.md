@@ -27,11 +27,11 @@ Overlapping subproblems occur when a recursive algorithm solves the same subprob
 
 For Fibonacci numbers:
 
-\[
-F(n)=F(n-1)+F(n-2)
-\]
+$$
+F(n) = F(n-1) + F(n-2)
+$$
 
-A naive recursive calculation of `F(5)` computes `F(3)` more than once. DP stores each Fibonacci value and reuses it.
+A naive recursive calculation of $F(5)$ computes $F(3)$ more than once. DP stores each Fibonacci value and reuses it.
 
 ### DP approaches
 
@@ -76,7 +76,7 @@ Bellman–Ford computes single-source shortest paths in a weighted directed grap
 
 ### Initialization
 
-Set `d(S) = 0` and all other distances to infinity.
+Set $d(S) = 0$ and all other distances to $\infty$.
 
 | Vertex | S | A | B | C | D | E |
 |---|---:|---:|---:|---:|---:|---:|
@@ -84,26 +84,26 @@ Set `d(S) = 0` and all other distances to infinity.
 
 ### Relaxation rule
 
-For every edge `u → v` of weight `w`:
+For every edge $u \to v$ of weight $w$:
 
-\[
-d(v)=\min(d(v),d(u)+w)
-\]
+$$
+d(v) = \min(d(v), d(u) + w)
+$$
 
-Do not relax an edge if `d(u) = ∞`.
+Do not relax an edge if $d(u) = \infty$.
 
 ### Iteration 1
 
 Process edges in the order listed:
 
-- S → A: `0 + 6 = 6`, so A = 6.
-- S → E: `0 + 2 = 2`, so E = 2.
-- A → B: `6 + 5 = 11`, so B = 11.
-- A → E: `6 − 4 = 2`, so E remains 2.
-- B → C: `11 − 2 = 9`, so C = 9.
-- E → C: `2 + 1 = 3`, improving C to 3.
-- E → D: `2 + 4 = 6`, so D = 6.
-- D → C: `6 + 3 = 9`, so C remains 3.
+- S → A: $0 + 6 = 6$, so $A = 6$.
+- S → E: $0 + 2 = 2$, so $E = 2$.
+- A → B: $6 + 5 = 11$, so $B = 11$.
+- A → E: $6 - 4 = 2$, so E remains 2.
+- B → C: $11 - 2 = 9$, so $C = 9$.
+- E → C: $2 + 1 = 3$, improving C to 3.
+- E → D: $2 + 4 = 6$, so $D = 6$.
+- D → C: $6 + 3 = 9$, so C remains 3.
 
 | After pass | S | A | B | C | D | E |
 |---|---:|---:|---:|---:|---:|---:|
@@ -120,7 +120,7 @@ No distances improve in subsequent passes.
 | 4 | 0 | 6 | 11 | 3 | 6 | 2 |
 | 5 | 0 | 6 | 11 | 3 | 6 | 2 |
 
-There are six vertices, so the standard algorithm needs at most `V − 1 = 5` passes. The distances stabilize after the first pass for this edge order.
+There are six vertices, so the standard algorithm needs at most $V - 1 = 5$ passes. The distances stabilize after the first pass for this edge order.
 
 ### Negative-cycle check
 
@@ -153,7 +153,7 @@ BELLMAN-FORD(G, S)
 4. If any distance can be reduced, report a reachable negative cycle.
 ```
 
-**Time complexity:** `O(VE)`.
+**Time complexity:** $O(VE)$.
 
 **Conclusion:** Final distances are `S=0, A=6, B=11, C=3, D=6, E=2`; no reachable negative-weight cycle exists.
 
@@ -169,80 +169,80 @@ Floyd–Warshall is a Dynamic Programming algorithm that computes shortest dista
 
 ### Initial cost matrix
 
-\[
-D^{(0)}=
+$$
+D^{(0)} =
 \begin{bmatrix}
-0&4&\infty&10\\
-\infty&0&3&\infty\\
-\infty&\infty&0&2\\
-\infty&\infty&\infty&0
+0 & 4 & \infty & 10\\
+\infty & 0 & 3 & \infty\\
+\infty & \infty & 0 & 2\\
+\infty & \infty & \infty & 0
 \end{bmatrix}
-\]
+$$
 
 ### Recurrence
 
-\[
-D_{ij}^{(k)}=\min\left(D_{ij}^{(k-1)},D_{ik}^{(k-1)}+D_{kj}^{(k-1)}\right)
-\]
+$$
+D_{ij}^{(k)} = \min\left(D_{ij}^{(k-1)}, D_{ik}^{(k-1)} + D_{kj}^{(k-1)}\right)
+$$
 
-At iteration `k`, vertex `k` is allowed as an intermediate vertex.
+At iteration $k$, vertex $k$ is allowed as an intermediate vertex.
 
 ### Iteration 1: Allow vertex 1
 
 No distance improves because no other vertex has a path into vertex 1.
 
-\[
-D^{(1)}=
+$$
+D^{(1)} =
 \begin{bmatrix}
-0&4&\infty&10\\
-\infty&0&3&\infty\\
-\infty&\infty&0&2\\
-\infty&\infty&\infty&0
+0 & 4 & \infty & 10\\
+\infty & 0 & 3 & \infty\\
+\infty & \infty & 0 & 2\\
+\infty & \infty & \infty & 0
 \end{bmatrix}
-\]
+$$
 
 ### Iteration 2: Allow vertex 2
 
-The path from 1 to 3 through 2 costs `4 + 3 = 7`, improving infinity to 7.
+The path from 1 to 3 through 2 costs $4 + 3 = 7$, improving $\infty$ to 7.
 
-\[
-D^{(2)}=
+$$
+D^{(2)} =
 \begin{bmatrix}
-0&4&7&10\\
-\infty&0&3&\infty\\
-\infty&\infty&0&2\\
-\infty&\infty&\infty&0
+0 & 4 & 7 & 10\\
+\infty & 0 & 3 & \infty\\
+\infty & \infty & 0 & 2\\
+\infty & \infty & \infty & 0
 \end{bmatrix}
-\]
+$$
 
 ### Iteration 3: Allow vertex 3
 
-- `1 → 4`: `min(10, 7 + 2) = 9`.
-- `2 → 4`: `min(∞, 3 + 2) = 5`.
+- $1 \to 4$: $\min(10, 7 + 2) = 9$.
+- $2 \to 4$: $\min(\infty, 3 + 2) = 5$.
 
-\[
-D^{(3)}=
+$$
+D^{(3)} =
 \begin{bmatrix}
-0&4&7&9\\
-\infty&0&3&5\\
-\infty&\infty&0&2\\
-\infty&\infty&\infty&0
+0 & 4 & 7 & 9\\
+\infty & 0 & 3 & 5\\
+\infty & \infty & 0 & 2\\
+\infty & \infty & \infty & 0
 \end{bmatrix}
-\]
+$$
 
 ### Iteration 4: Allow vertex 4
 
 No distances improve because vertex 4 has no outgoing edges.
 
-\[
-D^{(4)}=
+$$
+D^{(4)} =
 \begin{bmatrix}
-0&4&7&9\\
-\infty&0&3&5\\
-\infty&\infty&0&2\\
-\infty&\infty&\infty&0
+0 & 4 & 7 & 9\\
+\infty & 0 & 3 & 5\\
+\infty & \infty & 0 & 2\\
+\infty & \infty & \infty & 0
 \end{bmatrix}
-\]
+$$
 
 ### Final shortest distances and paths
 
@@ -255,14 +255,14 @@ D^{(4)}=
 | 2 | 4 | 5 | 2 → 3 → 4 |
 | 3 | 4 | 2 | 3 → 4 |
 
-Unreachable pairs retain distance infinity.
+Unreachable pairs retain distance $\infty$.
 
 ### Complexity
 
-- Time: `O(V³)`.
-- Space: `O(V²)`.
+- Time: $O(V^3)$.
+- Space: $O(V^2)$.
 
-**Conclusion:** The final matrix gives shortest paths between every ordered pair of vertices. In particular, `D[1][4] = 9` and `D[2][4] = 5`.
+**Conclusion:** The final matrix gives shortest paths between every ordered pair of vertices. In particular, $D[1][4] = 9$ and $D[2][4] = 5$.
 
 ---
 
@@ -278,15 +278,15 @@ Ordered keys:
 
 Successful-search weights:
 
-\[
-p_1,p_2,p_3,p_4=\{3,3,1,1\}
-\]
+$$
+p_1, p_2, p_3, p_4 = \{3, 3, 1, 1\}
+$$
 
 Unsuccessful-search weights:
 
-\[
-q_0,q_1,q_2,q_3,q_4=\{2,3,1,1,1\}
-\]
+$$
+q_0, q_1, q_2, q_3, q_4 = \{2, 3, 1, 1, 1\}
+$$
 
 These are treated as relative weights, not normalized probabilities.
 
@@ -296,27 +296,27 @@ An Optimal Binary Search Tree is a BST arranged to minimize weighted search cost
 
 ### DP variables and recurrence
 
-- `e[i,j]`: minimum weighted cost for keys `i` through `j`.
-- `w[i,j]`: total successful and unsuccessful search weight for the interval.
-- `root[i,j]`: root index that gives the minimum cost.
+- $e[i,j]$: minimum weighted cost for keys $i$ through $j$.
+- $w[i,j]$: total successful and unsuccessful search weight for the interval.
+- $\text{root}[i,j]$: root index that gives the minimum cost.
 
 Base cases:
 
-\[
-e[i,i-1]=q_{i-1},\quad w[i,i-1]=q_{i-1}
-\]
+$$
+e[i,i-1] = q_{i-1}, \quad w[i,i-1] = q_{i-1}
+$$
 
 Weight recurrence:
 
-\[
-w[i,j]=w[i,j-1]+p_j+q_j
-\]
+$$
+w[i,j] = w[i,j-1] + p_j + q_j
+$$
 
 Cost recurrence:
 
-\[
-e[i,j]=\min_{r=i}^{j}\left(e[i,r-1]+e[r+1,j]+w[i,j]\right)
-\]
+$$
+e[i,j] = \min_{r=i}^{j}\left(e[i,r-1] + e[r+1,j] + w[i,j]\right)
+$$
 
 ### Cost and root table
 
@@ -333,7 +333,7 @@ e[i,j]=\min_{r=i}^{j}\left(e[i,r-1]+e[r+1,j]+w[i,j]\right)
 | `if, int, while` | 25 | if |
 | `do, if, int, while` | **40** | **if** |
 
-The single-key costs include the costs of unsuccessful searches on the dummy leaves. For example, `e[1,1] = q0 + q1 + (q0 + p1 + q1) = 13`.
+The single-key costs include the costs of unsuccessful searches on the dummy leaves. For example, $e[1,1] = q_0 + q_1 + (q_0 + p_1 + q_1) = 13$.
 
 ### Construct the tree
 
@@ -351,27 +351,27 @@ The root for all four keys is `if`.
                 while
 ```
 
-The complete OBST also has unsuccessful-search dummy leaves `d0` through `d4`.
+The complete OBST also has unsuccessful-search dummy leaves $d_0$ through $d_4$.
 
 ### Minimum expected search cost
 
 The total weight is:
 
-\[
-\sum p_i+\sum q_i=8+8=16
-\]
+$$
+\sum p_i + \sum q_i = 8 + 8 = 16
+$$
 
 The minimum weighted cost is:
 
-\[
-e[1,4]=40
-\]
+$$
+e[1,4] = 40
+$$
 
 Normalizing the weights gives:
 
-\[
-\text{Expected cost}=\frac{40}{16}=\boxed{2.5}
-\]
+$$
+\text{Expected cost} = \frac{40}{16} = \boxed{2.5}
+$$
 
 **Conclusion:** The optimal root is `if`; the minimum weighted cost is 40, equivalent to 2.5 comparisons per search after normalization.
 
@@ -391,25 +391,25 @@ Normalizing the weights gives:
 | I4 | 5 | 30 |
 | I5 | 6 | 35 |
 
-Capacity `W = 10`.
+Capacity $W = 10$.
 
 ### DP state and recurrence
 
-Let `DP[i][w]` be the maximum profit using the first `i` items with capacity `w`.
+Let $DP[i][w]$ be the maximum profit using the first $i$ items with capacity $w$.
 
-If item `i` is too heavy:
+If item $i$ is too heavy:
 
-\[
-DP[i,w]=DP[i-1,w]
-\]
+$$
+DP[i,w] = DP[i-1,w]
+$$
 
 Otherwise:
 
-\[
-DP[i,w]=\max(DP[i-1,w],p_i+DP[i-1,w-w_i])
-\]
+$$
+DP[i,w] = \max(DP[i-1,w], p_i + DP[i-1,w-w_i])
+$$
 
-Base cases: `DP[0][w] = 0` and `DP[i][0] = 0`.
+Base cases: $DP[0][w] = 0$ and $DP[i][0] = 0$.
 
 ### DP table
 
@@ -424,9 +424,9 @@ Base cases: `DP[0][w] = 0` and `DP[i][0] = 0`.
 
 Therefore:
 
-\[
-DP[5,10]=\boxed{62}
-\]
+$$
+DP[5,10] = \boxed{62}
+$$
 
 ### Recover the selected items
 
@@ -436,13 +436,13 @@ The maximum value 62 is obtained by selecting:
 - I2: weight 3, profit 20.
 - I1: weight 2, profit 12.
 
-Total weight: `5 + 3 + 2 = 10`.
+Total weight: $5 + 3 + 2 = 10$.
 
 Total profit:
 
-\[
-30+20+12=\boxed{62}
-\]
+$$
+30 + 20 + 12 = \boxed{62}
+$$
 
 ### Why a ratio-based Greedy approach may fail
 
@@ -456,7 +456,7 @@ Total profit:
 
 A ratio-based choice of I2, I3, then I1 uses weight 9 and earns profit 57, which is less than 62. In 0/1 Knapsack, items cannot be split, so locally best ratios do not guarantee a globally optimal combination.
 
-**Complexity:** Time `O(nW)`; space `O(nW)` for the full table.
+**Complexity:** Time $O(nW)$; space $O(nW)$ for the full table.
 
 **Conclusion:** The optimal selection is I1, I2, and I4, with total weight 10 and profit **62**.
 
@@ -470,15 +470,15 @@ A ratio-based choice of I2, I3, then I1 uses weight 9 and earns profit 57, which
 
 Cities: A, B, C, D. Start and finish at A.
 
-\[
-C=
+$$
+C =
 \begin{bmatrix}
-0&10&15&20\\
-10&0&35&25\\
-15&35&0&30\\
-20&25&30&0
+0 & 10 & 15 & 20\\
+10 & 0 & 35 & 25\\
+15 & 35 & 0 & 30\\
+20 & 25 & 30 & 0
 \end{bmatrix}
-\]
+$$
 
 ### Definition
 
@@ -486,63 +486,63 @@ The Travelling Salesperson Problem seeks the minimum-cost tour that starts at a 
 
 ### DP state
 
-`DP[S][j]` is the minimum cost of a path starting at A, visiting the subset `S` of other cities, and ending at city `j`.
+$DP[S][j]$ is the minimum cost of a path starting at A, visiting the subset $S$ of other cities, and ending at city $j$.
 
 Base case:
 
-\[
-DP[\{j\}][j]=C[A][j]
-\]
+$$
+DP[\{j\}][j] = C[A][j]
+$$
 
 Recurrence:
 
-\[
-DP[S][j]=\min_{i\in S,\ i\ne j}
-\left(DP[S-\{j\}][i]+C[i][j]\right)
-\]
+$$
+DP[S][j] = \min_{i \in S,\ i \ne j}
+\left(DP[S - \{j\}][i] + C[i][j]\right)
+$$
 
 After visiting every city, return to A:
 
-\[
-\min_j\left(DP[\{B,C,D\}][j]+C[j][A]\right)
-\]
+$$
+\min_j\left(DP[\{B,C,D\}][j] + C[j][A]\right)
+$$
 
 ### Single-city states
 
-- `DP[{B}][B] = 10`
-- `DP[{C}][C] = 15`
-- `DP[{D}][D] = 20`
+- $DP[\{B\}][B] = 10$
+- $DP[\{C\}][C] = 15$
+- $DP[\{D\}][D] = 20$
 
 ### Two-city states
 
 | Visited subset | Ending city | Cost |
 |---|---|---:|
-| B, C | B | `15 + 35 = 50` |
-| B, C | C | `10 + 35 = 45` |
-| B, D | B | `20 + 25 = 45` |
-| B, D | D | `10 + 25 = 35` |
-| C, D | C | `20 + 30 = 50` |
-| C, D | D | `15 + 30 = 45` |
+| B, C | B | $15 + 35 = 50$ |
+| B, C | C | $10 + 35 = 45$ |
+| B, D | B | $20 + 25 = 45$ |
+| B, D | D | $10 + 25 = 35$ |
+| C, D | C | $20 + 30 = 50$ |
+| C, D | D | $15 + 30 = 45$ |
 
 ### Three-city states
 
 Ending at B:
 
-\[
-DP[\{B,C,D\}][B]=\min(50+35,45+25)=70
-\]
+$$
+DP[\{B,C,D\}][B] = \min(50 + 35, 45 + 25) = 70
+$$
 
 Ending at C:
 
-\[
-DP[\{B,C,D\}][C]=\min(45+35,35+30)=65
-\]
+$$
+DP[\{B,C,D\}][C] = \min(45 + 35, 35 + 30) = 65
+$$
 
 Ending at D:
 
-\[
-DP[\{B,C,D\}][D]=\min(45+25,45+30)=70
-\]
+$$
+DP[\{B,C,D\}][D] = \min(45 + 25, 45 + 30) = 70
+$$
 
 ### Return to A
 
@@ -554,9 +554,9 @@ DP[\{B,C,D\}][D]=\min(45+25,45+30)=70
 
 The minimum tour cost is:
 
-\[
+$$
 \boxed{80}
-\]
+$$
 
 One optimal tour is:
 
@@ -564,16 +564,16 @@ One optimal tour is:
 
 Cost:
 
-\[
-10+25+30+15=\boxed{80}
-\]
+$$
+10 + 25 + 30 + 15 = \boxed{80}
+$$
 
 The reverse tour `A → C → D → B → A` also costs 80.
 
 ### Complexity
 
-- Time: `O(n² 2ⁿ)`.
-- Space: `O(n 2ⁿ)`.
+- Time: $O(n^2 2^n)$.
+- Space: $O(n 2^n)$.
 
 **Conclusion:** The Held–Karp algorithm gives a minimum tour cost of **80**.
 

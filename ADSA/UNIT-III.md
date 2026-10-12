@@ -1,4 +1,4 @@
-## UNIT III
+# UNIT III
 
 ## 1. Divide and Conquer and Binary Search
 
@@ -26,9 +26,11 @@ For a sorted array, compare the key with the middle element. If the key is small
 
 **General recurrence:** A divide-and-conquer algorithm is often described by
 
-\[T(n)=aT(n/b)+f(n)]
+$$
+T(n) = aT(n/b) + f(n)
+$$
 
-where `a` is the number of subproblems, `n/b` is the approximate size of each subproblem, and `f(n)` is the work required to divide and combine.
+where $a$ is the number of subproblems, $n/b$ is the approximate size of each subproblem, and $f(n)$ is the work required to divide and combine.
 
 **Advantages**
 - Breaks a large problem into manageable parts.
@@ -72,9 +74,9 @@ The key `60` is found at position **12**.
 **Number of comparisons:** Two key-to-middle-element comparisons are made: `60` vs `40`, then `60` vs `60`. Therefore, the search takes **2 element comparisons** in this example. If loop-bound checks are counted, that is a different counting convention.
 
 **Complexity**
-- Best case: `O(1)` when the middle element is the key.
-- Average and worst case: `O(log n)`.
-- Iterative auxiliary space: `O(1)`.
+- Best case: $O(1)$ when the middle element is the key.
+- Average and worst case: $O(\log n)$.
+- Iterative auxiliary space: $O(1)$.
 
 **Conclusion:** Binary Search works on sorted arrays and halves the remaining search interval after each unsuccessful comparison.
 
@@ -133,17 +135,17 @@ MERGE-SORT(A)
 
 Each call sorts two halves and merging requires linear time:
 
-\[
-T(n)=2T(n/2)+cn
-\]
+$$
+T(n) = 2T(n/2) + cn
+$$
 
-At each level, the total merge work is `cn`. There are approximately `log₂ n` levels, so:
+At each level, the total merge work is $cn$. There are approximately $\log_2 n$ levels, so:
 
-\[
-T(n)=cn\log_2 n+O(n)=O(n\log n)
-\]
+$$
+T(n) = cn\log_2 n + O(n) = O(n\log n)
+$$
 
-Best, average, and worst-case time complexity are all **`O(n log n)`**. Auxiliary space is **`O(n)`** for the standard array-based implementation.
+Best, average, and worst-case time complexity are all **$O(n \log n)$**. Auxiliary space is **$O(n)$** for the standard array-based implementation.
 
 **Final sorted sequence:**
 
@@ -211,23 +213,23 @@ QUICKSORT(A, low, high)
 
 **Best case:** Each pivot divides the array into approximately equal halves.
 
-\[
-T(n)=2T(n/2)+cn=O(n\log n)
-\]
+$$
+T(n) = 2T(n/2) + cn = O(n\log n)
+$$
 
-**Worst case:** Each pivot creates one subarray of size `n − 1` and one empty subarray.
+**Worst case:** Each pivot creates one subarray of size $n - 1$ and one empty subarray.
 
-\[
-T(n)=T(n-1)+cn=O(n^2)
-\]
+$$
+T(n) = T(n-1) + cn = O(n^2)
+$$
 
 | Case | Time complexity |
 |---|---|
-| Best | `O(n log n)` |
-| Average | `O(n log n)` |
-| Worst | `O(n²)` |
+| Best | $O(n \log n)$ |
+| Average | $O(n \log n)$ |
+| Worst | $O(n^2)$ |
 
-Quick Sort usually uses `O(log n)` auxiliary stack space on balanced partitions; its worst-case recursion stack can be `O(n)`.
+Quick Sort usually uses $O(\log n)$ auxiliary stack space on balanced partitions; its worst-case recursion stack can be $O(n)$.
 
 **Conclusion:** Quick Sort sorts the input into ascending order. Its performance depends on the balance of the partitions.
 
@@ -283,9 +285,9 @@ Job Sequencing with Deadlines is a Greedy optimization problem. Each job require
 | 3 | J7 | 40 |
 | **Total** | | **175** |
 
-\[
-\text{Maximum profit}=35+100+40=\boxed{175}
-\]
+$$
+\text{Maximum profit} = 35 + 100 + 40 = \boxed{175}
+$$
 
 Choosing the latest free slot preserves earlier slots for jobs with tighter deadlines. For the standard unit-time job sequencing problem, this Greedy strategy yields an optimal schedule.
 
@@ -307,13 +309,13 @@ Choosing the latest free slot preserves earlier slots for jobs with tighter dead
 | I4 | 15 | 75 |
 | I5 | 25 | 125 |
 
-Capacity: `W = 50`.
+Capacity: $W = 50$.
 
 ### Step 1: Calculate ratios
 
-\[
-r_i=\frac{\text{profit}_i}{\text{weight}_i}
-\]
+$$
+r_i = \frac{\text{profit}_i}{\text{weight}_i}
+$$
 
 | Item | Weight | Profit | Profit/weight |
 |---|---:|---:|---:|
@@ -330,13 +332,13 @@ Select I1 first. I2, I4, and I5 have equal ratios, so any order among them is va
 1. Take all of I1: weight 10, profit 60; remaining capacity 40.
 2. Take all of I2: weight 20, profit 100; remaining capacity 20.
 3. Take all of I4: weight 15, profit 75; remaining capacity 5.
-4. Take 5 units of I5, which is `5/25 = 1/5` of the item.
+4. Take 5 units of I5, which is $5/25 = 1/5$ of the item.
 
 Fractional profit from I5:
 
-\[
-125\times\frac{5}{25}=25
-\]
+$$
+125 \times \frac{5}{25} = 25
+$$
 
 ### Final selection
 
@@ -349,9 +351,9 @@ Fractional profit from I5:
 | I3 | 0% | 0 | 0 |
 | **Total** | | **50** | **260** |
 
-\[
-\boxed{\text{Maximum profit}=60+100+75+25=260}
-\]
+$$
+\boxed{\text{Maximum profit} = 60 + 100 + 75 + 25 = 260}
+$$
 
 ### Why Greedy is applicable
 
@@ -360,7 +362,7 @@ Fractional profit from I5:
 - Fractional selection lets the algorithm fill the remaining capacity exactly.
 - For the fractional knapsack problem, sorting by profit-to-weight ratio produces an optimal solution.
 
-**Complexity:** Sorting takes `O(n log n)`; selecting items afterward takes `O(n)`.
+**Complexity:** Sorting takes $O(n \log n)$; selecting items afterward takes $O(n)$.
 
 **Conclusion:** The capacity is fully used and the maximum profit is **260**.
 
@@ -390,7 +392,7 @@ Vertices: `A, B, C, D, E, F`
 | B–E | 10 |
 | B–D | 11 |
 
-A spanning tree with six vertices must contain `V − 1 = 5` edges.
+A spanning tree with six vertices must contain $V - 1 = 5$ edges.
 
 ### A. Kruskal’s algorithm
 
@@ -409,9 +411,9 @@ Five edges have now been selected, so the MST is complete. The remaining edges n
 
 Selected edges: `FD, DE, BC, AB, CD`.
 
-\[
-\text{MST cost}=1+2+3+4+6=\boxed{16}
-\]
+$$
+\text{MST cost} = 1 + 2 + 3 + 4 + 6 = \boxed{16}
+$$
 
 ### B. Prim’s algorithm
 
@@ -425,9 +427,9 @@ Selected edges: `FD, DE, BC, AB, CD`.
 | 4 | D–F | 1 | A, B, C, D, F |
 | 5 | D–E | 2 | A, B, C, D, E, F |
 
-\[
-\text{MST cost}=4+3+6+1+2=\boxed{16}
-\]
+$$
+\text{MST cost} = 4 + 3 + 6 + 1 + 2 = \boxed{16}
+$$
 
 ### Comparison
 
@@ -467,7 +469,7 @@ Source: A. All weights are non-negative.
 
 Dijkstra’s algorithm is a Greedy single-source shortest-path algorithm for graphs with non-negative edge weights.
 
-Initialize `d(A) = 0` and all other distances to infinity.
+Initialize $d(A) = 0$ and all other distances to $\infty$.
 
 | Stage | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -475,7 +477,7 @@ Initialize `d(A) = 0` and all other distances to infinity.
 
 ### Iteration 1: Visit A
 
-Update B = `0 + 4 = 4` and F = `0 + 7 = 7`.
+Update $B = 0 + 4 = 4$ and $F = 0 + 7 = 7$.
 
 | After visiting | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -483,7 +485,7 @@ Update B = `0 + 4 = 4` and F = `0 + 7 = 7`.
 
 ### Iteration 2: Visit B
 
-Update C = `4 + 3 = 7`; E = `4 + 10 = 14`. The route to F through B costs 12, so the existing distance 7 remains.
+Update $C = 4 + 3 = 7$; $E = 4 + 10 = 14$. The route to F through B costs 12, so the existing distance 7 remains.
 
 | After visiting | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -493,7 +495,7 @@ C and F tie at distance 7; either can be processed first.
 
 ### Iteration 3: Visit C
 
-Update D = `7 + 6 = 13`.
+Update $D = 7 + 6 = 13$.
 
 | After visiting | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -501,7 +503,7 @@ Update D = `7 + 6 = 13`.
 
 ### Iteration 4: Visit F
 
-Improve D to `7 + 3 = 10` and E to `7 + 5 = 12`.
+Improve D to $7 + 3 = 10$ and E to $7 + 5 = 12$.
 
 | After visiting | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -509,7 +511,7 @@ Improve D to `7 + 3 = 10` and E to `7 + 5 = 12`.
 
 ### Iteration 5: Visit D
 
-The route to E through D costs `10 + 2 = 12`, equal to its current distance, so no improvement occurs.
+The route to E through D costs $10 + 2 = 12$, equal to its current distance, so no improvement occurs.
 
 | After visiting | A | B | C | D | E | F |
 |---|---:|---:|---:|---:|---:|---:|
@@ -530,7 +532,7 @@ No distance improves.
 | E | 12 | A → F → E |
 | F | 7 | A → F |
 
-E also has an equal-cost path `A → F → D → E`, with cost `7 + 3 + 2 = 12`.
+E also has an equal-cost path `A → F → D → E`, with cost $7 + 3 + 2 = 12$.
 
 ### Algorithm
 
@@ -554,8 +556,8 @@ Dijkstra’s algorithm finalizes the closest unvisited vertex on the assumption 
 
 ### Complexity
 
-- Adjacency matrix with linear minimum search: `O(V²)`.
-- Adjacency list with a binary min-heap: `O((V + E) log V)`.
+- Adjacency matrix with linear minimum search: $O(V^2)$.
+- Adjacency list with a binary min-heap: $O((V + E) \log V)$.
 
 **Conclusion:** The final distances from A are `0, 4, 7, 10, 12, 7` for A, B, C, D, E, F.
 

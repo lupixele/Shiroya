@@ -222,3 +222,61 @@
    Construct the state-space tree, calculate lower bounds for promising partial tours, eliminate non-promising branches, and determine the optimal tour and its total cost.
 
 8. Compare and contrast the Backtracking and Branch and Bound methods. — **[→ Answer: `UNIT-V.md` §8](UNIT-V.md#8-compare-and-contrast-backtracking-and-branch-and-bound)**
+
+---
+
+## Important Questions for Revision
+
+### A. Most Expected (from your question paper, practise these first)
+
+- **Unit I**
+  1. Describe the asymptotic notations $O$, $\Omega$ and $\Theta$ with examples.
+  2. Explain collision resolution techniques (linear probing, quadratic probing, double hashing, separate chaining).
+  3. Differentiate static and dynamic hashing; explain extendable hashing with an example.
+- **Unit II**
+  1. Construct an AVL tree for the given keys, showing all rotations.
+  2. Show deletion of a node in an AVL tree with balancing.
+  3. Construct a B-tree of order 4 for the given keys.
+  4. Build a max-heap/min-heap by insertion and perform delete-max.
+- **Unit III**
+  1. Merge sort on the given data with the recurrence and time complexity.
+  2. Quick sort trace with best-case and worst-case complexity.
+  3. Job sequencing with deadlines and fractional knapsack.
+  4. Kruskal's and Prim's MST; Dijkstra's shortest path.
+- **Unit IV**
+  1. Optimal Binary Search Tree (cost table, root table, final tree).
+  2. 0/1 Knapsack using DP table and traceback.
+  3. Floyd–Warshall matrices and complexity; Bellman–Ford iterations.
+  4. TSP using Held–Karp.
+- **Unit V**
+  1. 4-Queens state-space tree; sum of subsets; Hamiltonian cycle; graph colouring.
+  2. 0/1 Knapsack and TSP using Branch and Bound.
+  3. Backtracking vs Branch and Bound.
+
+### B. Extra Practice Questions (may also be asked)
+
+1. State the Master theorem and solve $T(n) = 4T(n/2) + n^2$.
+2. What is a Red-Black tree? List its properties and compare it with an AVL tree.
+3. Write the heap sort algorithm and trace it on a sample array.
+4. Explain Huffman coding with an example (greedy method).
+5. Explain topological sorting and its applications.
+6. Find the Longest Common Subsequence (LCS) of two strings using DP.
+7. Explain Matrix Chain Multiplication using DP with an example.
+8. Explain Strassen's matrix multiplication algorithm and its complexity.
+9. Differentiate between P, NP, NP-hard and NP-complete problems.
+10. What is a $\text{B}^+$ tree? How does it differ from a B-tree?
+11. Explain linear hashing and rehashing; what is the load factor?
+12. Write the algorithm for the N-Queens problem and calculate its complexity.
+13. Solve the Assignment problem or 15-puzzle using Branch and Bound.
+14. Compare Kruskal's and Prim's algorithms.
+
+---
+
+## Quick Revision Tips
+
+1. **Unit I:** Learn the three asymptotic definitions with constants, the hash functions and the 4 collision techniques.
+2. **Unit II:** Practise AVL rotations (LL, RR, LR, RL), B-tree split/merge and heap sift-up/sift-down.
+3. **Unit III:** Remember the recurrences $T(n) = 2T(n/2) + n$ (merge sort), the greedy sorting rule for each problem and the MST/Dijkstra tables.
+4. **Unit IV:** Memorise the DP recurrences (Floyd, OBST, 0/1 knapsack, Held–Karp) and write tables neatly.
+5. **Unit V:** State-space trees with bounding conditions; know the difference between Backtracking and Branch and Bound.
+

@@ -1,180 +1,107 @@
-# UNIT IV
+# UNIT IV — Dynamic Programming
+
+> **Source:** *Advanced Data Structures & Algorithm Analysis (2501CS10) — Unit-wise Important Questions — Answers | Aditya University*
+
+---
 
 ## 1. Dynamic Programming: methodology, optimal substructure, overlapping subproblems, and comparison with Divide and Conquer
 
-### Definition
+**Q1. Explain the general methodology of Dynamic Programming. Discuss optimal substructure and overlapping subproblems. Differentiate DP from Divide and Conquer.**
 
-Dynamic Programming (DP) solves a problem by breaking it into subproblems, storing their solutions, and reusing them to avoid repeated work. It is commonly used for optimization problems.
+Dynamic Programming (DP) solves a complex problem by breaking it into overlapping sub-problems, solving each sub-problem only once, and storing its result (in a table) for reuse. It is mainly used for optimisation problems.
 
-### General methodology
+### Steps of DP
 
-1. Define the subproblems and state.
-2. Identify the relationship between a problem and its smaller subproblems.
-3. Write a recurrence relation.
-4. Define base cases.
-5. Store subproblem answers using memoization or tabulation.
-6. Recover the final answer from the stored values.
+1. Characterise the structure of an optimal solution.
+2. Define the value of an optimal solution recursively (recurrence).
+3. Compute values bottom-up (tabulation) or top-down with memoisation.
+4. Construct the optimal solution from the table.
 
-### Optimal substructure
+### Principles
 
-A problem has optimal substructure if an optimal solution can be built from optimal solutions to its subproblems.
+1. **Optimal substructure:** an optimal solution to the problem contains optimal solutions to its sub-problems.
+   - *Example:* in shortest paths, if the shortest path from A to C goes through B, then its `A→B` and `B→C` parts are themselves shortest paths (Floyd–Warshall, Bellman–Ford).
+2. **Overlapping subproblems:** the same sub-problems are solved again and again in a naive recursion.
+   - *Example:* Fibonacci: $F(5) = F(4) + F(3)$, and $F(4) = F(3) + F(2)$. $F(3)$ is computed twice. DP stores $F(i)$ in a table and reduces $O(2^n)$ to $O(n)$.
 
-**Example:** If a shortest path from A to C passes through B, the subpath from A to B must also be shortest; otherwise, replacing it with a shorter subpath would improve the full route.
+### Dynamic Programming vs. Divide and Conquer
 
-### Overlapping subproblems
-
-Overlapping subproblems occur when a recursive algorithm solves the same subproblem repeatedly.
-
-For Fibonacci numbers:
-
-$$
-F(n) = F(n-1) + F(n-2)
-$$
-
-A naive recursive calculation of $F(5)$ computes $F(3)$ more than once. DP stores each Fibonacci value and reuses it.
-
-### DP approaches
-
-- **Memoization (top-down):** Recursion plus a cache of computed results.
-- **Tabulation (bottom-up):** Iteratively fills a table from the base cases upward.
-
-### Dynamic Programming vs Divide and Conquer
-
-| Dynamic Programming | Divide and Conquer |
-|---|---|
-| Often used when subproblems overlap. | Often used when subproblems are independent. |
-| Stores results for reuse. | Usually computes and combines independent subproblems. |
-| Prevents repeated subproblem calculations. | May repeat work if overlapping subproblems are not cached. |
-| Examples: Knapsack, Floyd–Warshall, OBST. | Examples: Merge Sort, Binary Search. |
-
-**Conclusion:** DP is effective when a problem has optimal substructure and overlapping subproblems.
+| Basis | Dynamic Programming | Divide and Conquer |
+|---|---|---|
+| **Sub-problems** | Overlapping (same sub-problem appears repeatedly) | Independent (no overlap) |
+| **Strategy** | Solves each sub-problem once and stores the answer | Solves each sub-problem recursively, again every time |
+| **Approach** | Bottom-up (or memoised top-down) | Top-down |
+| **Storage** | Needs a table (extra memory) | No table; uses only recursion stack |
+| **Efficiency** | Polynomial time by avoiding recomputation | Efficient only when sub-problems don't overlap; otherwise exponential |
+| **Used for** | Optimisation (knapsack, OBST, TSP, shortest paths) | Sorting, searching, matrix multiplication |
+| **Examples** | Floyd–Warshall, 0/1 knapsack, LCS | Merge sort, quick sort, binary search |
 
 ---
 
 ## 2. Bellman–Ford algorithm from source S
 
-**Question:** Find shortest paths from S, show distances after iterations, and check for negative-weight cycles. (8 marks)
+**Q2. Apply the Bellman–Ford algorithm to find shortest paths from source S in the given directed weighted graph. Show the distance values after each iteration and check for a negative cycle.**
 
 ![Bellman-Ford Directed Weighted Graph](figures/unit4_q2_bellman_ford.png)
 
-### Edge list used
+> *Note:* the figure refers to an edge list that was not included in the file, so the edge directions below are assumed (left to right as drawn).
 
-| Directed edge | Weight |
-|---|---:|
-| S → A | 6 |
-| S → E | 2 |
-| A → B | 5 |
-| A → E | -4 |
-| B → C | -2 |
-| E → C | 1 |
-| E → D | 4 |
-| D → C | 3 |
+**Edges (assumed directions):** `S→A 6, S→E 2, A→B 5, A→E −4, B→C −2, E→C 1, E→D 4, C→D 3`. Vertices: `S, A, B, C, D, E` ($|V| = 6$, so $|V| - 1 = 5$ passes are allowed).
 
-### Definition
+**Relaxation rule:**
 
-Bellman–Ford computes single-source shortest paths in a weighted directed graph and supports negative edge weights. It can detect a negative-weight cycle reachable from the source.
+$$
+\text{if } d[u] + w(u, v) < d[v] \text{ then } d[v] = d[u] + w(u, v).
+$$
 
-### Initialization
+### Iteration 1 (edges processed in the order listed)
 
-Set $d(S) = 0$ and all other distances to $\infty$.
+- `S→A`: $d[A] = 6$. `S→E`: $d[E] = 2$.
+- `A→B`: $d[B] = 6 + 5 = 11$. `A→E`: $6 - 4 = 2$, no change.
+- `B→C`: $d[C] = 11 - 2 = 9$. `E→C`: $2 + 1 = 3$, so $d[C] = 3$.
+- `E→D`: $d[D] = 2 + 4 = 6$. `C→D`: $3 + 3 = 6$, no change.
 
-| Vertex | S | A | B | C | D | E |
+| Iteration | S | A | B | C | D | E |
 |---|---:|---:|---:|---:|---:|---:|
 | Initial | 0 | ∞ | ∞ | ∞ | ∞ | ∞ |
-
-### Relaxation rule
-
-For every edge $u \to v$ of weight $w$:
-
-$$
-d(v) = \min(d(v), d(u) + w)
-$$
-
-Do not relax an edge if $d(u) = \infty$.
-
-### Iteration 1
-
-Process edges in the order listed:
-
-- S → A: $0 + 6 = 6$, so $A = 6$.
-- S → E: $0 + 2 = 2$, so $E = 2$.
-- A → B: $6 + 5 = 11$, so $B = 11$.
-- A → E: $6 - 4 = 2$, so E remains 2.
-- B → C: $11 - 2 = 9$, so $C = 9$.
-- E → C: $2 + 1 = 3$, improving C to 3.
-- E → D: $2 + 4 = 6$, so $D = 6$.
-- D → C: $6 + 3 = 9$, so C remains 3.
-
-| After pass | S | A | B | C | D | E |
-|---|---:|---:|---:|---:|---:|---:|
 | 1 | 0 | 6 | 11 | 3 | 6 | 2 |
-
-### Iterations 2–5
-
-No distances improve in subsequent passes.
-
-| Pass | S | A | B | C | D | E |
-|---:|---:|---:|---:|---:|---:|---:|
 | 2 | 0 | 6 | 11 | 3 | 6 | 2 |
-| 3 | 0 | 6 | 11 | 3 | 6 | 2 |
-| 4 | 0 | 6 | 11 | 3 | 6 | 2 |
-| 5 | 0 | 6 | 11 | 3 | 6 | 2 |
+| 3 to 5 | 0 | 6 | 11 | 3 | 6 | 2 |
 
-There are six vertices, so the standard algorithm needs at most $V - 1 = 5$ passes. The distances stabilize after the first pass for this edge order.
+No value changes in iteration 2, so the algorithm can stop early.
 
-### Negative-cycle check
+### Negative cycle check ($|V|$-th pass)
 
-Perform one additional pass over every edge. If any distance can still be reduced, a reachable negative-weight cycle exists. No distance changes here.
+Try to relax every edge once more. No distance decreases, therefore the graph contains **no negative-weight cycle** (all edges go "forward" in the order `S, A, B, E, C, D`, so no cycle exists at all).
 
-Therefore, **no negative-weight cycle reachable from S exists**.
+### Shortest distances from S
 
-### Final distances and paths
+`A = 6, B = 11, C = 3, D = 6, E = 2`.
 
-| Destination | Distance | Shortest path |
+| Vertex | Distance | Path |
 |---|---:|---|
-| S | 0 | S |
-| A | 6 | S → A |
-| B | 11 | S → A → B |
-| C | 3 | S → E → C |
-| D | 6 | S → E → D |
-| E | 2 | S → E |
+| A | 6 | `S → A` |
+| E | 2 | `S → E` (or `S → A → E`, also 2) |
+| C | 3 | `S → E → C` |
+| D | 6 | `S → E → D` (or `S → E → C → D`) |
+| B | 11 | `S → A → B` |
 
-### Pseudocode
-
-```text
-BELLMAN-FORD(G, S)
-1. Set distance[S] = 0; all other distances = infinity.
-2. Repeat V - 1 times:
-       For every edge (u, v, w):
-           If distance[u] is finite and
-              distance[u] + w < distance[v]:
-                  distance[v] = distance[u] + w
-3. Scan all edges once more.
-4. If any distance can be reduced, report a reachable negative cycle.
-```
-
-**Time complexity:** $O(VE)$.
-
-**Conclusion:** Final distances are `S=0, A=6, B=11, C=3, D=6, E=2`; no reachable negative-weight cycle exists.
+**Complexity:** $O(V \cdot E)$. Unlike Dijkstra, it handles negative weights and detects negative cycles (if any edge can still be relaxed after $V - 1$ passes).
 
 ---
 
 ## 3. Floyd–Warshall algorithm for all-pairs shortest paths
 
-**Question:** Show intermediate matrices, final shortest-distance matrix, paths, and time complexity. (8 marks)
+**Q3. Compute the all-pairs shortest path distances using Floyd–Warshall for the given initial cost matrix.**
 
-### Definition
-
-Floyd–Warshall is a Dynamic Programming algorithm that computes shortest distances between every pair of vertices in a weighted graph.
-
-### Initial cost matrix
+### Initial matrix $D^{(0)}$ (vertices 1, 2, 3, 4)
 
 $$
 D^{(0)} =
 \begin{bmatrix}
-0 & 4 & \infty & 10\\
-\infty & 0 & 3 & \infty\\
-\infty & \infty & 0 & 2\\
+0 & 4 & \infty & 10 \\
+\infty & 0 & 3 & \infty \\
+\infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
 $$
@@ -182,166 +109,99 @@ $$
 ### Recurrence
 
 $$
-D_{ij}^{(k)} = \min\left(D_{ij}^{(k-1)}, D_{ik}^{(k-1)} + D_{kj}^{(k-1)}\right)
+D^{(k)}[i][j] = \min\left( D^{(k-1)}[i][j],\ D^{(k-1)}[i][k] + D^{(k-1)}[k][j] \right)
 $$
 
-At iteration $k$, vertex $k$ is allowed as an intermediate vertex.
-
-### Iteration 1: Allow vertex 1
-
-No distance improves because no other vertex has a path into vertex 1.
-
-$$
-D^{(1)} =
-\begin{bmatrix}
-0 & 4 & \infty & 10\\
-\infty & 0 & 3 & \infty\\
-\infty & \infty & 0 & 2\\
-\infty & \infty & \infty & 0
-\end{bmatrix}
-$$
-
-### Iteration 2: Allow vertex 2
-
-The path from 1 to 3 through 2 costs $4 + 3 = 7$, improving $\infty$ to 7.
+- **$k = 1$ (via vertex 1):** no vertex has an edge into vertex 1 (column 1 is all $\infty$), so $D^{(1)} = D^{(0)}$.
+- **$k = 2$ (via vertex 2):** $D[1][3] = \min(\infty, D[1][2] + D[2][3]) = 4 + 3 = 7$.
 
 $$
 D^{(2)} =
 \begin{bmatrix}
-0 & 4 & 7 & 10\\
-\infty & 0 & 3 & \infty\\
-\infty & \infty & 0 & 2\\
+0 & 4 & 7 & 10 \\
+\infty & 0 & 3 & \infty \\
+\infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
 $$
 
-### Iteration 3: Allow vertex 3
-
-- $1 \to 4$: $\min(10, 7 + 2) = 9$.
-- $2 \to 4$: $\min(\infty, 3 + 2) = 5$.
+- **$k = 3$ (via vertex 3):** $D[1][4] = \min(10, D[1][3] + D[3][4]) = \min(10, 7 + 2) = 9$; $D[2][4] = \min(\infty, 3 + 2) = 5$.
 
 $$
 D^{(3)} =
 \begin{bmatrix}
-0 & 4 & 7 & 9\\
-\infty & 0 & 3 & 5\\
-\infty & \infty & 0 & 2\\
+0 & 4 & 7 & 9 \\
+\infty & 0 & 3 & 5 \\
+\infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
 $$
 
-### Iteration 4: Allow vertex 4
+- **$k = 4$ (via vertex 4):** vertex 4 has no outgoing edges, so there is no change. $D^{(4)} = D^{(3)}$.
 
-No distances improve because vertex 4 has no outgoing edges.
+### Final shortest path matrix
 
 $$
 D^{(4)} =
 \begin{bmatrix}
-0 & 4 & 7 & 9\\
-\infty & 0 & 3 & 5\\
-\infty & \infty & 0 & 2\\
+0 & 4 & 7 & 9 \\
+\infty & 0 & 3 & 5 \\
+\infty & \infty & 0 & 2 \\
 \infty & \infty & \infty & 0
 \end{bmatrix}
 $$
 
-### Final shortest distances and paths
+### Significance of the intermediate vertex
 
-| Source | Destination | Distance | Path |
-|---|---|---:|---|
-| 1 | 2 | 4 | 1 → 2 |
-| 1 | 3 | 7 | 1 → 2 → 3 |
-| 1 | 4 | 9 | 1 → 2 → 3 → 4 |
-| 2 | 3 | 3 | 2 → 3 |
-| 2 | 4 | 5 | 2 → 3 → 4 |
-| 3 | 4 | 2 | 3 → 4 |
+In iteration $k$, $D^{(k)}[i][j]$ is the shortest path from $i$ to $j$ using only vertices $\{1, \dots, k\}$ as intermediate vertices. Each iteration tests whether passing through vertex $k$ gives a shorter route than the best known so far. After $k = n$, all vertices are allowed, so the matrix is final.
 
-Unreachable pairs retain distance $\infty$.
-
-### Complexity
-
-- Time: $O(V^3)$.
-- Space: $O(V^2)$.
-
-**Conclusion:** The final matrix gives shortest paths between every ordered pair of vertices. In particular, $D[1][4] = 9$ and $D[2][4] = 5$.
+**Time complexity:** three nested loops $(k, i, j)$, each running $n$ times, so each of the $n$ iterations does $n^2$ comparisons: $T(n) = n \times n^2 = \Theta(n^3)$. **Space:** $\Theta(n^2)$.
 
 ---
 
 ## 4. Optimal Binary Search Tree (OBST) using Dynamic Programming
 
-**Question:** Construct an OBST using the given key and search-probability weights. Show the cost table, roots, tree, and minimum expected cost. (8 marks)
+**Q4. Optimal Binary Search Tree: $n = 4$, keys $\{\text{do}, \text{if}, \text{int}, \text{while}\}$, $p(1:4) = \{3, 3, 1, 1\}$, $q(0:4) = \{2, 3, 1, 1, 1\}$.**
 
-### Given data
-
-Ordered keys:
-
-`do, if, int, while`
-
-Successful-search weights:
+### Formulas
 
 $$
-p_1, p_2, p_3, p_4 = \{3, 3, 1, 1\}
+W(i, i) = q_i; \quad C(i, i) = 0; \quad R(i, i) = 0
 $$
 
-Unsuccessful-search weights:
-
 $$
-q_0, q_1, q_2, q_3, q_4 = \{2, 3, 1, 1, 1\}
+W(i, j) = W(i, j-1) + p_j + q_j
 $$
 
-These are treated as relative weights, not normalized probabilities.
-
-### Definition
-
-An Optimal Binary Search Tree is a BST arranged to minimize weighted search cost. Keys with larger search weights should generally be placed closer to the root.
-
-### DP variables and recurrence
-
-- $e[i,j]$: minimum weighted cost for keys $i$ through $j$.
-- $w[i,j]$: total successful and unsuccessful search weight for the interval.
-- $\text{root}[i,j]$: root index that gives the minimum cost.
-
-Base cases:
-
 $$
-e[i,i-1] = q_{i-1}, \quad w[i,i-1] = q_{i-1}
+C(i, j) = W(i, j) + \min_{i < k \le j} \left[ C(i, k-1) + C(k, j) \right]; \quad R(i, j) = \text{the } k \text{ giving the minimum.}
 $$
 
-Weight recurrence:
+Keys: $a_1 = \text{do}, a_2 = \text{if}, a_3 = \text{int}, a_4 = \text{while}$.
 
-$$
-w[i,j] = w[i,j-1] + p_j + q_j
-$$
+### Cost table ($W, C, R$ for each $j - i$)
 
-Cost recurrence:
+| $j - i$ | $(i, j)$ | $W$ | $C$ | $R$ (root) |
+|---:|---|---|---|---:|
+| 0 | $(0,0)\ (1,1)\ (2,2)\ (3,3)\ (4,4)$ | $2, 3, 1, 1, 1$ | $0$ | $0$ |
+| 1 | $(0,1)$ | $2 + 3 + 3 = 8$ | $8$ | 1 |
+| 1 | $(1,2)$ | $3 + 3 + 1 = 7$ | $7$ | 2 |
+| 1 | $(2,3)$ | $1 + 1 + 1 = 3$ | $3$ | 3 |
+| 1 | $(3,4)$ | $1 + 1 + 1 = 3$ | $3$ | 4 |
+| 2 | $(0,2)$ | $8 + 3 + 1 = 12$ | $12 + \min(k=1: 0+7,\ k=2: 8+0) = 19$ | 1 |
+| 2 | $(1,3)$ | $7 + 1 + 1 = 9$ | $9 + \min(k=2: 0+3,\ k=3: 7+0) = 12$ | 2 |
+| 2 | $(2,4)$ | $3 + 1 + 1 = 5$ | $5 + \min(k=3: 0+3,\ k=4: 3+0) = 8$ | 3 |
+| 3 | $(0,3)$ | $12 + 1 + 1 = 14$ | $14 + \min(k=1: 0+12,\ k=2: 8+3,\ k=3: 19+0) = 25$ | 2 |
+| 3 | $(1,4)$ | $9 + 1 + 1 = 11$ | $11 + \min(k=2: 0+8,\ k=3: 7+3,\ k=4: 12+0) = 19$ | 2 |
+| 4 | $(0,4)$ | $14 + 1 + 1 = 16$ | $16 + \min(k=1: 0+19,\ k=2: 8+8,\ k=3: 19+3,\ k=4: 25+0) = \mathbf{32}$ | **2** |
 
-$$
-e[i,j] = \min_{r=i}^{j}\left(e[i,r-1] + e[r+1,j] + w[i,j]\right)
-$$
+*($W(0,4) = W(0,3) + p_4 + q_4 = 14 + 1 + 1 = 16$. For $(2,4)$ the choices $k = 3$ and $k = 4$ tie at 8; $k = 3$ is taken.)*
 
-### Cost and root table
+### Finding the tree
 
-| Interval | Minimum weighted cost | Root |
-|---|---:|---|
-| `do` | 13 | do |
-| `if` | 11 | if |
-| `int` | 5 | int |
-| `while` | 5 | while |
-| `do, if` | 25 | do |
-| `if, int` | 17 | if |
-| `int, while` | 11 | int |
-| `do, if, int` | 32 | if |
-| `if, int, while` | 25 | if |
-| `do, if, int, while` | **40** | **if** |
+$R(0,4) = 2$, so the root is $a_2 = \text{if}$. Left subtree $=$ keys $(0,1)$, whose root is $R(0,1) = 1$, i.e. $\text{do}$. Right subtree $=$ keys $(2,4)$, whose root is $R(2,4) = 3$, i.e. $\text{int}$; its right subtree is $(3,4)$ with root $R(3,4) = 4$, i.e. $\text{while}$.
 
-The single-key costs include the costs of unsuccessful searches on the dummy leaves. For example, $e[1,1] = q_0 + q_1 + (q_0 + p_1 + q_1) = 13$.
-
-### Construct the tree
-
-The root for all four keys is `if`.
-
-- Left subtree: `do`.
-- Right subtree: `int`.
-- Right child of `int`: `while`.
+### Final Optimal BST
 
 ```text
           if
@@ -351,230 +211,105 @@ The root for all four keys is `if`.
                 while
 ```
 
-The complete OBST also has unsuccessful-search dummy leaves $d_0$ through $d_4$.
-
-### Minimum expected search cost
-
-The total weight is:
-
-$$
-\sum p_i + \sum q_i = 8 + 8 = 16
-$$
-
-The minimum weighted cost is:
-
-$$
-e[1,4] = 40
-$$
-
-Normalizing the weights gives:
-
-$$
-\text{Expected cost} = \frac{40}{16} = \boxed{2.5}
-$$
-
-**Conclusion:** The optimal root is `if`; the minimum weighted cost is 40, equivalent to 2.5 comparisons per search after normalization.
+Minimum cost $C(0,4) = 32$, i.e. the minimum expected search cost $= C / W = 32 / 16 = \mathbf{2}$ comparisons per search (weighted). **Time:** $O(n^3)$ ($O(n^2)$ with Knuth's optimisation).
 
 ---
 
 ## 5. 0/1 Knapsack using Dynamic Programming
 
-**Question:** For capacity 10, construct the DP table, identify selected items, calculate maximum profit, and explain why ratio-based Greedy selection is not always optimal. (8 marks)
+**Q5. Solve the 0/1 Knapsack problem using Dynamic Programming (capacity $= 10$).**
 
-### Given data
+| Item | I1 | I2 | I3 | I4 | I5 |
+|---|---:|---:|---:|---:|---:|
+| **Weight** | 2 | 3 | 4 | 5 | 6 |
+| **Profit** | 12 | 20 | 25 | 30 | 35 |
 
-| Item | Weight | Profit |
-|---|---:|---:|
-| I1 | 2 | 12 |
-| I2 | 3 | 20 |
-| I3 | 4 | 25 |
-| I4 | 5 | 30 |
-| I5 | 6 | 35 |
-
-Capacity $W = 10$.
-
-### DP state and recurrence
-
-Let $DP[i][w]$ be the maximum profit using the first $i$ items with capacity $w$.
-
-If item $i$ is too heavy:
+### Recurrence
 
 $$
-DP[i,w] = DP[i-1,w]
+V[i][w] =
+\begin{cases}
+V[i-1][w] & \text{if } w_i > w, \\
+\max\left( V[i-1][w],\ p_i + V[i-1][w - w_i] \right) & \text{otherwise.}
+\end{cases}
 $$
 
-Otherwise:
+### DP table $V[i][w]$ (rows $=$ items considered, columns $=$ capacity 0 to 10)
 
-$$
-DP[i,w] = \max(DP[i-1,w], p_i + DP[i-1,w-w_i])
-$$
-
-Base cases: $DP[0][w] = 0$ and $DP[i][0] = 0$.
-
-### DP table
-
-| Items considered | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| $i \setminus w$ | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| None | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| I1 | 0 | 0 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 |
-| I1, I2 | 0 | 0 | 12 | 20 | 20 | 32 | 32 | 32 | 32 | 32 | 32 |
-| I1–I3 | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 45 | 57 | 57 |
-| I1–I4 | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | 62 |
-| I1–I5 | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | **62** |
-
-Therefore:
+| **0** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| **1 (I1)** | 0 | 0 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 | 12 |
+| **2 (I2)** | 0 | 0 | 12 | 20 | 20 | 32 | 32 | 32 | 32 | 32 | 32 |
+| **3 (I3)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 45 | 57 | 57 |
+| **4 (I4)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | 62 |
+| **5 (I5)** | 0 | 0 | 12 | 20 | 25 | 32 | 37 | 45 | 50 | 57 | **62** |
 
 $$
-DP[5,10] = \boxed{62}
+\text{Maximum profit} = V[5][10] = \boxed{62}
 $$
 
-### Recover the selected items
+### Traceback (selected items)
 
-The maximum value 62 is obtained by selecting:
+- $V[5][10] = V[4][10] = 62$, so **I5 is not selected**.
+- $V[4][10] = 62 \ne V[3][10] = 57$, so **I4 is selected** ($w = 5$); remaining capacity $= 5$.
+- $V[3][5] = 32 = V[2][5]$, so **I3 is not selected**.
+- $V[2][5] = 32 \ne V[1][5] = 12$, so **I2 is selected** ($w = 3$); remaining capacity $= 2$.
+- $V[1][2] = 12 \ne V[0][2] = 0$, so **I1 is selected** ($w = 2$); remaining capacity $= 0$.
 
-- I4: weight 5, profit 30.
-- I2: weight 3, profit 20.
-- I1: weight 2, profit 12.
+**Selected items:** `I1, I2, I4`. Total weight $= 2 + 3 + 5 = 10$, total profit $= 12 + 20 + 30 = \mathbf{62}$.
 
-Total weight: $5 + 3 + 2 = 10$.
+### Why ratio-based greedy may fail in 0/1 knapsack
 
-Total profit:
-
-$$
-30 + 20 + 12 = \boxed{62}
-$$
-
-### Why a ratio-based Greedy approach may fail
-
-| Item | Weight | Profit | Ratio |
-|---|---:|---:|---:|
-| I1 | 2 | 12 | 6.00 |
-| I2 | 3 | 20 | 6.67 |
-| I3 | 4 | 25 | 6.25 |
-| I4 | 5 | 30 | 6.00 |
-| I5 | 6 | 35 | 5.83 |
-
-A ratio-based choice of I2, I3, then I1 uses weight 9 and earns profit 57, which is less than 62. In 0/1 Knapsack, items cannot be split, so locally best ratios do not guarantee a globally optimal combination.
-
-**Complexity:** Time $O(nW)$; space $O(nW)$ for the full table.
-
-**Conclusion:** The optimal selection is I1, I2, and I4, with total weight 10 and profit **62**.
+Profit/weight ratios are $I_2 = 6.67, I_3 = 6.25, I_1 = 6.0, I_4 = 6.0, I_5 = 5.83$. Greedy takes `I2, I3, I1` (weight 9, profit 57); the remaining capacity 1 cannot hold any other item. Profit $= 57 < 62$. Items cannot be split, so the highest-ratio picks can leave unusable capacity, while the DP considers all combinations of items. **Time and space:** $O(n \cdot W)$.
 
 ---
 
 ## 6. Travelling Salesperson Problem (TSP) using Held–Karp Dynamic Programming
 
-**Question:** Find an optimal tour and minimum cost using Dynamic Programming. (8 marks)
+**Q6. Analyze the Travelling Salesperson Problem using Dynamic Programming (Held–Karp), starting and ending at city A.**
 
-### Given cost matrix
-
-Cities: A, B, C, D. Start and finish at A.
+### Cost matrix (A, B, C, D)
 
 $$
 C =
 \begin{bmatrix}
-0 & 10 & 15 & 20\\
-10 & 0 & 35 & 25\\
-15 & 35 & 0 & 30\\
+0 & 10 & 15 & 20 \\
+10 & 0 & 35 & 25 \\
+15 & 35 & 0 & 30 \\
 20 & 25 & 30 & 0
 \end{bmatrix}
 $$
 
-### Definition
-
-The Travelling Salesperson Problem seeks the minimum-cost tour that starts at a city, visits every other city exactly once, and returns to the start.
-
-### DP state
-
-$DP[S][j]$ is the minimum cost of a path starting at A, visiting the subset $S$ of other cities, and ending at city $j$.
-
-Base case:
+### Held–Karp recurrence
 
 $$
-DP[\{j\}][j] = C[A][j]
+g(i, S) = \min_{j \in S} \left[ c(i, j) + g(j, S - \{j\}) \right], \quad \text{with } g(i, \emptyset) = c(i, A).
 $$
 
-Recurrence:
+$g(i, S) =$ the shortest path starting at $i$, visiting all cities in $S$ exactly once and ending at A.
+
+- **Step 1: $S = \emptyset$:**
+  - $g(B, \emptyset) = 10,\quad g(C, \emptyset) = 15,\quad g(D, \emptyset) = 20$.
+- **Step 2: $|S| = 1$:**
+  - $g(B, \{C\}) = c(B,C) + g(C, \emptyset) = 35 + 15 = 50;\quad g(B, \{D\}) = 25 + 20 = 45$
+  - $g(C, \{B\}) = 35 + 10 = 45;\quad g(C, \{D\}) = 30 + 20 = 50$
+  - $g(D, \{B\}) = 25 + 10 = 35;\quad g(D, \{C\}) = 30 + 15 = 45$
+- **Step 3: $|S| = 2$:**
+  - $g(B, \{C, D\}) = \min( c(B,C) + g(C,\{D\}),\ c(B,D) + g(D,\{C\}) ) = \min(35 + 50, 25 + 45) = \min(85, 70) = 70$ (via D)
+  - $g(C, \{B, D\}) = \min( c(C,B) + g(B,\{D\}),\ c(C,D) + g(D,\{B\}) ) = \min(35 + 45, 30 + 35) = \min(80, 65) = 65$ (via D)
+  - $g(D, \{B, C\}) = \min( c(D,B) + g(B,\{C\}),\ c(D,C) + g(C,\{B\}) ) = \min(25 + 50, 30 + 45) = \min(75, 75) = 75$
+- **Step 4: final:**
 
 $$
-DP[S][j] = \min_{i \in S,\ i \ne j}
-\left(DP[S - \{j\}][i] + C[i][j]\right)
+\begin{aligned}
+g(A, \{B, C, D\}) &= \min\left( c(A,B) + g(B,\{C,D\}),\ c(A,C) + g(C,\{B,D\}),\ c(A,D) + g(D,\{B,C\}) \right) \\
+&= \min( 10 + 70,\ 15 + 65,\ 20 + 75 ) = \min(80, 80, 95) = \boxed{80}
+\end{aligned}
 $$
 
-After visiting every city, return to A:
+**Optimal tour:** `A → B → D → C → A`, cost $= 10 + 25 + 30 + 15 = \mathbf{80}$. *(Its reverse `A → C → D → B → A` also costs 80.)*
 
-$$
-\min_j\left(DP[\{B,C,D\}][j] + C[j][A]\right)
-$$
+### Use of overlapping subproblems
 
-### Single-city states
-
-- $DP[\{B\}][B] = 10$
-- $DP[\{C\}][C] = 15$
-- $DP[\{D\}][D] = 20$
-
-### Two-city states
-
-| Visited subset | Ending city | Cost |
-|---|---|---:|
-| B, C | B | $15 + 35 = 50$ |
-| B, C | C | $10 + 35 = 45$ |
-| B, D | B | $20 + 25 = 45$ |
-| B, D | D | $10 + 25 = 35$ |
-| C, D | C | $20 + 30 = 50$ |
-| C, D | D | $15 + 30 = 45$ |
-
-### Three-city states
-
-Ending at B:
-
-$$
-DP[\{B,C,D\}][B] = \min(50 + 35, 45 + 25) = 70
-$$
-
-Ending at C:
-
-$$
-DP[\{B,C,D\}][C] = \min(45 + 35, 35 + 30) = 65
-$$
-
-Ending at D:
-
-$$
-DP[\{B,C,D\}][D] = \min(45 + 25, 45 + 30) = 70
-$$
-
-### Return to A
-
-| Final city before A | Path cost before return | Return edge | Tour cost |
-|---|---:|---:|---:|
-| B | 70 | 10 | 80 |
-| C | 65 | 15 | 80 |
-| D | 70 | 20 | 90 |
-
-The minimum tour cost is:
-
-$$
-\boxed{80}
-$$
-
-One optimal tour is:
-
-`A → B → D → C → A`
-
-Cost:
-
-$$
-10 + 25 + 30 + 15 = \boxed{80}
-$$
-
-The reverse tour `A → C → D → B → A` also costs 80.
-
-### Complexity
-
-- Time: $O(n^2 2^n)$.
-- Space: $O(n 2^n)$.
-
-**Conclusion:** The Held–Karp algorithm gives a minimum tour cost of **80**.
-
----
+Every $g(i, S)$ is computed once, stored in the table and then reused by all larger subsets that contain it. For example, the stored values $g(B,\{C,D\}) = 70$, $g(C,\{B,D\}) = 65$ and $g(D,\{B,C\}) = 75$ are all reused when computing $g(A,\{B,C,D\})$, instead of re-enumerating the underlying paths. With only 3 cities the sharing is small, but for $n$ cities a value $g(j, S)$ is shared by many different longer paths, which is why DP needs $O(n^2 \cdot 2^n)$ time instead of checking all $(n-1)!$ tours (here $3! = 6$). **Space:** $O(n \cdot 2^n)$.

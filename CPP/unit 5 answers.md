@@ -1,16 +1,55 @@
-# Object Oriented Programming through C++ — Unit 5 Handwritten Answers (`Unit_5_Handwritten_Answers (1)`)
+# Object Oriented Programming through C++ — Unit 5 Answers (`unit 5 answers.md`)
 
-> **Source PDF:** [`raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf)  
-> **Question Bank:** [`Question Bank_CPP_Unit 3_4_5.md`](Question%20Bank_CPP_Unit%203_4_5.md#unit-5)  
-> **Typed Answers Companion:** [`cpp 5.md`](cpp%205.md)
+> **Raw Source PDFs:**
+> - [`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf) *(Typed Unit 5 Answers)*
+> - [`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf) *(Handwritten Unit 5 Answers)*
+>
+> **Questions File:** [`questions.md` — UNIT 5](questions.md#unit-5)
 
 ---
 
-## UNIT 5 - Question 1
+## Q1. Explain the principles of exception handling in C++ with a simple flow example.
 
-### Q) Explain the principles of exception handling in C++ with a simple flow example.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 2–3)
 
-### Answer
+#### Definition
+Exception handling is a mechanism in C++ used to handle runtime errors without abruptly terminating the program.
+
+#### Principles of Exception Handling
+1. **Try** – The code that may cause an error is placed inside a `try` block.
+2. **Throw** – When an error occurs, an exception is generated using `throw`.
+3. **Catch** – The `catch` block receives and handles the exception.
+4. **Normal execution** – After handling the exception, the program can continue normally.
+
+#### Simple Flow
+![Exception Handling Simple Flow](figures/unit5_q1_exception_flow.png)
+
+#### Example
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        int a = 10, b = 0;
+        if (b == 0)
+            throw "Division by zero";
+        cout << a / b;
+    }
+    catch (const char* msg) {
+        cout << "Exception: " << msg;
+    }
+    return 0;
+}
+```
+
+#### Conclusion
+Thus, exception handling makes programs safer, reliable, and easier to debug.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 1)
+
 Exception handling in C++ is a mechanism used to handle runtime errors so that the program does not terminate abnormally.
 
 #### Principles of Exception Handling
@@ -65,11 +104,68 @@ Thus, exception handling in C++ uses `try`, `throw`, and `catch` to detect and h
 
 ---
 
-## UNIT 5 - Question 2
+## Q2. What are multiple catch statements? Explain with an example.
 
-### Q) What are multiple catch statements? Explain with an example.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 3–5)
 
-### Answer
+#### Definition
+Multiple catch statements are used when a program can generate different types of exceptions. Each exception type can have a separate catch block.
+
+#### Syntax
+```cpp
+try {
+    // statements
+}
+catch (int e) {
+    // handles integer exception
+}
+catch (double e) {
+    // handles double exception
+}
+catch (const char* e) {
+    // handles string exception
+}
+```
+
+#### Example
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        int choice = 1;
+
+        if (choice == 1)
+            throw 10;
+        else
+            throw 5.5;
+    }
+    catch (int e) {
+        cout << "Integer exception: " << e;
+    }
+    catch (double e) {
+        cout << "Double exception: " << e;
+    }
+    return 0;
+}
+```
+
+#### Output
+```text
+Integer exception: 10
+```
+
+#### Important Points
+- A single `try` block can have multiple `catch` blocks.
+- Each `catch` handles a different type of exception.
+- Only the matching `catch` block is executed.
+- Multiple catches make exception handling more flexible.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 2)
+
 Multiple catch statements in C++ are used to handle different types of exceptions separately. A single `try` block can be followed by more than one `catch` block. When an exception is thrown, the control moves to the `catch` block whose type matches the thrown exception. This makes the program more flexible and helps in handling different errors in different ways.
 
 #### Points to remember
@@ -128,11 +224,70 @@ Thus, multiple catch statements are useful when a program can generate different
 
 ---
 
-## UNIT 5 - Question 3
+## Q3. Describe the role of try, throw, and catch in exception handling with syntax.
 
-### Q) Describe the role of try, throw, and catch in exception handling with syntax.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 5–7)
 
-### Answer
+C++ exception handling mainly uses three keywords: `try`, `throw`, and `catch`.
+
+#### 1. try
+The `try` block contains code that may produce an exception.
+
+**Syntax:**
+```cpp
+try {
+    // risky code
+}
+```
+
+#### 2. throw
+The `throw` statement is used to generate an exception.
+
+**Syntax:**
+```cpp
+throw value;
+```
+
+#### 3. catch
+The `catch` block receives and handles the exception thrown by the `throw` statement.
+
+**Syntax:**
+```cpp
+catch(type variable) {
+    // handling code
+}
+```
+
+#### Example
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        int age = 15;
+        if (age < 18)
+            throw age;
+    }
+    catch (int x) {
+        cout << "Not eligible";
+    }
+    return 0;
+}
+```
+
+#### Flow
+```text
+try → throw → catch
+```
+
+#### Conclusion
+`try` identifies risky code, `throw` generates an exception, and `catch` handles the exception.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 3)
+
 Exception handling in C++ is used to detect and handle runtime errors so that the program does not terminate abnormally. The three main keywords used are `try`, `throw`, and `catch`.
 
 #### Role of try, throw and catch
@@ -181,11 +336,65 @@ Thus, `try` is used to test a block of code, `throw` is used to signal an except
 
 ---
 
-## UNIT 5 - Question 4
+## Q4. Explain the steps to open, write, read, and close a file in C++ with sample code.
 
-### Q) Explain the steps to open, write, read, and close a file in C++ with sample code.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 7–8)
 
-### Answer
+#### Definition
+File handling in C++ is used to store and retrieve data from files permanently.
+
+#### C++ provides
+- `ofstream` $\rightarrow$ writing to a file
+- `ifstream` $\rightarrow$ reading from a file
+- `fstream` $\rightarrow$ both reading and writing
+
+#### Steps
+1. Include `<fstream>`
+2. Open the file
+3. Write or read data
+4. Close the file
+
+#### Example
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    // Open file for writing
+    ofstream fout("data.txt");
+    fout << "Hello C++";
+    fout.close();
+
+    // Open file for reading
+    ifstream fin("data.txt");
+    string text;
+    getline(fin, text);
+    cout << text;
+    fin.close();
+
+    return 0;
+}
+```
+
+#### Explanation
+
+| Operation | Class/Function |
+| :--- | :--- |
+| Open for writing | `ofstream` |
+| Write | `<<` |
+| Open for reading | `ifstream` |
+| Read | `getline()` / `>>` |
+| Close | `close()` |
+
+#### Conclusion
+File handling allows data to be stored permanently and accessed whenever required.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 4)
+
 File handling in C++ is used to store data permanently in a file. The common steps are opening a file, writing data, reading data, and closing the file.
 
 #### Steps in File Handling
@@ -238,11 +447,65 @@ Thus, in C++, files are opened using file stream objects, data is written or rea
 
 ---
 
-## UNIT 5 - Question 5
+## Q5. What is STL? Explain its components and programming model.
 
-### Q) What is STL? Explain its components and programming model.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 8–10)
 
-### Answer
+#### Definition
+STL (Standard Template Library) is a collection of predefined generic classes and functions in C++ used for common data structures and algorithms.
+
+#### Main Components of STL
+1. **Containers** – Store and organize data.
+   - `vector`
+   - `list`
+   - `map`
+   - `set`
+2. **Algorithms** – Perform operations on data.
+   - `sort()`
+   - `find()`
+   - `reverse()`
+3. **Iterators** – Used to access and move through container elements.
+4. **Function Objects** – Objects that can be used like functions.
+
+#### STL Programming Model
+```text
+Container
+    ↓
+Iterator
+    ↓
+Algorithm
+    ↓
+Data Processing
+```
+
+#### Example
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> v = {30, 10, 20};
+    sort(v.begin(), v.end());
+    for (int x : v)
+        cout << x << " ";
+    return 0;
+}
+```
+
+#### Output
+```text
+10 20 30
+```
+
+#### Conclusion
+STL reduces programming effort by providing ready-made and reusable components.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 5)
+
 STL (Standard Template Library) is a part of C++ that provides ready-made classes and functions to store and process data efficiently. It supports generic programming and helps programmers write reusable and efficient code.
 
 #### 1. Components of STL
@@ -286,11 +549,59 @@ Thus, STL provides powerful ready-made components like containers, algorithms, a
 
 ---
 
-## UNIT 5 - Question 6
+## Q6. What are iterators in STL? Explain their types and usage.
 
-### Q) What are iterators in STL? Explain their types and usage.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 10–11)
 
-### Answer
+#### Definition
+An iterator is an object used to point to and access elements of an STL container. It works similar to a pointer.
+
+#### Basic Syntax
+```cpp
+vector<int>::iterator it;
+```
+
+#### Common Types of Iterators
+1. **Input Iterator** – Used to read elements.
+2. **Output Iterator** – Used to write elements.
+3. **Forward Iterator** – Moves only in the forward direction.
+4. **Bidirectional Iterator** – Moves forward and backward.
+5. **Random Access Iterator** – Can directly access any element.
+
+#### Example
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {10, 20, 30};
+    vector<int>::iterator it;
+    for (it = v.begin(); it != v.end(); it++) {
+        cout << *it << " ";
+    }
+    return 0;
+}
+```
+
+#### Output
+```text
+10 20 30
+```
+
+#### Important Functions
+- `begin()` $\rightarrow$ points to the first element
+- `end()` $\rightarrow$ points just after the last element
+- `*it` $\rightarrow$ accesses the current element
+- `++it` $\rightarrow$ moves iterator forward
+
+#### Conclusion
+Iterators provide a common way to access and process elements of STL containers.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 6)
+
 Iterators in STL are object-like entities (pointers-like) used to point to elements of containers. They act as a connection between containers and algorithms. Iterators are used to traverse, access, and manipulate elements in STL containers.
 
 #### 1. Types of Iterators
@@ -332,11 +643,93 @@ Thus, iterators are important components of STL. They help in accessing containe
 
 ---
 
-## UNIT 5 - Question 7
+## Q7. Explain vectors, Lists, and maps in STL with syntax and suitable example.
 
-### Q) Explain vectors, lists, and maps in STL with syntax and suitable example.
+### Version 1 — Typed Notes ([`CPP/raw/cpp 5.pdf`](raw/cpp%205.pdf), Pages 11–13)
 
-### Answer
+C++ STL provides different containers for storing data. Vector, List, and Map are commonly used containers.
+
+#### 1. Vector
+A vector is a dynamic array that stores elements in continuous memory.
+
+**Syntax:**
+```cpp
+vector<int> v;
+```
+
+**Example:**
+```cpp
+vector<int> v = {10, 20, 30};
+v.push_back(40);
+for (int x : v)
+    cout << x << " ";
+```
+
+**Output:**
+```text
+10 20 30 40
+```
+
+#### 2. List
+A list is a doubly linked list. It allows efficient insertion and deletion from the beginning and end.
+
+**Syntax:**
+```cpp
+list<int> l;
+```
+
+**Example:**
+```cpp
+list<int> l = {10, 20, 30};
+l.push_front(5);
+l.push_back(40);
+for (int x : l)
+    cout << x << " ";
+```
+
+**Output:**
+```text
+5 10 20 30 40
+```
+
+#### 3. Map
+A map stores data in key-value pairs. Each key is unique.
+
+**Syntax:**
+```cpp
+map<int, string> m;
+```
+
+**Example:**
+```cpp
+map<int, string> m;
+m[1] = "C++";
+m[2] = "Python";
+for (auto x : m)
+    cout << x.first << " " << x.second << endl;
+```
+
+**Output:**
+```text
+1 C++
+2 Python
+```
+
+#### Difference
+
+| Container | Stores | Main Feature |
+| :--- | :--- | :--- |
+| **Vector** | Elements | Dynamic array |
+| **List** | Elements | Easy insertion/deletion |
+| **Map** | Key-value pairs | Unique keys |
+
+#### Conclusion
+`vector`, `list`, and `map` are useful STL containers for storing and managing data in different ways.
+
+---
+
+### Version 2 — Handwritten Notes ([`CPP/raw/Unit_5_Handwritten_Answers (1).pdf`](raw/Unit_5_Handwritten_Answers%20(1).pdf), Page 7)
+
 STL provides different containers to store data efficiently. Vector, list, and map are commonly used STL containers.
 
 #### 1. Vector

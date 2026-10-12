@@ -6,7 +6,7 @@ Detailed exam-ready questions and worked answers split by unit in Markdown.
 
 | File | Contents |
 |---|---|
-| [`ADS&AA unit-wise Important questions-1.md`](ADS&AA%20unit-wise%20Important%20questions-1.md) | Complete Unit-I to Unit-V Important Questions mapped to each unit's `.md` answer section |
+| [`IMP-QUESTIONS.md`](IMP-QUESTIONS.md) | Complete Unit-I to Unit-V Important Questions mapped to each unit's `.md` answer section |
 | [`UNIT-I.md`](UNIT-I.md) | Algorithm Analysis, Time vs. Space Complexity, Asymptotic Notations ($O, \Omega, \Theta$), Matrix Multiplication Analysis, Hashing & Hash Functions, Collision Resolution, Static vs. Extendible Hashing |
 | [`UNIT-II.md`](UNIT-II.md) | AVL Tree Construction, Four AVL Rotations & Applications, AVL Deletion (`15`), B-Tree Order-4 Construction, B-Tree Deletion & Applications, Min/Max Heap Construction, Max Heap Deletion (`90`), Binary Heap Operations & Priority Queues |
 | [`UNIT-III.md`](UNIT-III.md) | Divide and Conquer, Binary Search, Merge Sort, Quick Sort, Greedy Job Sequencing, Fractional Knapsack, Minimum Spanning Tree (Kruskal & Prim), Dijkstra’s Algorithm |

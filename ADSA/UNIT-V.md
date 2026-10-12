@@ -185,12 +185,70 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 3. Conclusion for the Exam
+### 3. Conclusion for the Exam Question
 - **Number of valid 3-colorings:** **$0$** (The graph is **NOT 3-colorable**).
 - **Chromatic Number:** For any complete graph $K_n$, exactly $n$ colors are required. For $K_5$, the chromatic number is **5**.
 - **Time Complexity:** $O(m^n)$ worst case ($m$ colors, $n$ vertices); pruning stops the search tree early.
 
 ![3-Coloring State-Space Tree](figures/unit5_q4_coloring_tree.png)
+
+---
+
+### 🌟 Bonus Version: Solvable 3-Coloring Example ($n = 4, m = 3$)
+*(From Professor's Lecture PPT Slide 26 — standard solvable problem frequently asked in exams)*
+
+#### Problem:
+Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-2, 2-3, 3-4, 4-1)$, determine all valid color assignments using $m = 3$ colors $\{1, 2, 3\}$ and draw the state-space tree.
+
+```text
+    (1) -------- (2)
+     |            |
+     |            |
+    (4) -------- (3)
+```
+
+#### Step-by-Step Backtracking Trace (Fixing Vertex 1 = Color 1):
+1. **Vertex 1 = Color 1**
+2. **Vertex 2** is connected to 1 $\implies$ Cannot be 1. Choices: **Color 2** or **Color 3**.
+   - **Branch A: Vertex 2 = Color 2**
+     - **Vertex 3** is connected to 2 (Color 2) $\implies$ Choices: **Color 1** or **Color 3**.
+       - **Case A1: Vertex 3 = Color 1**
+         - Vertex 4 connects to 1 (Color 1) and 3 (Color 1).
+         - Since both neighbors are Color 1, Vertex 4 can be **Color 2** or **Color 3**!
+         - 🎉 **Solution 1:** `(1, 2, 1, 2)`
+         - 🎉 **Solution 2:** `(1, 2, 1, 3)`
+       - **Case A2: Vertex 3 = Color 3**
+         - Vertex 4 connects to 1 (Color 1) and 3 (Color 3).
+         - Vertex 4 cannot be 1 or 3 $\implies$ Vertex 4 must be **Color 2**!
+         - 🎉 **Solution 3:** `(1, 2, 3, 2)`
+   - **Branch B: Vertex 2 = Color 3 (Symmetric with Branch A)**
+     - **Case B1: Vertex 3 = Color 1**
+       - Vertex 4 connects to 1 (Color 1) and 3 (Color 1) $\implies$ Vertex 4 can be **Color 2** or **Color 3**.
+       - 🎉 **Solution 4:** `(1, 3, 1, 2)`
+       - 🎉 **Solution 5:** `(1, 3, 1, 3)`
+     - **Case B2: Vertex 3 = Color 2**
+       - Vertex 4 connects to 1 (Color 1) and 3 (Color 2) $\implies$ Vertex 4 must be **Color 3**!
+       - 🎉 **Solution 6:** `(1, 3, 2, 3)`
+
+#### State-Space Tree (with Vertex 1 = 1):
+```text
+                         [Root]
+                           |
+                        (1 = 1)
+                       /       \
+                (2 = 2)         (2 = 3)
+               /       \       /       \
+           (3 = 1)   (3 = 3) (3 = 1)   (3 = 2)
+           /     \      |    /     \      |
+        (4=2)   (4=3) (4=2) (4=2)   (4=3) (4=3)
+        Sol 1   Sol 2 Sol 3 Sol 4   Sol 5 Sol 6
+```
+
+#### Total Valid Colorings:
+- Starting with Vertex 1 = Color 1 yields **6 valid colorings**.
+- Since Vertex 1 can also start with Color 2 or Color 3:
+  $$\text{Total Valid Colorings} = 3 \times 6 = \mathbf{18}$$
+- **Chromatic Number:** For cycle $C_4$, minimum colors needed is $\mathbf{2}$ (alternating colors `1, 2, 1, 2`). With $m = 3$, it is easily colorable!
 
 ---
 

@@ -17,12 +17,11 @@ Operator overloading allows C++ operators (such as `+`, `-`, `==`) to work direc
 
 | Feature | Member Function | Friend Function |
 | :--- | :--- | :--- |
-| **Declaration** | Defined inside the class as a member. | Declared inside the class with the `friend` keyword, defined outside. |
-| **Calling Object** | Called using the left-hand object (`obj1.operator+(obj2)`). | Called like a normal function with objects passed as arguments (`operator+(obj1, obj2)`). |
+| **Declaration** | Defined inside the class as a member. | Declared inside the class with `friend`, defined outside. |
+| **Calling Object** | Called using the left-hand object (`obj1 + obj2`). | Called like a normal function (`operator+(obj1, obj2)`). |
 | **`this` Pointer** | Has an implicit `this` pointer pointing to the left operand. | Does not have a `this` pointer. |
 | **Parameters** | • Unary: **0** explicit arguments<br>• Binary: **1** explicit argument | • Unary: **1** explicit argument<br>• Binary: **2** explicit arguments |
-| **Access** | Directly accesses private and protected members. | Can access private and protected members because it is declared a friend. |
-| **Operands** | Left operand must be an object of that class. | Allows different types on both sides (e.g., `5 + obj`). |
+| **Operands** | Left operand must be an object of that class. | Allows different types on the left side (e.g., `5 + obj`). |
 
 ### Code Example
 ```cpp
@@ -188,53 +187,43 @@ Inheritance is a feature of OOP where a derived class acquires the properties an
 C++ supports 5 types of inheritance:
 
 ### 1. Single Inheritance
-One derived class inherits from one base class.
+One derived class inherits from one base class ($A \rightarrow B$).
 ```cpp
-class A {
-public:
-    void showA() { cout << "Base class A\n"; }
-};
-
-class B : public A {
-public:
-    void showB() { cout << "Derived class B\n"; }
-};
+class A { };
+class B : public A { }; // Derived from A
 ```
 
 ### 2. Multiple Inheritance
-One derived class inherits from more than one base class.
+One derived class inherits from more than one base class ($A, B \rightarrow C$).
 ```cpp
 class A { };
 class B { };
-
-class C : public A, public B {
-    // Inherits from both A and B
-};
+class C : public A, public B { }; // Derived from A and B
 ```
 
 ### 3. Multilevel Inheritance
-A class is derived from another derived class, forming a chain.
+A class is derived from another derived class ($A \rightarrow B \rightarrow C$).
 ```cpp
 class A { };
-class B : public A { }; // B inherits from A
-class C : public B { }; // C inherits from B
+class B : public A { };
+class C : public B { }; // Derived from B
 ```
 
 ### 4. Hierarchical Inheritance
-Multiple derived classes inherit from a single base class.
-```cpp
-class A { };
-class B : public A { }; // B inherits from A
-class C : public A { }; // C inherits from A
-```
-
-### 5. Hybrid Inheritance
-A combination of two or more types of inheritance.
+Multiple derived classes inherit from a single base class ($A \rightarrow B, C$).
 ```cpp
 class A { };
 class B : public A { };
 class C : public A { };
-class D : public B, public C { }; // Combines hierarchical and multiple
+```
+
+### 5. Hybrid Inheritance
+A combination of two or more types of inheritance (e.g., Multilevel + Multiple).
+```cpp
+class A { };
+class B : public A { };
+class C : public A { };
+class D : public B, public C { }; // Combines Hierarchical and Multiple
 ```
 
 ---

@@ -83,14 +83,16 @@ catch (const char* e) {
 #include <iostream>
 using namespace std;
 
-void test(int choice) {
+int main() {
     try {
+        int choice = 1;
+
         if (choice == 1)
-            throw 10;           // int
+            throw 10;      // throws int
         else if (choice == 2)
-            throw 3.14;         // double
+            throw 3.14;    // throws double
         else
-            throw "Error";      // string
+            throw "Error"; // throws string
     }
     catch (int e) {
         cout << "Caught integer: " << e << endl;
@@ -101,12 +103,7 @@ void test(int choice) {
     catch (const char* e) {
         cout << "Caught string: " << e << endl;
     }
-}
 
-int main() {
-    test(1);
-    test(2);
-    test(3);
     return 0;
 }
 ```
@@ -114,8 +111,6 @@ int main() {
 ### Output
 ```text
 Caught integer: 10
-Caught double: 3.14
-Caught string: Error
 ```
 
 ---
@@ -229,7 +224,6 @@ File Content: Welcome to C++ File Handling
 1. **Containers:** Store and organize data (e.g., `vector`, `list`, `map`, `set`).
 2. **Algorithms:** Predefined procedures that perform operations on containers (e.g., `sort()`, `find()`, `reverse()`).
 3. **Iterators:** Pointer-like objects used to access and step through elements in a container.
-4. **Function Objects (Functors):** Objects that can be used like functions.
 
 ### STL Programming Model
 ```text
@@ -330,11 +324,11 @@ A **map** stores data in sorted key-value pairs where each key is unique.
 
 ### Comparison Table
 
-| Container | Internal Structure | Access Speed | Main Feature |
+| Container | Type | Access Mode | Main Feature |
 | :--- | :--- | :--- | :--- |
-| **Vector** | Dynamic contiguous array | Fast random access ($O(1)$) | Replaces regular arrays |
-| **List** | Doubly linked list | Sequential access ($O(n)$) | Fast insert/delete anywhere |
-| **Map** | Balanced binary search tree | Key search ($O(\log n)$) | Unique key-value pairs |
+| **Vector** | Dynamic array | Direct index (`[]`) | Fast random access, resizes dynamically |
+| **List** | Doubly linked list | Sequential (`iterator`) | Fast insertion & deletion at any position |
+| **Map** | Key-value pairs | Key lookup (`m[key]`) | Stores unique keys in sorted order |
 
 ### Code Example
 ```cpp

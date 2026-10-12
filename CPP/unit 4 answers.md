@@ -159,24 +159,16 @@ void bubbleSort(T arr[], int n) {
     }
 }
 
-template <class T>
-void printArray(T arr[], int n) {
-    for (int i = 0; i < n; i++)
-        cout << arr[i] << " ";
-    cout << endl;
-}
-
 int main() {
     int arr[] = {5, 2, 8, 1, 3};
     int n = 5;
 
-    cout << "Before sorting: ";
-    printArray(arr, n);
-
     bubbleSort(arr, n);
 
-    cout << "After sorting : ";
-    printArray(arr, n);
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+    cout << endl;
 
     return 0;
 }
@@ -184,8 +176,7 @@ int main() {
 
 ### Output
 ```text
-Before sorting: 5 2 8 1 3 
-After sorting : 1 2 3 5 8 
+Sorted array: 1 2 3 5 8 
 ```
 
 ---
@@ -217,6 +208,3 @@ T square(T x) {
 ```cpp
 #define SQUARE(x) ((x) * (x))
 ```
-
-### Conclusion
-Templates are preferred because they provide type safety, respect scope, and avoid bugs caused by simple text substitution.

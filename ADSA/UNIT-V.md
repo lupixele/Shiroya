@@ -294,56 +294,95 @@ A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once
 
 **Q6. Analyze the 0/1 Knapsack problem using Least Cost (LC) Branch and Bound (capacity $= 16$).**
 
-| Item | I1 | I2 | I3 | I4 | I5 |
-|---|---:|---:|---:|---:|---:|
-| **Weight ($w_i$)** | 2 | 5 | 10 | 5 | 4 |
-| **Profit ($p_i$)** | 40 | 30 | 50 | 10 | 25 |
+| Item                    |     I1 |    I2 |    I3 |    I4 |       I5 |
+| ----------------------- | -----: | ----: | ----: | ----: | -------: |
+| **Weight ($w_i$)**      |      2 |     5 |    10 |     5 |        4 |
+| **Profit ($p_i$)**      |     40 |    30 |    50 |    10 |       25 |
 | **Ratio ($p_i / w_i$)** | **20** | **6** | **5** | **2** | **6.25** |
 
 ---
 
 ### 1. Step 1: Sort Items by Profit / Weight Ratio
 Arrange items in decreasing ratio order:
-1. **I1:** $(w = 2, p = 40, \text{ratio} = 20)$
-2. **I5:** $(w = 4, p = 25, \text{ratio} = 6.25)$
-3. **I2:** $(w = 5, p = 30, \text{ratio} = 6.0)$
-4. **I3:** $(w = 10, p = 50, \text{ratio} = 5.0)$
-5. **I4:** $(w = 5, p = 10, \text{ratio} = 2.0)$
+1. **$I_1$:** $(w = 2, v = 40, \text{ratio} = 20.0)$
+2. **$I_5$:** $(w = 4, v = 25, \text{ratio} = 6.25)$
+3. **$I_2$:** $(w = 5, v = 30, \text{ratio} = 6.0)$
+4. **$I_3$:** $(w = 10, v = 50, \text{ratio} = 5.0)$
+5. **$I_4$:** $(w = 5, v = 10, \text{ratio} = 2.0)$
 
 ---
 
-### 2. Step 2: How the Bounds Work
-- **Upper Bound ($UB$):** Optimistic estimate of the maximum profit possible from this node.  
-  $$UB = \text{Current Profit} + \text{Remaining items taken greedily (with fraction if needed)}$$
-- **Pruning Rule:** If a node's $UB \le \text{Best feasible profit found so far}$, **KILL the node!** (It can never beat our best solution).
-- **Expansion Rule:** Always expand the live node with the highest potential profit ($UB$).
+### 2. The Upper Bound ($ub$) Formula & Rules
+The upper bound is computed using the formula:
+
+$$ub = v + (W - w) \times \left(\frac{v_{i+1}}{w_{i+1}}\right)$$
+
+Where:
+- $v$ = current profit / value earned so far
+- $w$ = current weight used so far
+- $W$ = total knapsack capacity ($16$)
+- $\frac{v_{i+1}}{w_{i+1}}$ = profit-to-weight ratio of the **next available item**
+
+#### The 3 Branch & Bound Decision Rules:
+1. **Branching:**
+   - Left branch: `with i` (include item $i \implies w \leftarrow w + w_i,\ v \leftarrow v + v_i$).
+   - Right branch: `w/o i` (exclude item $i \implies w \leftarrow w,\ v \leftarrow v$).
+2. **Pruning Condition 1 (Infeasible):**
+   - If $w > W \implies$ mark **`X not feasible`** and kill the branch immediately!
+3. **Pruning Condition 2 (Inferior):**
+   - If $ub \le \text{Best Feasible Solution Found} \implies$ mark **`X inferior to node X`** and prune the branch!
 
 ---
 
-### 3. Step-by-Step Tree Exploration
+### 3. Step-by-Step Node Calculations
 
-| Node | Action Taken | Weight | Profit | Upper Bound ($UB$) | Status |
+- **Node 0 (Root):** $w = 0, v = 0$
+  $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \quad \text{(or fractional greedy: } \mathbf{120}\text{)}$$
+- **Node 1 (with $I_1$):** $w = 2, v = 40$
+  $$ub = 40 + (16 - 2) \times 6.25 = 40 + 87.5 = \mathbf{127.5}$$
+- **Node 2 (w/o $I_1$):** $w = 0, v = 0$
+  $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \implies \text{\textbf{X inferior to node 9}}\ (100 < 115)$$
+- **Node 3 (with $I_5$):** $w = 2 + 4 = 6, v = 40 + 25 = 65$
+  $$ub = 65 + (16 - 6) \times 6.0 = 65 + 60 = \mathbf{125.0}$$
+- **Node 4 (w/o $I_5$):** $w = 2, v = 40$
+  $$ub = 40 + (16 - 2) \times 6.0 = 40 + 84 = \mathbf{124.0} \implies \text{\textbf{X inferior to node 9}}$$
+- **Node 5 (with $I_2$):** $w = 6 + 5 = 11, v = 65 + 30 = 95$
+  $$ub = 95 + (16 - 11) \times 5.0 = 95 + 25 = \mathbf{120.0}$$
+- **Node 6 (w/o $I_2$):** $w = 6, v = 65$
+  $$ub = 65 + (16 - 6) \times 5.0 = 65 + 50 = \mathbf{115.0}$$
+- **Node 7 (with $I_3$ from Node 5):** $w = 11 + 10 = 21$
+  $$21 > 16 \implies \text{\textbf{X not feasible (kill node)}}$$
+- **Node 8 (w/o $I_3$ from Node 5):** $w = 11, v = 95$
+  $$ub = 95 + (16 - 11) \times 2.0 = 95 + 10 = \mathbf{105.0} \implies \text{\textbf{X inferior to node 9}}\ (105 \le 115)$$
+- **Node 9 (with $I_3$ from Node 6):** $w = 6 + 10 = 16, v = 65 + 50 = 115$
+  $$ub = 115 + (16 - 16) \times 2.0 = \mathbf{115.0} \implies \mathbf{value = 115\ (OPTIMAL\ SOLUTION!)}$$
+- **Node 10 (w/o $I_3$ from Node 6):** $w = 6, v = 65$
+  $$ub = 65 + (16 - 6) \times 2.0 = 65 + 20 = \mathbf{85.0} \implies \text{\textbf{X inferior to node 9}}\ (85 < 115)$$
+
+---
+
+### 4. Summary Table of Nodes
+
+| Node | Decision Branch | $w$ | $v$ | Upper Bound ($ub$) | Status |
 |:---:|:---|---:|---:|:---:|:---|
-| **Root** | No items chosen yet | 0 | 0 | $40 + 25 + 30 + \frac{5}{10}(50) = \mathbf{120}$ | Expand |
-| **1** | Include I1 | 2 | 40 | $\mathbf{120}$ | Expand |
-| **2** | Exclude I1 | 0 | 0 | $25 + 30 + \frac{7}{10}(50) = \mathbf{90}$ | Pruned later ($90 < 115$) |
-| **3** | Include I1, Include I5 | 6 | 65 | $\mathbf{120}$ | Expand |
-| **4** | Include I1, Exclude I5 | 2 | 40 | $\mathbf{115}$ | Pruned ($UB \le 115$) |
-| **5** | Include I1, I5, I2 | 11 | 95 | $\mathbf{120}$ | Expand |
-| **6** | Include I1, I5, Exclude I2 | 6 | 65 | $\mathbf{115}$ | Expand |
-| **7** | Include I1, I5, I2, I3 | $21 > 16$ | — | — | **Killed (Over capacity!)** |
-| **8** | Include I1, I5, I2, Exclude I3 | 11 | 95 | $95 + 10 = \mathbf{105}$ | Feasible ($105 \le 115 \to$ pruned) |
-| **9** | **Include I1, I5, Exclude I2, Include I3** | **16** | **115** | **115** | **🎉 Feasible! Best Profit $= 115$** |
-| **10** | Include I1, I5, Exclude I2, Exclude I3 | 6 | 65 | $65 + 10 = \mathbf{75}$ | Pruned ($75 < 115$) |
-
-Once Node 9 achieves feasible profit **115**, all remaining live nodes with $UB \le 115$ are pruned.
+| **0** | Root (start) | 0 | 0 | $127.5$ | Expand |
+| **1** | `with I1` | 2 | 40 | $127.5$ | Expand |
+| **2** | `w/o I1` | 0 | 0 | $100.0$ | **X inferior to node 9** ($100 < 115$) |
+| **3** | `with I5` | 6 | 65 | $125.0$ | Expand |
+| **4** | `w/o I5` | 2 | 40 | $115.0$ | **X inferior to node 9** ($115 \le 115$) |
+| **5** | `with I2` | 11 | 95 | $120.0$ | Expand |
+| **6** | `w/o I2` | 6 | 65 | $115.0$ | Expand |
+| **7** | `with I3` | 21 | — | — | **X not feasible** ($w > 16$) |
+| **8** | `w/o I3` | 11 | 95 | $105.0$ | **X inferior to node 9** ($105 \le 115$) |
+| **9** | **`with I3`** | **16** | **115** | **115.0** | **🎉 OPTIMAL SOLUTION (value = 115)** |
+| **10** | `w/o I3` | 6 | 65 | $85.0$ | **X inferior to node 9** ($85 < 115$) |
 
 ---
 
-### 4. Final Optimal Solution
-- **Items Selected:** **`I1, I5, I3`**
-- **Total Weight:** $2 + 4 + 10 = \mathbf{16}$ (Exact capacity)
-- **Maximum Profit:** $40 + 25 + 50 = \mathbf{115}$
+### 5. Final Optimal Solution
+- **Optimal Items Selected:** **`I1, I5, I3`**
+- **Total Weight:** $2 + 4 + 10 = \mathbf{16}$
+- **Maximum Profit / Value:** $40 + 25 + 50 = \mathbf{115}$
 
 ![0/1 Knapsack LC Branch and Bound State-Space Tree](figures/unit5_q6_bb_knapsack_tree.png)
 

@@ -1,0 +1,858 @@
+PHASE 3 – PATTERN-BASED BINARY SEARCH
+====================================
+
+This document contains:
+1. Logic
+2. Practice question with user input
+3. Complete Python code
+
+Phase 3 Topics:
+1. Find Peak Element
+2. Peak Index in Mountain Array
+3. Search in Mountain Array
+4. Single Element in Sorted Array
+5. Find Missing Number in Sorted Pattern
+6. Find Local Minimum
+7. Find Local Maximum
+8. Find Maximum in Bitonic Array
+9. Search in Bitonic Array
+10. Find Target in Mountain / Bitonic Array
+
+==================================================
+1. FIND PEAK ELEMENT
+==================================================
+
+LOGIC:
+- A peak element is greater than its neighbors.
+- Example:
+  arr = [1, 2, 3, 1]
+  Peak = 3
+
+- Instead of checking both sides every time,
+  compare arr[mid] with arr[mid + 1].
+
+If:
+    arr[mid] < arr[mid + 1]
+
+then we are going upward.
+So a peak must exist on the right side.
+
+    low = mid + 1
+
+Else:
+    We are going downward,
+    so the peak can be at mid or on the left.
+
+    high = mid
+
+- When low == high,
+  that position is a peak.
+
+QUESTION:
+Take an array from the user.
+Find the index and value of a peak element using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Peak index:", low)
+print("Peak element:", arr[low])
+
+
+==================================================
+2. PEAK INDEX IN MOUNTAIN ARRAY
+==================================================
+
+LOGIC:
+- A mountain array first increases and then decreases.
+
+Example:
+[1, 3, 5, 7, 6, 4, 2]
+
+Peak = 7
+Peak index = 3
+
+- Compare arr[mid] and arr[mid + 1].
+
+If:
+    arr[mid] < arr[mid + 1]
+
+we are on the increasing side.
+Move right.
+
+Else:
+    we are on the decreasing side
+    or exactly at the peak.
+Move left including mid.
+
+QUESTION:
+Take a mountain array from the user.
+Find the peak index.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter mountain array elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Peak index:", low)
+print("Peak element:", arr[low])
+
+
+==================================================
+3. SEARCH IN MOUNTAIN ARRAY
+==================================================
+
+LOGIC:
+- A mountain array has two parts:
+
+  Increasing part
+  Peak
+  Decreasing part
+
+Example:
+[1, 3, 5, 8, 6, 4, 2]
+
+Step 1:
+Find the peak index.
+
+Step 2:
+Search target in the increasing part
+using normal Binary Search.
+
+Step 3:
+If not found,
+search target in the decreasing part
+using reverse Binary Search.
+
+QUESTION:
+Take a mountain array and target from the user.
+Find the target index.
+If not found, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter mountain array elements: ").split()))
+target = int(input("Enter target: "))
+
+# Find peak
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+peak = low
+
+
+# Search increasing part
+low = 0
+high = peak
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+# Search decreasing part
+if answer == -1:
+    low = peak + 1
+    high = n - 1
+
+    while low <= high:
+        mid = low + (high - low) // 2
+
+        if arr[mid] == target:
+            answer = mid
+            break
+
+        elif arr[mid] < target:
+            high = mid - 1
+
+        else:
+            low = mid + 1
+
+print("Index:", answer)
+
+
+==================================================
+4. SINGLE ELEMENT IN SORTED ARRAY
+==================================================
+
+LOGIC:
+Example:
+[1, 1, 2, 2, 3, 4, 4, 5, 5]
+
+Single element = 3
+
+All other values appear exactly twice.
+
+Important pattern before single element:
+
+Pairs begin at EVEN index.
+
+Example:
+0,1
+2,3
+4,5
+
+After the single element,
+the pair pattern shifts.
+
+Main trick:
+Make mid even.
+
+If mid is odd:
+    mid -= 1
+
+Now compare:
+
+    arr[mid] == arr[mid + 1]
+
+If true:
+    Single element is on the right.
+
+    low = mid + 2
+
+Else:
+    Single element is at mid or on the left.
+
+    high = mid
+
+QUESTION:
+Take a sorted array where every value occurs twice except one.
+Find the single element using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if mid % 2 == 1:
+        mid -= 1
+
+    if arr[mid] == arr[mid + 1]:
+        low = mid + 2
+    else:
+        high = mid
+
+print("Single element:", arr[low])
+
+
+==================================================
+5. FIND MISSING NUMBER IN SORTED PATTERN
+==================================================
+
+LOGIC:
+Suppose the array should contain numbers from 1 onward.
+
+Example:
+[1, 2, 3, 4, 6, 7, 8]
+
+Missing number = 5
+
+For a perfect sequence starting from 1:
+
+index 0 -> value 1
+index 1 -> value 2
+index 2 -> value 3
+
+So:
+    arr[index] = index + 1
+
+If:
+    arr[mid] == mid + 1
+
+then no number is missing before mid.
+Move right.
+
+Else:
+    missing number is on the left side
+    or at current position.
+
+QUESTION:
+Take a sorted array containing numbers starting from 1
+with exactly one missing number.
+Find the missing number using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == mid + 1:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+print("Missing number:", low + 1)
+
+
+==================================================
+6. FIND LOCAL MINIMUM
+==================================================
+
+LOGIC:
+- A local minimum is smaller than its neighbors.
+
+Example:
+[9, 7, 3, 5, 8]
+
+Local minimum = 3
+
+We can compare mid with neighbors.
+
+If:
+    arr[mid] is smaller than both neighbors
+
+then mid is the local minimum.
+
+If left neighbor is smaller:
+    move left.
+
+Otherwise:
+    move right.
+
+QUESTION:
+Take an array of distinct elements.
+Find a local minimum using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter elements: ").split()))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    left = arr[mid - 1] if mid > 0 else float("inf")
+    right = arr[mid + 1] if mid < n - 1 else float("inf")
+
+    if arr[mid] < left and arr[mid] < right:
+        answer = mid
+        break
+
+    elif left < arr[mid]:
+        high = mid - 1
+
+    else:
+        low = mid + 1
+
+print("Local minimum index:", answer)
+print("Local minimum:", arr[answer])
+
+
+==================================================
+7. FIND LOCAL MAXIMUM
+==================================================
+
+LOGIC:
+- A local maximum is greater than its neighbors.
+
+Example:
+[1, 4, 7, 5, 3]
+
+Local maximum = 7
+
+If arr[mid] is greater than both neighbors:
+    mid is a local maximum.
+
+If the right neighbor is greater:
+    move right.
+
+Otherwise:
+    move left.
+
+QUESTION:
+Take an array of distinct elements.
+Find a local maximum using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter elements: ").split()))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    left = arr[mid - 1] if mid > 0 else float("-inf")
+    right = arr[mid + 1] if mid < n - 1 else float("-inf")
+
+    if arr[mid] > left and arr[mid] > right:
+        answer = mid
+        break
+
+    elif right > arr[mid]:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+print("Local maximum index:", answer)
+print("Local maximum:", arr[answer])
+
+
+==================================================
+8. FIND MAXIMUM IN BITONIC ARRAY
+==================================================
+
+LOGIC:
+- A bitonic array first increases and then decreases.
+
+Example:
+[1, 3, 8, 12, 9, 5, 2]
+
+Maximum = 12
+
+This is basically the same as finding the peak.
+
+If:
+    arr[mid] < arr[mid + 1]
+
+move right.
+
+Else:
+    keep mid and move left.
+
+QUESTION:
+Take a bitonic array.
+Find the maximum element using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter bitonic array elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Maximum element:", arr[low])
+print("Maximum index:", low)
+
+
+==================================================
+9. SEARCH IN BITONIC ARRAY
+==================================================
+
+LOGIC:
+A bitonic array:
+
+increases
+then reaches maximum
+then decreases.
+
+Example:
+[1, 3, 8, 12, 9, 5, 2]
+
+To search a target:
+
+Step 1:
+Find the maximum / peak index.
+
+Step 2:
+Binary Search on increasing side.
+
+Step 3:
+Binary Search on decreasing side.
+
+QUESTION:
+Take a bitonic array and target.
+Find target index.
+If absent, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter bitonic array elements: ").split()))
+target = int(input("Enter target: "))
+
+# Find peak
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+peak = low
+answer = -1
+
+
+# Search increasing half
+low = 0
+high = peak
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+# Search decreasing half
+if answer == -1:
+    low = peak + 1
+    high = n - 1
+
+    while low <= high:
+        mid = low + (high - low) // 2
+
+        if arr[mid] == target:
+            answer = mid
+            break
+
+        elif arr[mid] < target:
+            high = mid - 1
+
+        else:
+            low = mid + 1
+
+print("Index:", answer)
+
+
+==================================================
+10. FIND TARGET IN MOUNTAIN / BITONIC ARRAY
+==================================================
+
+LOGIC:
+This is a full combination problem.
+
+Example:
+arr = [2, 4, 7, 11, 9, 6, 3]
+target = 6
+
+Step 1:
+Find peak index.
+
+Step 2:
+Search increasing half.
+
+Step 3:
+Search decreasing half.
+
+This problem is important because it combines:
+- peak finding
+- normal Binary Search
+- descending Binary Search
+
+QUESTION:
+Take a mountain array and target.
+Find the target index using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter mountain array elements: ").split()))
+target = int(input("Enter target: "))
+
+# Find peak
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < arr[mid + 1]:
+        low = mid + 1
+    else:
+        high = mid
+
+peak = low
+
+
+# Search left side
+low = 0
+high = peak
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+# Search right side
+if answer == -1:
+    low = peak + 1
+    high = n - 1
+
+    while low <= high:
+        mid = low + (high - low) // 2
+
+        if arr[mid] == target:
+            answer = mid
+            break
+
+        elif arr[mid] < target:
+            high = mid - 1
+
+        else:
+            low = mid + 1
+
+print("Target index:", answer)
+
+
+==================================================
+PHASE 3 QUICK REVISION
+==================================================
+
+1. Peak Element
+   Compare:
+      arr[mid] and arr[mid + 1]
+
+   If arr[mid] < arr[mid + 1]:
+      move RIGHT
+   else:
+      move LEFT including mid
+
+2. Mountain Array
+   Increasing -> Peak -> Decreasing
+
+3. Search in Mountain Array
+   Find peak
+   Search increasing side
+   Search decreasing side
+
+4. Single Element
+   Pair pattern changes after the single element.
+
+5. Missing Number
+   Compare:
+      arr[mid] with mid + 1
+
+6. Local Minimum
+   Smaller than both neighbors.
+
+7. Local Maximum
+   Greater than both neighbors.
+
+8. Maximum in Bitonic Array
+   Same as peak element.
+
+9. Search in Bitonic Array
+   Peak + two Binary Searches.
+
+10. Mountain / Bitonic Target Search
+    One increasing search
+    One decreasing search
+
+
+==================================================
+IMPORTANT: ASCENDING VS DESCENDING BINARY SEARCH
+==================================================
+
+ASCENDING ARRAY:
+
+if arr[mid] < target:
+    low = mid + 1
+else:
+    high = mid - 1
+
+
+DESCENDING ARRAY:
+
+if arr[mid] < target:
+    high = mid - 1
+else:
+    low = mid + 1
+
+
+Example descending array:
+
+[10, 8, 6, 4, 2]
+
+If:
+arr[mid] = 6
+target = 8
+
+Target is greater than 6.
+
+In descending order,
+greater values are on the LEFT.
+
+So:
+high = mid - 1
+
+
+==================================================
+IMPORTANT: WHY arr[mid + 1] IS SAFE?
+==================================================
+
+In peak problems we use:
+
+while low < high
+
+This guarantees that mid will not become the last index.
+
+So:
+arr[mid + 1]
+
+remains valid.
+
+
+==================================================
+IMPORTANT: WHY high = mid?
+==================================================
+
+In peak problems:
+
+if arr[mid] > arr[mid + 1]
+
+mid itself may be the peak.
+
+So we should not remove mid.
+
+Therefore:
+
+high = mid
+
+not:
+
+high = mid - 1
+
+
+==================================================
+SUGGESTED PRACTICE ORDER
+==================================================
+
+Day 1:
+1. Find Peak Element
+2. Peak Index in Mountain Array
+3. Maximum in Bitonic Array
+
+Day 2:
+4. Single Element in Sorted Array
+5. Missing Number in Sorted Pattern
+
+Day 3:
+6. Local Minimum
+7. Local Maximum
+
+Day 4:
+8. Search in Mountain Array
+9. Search in Bitonic Array
+10. Target in Mountain / Bitonic Array
+
+
+==================================================
+PHASE 3 CHECKPOINT
+==================================================
+
+Before moving to Phase 4, make sure you understand:
+
+1. Why compare arr[mid] with arr[mid + 1]?
+
+2. Why use:
+      while low < high
+
+3. Why sometimes:
+      high = mid
+
+4. Difference between:
+      ascending Binary Search
+      descending Binary Search
+
+5. How to split a mountain array into:
+      increasing part
+      decreasing part
+
+6. How pair indexes help in the
+   Single Element problem.
+
+After Phase 3, move to:
+
+PHASE 4 – BINARY SEARCH ON NUMBERS
+
+Topics:
+- Square Root
+- Integer Square Root
+- Perfect Square
+- Nth Root
+- Cube Root
+- Precision Binary Search

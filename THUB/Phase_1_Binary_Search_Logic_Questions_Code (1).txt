@@ -1,0 +1,652 @@
+PHASE 1 – BINARY SEARCH PRACTICE
+================================
+
+This document contains:
+1. Logic
+2. Practice question with user input
+3. Complete Python code
+
+--------------------------------------------------
+1. BASIC BINARY SEARCH
+--------------------------------------------------
+
+LOGIC:
+- Binary Search works on a sorted array.
+- Set low = 0 and high = n - 1.
+- Find middle index:
+      mid = low + (high - low) // 2
+- If arr[mid] == target, target is found.
+- If arr[mid] < target, search the right half:
+      low = mid + 1
+- If arr[mid] > target, search the left half:
+      high = mid - 1
+- If low becomes greater than high, target is not present.
+
+PRACTICE QUESTION:
+Take the size of a sorted array from the user.
+Take all array elements from the user.
+Take a target value from the user.
+Find the index of the target using Binary Search.
+If the target is not present, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target element: "))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+    elif arr[mid] < target:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+print("Index:", answer)
+
+
+--------------------------------------------------
+2. SEARCH INSERT POSITION
+--------------------------------------------------
+
+LOGIC:
+- The array is sorted.
+- We need to find where the target exists or where it should be inserted.
+- Use Binary Search.
+- If arr[mid] < target, move right.
+- Otherwise, store mid as a possible answer and move left.
+- At the end, low gives the correct insertion position.
+
+PRACTICE QUESTION:
+Take a sorted array from the user.
+Take a target value.
+Print the index where the target is present.
+If it is not present, print the index where it should be inserted.
+
+Example:
+Array: 1 3 5 6
+Target: 2
+Output: 1
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < target:
+        low = mid + 1
+    else:
+        high = mid - 1
+
+print("Insert position:", low)
+
+
+--------------------------------------------------
+3. FIND FLOOR OF A NUMBER
+--------------------------------------------------
+
+LOGIC:
+- Floor means the greatest element less than or equal to the target.
+- Example:
+      arr = [1, 2, 4, 6, 8]
+      target = 5
+      floor = 4
+- If arr[mid] == target, that value is the floor.
+- If arr[mid] < target:
+      store arr[mid] as a possible answer
+      move right to find a larger valid value.
+- If arr[mid] > target:
+      move left.
+
+PRACTICE QUESTION:
+Take a sorted array and target from the user.
+Find the floor of the target.
+If no floor exists, print "No floor exists".
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+floor_value = None
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        floor_value = arr[mid]
+        break
+
+    elif arr[mid] < target:
+        floor_value = arr[mid]
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+if floor_value is None:
+    print("No floor exists")
+else:
+    print("Floor:", floor_value)
+
+
+--------------------------------------------------
+4. FIND CEIL OF A NUMBER
+--------------------------------------------------
+
+LOGIC:
+- Ceil means the smallest element greater than or equal to the target.
+- Example:
+      arr = [1, 2, 4, 6, 8]
+      target = 5
+      ceil = 6
+- If arr[mid] == target, that value is the ceil.
+- If arr[mid] > target:
+      store arr[mid] as a possible answer
+      move left to find a smaller valid value.
+- If arr[mid] < target:
+      move right.
+
+PRACTICE QUESTION:
+Take a sorted array and target from the user.
+Find the ceil of the target.
+If no ceil exists, print "No ceil exists".
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+ceil_value = None
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        ceil_value = arr[mid]
+        break
+
+    elif arr[mid] > target:
+        ceil_value = arr[mid]
+        high = mid - 1
+
+    else:
+        low = mid + 1
+
+if ceil_value is None:
+    print("No ceil exists")
+else:
+    print("Ceil:", ceil_value)
+
+
+--------------------------------------------------
+5. FIRST OCCURRENCE OF TARGET
+--------------------------------------------------
+
+LOGIC:
+- Used when duplicate elements are present.
+- When target is found, do not stop.
+- Save mid as the answer.
+- Continue searching on the left side.
+- This gives the first occurrence.
+
+Example:
+arr = [1, 2, 2, 2, 3]
+target = 2
+answer = 1
+
+PRACTICE QUESTION:
+Take a sorted array that may contain duplicates.
+Take a target.
+Print the index of the first occurrence of the target.
+If it does not exist, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        high = mid - 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+print("First occurrence index:", answer)
+
+
+--------------------------------------------------
+6. LAST OCCURRENCE OF TARGET
+--------------------------------------------------
+
+LOGIC:
+- Similar to first occurrence.
+- When target is found:
+      save mid
+      continue searching on the right side.
+- This gives the last occurrence.
+
+Example:
+arr = [1, 2, 2, 2, 3]
+target = 2
+answer = 3
+
+PRACTICE QUESTION:
+Take a sorted array containing possible duplicate elements.
+Take a target.
+Print the index of the last occurrence.
+If target is absent, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        low = mid + 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+print("Last occurrence index:", answer)
+
+
+--------------------------------------------------
+7. COUNT OCCURRENCES OF TARGET
+--------------------------------------------------
+
+LOGIC:
+- First find the first occurrence.
+- Then find the last occurrence.
+- If target exists:
+      count = last - first + 1
+- Otherwise:
+      count = 0
+
+Example:
+arr = [1, 2, 2, 2, 3]
+target = 2
+
+first = 1
+last = 3
+
+count = 3 - 1 + 1 = 3
+
+PRACTICE QUESTION:
+Take a sorted array with duplicates.
+Take a target.
+Find how many times the target occurs using Binary Search.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+
+# Find first occurrence
+low = 0
+high = n - 1
+first = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        first = mid
+        high = mid - 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+# Find last occurrence
+low = 0
+high = n - 1
+last = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        last = mid
+        low = mid + 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+if first == -1:
+    print("Count: 0")
+else:
+    print("Count:", last - first + 1)
+
+
+--------------------------------------------------
+8. FIND FIRST AND LAST POSITION
+--------------------------------------------------
+
+LOGIC:
+- Find the first occurrence using Binary Search.
+- Find the last occurrence using Binary Search.
+- Return both indexes.
+
+Example:
+arr = [5, 7, 7, 8, 8, 10]
+target = 8
+
+Output:
+[3, 4]
+
+PRACTICE QUESTION:
+Take a sorted array and a target from the user.
+Print the first and last position of the target.
+If target is not present, print [-1, -1].
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+
+# First occurrence
+low = 0
+high = n - 1
+first = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        first = mid
+        high = mid - 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+# Last occurrence
+low = 0
+high = n - 1
+last = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        last = mid
+        low = mid + 1
+
+    elif arr[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+
+
+print([first, last])
+
+
+--------------------------------------------------
+9. LOWER BOUND
+--------------------------------------------------
+
+LOGIC:
+- Lower Bound = first index where:
+      arr[index] >= target
+- If arr[mid] >= target:
+      mid may be the answer
+      move left.
+- If arr[mid] < target:
+      move right.
+- If no such element exists, answer will be n.
+
+Example:
+arr = [1, 3, 5, 7]
+target = 4
+
+Output:
+2
+
+Because arr[2] = 5 is the first value >= 4.
+
+PRACTICE QUESTION:
+Take a sorted array and target from the user.
+Find the lower bound index.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = n
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] >= target:
+        answer = mid
+        high = mid - 1
+
+    else:
+        low = mid + 1
+
+print("Lower bound index:", answer)
+
+
+--------------------------------------------------
+10. UPPER BOUND
+--------------------------------------------------
+
+LOGIC:
+- Upper Bound = first index where:
+      arr[index] > target
+- If arr[mid] > target:
+      mid may be the answer
+      move left.
+- Otherwise:
+      move right.
+- If no element is greater than target, answer is n.
+
+Example:
+arr = [1, 2, 2, 2, 4, 6]
+target = 2
+
+Output:
+4
+
+Because arr[4] = 4 is the first value greater than 2.
+
+PRACTICE QUESTION:
+Take a sorted array and target from the user.
+Find the upper bound index.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+
+arr = list(map(int, input("Enter sorted elements: ").split()))
+
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = n
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] > target:
+        answer = mid
+        high = mid - 1
+
+    else:
+        low = mid + 1
+
+print("Upper bound index:", answer)
+
+
+==================================================
+PHASE 1 QUICK REVISION
+==================================================
+
+1. Basic Binary Search
+   Target found:
+      arr[mid] == target
+
+2. Search Insert Position
+   Find first index where:
+      arr[index] >= target
+
+3. Floor
+   Greatest value:
+      <= target
+
+4. Ceil
+   Smallest value:
+      >= target
+
+5. First Occurrence
+   Target found -> move LEFT.
+
+6. Last Occurrence
+   Target found -> move RIGHT.
+
+7. Count Occurrences
+   last - first + 1
+
+8. First and Last Position
+   Perform two Binary Searches.
+
+9. Lower Bound
+   First value:
+      >= target
+
+10. Upper Bound
+    First value:
+      > target
+
+
+==================================================
+IMPORTANT RULE
+==================================================
+
+Binary Search normally requires sorted data.
+
+Main template:
+
+low = 0
+high = n - 1
+
+while low <= high:
+
+    mid = low + (high - low) // 2
+
+    if condition:
+        # move left or right
+
+Time Complexity:
+O(log n)
+
+Space Complexity for iterative Binary Search:
+O(1)
+
+
+==================================================
+SUGGESTED PRACTICE ORDER
+==================================================
+
+Day 1:
+1. Basic Binary Search
+2. Search Insert Position
+3. Floor
+4. Ceil
+
+Day 2:
+5. First Occurrence
+6. Last Occurrence
+7. Count Occurrences
+
+Day 3:
+8. First and Last Position
+9. Lower Bound
+10. Upper Bound
+
+After completing these, move to Phase 2:
+Rotated Sorted Arrays.

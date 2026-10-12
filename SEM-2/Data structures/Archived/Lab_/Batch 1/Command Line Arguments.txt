@@ -1,0 +1,93 @@
+Command Line Arguments:
+-----------------------------
+Command Line Arguments are values passed to a program while running it from the command line (terminal).
+
+Instead of taking input using scanf(),
+We pass input directly when executing the program.
+
+Syntax:
+------------
+int main(int argc, char *argv[])
+
+argc → Argument Count
+(Total number of arguments)
+
+argv → Argument Vector
+(Array of argument values)
+
+Important Points:
+-------------------------
+
+argv[0] → Program name
+
+argv[1] → First argument
+
+argv[2] → Second argument
+
+and so on…
+
+Example:
+--------------
+#include<stdio.h>
+
+int main(int argc, char *argv[])
+{
+    int i;
+
+    printf("Total arguments: %d\n", argc);
+
+    for(i = 0; i < argc; i++)
+    {
+        printf("Argument %d: %s\n", i, argv[i]);
+    }
+
+    return 0;
+}
+
+Syllabus practice question solution:
+-------------------------------------
+#include<stdio.h>
+#include<stdlib.h>
+
+int main(int argc, char *argv[])
+{
+    char *name = argv[1];
+
+    int mark1 = atoi(argv[2]);
+    int mark2 = atoi(argv[3]);
+
+    int total = mark1 + mark2;
+
+    printf("Student Name : %s\n", name);
+    printf("Mark 1       : %d\n", mark1);
+    printf("Mark 2       : %d\n", mark2);
+    printf("Total        : %d\n", total);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

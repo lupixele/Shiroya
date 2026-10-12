@@ -1,0 +1,529 @@
+PHASE 2 – BINARY SEARCH PRACTICE
+================================
+
+This document contains:
+1. Logic
+2. Practice question with user input
+3. Complete Python code
+
+Phase 2 Topics:
+1. Smallest Element Greater Than Target
+2. Largest Element Smaller Than Target
+3. Closest Element to Target
+4. Search in Nearly Sorted Array
+5. Number of Times a Sorted Array is Rotated
+6. Minimum in Rotated Sorted Array
+7. Search in Rotated Sorted Array
+8. Search in Rotated Sorted Array with Duplicates
+9. Maximum in Rotated Sorted Array
+10. Rotation Index
+
+==================================================
+1. SMALLEST ELEMENT GREATER THAN TARGET
+==================================================
+
+LOGIC:
+- Find the smallest value strictly greater than the target.
+- If arr[mid] > target:
+  save arr[mid] as a possible answer and move left.
+- Otherwise, move right.
+
+QUESTION:
+Take a sorted array and target from the user.
+Find the smallest element strictly greater than the target.
+If it does not exist, print "No element found".
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = None
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] > target:
+        answer = arr[mid]
+        high = mid - 1
+    else:
+        low = mid + 1
+
+if answer is None:
+    print("No element found")
+else:
+    print("Smallest element greater than target:", answer)
+
+==================================================
+2. LARGEST ELEMENT SMALLER THAN TARGET
+==================================================
+
+LOGIC:
+- Find the greatest value strictly smaller than the target.
+- If arr[mid] < target:
+  save arr[mid] and move right.
+- Otherwise, move left.
+
+QUESTION:
+Take a sorted array and target from the user.
+Find the largest element strictly smaller than the target.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = None
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] < target:
+        answer = arr[mid]
+        low = mid + 1
+    else:
+        high = mid - 1
+
+if answer is None:
+    print("No element found")
+else:
+    print("Largest element smaller than target:", answer)
+
+==================================================
+3. CLOSEST ELEMENT TO TARGET
+==================================================
+
+LOGIC:
+- Use normal Binary Search.
+- If target is found, it is the closest element.
+- If not found, after the loop:
+  high points to the nearby smaller element.
+  low points to the nearby larger element.
+- Compare both distances using abs().
+
+QUESTION:
+Take a sorted array and target.
+Print the closest element to the target.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        print("Closest element:", arr[mid])
+        break
+    elif arr[mid] < target:
+        low = mid + 1
+    else:
+        high = mid - 1
+else:
+    if high < 0:
+        print("Closest element:", arr[low])
+    elif low >= n:
+        print("Closest element:", arr[high])
+    else:
+        left_diff = abs(arr[high] - target)
+        right_diff = abs(arr[low] - target)
+
+        if left_diff <= right_diff:
+            print("Closest element:", arr[high])
+        else:
+            print("Closest element:", arr[low])
+
+==================================================
+4. SEARCH IN NEARLY SORTED ARRAY
+==================================================
+
+LOGIC:
+In a nearly sorted array, an element that should be at index i
+may be at i, i-1, or i+1.
+
+So at each step check:
+- arr[mid]
+- arr[mid - 1]
+- arr[mid + 1]
+
+If target is smaller than arr[mid], move left by 2.
+If target is larger, move right by 2.
+
+QUESTION:
+Take a nearly sorted array and target.
+Find the target index. If absent, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter nearly sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+
+    if mid - 1 >= low and arr[mid - 1] == target:
+        answer = mid - 1
+        break
+
+    if mid + 1 <= high and arr[mid + 1] == target:
+        answer = mid + 1
+        break
+
+    if arr[mid] > target:
+        high = mid - 2
+    else:
+        low = mid + 2
+
+print("Index:", answer)
+
+==================================================
+5. NUMBER OF TIMES A SORTED ARRAY IS ROTATED
+==================================================
+
+LOGIC:
+- The number of rotations is the index of the minimum element.
+- Example:
+  [4, 5, 1, 2, 3]
+  Minimum element = 1
+  Index = 2
+  So array is rotated 2 times.
+
+QUESTION:
+Take a rotated sorted array with unique values.
+Find how many times it has been rotated.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    if arr[low] <= arr[high]:
+        break
+
+    mid = low + (high - low) // 2
+
+    if arr[mid] > arr[high]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Number of rotations:", low)
+
+==================================================
+6. FIND MINIMUM IN ROTATED SORTED ARRAY
+==================================================
+
+LOGIC:
+- Compare arr[mid] with arr[high].
+- If arr[mid] > arr[high], minimum is on the right.
+- Otherwise, minimum is at mid or on the left.
+- When low == high, arr[low] is the minimum.
+
+QUESTION:
+Take a rotated sorted array with unique elements.
+Find the minimum element.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] > arr[high]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Minimum element:", arr[low])
+
+==================================================
+7. SEARCH IN ROTATED SORTED ARRAY
+==================================================
+
+LOGIC:
+- At least one half is sorted.
+- If arr[low] <= arr[mid], left half is sorted.
+- Otherwise, right half is sorted.
+- Check whether the target lies in the sorted half.
+- If yes, search there.
+- Otherwise, search the other half.
+
+QUESTION:
+Take a rotated sorted array with unique elements and a target.
+Find its index. If absent, print -1.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+answer = -1
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        answer = mid
+        break
+
+    if arr[low] <= arr[mid]:
+        if arr[low] <= target < arr[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+    else:
+        if arr[mid] < target <= arr[high]:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+print("Index:", answer)
+
+==================================================
+8. SEARCH IN ROTATED SORTED ARRAY WITH DUPLICATES
+==================================================
+
+LOGIC:
+Duplicates can make it difficult to identify the sorted half.
+
+If:
+arr[low] == arr[mid] == arr[high]
+
+then:
+low += 1
+high -= 1
+
+Otherwise use the normal rotated-array logic.
+
+QUESTION:
+Take a rotated sorted array that may contain duplicates.
+Take a target.
+Print True if found, otherwise False.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+target = int(input("Enter target: "))
+
+low = 0
+high = n - 1
+found = False
+
+while low <= high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] == target:
+        found = True
+        break
+
+    if arr[low] == arr[mid] == arr[high]:
+        low += 1
+        high -= 1
+        continue
+
+    if arr[low] <= arr[mid]:
+        if arr[low] <= target < arr[mid]:
+            high = mid - 1
+        else:
+            low = mid + 1
+    else:
+        if arr[mid] < target <= arr[high]:
+            low = mid + 1
+        else:
+            high = mid - 1
+
+print(found)
+
+==================================================
+9. FIND MAXIMUM IN ROTATED SORTED ARRAY
+==================================================
+
+LOGIC:
+- First find the minimum index.
+- If minimum index is 0, array is not rotated.
+  Maximum is the last element.
+- Otherwise, maximum is the element just before the minimum.
+
+QUESTION:
+Take a rotated sorted array with unique elements.
+Find the maximum element.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] > arr[high]:
+        low = mid + 1
+    else:
+        high = mid
+
+minimum_index = low
+
+if minimum_index == 0:
+    maximum = arr[n - 1]
+else:
+    maximum = arr[minimum_index - 1]
+
+print("Maximum element:", maximum)
+
+==================================================
+10. ROTATION INDEX
+==================================================
+
+LOGIC:
+- Rotation index is the index of the minimum element.
+- Compare arr[mid] with arr[high].
+- If arr[mid] > arr[high], move right.
+- Otherwise, keep mid and move left.
+- At the end, low is the rotation index.
+
+QUESTION:
+Take a rotated sorted array.
+Find the index where rotation starts.
+
+CODE:
+
+n = int(input("Enter number of elements: "))
+arr = list(map(int, input("Enter rotated sorted elements: ").split()))
+
+low = 0
+high = n - 1
+
+while low < high:
+    mid = low + (high - low) // 2
+
+    if arr[mid] > arr[high]:
+        low = mid + 1
+    else:
+        high = mid
+
+print("Rotation index:", low)
+
+==================================================
+PHASE 2 QUICK REVISION
+==================================================
+
+1. Smallest element > target
+   Save answer and move LEFT.
+
+2. Largest element < target
+   Save answer and move RIGHT.
+
+3. Closest element
+   Compare nearby values after Binary Search.
+
+4. Nearly sorted array
+   Check mid, mid-1 and mid+1.
+
+5. Number of rotations
+   Index of minimum element.
+
+6. Minimum in rotated array
+   Compare arr[mid] with arr[high].
+
+7. Search in rotated array
+   First identify which half is sorted.
+
+8. Rotated array with duplicates
+   If low, mid and high values are equal:
+   low += 1 and high -= 1.
+
+9. Maximum in rotated array
+   Element before minimum.
+
+10. Rotation index
+    Index of minimum element.
+
+==================================================
+IMPORTANT: WHY high = mid?
+==================================================
+
+While finding the minimum element, mid itself may be the answer.
+
+Example:
+[4, 5, 1, 2, 3]
+
+If mid points to 1, using:
+high = mid - 1
+
+would remove the correct answer.
+
+So we use:
+high = mid
+
+==================================================
+IMPORTANT: WHY while low < high?
+==================================================
+
+For minimum/rotation-index problems, the goal is to reduce the
+search space until only one element remains.
+
+When the loop ends:
+low == high
+
+That index is the answer.
+
+==================================================
+SUGGESTED PRACTICE ORDER
+==================================================
+
+Day 1:
+1. Smallest Element Greater Than Target
+2. Largest Element Smaller Than Target
+3. Closest Element
+
+Day 2:
+4. Search in Nearly Sorted Array
+5. Number of Rotations
+6. Minimum in Rotated Sorted Array
+
+Day 3:
+7. Search in Rotated Sorted Array
+8. Search in Rotated Sorted Array with Duplicates
+
+Day 4:
+9. Maximum in Rotated Sorted Array
+10. Rotation Index
+
+After this, move to Phase 3:
+Pattern-Based Binary Search.

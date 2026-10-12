@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singly Linked List — Visual Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;700;900&display=swap');
+
+  :root {
+    --bg: #0d0f1a;
+    --card: #131624;
+    --border: #1e2540;
+    --node-bg: #1a2035;
+    --node-border: #2e3d6e;
+    --accent: #4f8ef7;
+    --green: #3ecf8e;
+    --red: #f75f5f;
+    --yellow: #f7c94f;
+    --purple: #a78bfa;
+    --orange: #fb923c;
+    --text: #e2e8f0;
+    --muted: #8896b3;
+    --head-color: #f7c94f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 40px 20px 30px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 30px;
+  }
+  .header h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--orange), var(--yellow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p { color: var(--muted); margin-top: 8px; font-size: 0.95rem; }
+
+  /* NODE STRUCTURE */
+  .node-structure {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .node-structure h2 {
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+  .node-demo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    background: var(--node-bg);
+    border: 2px solid var(--orange);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+  }
+  .node-demo .part {
+    padding: 12px 20px;
+    border-right: 1px solid var(--node-border);
+  }
+  .node-demo .part:last-child { border-right: none; }
+  .node-demo .data-part { color: var(--yellow); font-weight: 700; }
+  .node-demo .next-part { color: var(--accent); }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+
+  /* CARDS */
+  .ops-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .op-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .op-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .op-num {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.85rem;
+    font-family: 'JetBrains Mono', monospace;
+    flex-shrink: 0;
+  }
+  .op-title { font-weight: 700; font-size: 1rem; }
+  .op-complexity {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .op-body { padding: 20px; }
+
+  /* BEFORE/AFTER */
+  .before-after {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 600px) { .before-after { grid-template-columns: 1fr; } }
+  .state-box {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+  }
+  .state-box.after-box { border-color: #2a3d2a; }
+
+  /* DIAGRAM LABEL */
+  .diagram-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .diagram-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* SLL DIAGRAM */
+  .sll-diagram {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 10px;
+    padding: 6px 0;
+  }
+
+  .head-ptr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+  .head-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--head-color);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 4px;
+  }
+  .head-arrow { color: var(--head-color); font-size: 1rem; line-height: 1; }
+
+  /* SLL NODE — only DATA + NEXT */
+  .sll-node {
+    display: flex;
+    border: 2px solid var(--node-border);
+    border-radius: 6px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    background: var(--node-bg);
+    flex-shrink: 0;
+  }
+  .sll-node .n-data {
+    padding: 8px 12px;
+    color: var(--yellow);
+    font-weight: 700;
+    font-size: 0.8rem;
+    border-right: 1px solid var(--node-border);
+    min-width: 36px;
+    text-align: center;
+  }
+  .sll-node .n-next {
+    padding: 8px 8px;
+    background: #1c2540;
+    color: var(--accent);
+    min-width: 28px;
+    text-align: center;
+  }
+
+  /* Node color variants */
+  .sll-node.new-node {
+    border-color: var(--green);
+    box-shadow: 0 0 12px rgba(62,207,142,0.3);
+  }
+  .sll-node.new-node .n-data { color: var(--green); }
+  .sll-node.del-node {
+    border-color: var(--red);
+    box-shadow: 0 0 12px rgba(247,95,95,0.25);
+    opacity: 0.65;
+  }
+  .sll-node.del-node .n-data { color: var(--red); text-decoration: line-through; }
+  .sll-node.found-node {
+    border-color: var(--purple);
+    box-shadow: 0 0 12px rgba(167,139,250,0.25);
+  }
+  .sll-node.found-node .n-data { color: var(--purple); }
+  .sll-node.key-node {
+    border-color: var(--orange);
+    box-shadow: 0 0 10px rgba(251,146,60,0.2);
+  }
+  .sll-node.key-node .n-data { color: var(--orange); }
+
+  /* Arrows */
+  .arrow-fwd {
+    color: var(--accent);
+    font-size: 1rem;
+    padding: 0 3px;
+    flex-shrink: 0;
+  }
+  .null-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* STEPS */
+  .steps-title {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .steps-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 6px;
+  }
+  .step {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  .step-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .step-text { color: var(--text); }
+  .step-text code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--orange);
+    background: rgba(251,146,60,0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* NOTE */
+  .note {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: rgba(251,146,60,0.07);
+    border: 1px solid rgba(251,146,60,0.2);
+    color: var(--muted);
+  }
+  .note.info {
+    background: rgba(79,142,247,0.07);
+    border-color: rgba(79,142,247,0.2);
+  }
+
+  /* POINTER TRACE — for showing traversal step-by-step */
+  .trace-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .trace-ptr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--orange);
+    background: rgba(251,146,60,0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(251,146,60,0.3);
+    flex-shrink: 0;
+  }
+
+  /* SUMMARY TABLE */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  .summary-table th {
+    padding: 10px 16px;
+    text-align: left;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .summary-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .summary-table tr:last-child td { border-bottom: none; }
+  .summary-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .tc-o1 { color: var(--green); }
+  .tc-on { color: var(--yellow); }
+
+  .vs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+  .vs-table th {
+    padding: 8px 14px;
+    text-align: left;
+    color: var(--muted);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+  }
+  .vs-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .vs-table tr:last-child td { border-bottom: none; }
+  .sll-col { color: var(--orange); }
+  .dll-col { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<div class="header">
+  <h1>Singly Linked List</h1>
+  <p>Complete operations with visual diagrams — all 10 operations</p>
+</div>
+
+<!-- ══════════ NODE STRUCTURE ══════════ -->
+<div class="node-structure">
+  <h2>Node Structure</h2>
+  <div class="node-demo">
+    <div class="part data-part">DATA</div>
+    <div class="part next-part">NEXT →</div>
+  </div>
+  <p style="color:var(--muted);font-size:0.82rem;margin-top:14px">
+    Each node has only <strong style="color:var(--yellow)">DATA</strong> + <strong style="color:var(--accent)">NEXT pointer</strong> &nbsp;|&nbsp; No backward pointer (unlike Doubly LL)
+  </p>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--yellow)"></div> DATA (yellow)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> NEXT pointer (blue)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--green);box-shadow:0 0 6px rgba(62,207,142,0.5)"></div> New node (green glow)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--red)"></div> Deleted node (red)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Key/target node (orange)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--purple)"></div> Found node (purple)</div>
+  </div>
+</div>
+
+<div class="ops-grid">
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- CREATE A NODE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(251,146,60,0.15);color:var(--orange)">00</div>
+      <div class="op-title">Create a Node</div>
+      <div class="op-complexity">O(1)</div>
+    </div>
+    <div class="op-body">
+      <div class="state-box" style="margin-bottom:14px">
+        <div class="diagram-label">New node created with value 10</div>
+        <div class="sll-diagram">
+          <div class="sll-node new-node">
+            <div class="n-data">10</div>
+            <div class="n-next">∅</div>
+          </div>
+          <span class="null-label">← NEXT = NULL (not connected yet)</span>
+        </div>
+      </div>
+      <div class="steps-title">Steps</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(251,146,60,0.15);color:var(--orange)">1</div><div class="step-text">Allocate memory for NEW node</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(251,146,60,0.15);color:var(--orange)">2</div><div class="step-text"><code>NEW→data = value</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(251,146,60,0.15);color:var(--orange)">3</div><div class="step-text"><code>NEW→next = NULL</code></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 1) INSERT AT BEGINNING -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(62,207,142,0.15);color:var(--green)">01</div>
+      <div class="op-title">Insert at Beginning</div>
+      <div class="op-complexity">O(1)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Insert 5</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node new-node"><div class="n-data">5</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">1</div><div class="step-text">Create NEW node</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">2</div><div class="step-text"><code>NEW→next = HEAD</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">3</div><div class="step-text"><code>HEAD = NEW</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">4</div><div class="step-text">Stop</div></div>
+      </div>
+      <div class="note info">💡 Only O(1) operation in SLL — no traversal needed!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 2) INSERT AT END -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(62,207,142,0.15);color:var(--green)">02</div>
+      <div class="op-title">Insert at End</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Insert 40</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+            <span class="null-label">← last</span>
+          </div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node new-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">1</div><div class="step-text">Create NEW node, <code>NEW→next = NULL</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">2</div><div class="step-text">If HEAD = NULL → <code>HEAD = NEW</code>, Stop</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">3</div><div class="step-text">Traverse <code>temp</code> until <code>temp→next = NULL</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">4</div><div class="step-text"><code>temp→next = NEW</code></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 3) INSERT AT SPECIFIC POSITION -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(62,207,142,0.15);color:var(--green)">03</div>
+      <div class="op-title">Insert at Specific Position</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Insert 30 at pos 3</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+          <div style="margin-top:8px;font-size:0.75rem;color:var(--orange)">↑ temp stops at pos 2 (pos−1)</div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After — 30 inserted at pos 3</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node new-node"><div class="n-data">30</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Step diagram showing link change -->
+      <div class="state-box" style="margin-bottom:14px">
+        <div class="diagram-label">Link Change (how pointers update)</div>
+        <div style="font-size:0.78rem;color:var(--muted);line-height:2">
+          <div>Step 1: <span style="color:var(--green)">NEW→next = temp→next</span> &nbsp;(NEW points to 40)</div>
+          <div>Step 2: <span style="color:var(--orange)">temp→next = NEW</span> &nbsp;(20 now points to 30)</div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">1</div><div class="step-text">Create NEW node</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">2</div><div class="step-text">If pos=1 → Insert at Beginning</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">3</div><div class="step-text">Traverse to (pos−1)th node → temp</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">4</div><div class="step-text"><code>NEW→next = temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">5</div><div class="step-text"><code>temp→next = NEW</code></div></div>
+      </div>
+      <div class="note">⚠️ Set <code>NEW→next</code> FIRST, then update <code>temp→next</code> — reverse order loses the original link!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 4) INSERT AFTER AN ELEMENT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(62,207,142,0.15);color:var(--green)">04</div>
+      <div class="op-title">Insert After an Element</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Insert 25 after 20</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+          <div style="margin-top:6px;font-size:0.75rem;color:var(--orange)">↑ key found = 20</div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node new-node"><div class="n-data">25</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">1</div><div class="step-text">Create NEW node</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">2</div><div class="step-text">Traverse to find node with data = key</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">3</div><div class="step-text">If not found → Print "Not Found", Stop</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">4</div><div class="step-text"><code>NEW→next = temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(62,207,142,0.15);color:var(--green)">5</div><div class="step-text"><code>temp→next = NEW</code></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 5) DELETE AT BEGINNING -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(247,95,95,0.15);color:var(--red)">05</div>
+      <div class="op-title">Delete at Beginning</div>
+      <div class="op-complexity">O(1)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Delete 10</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node del-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">1</div><div class="step-text">If HEAD = NULL → Print "List Empty", Stop</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">2</div><div class="step-text"><code>temp = HEAD</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">3</div><div class="step-text"><code>HEAD = HEAD→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">4</div><div class="step-text">Delete temp</div></div>
+      </div>
+      <div class="note info">💡 O(1) — only move HEAD forward, no traversal!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 6) DELETE AT END -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(247,95,95,0.15);color:var(--red)">06</div>
+      <div class="op-title">Delete at End</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Delete 30 (last)</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node del-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+          <div style="margin-top:6px;font-size:0.75rem;color:var(--orange)">↑ temp stops at 20 (second-to-last)</div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">1</div><div class="step-text">If HEAD = NULL → Print "List Empty"</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">2</div><div class="step-text">If only 1 node → Delete HEAD, <code>HEAD = NULL</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">3</div><div class="step-text">Traverse until <code>temp→next→next = NULL</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">4</div><div class="step-text">Delete <code>temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">5</div><div class="step-text"><code>temp→next = NULL</code></div></div>
+      </div>
+      <div class="note">⚠️ Stop at second-to-last node, not the last — so you can set its next to NULL.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 7) DELETE AT SPECIFIC POSITION -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(247,95,95,0.15);color:var(--red)">07</div>
+      <div class="op-title">Delete at Specific Position</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Delete pos 3 (value 30)</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node del-node"><div class="n-data">30</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+          <div style="margin-top:6px;font-size:0.75rem;color:var(--orange)">↑ temp = pos 2 &nbsp;|&nbsp; target = pos 3</div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Link change diagram -->
+      <div class="state-box" style="margin-bottom:14px">
+        <div class="diagram-label">Link Change</div>
+        <div style="font-size:0.78rem;color:var(--muted);line-height:2">
+          <div>Before: 20 → <span style="color:var(--red)">30</span> → 40</div>
+          <div>After &nbsp;: 20 → 40 &nbsp; (<code style="color:var(--orange)">temp→next = target→next</code>)</div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">1</div><div class="step-text">If HEAD = NULL → Print "Empty List"</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">2</div><div class="step-text">If pos=1 → Delete at Beginning</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">3</div><div class="step-text">Traverse to (pos−1)th node → temp</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">4</div><div class="step-text"><code>target = temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">5</div><div class="step-text"><code>temp→next = target→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">6</div><div class="step-text">Delete target</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 8) DELETE AFTER AN ELEMENT -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(247,95,95,0.15);color:var(--red)">08</div>
+      <div class="op-title">Delete After an Element</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="before-after">
+        <div class="state-box">
+          <div class="diagram-label">Before — Delete after 20 (deletes 30)</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node del-node"><div class="n-data">30</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+          <div style="margin-top:6px;font-size:0.75rem;">
+            <span style="color:var(--orange)">↑ key = 20 (temp)</span> &nbsp;
+            <span style="color:var(--red)">↑ target = 30</span>
+          </div>
+        </div>
+        <div class="state-box after-box">
+          <div class="diagram-label">After</div>
+          <div class="sll-diagram">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node key-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">1</div><div class="step-text">Traverse to find node with key (temp)</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">2</div><div class="step-text">If not found → Print "Not Found"</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">3</div><div class="step-text">If <code>temp→next = NULL</code> → Print "No node after"</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">4</div><div class="step-text"><code>target = temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">5</div><div class="step-text"><code>temp→next = target→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(247,95,95,0.15);color:var(--red)">6</div><div class="step-text">Delete target</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 9) SEARCH -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">09</div>
+      <div class="op-title">Search an Element</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <!-- Traversal trace -->
+      <div class="state-box" style="margin-bottom:14px">
+        <div class="diagram-label">Search key = 30 — traversal steps</div>
+        <!-- Step 1 -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:0.72rem;color:var(--muted);width:50px">Step 1</span>
+          <div class="sll-diagram" style="padding:0">
+            <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node" style="border-color:var(--orange);box-shadow:0 0 8px rgba(251,146,60,0.2)"><div class="n-data" style="color:var(--orange)">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd" style="opacity:0.4">→</span>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+          <span style="font-size:0.72rem;color:var(--muted)">10 ≠ 30, move next</span>
+        </div>
+        <!-- Step 2 -->
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span style="font-size:0.72rem;color:var(--muted);width:50px">Step 2</span>
+          <div class="sll-diagram" style="padding:0">
+            <div class="head-ptr" style="visibility:hidden"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd" style="opacity:0.4">→</span>
+            <div class="sll-node" style="border-color:var(--orange);box-shadow:0 0 8px rgba(251,146,60,0.2)"><div class="n-data" style="color:var(--orange)">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+          <span style="font-size:0.72rem;color:var(--muted)">20 ≠ 30, move next</span>
+        </div>
+        <!-- Step 3 — Found -->
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span style="font-size:0.72rem;color:var(--muted);width:50px">Step 3</span>
+          <div class="sll-diagram" style="padding:0">
+            <div class="head-ptr" style="visibility:hidden"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">10</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd" style="opacity:0.4">→</span>
+            <div class="sll-node" style="opacity:0.4"><div class="n-data">20</div><div class="n-next">•</div></div>
+            <span class="arrow-fwd">→</span>
+            <div class="sll-node found-node"><div class="n-data">30</div><div class="n-next">∅</div></div>
+          </div>
+          <span style="font-size:0.72rem;color:var(--green)">✓ 30 = 30 → FOUND at pos 3!</span>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">1</div><div class="step-text"><code>temp = HEAD</code>, pos = 1</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">2</div><div class="step-text">While <code>temp ≠ NULL</code>: compare data with key</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">3</div><div class="step-text">If match → Print "Found at pos"</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">4</div><div class="step-text">Else <code>temp = temp→next</code>, pos++</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(167,139,250,0.15);color:var(--purple)">5</div><div class="step-text">If loop ends → Print "NOT FOUND"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- 10) DISPLAY -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">10</div>
+      <div class="op-title">Display the List</div>
+      <div class="op-complexity">O(n)</div>
+    </div>
+    <div class="op-body">
+      <div class="state-box" style="margin-bottom:14px">
+        <div class="diagram-label">List traversal — print each node</div>
+        <div class="sll-diagram">
+          <div class="head-ptr"><div class="head-label">HEAD</div><div class="head-arrow">↓</div></div>
+          <div class="sll-node"><div class="n-data">10</div><div class="n-next">•</div></div>
+          <span class="arrow-fwd">→</span>
+          <div class="sll-node"><div class="n-data">20</div><div class="n-next">•</div></div>
+          <span class="arrow-fwd">→</span>
+          <div class="sll-node"><div class="n-data">30</div><div class="n-next">•</div></div>
+          <span class="arrow-fwd">→</span>
+          <div class="sll-node"><div class="n-data">40</div><div class="n-next">∅</div></div>
+          <span class="arrow-fwd">→</span>
+          <span class="null-label" style="font-size:0.85rem;color:var(--red)">NULL</span>
+        </div>
+        <div style="margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.8rem">
+          <span style="color:var(--muted)">Output: </span>
+          <span style="color:var(--yellow)">10</span>
+          <span style="color:var(--muted)"> → </span>
+          <span style="color:var(--yellow)">20</span>
+          <span style="color:var(--muted)"> → </span>
+          <span style="color:var(--yellow)">30</span>
+          <span style="color:var(--muted)"> → </span>
+          <span style="color:var(--yellow)">40</span>
+          <span style="color:var(--muted)"> → NULL</span>
+        </div>
+      </div>
+      <div class="steps-title">Algorithm</div>
+      <div class="steps">
+        <div class="step"><div class="step-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">1</div><div class="step-text">If HEAD = NULL → Print "List Empty", Stop</div></div>
+        <div class="step"><div class="step-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">2</div><div class="step-text"><code>temp = HEAD</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">3</div><div class="step-text">While <code>temp ≠ NULL</code>: Print <code>temp→data</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">4</div><div class="step-text"><code>temp = temp→next</code></div></div>
+        <div class="step"><div class="step-num" style="background:rgba(79,142,247,0.15);color:var(--accent)">5</div><div class="step-text">Print NULL (end of list)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SUMMARY TABLE -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-title">📊 Summary Table</div>
+    </div>
+    <div class="op-body" style="padding:0">
+      <table class="summary-table">
+        <tr>
+          <th>#</th>
+          <th>Operation</th>
+          <th>Time Complexity</th>
+        </tr>
+        <tr><td>1</td><td>Insert at Beginning</td><td class="tc-o1">O(1) ✦ fast</td></tr>
+        <tr><td>2</td><td>Insert at End</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>3</td><td>Insert at Position</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>4</td><td>Insert After Element</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>5</td><td>Delete at Beginning</td><td class="tc-o1">O(1) ✦ fast</td></tr>
+        <tr><td>6</td><td>Delete at End</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>7</td><td>Delete at Position</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>8</td><td>Delete After Element</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>9</td><td>Search</td><td class="tc-on">O(n)</td></tr>
+        <tr><td>10</td><td>Display</td><td class="tc-on">O(n)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- SLL vs DLL COMPARISON -->
+  <!-- ══════════════════════════════════════════════════════ -->
+  <div class="op-card">
+    <div class="op-header">
+      <div class="op-title">⚡ SLL vs DLL — Quick Comparison</div>
+    </div>
+    <div class="op-body" style="padding:0">
+      <table class="vs-table">
+        <tr>
+          <th>Feature</th>
+          <th class="sll-col">Singly LL</th>
+          <th class="dll-col">Doubly LL</th>
+        </tr>
+        <tr>
+          <td>Pointers per node</td>
+          <td class="sll-col">1 (next only)</td>
+          <td class="dll-col">2 (prev + next)</td>
+        </tr>
+        <tr>
+          <td>Traversal direction</td>
+          <td class="sll-col">Forward only →</td>
+          <td class="dll-col">Both ← →</td>
+        </tr>
+        <tr>
+          <td>Memory per node</td>
+          <td class="sll-col">Less</td>
+          <td class="dll-col">More</td>
+        </tr>
+        <tr>
+          <td>Delete at end (with tail)</td>
+          <td class="sll-col">O(n)</td>
+          <td class="dll-col">O(1)</td>
+        </tr>
+        <tr>
+          <td>Reverse traversal</td>
+          <td class="sll-col">Not possible</td>
+          <td class="dll-col">Possible</td>
+        </tr>
+        <tr>
+          <td>Implementation</td>
+          <td class="sll-col">Simpler</td>
+          <td class="dll-col">More complex</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;padding:30px;color:var(--muted);font-size:0.8rem">
+  Singly Linked List — Data Structures Unit 3 · AEC
+</div>
+
+</body>
+</html>

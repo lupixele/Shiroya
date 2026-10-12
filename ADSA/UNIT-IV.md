@@ -117,6 +117,17 @@ $$
 D^{(k)}[i][j] = \min\left( D^{(k-1)}[i][j],\ D^{(k-1)}[i][k] + D^{(k-1)}[k][j] \right)
 $$
 
+> [!IMPORTANT]
+> **What does $(k-1)$ mean? It is NOT a power (`pow`)!**  
+> In mathematics, when subscripts $[i][j]$ are already used for **row $i$** and **column $j$**, mathematicians use a superscript in parentheses `(k)` as a **step / version counter**, NOT an exponent.  
+> - $D^{(k-1)}$ simply means: **"the value from the PREVIOUS matrix / previous table"**
+> - $D^{(k)}$ simply means: **"the value in the CURRENT matrix / current table"**
+> 
+> In actual code (like on GeeksforGeeks), there is **zero power calculation**. It is literally just:
+> ```cpp
+> dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+> ```
+
 #### 💡 The 3 GfG Shortcut Rules (Saves 80% Manual Effort):
 In each iteration $k$ (where vertex $k$ is treated as the intermediate vertex):
 

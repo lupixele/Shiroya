@@ -233,6 +233,8 @@ $$
 
 ![Minimum Spanning Tree Weighted Undirected Graph](figures/unit3_q6_mst.png)
 
+![Kruskal's vs. Prim's MST Step-by-Step Diagram](figures/unit3_q6_kruskal_prim_steps.png)
+
 ### Graph Summary & Problem Objective
 - **Vertices ($V$):** 6 vertices — $\{A, B, C, D, E, F\}$
 - **Objective:** Find a spanning tree connecting all 6 vertices with minimum total edge weight.

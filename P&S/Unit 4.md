@@ -1,31 +1,5 @@
 # Unit 4 — Testing of Hypothesis
 
-Complete exam-ready questions and worked solutions for **Unit-IV** of Probability & Statistics (Aditya University / JNTU curriculum).
-
----
-
-## Visual Formula Sheet & Cheatsheet
-
-![Unit 4 Formula Sheet](figures/unit4_formula_sheet.png)
-
----
-
-## Visual Worked Solutions (Hypothesis Tests Q7 to Q10)
-
-![Unit 4 Visual Solutions](figures/unit4_visual_solutions.png)
-
----
-
-## Quick Navigation / Table of Contents
-
-| Section | Topic | Question Source | Key Result |
-|:---|:---|:---|:---|
-| [**Question 7**](#question-7--chi-square-test-for-independence-of-sampling-techniques) | Chi-Square Test of Independence ($2 \times 4$ Table, $N=300$) | Assignment-II Q7 | $\chi^2_{\mathrm{cal}} = 2.10 < 7.815 \implies \text{Accept } H_0$ |
-| [**Question 8**](#question-8--two-sample-large-sample-z-test-for-means) | Two-Sample Large-Sample $Z$-Test (Wheat Yields) | Assignment-II Q8 | $|Z_{\mathrm{cal}}| = 5.08 > 1.96 \implies \text{Reject } H_0$ |
-| [**Question 9**](#question-9--paired-students-t-test-soldiers-training) | Paired Student's $t$-Test (10 Soldiers Before/After) | Assignment-II Q9 | $t_{\mathrm{cal}} = 2.16 > 1.833 \implies \text{Reject } H_0$ |
-| [**Question 10**](#question-10--single-sample-large-sample-z-test-for-mean) | Single-Sample Large-Sample $Z$-Test ($n=64$) | Assignment-II Q10 | $|Z_{\mathrm{cal}}| = 4.48 > 1.96 \implies \text{Reject } H_0$ |
-| [**Supplementary Section**](#supplementary-unit-4-core-topics--notes-verification) | Additional Hypothesis Tests Review | Core Topics | Proportions, Two-Sample $t$, Snedecor's $F$, Paired $t$ |
-
 ---
 
 ## Question 7 — Chi-Square Test for Independence of Sampling Techniques
@@ -277,50 +251,3 @@ Since $|Z_{\mathrm{cal}}| = 4.48$ is far greater than the critical value $1.96$,
 
 > [!NOTE]
 > **Note:** The standard deviation $25\text{ kg}$ is the population parameter ($\sigma$), not sample $s$.
-
----
-
-## Supplementary Unit 4 Core Topics & Notes Verification
-
-This section audits additional topics, worked examples, and handwritten notes from `P&S_Unit-IV_Notes_AUS - Copy-1.pdf` and `testing of Hypothesis.pdf`.
-
-### 1. Large-Sample Tests for Proportions
-
-#### Single Proportion Example (Manufacturer Specification Claim)
-- Problem: Manufacturer claims at least $95\%$ of equipment conforms to specification. A sample of $n = 200$ pieces reveals $18$ faulty (so $x = 182$ conform, $p = \frac{182}{200} = 0.91$). Test at $\alpha = 0.05$.
-- Hypotheses: $H_0: P = 0.95$, $H_1: P < 0.95$ (left-tailed).
-- Standard Error: $SE = \sqrt{\frac{P_0 Q_0}{n}} = \sqrt{\frac{0.95 \times 0.05}{200}} = \sqrt{0.0002375} \approx 0.01541$.
-- Test Statistic: $Z = \frac{0.91 - 0.95}{0.01541} = \mathbf{-2.595} \approx \mathbf{-2.59}$.
-- Critical value: For a one-tailed test at $5\%$, $Z_{0.05} = -1.645$.
-- Conclusion: Since $Z = -2.59 < -1.645$, **Reject $H_0$**. The manufacturer's claim is refuted.
-
----
-
-### 2. Snedecor's $F$-Test for Equality of Two Variances
-
-#### Worked Example: Tobacco Nicotine Contents (Handwritten in `P&S_Unit-IV_Notes_AUS` Pages 17–19)
-- **Sample A ($n_1 = 5$):** $24, 27, 26, 21, 25 \implies \bar{x} = 24.6, \sum(x_i - \bar{x})^2 = 21.2$.
-  $$S_1^2 = \frac{21.2}{5 - 1} = \frac{21.2}{4} = \mathbf{5.30}$$
-- **Sample B ($n_2 = 6$):** $27, 30, 28, 31, 22, 36 \implies \bar{y} = 29.0, \sum(y_i - \bar{y})^2 = 108.0$.
-  $$S_2^2 = \frac{108.0}{6 - 1} = \frac{108.0}{5} = \mathbf{21.60}$$
-- **$F$-Test Statistic:** Since $S_2^2 > S_1^2$:
-  $$F = \frac{S_2^2}{S_1^2} = \frac{21.60}{5.30} \approx \mathbf{4.0755}$$
-  Degrees of freedom: $\nu_1 = n_2 - 1 = 5$, $\nu_2 = n_1 - 1 = 4$.
-  Critical value from $F$-table: $F_{0.05}(5, 4) = \mathbf{6.26}$ (or $F(4, 5) = 5.19$).
-  Decision: $F_{\mathrm{cal}} = 4.075 < 5.19 \implies$ **Accept $H_0$** (variances do not differ significantly).
-- **Subsequent $t$-Test for Difference of Means:**
-  $$S_p^2 = \frac{21.2 + 108.0}{5 + 6 - 2} = \frac{129.2}{9} \approx 14.3556 \implies S_p \approx 3.7889$$
-  $$t = \frac{24.6 - 29.0}{3.7889 \sqrt{\frac{1}{5} + \frac{1}{6}}} = \frac{-4.4}{3.7889 \times 0.6055} = \frac{-4.4}{2.294} \approx \mathbf{-1.918}$$
-  $|t| = 1.918 < t_{0.025,\, 9} = 2.262 \implies$ **Accept $H_0$** (both samples can be regarded as drawn from the same normal population).
-
----
-
-### 3. Critical Conceptual Correction in `testing of Hypothesis.pdf`
-
-> [!WARNING]
-> **Conceptual Error in `testing of Hypothesis.pdf` (Page 20–21, Problem 3):**
-> - The problem presents the blood pressure of women before and after intake of a drug:
->   - Before: `110, 120, 125, 132`
->   - After: `120, 118, 125, 136`
-> - In `testing of Hypothesis.pdf` Page 21, the author wrongly applied an **independent two-sample $t$-test** ($S_p^2 = 8.67, t = 0.49$)!
-> - **Statistical Rule:** Because measurements are taken on the **same individual women before and after treatment**, the samples are **paired/correlated**, NOT independent. A **paired Student's $t$-test** on differences $d = \text{After} - \text{Before}$ ($+10, -2, 0, +4$) must be applied.

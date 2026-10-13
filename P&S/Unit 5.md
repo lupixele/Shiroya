@@ -1,33 +1,5 @@
 # Unit 5 — Correlation and Regression
 
-Complete exam-ready questions and worked solutions for **Unit-V** of Probability & Statistics (Aditya University / JNTU curriculum).
-
----
-
-## Visual Formula Sheet & Cheatsheet
-
-![Unit 5 Formula Sheet](figures/unit5_formula_sheet.png)
-
----
-
-## Visual Worked Solutions (Curve Fitting, Correlation & Regression)
-
-![Unit 5 Visual Solutions](figures/unit5_visual_solutions.png)
-
----
-
-## Quick Navigation / Table of Contents
-
-| Section | Topic | Question Source | Key Result |
-|:---|:---|:---|:---|
-| [**Question 11**](#question-11--least-squares-parabola-curve-fitting) | Fit a Parabola $y = a + bx + cx^2$ | Assignment-II Q11 | $y = 0.9629 + 0.8443x + 0.1214x^2$ |
-| [**Question 12**](#question-12--exponential-curve-fitting-y--aebx) | Fit Exponential Curve $y = ae^{bx}$ | Assignment-II Q12 | $y = 4.996\,e^{0.0356x}$ |
-| [**Question 13**](#question-13--spearmans-rank-correlation-with-tied-ranks) | Spearman's Rank Correlation with Ties | Assignment-II Q13 | $\rho = \frac{11}{15} \approx 0.7333$ |
-| [**Question 14**](#question-14--karl-pearsons-coefficient-of-correlation) | Karl Pearson's Correlation Coefficient ($r$) | Assignment-II Q14 | $r = \frac{46}{\sqrt{2352}} \approx 0.9485$ |
-| [**Question 15**](#question-15--regression-equations-means-and-correlation) | Regression Lines, Means & Correlation | Assignment-II Q15 | $\bar{x} = -3/29, \bar{y} = 15/29, r \approx 0.7395$ |
-| [**Question 16**](#question-16--beauty-contest-judges-rank-correlation) | Beauty Contest Judges Rank Correlation | Assignment-II Q16 | $\rho = -\frac{3}{110} \approx -0.0273$ |
-| [**Supplementary Section**](#supplementary-unit-5-core-topics--notes-verification) | Additional Curve Fitting & Regression Review | Core Topics | Power curve, angle between regression lines |
-
 ---
 
 ## Question 11 — Least-Squares Parabola Curve Fitting
@@ -469,51 +441,3 @@ $$\rho = 1 - \frac{6 \times 169.5}{990} = 1 - \frac{1017}{990} = 1 - 1.027273 = 
 
 > [!NOTE]
 > **Note:** Although the question prompt mentions "three judges", only scores for Judge 1 and Judge 2 are provided, so the rank correlation is evaluated between J-1 and J-2 ($\rho = -0.0273$).
-
----
-
-## Supplementary Unit 5 Core Topics & Notes Verification
-
-This section audits additional topics, worked examples, and handwritten notes from `Correlation.pdf` and `Regression.pdf`.
-
-### 1. Audit of `Correlation.pdf`
-
-#### Error 1: Page 7 (Fitting Straight Line to Heated Rod Data)
-- Normal equations are:
-  $$6a_0 + 270a_1 = 4803.9$$
-  $$270a_0 + 13900a_1 = 216201$$
-- On Page 7, the student wrote the second equation as `970 a_0 + 13900 a_1 = 216201` (typo `970` instead of `270`). The solution $a_0 = 799.994 \approx 800, a_1 = 0.0146$ was correct.
-
-#### Error 2: Page 28–29 (Karl Pearson Correlation with Assumed Mean)
-- Data points: $x = [28, 41, 40, 38, 35, 33, 40, 32, \mathbf{36}, 33]$, $y = [23, 34, 33, 34, 30, 26, 28, 31, 36, 38]$.
-- In the table on Page 29, the 9th observation for $x$ was copied as **`35`** instead of **`36`**, while the deviation column still used $X = 36 - 35 = 1$. The calculation $r \approx 0.4403$ correctly corresponds to $x = 36$.
-
----
-
-### 2. Audit of `Regression.pdf`
-
-#### Missing Problem: Page 8 (Problem 7 Fully Solved Here)
-- Problem 7 on Page 8 states: *"Find a regression line by taking deviations from mean for: $x: 45, 47, 39, 57, 54, 46$; $y: 32, 29, 37, 26, 31, 30$. Also calculate the value of $x$ when $y = 70$."*
-- In `Regression.pdf`, the solution was **left completely blank** (Page 9 jumped to theory notes).
-- **Complete Worked Solution:**
-  1. $n = 6$.
-  2. $\sum x = 288 \implies \bar{x} = \frac{288}{6} = \mathbf{48}$.
-  3. $\sum y = 185 \implies \bar{y} = \frac{185}{6} = \mathbf{30.8333}$.
-  4. Using deviations $u = x - 48, v = y - 30.8333$:
-     - $u = [-3, -1, -9, +9, +6, -2]$, $\sum u = 0, \sum u^2 = 9 + 1 + 81 + 81 + 36 + 4 = \mathbf{212}$.
-     - $\sum uv = -108.0$.
-     - $\sum v^2 = 70.8333$.
-  5. Regression line of $x$ on $y$:
-     $$b_{xy} = \frac{\sum uv}{\sum v^2} = \frac{-108}{70.8333} \approx \mathbf{-1.5247}$$
-     $$x - 48 = -1.5247(y - 30.8333) \implies x = -1.5247y + 95.011$$
-  6. When $y = 70$:
-     $$x = -1.5247(70) + 95.011 = -106.729 + 95.011 = \mathbf{-11.72}$$
-
-#### Error: Page 11 (Rainfall & Production Prediction)
-- In `Regression.pdf` Page 11, the regression equation of $y$ on $x$ is derived as:
-  $$y = 16x + 20$$
-- Substituting $x = 40$:
-  $$y = 16(40) + 20 = 640 + 20 = \mathbf{660}$$
-- The handwritten note incorrectly wrote:
-  $$y = \mathbf{66} \quad \text{\textbf{[TYPO - DROPPED ZERO]}}$$
-  The correct predicted production is **$660\text{ Kgs}$**, not $66$.

@@ -373,60 +373,39 @@ $$\sum_{i=1}^{16} x_i = 15 + 17 + 10 + 18 + 16 + 9 + 7 + 11 + 13 + 14 + 20 + 13 
 
 $$\bar{x} = \frac{\sum x_i}{n} = \frac{241}{16} = \mathbf{15.0625}$$
 
-#### 2. Sample Variance ($s^2$) and Sample Standard Deviation ($s$)
-Compute deviations $(x_i - \bar{x})$ where $\bar{x} = 15.0625$:
+#### 2. Sample Variance ($\sigma^2$) and Standard Deviation ($\sigma$)
+Using the shortcut summation formula:
+$$\sum x_i = 241, \quad \sum x_i^2 = 3945$$
 
-| $i$ | $x_i$ | $(x_i - \bar{x})$ | $(x_i - \bar{x})^2$ |
-|:---:|:---:|:---:|:---:|
-| 1 | 15 | $-0.0625$ | 0.00390625 |
-| 2 | 17 | $+1.9375$ | 3.75390625 |
-| 3 | 10 | $-5.0625$ | 25.62890625 |
-| 4 | 18 | $+2.9375$ | 8.62890625 |
-| 5 | 16 | $+0.9375$ | 0.87890625 |
-| 6 | 9 | $-6.0625$ | 36.75390625 |
-| 7 | 7 | $-8.0625$ | 65.00390625 |
-| 8 | 11 | $-4.0625$ | 16.50390625 |
-| 9 | 13 | $-2.0625$ | 4.25390625 |
-| 10 | 14 | $-1.0625$ | 1.12890625 |
-| 11 | 20 | $+4.9375$ | 24.37890625 |
-| 12 | 13 | $-2.0625$ | 4.25390625 |
-| 13 | 19 | $+3.9375$ | 15.50390625 |
-| 14 | 25 | $+9.9375$ | 98.75390625 |
-| 15 | 18 | $+2.9375$ | 8.62890625 |
-| 16 | 16 | $+0.9375$ | 0.87890625 |
-| **Sum** | **241** | **0.0000** | **314.9375** |
+$$\sum (x_i - \bar{x})^2 = \sum x_i^2 - \frac{(\sum x_i)^2}{n} = 3945 - \frac{(241)^2}{16} = 3945 - 3630.06 = 314.94$$
 
-Unbiased sample variance:
+Sample variance:
+$$\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1} = \frac{314.94}{15} \approx 21.00 \quad (\text{exact } 20.996)$$
 
-$$s^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1} = \frac{314.9375}{16 - 1} = \frac{314.9375}{15} \approx \mathbf{20.9958}$$
-
-Unbiased sample standard deviation:
-
-$$s = \sqrt{20.9958} \approx \mathbf{4.5821}$$
+Sample standard deviation:
+$$\sigma = \sqrt{21.00} \approx 4.58 \quad (\text{exact } 4.582)$$
 
 #### 3. Standard Error of the Mean ($SE$)
 
-$$SE = \frac{s}{\sqrt{n}} = \frac{4.5821}{\sqrt{16}} = \frac{4.5821}{4} \approx \mathbf{1.1455}$$
+$$SE = \frac{\sigma}{\sqrt{n}} = \frac{4.58}{\sqrt{16}} = \frac{4.58}{4} = 1.145$$
 
 #### 4. Critical Value from Student's $t$-Distribution
-Since population $\sigma$ is unknown and sample size $n = 16 < 30$ (small sample from normal population), we use **Student's $t$-distribution** with:
+Since sample size $n = 16 < 30$, we use **Student's $t$-distribution** with degrees of freedom:
+$$\nu = df = n - 1 = 16 - 1 = 15$$
 
-$$\nu = df = n - 1 = 16 - 1 = 15 \text{ degrees of freedom}$$
-
-For a $95\%$ two-sided confidence interval ($\alpha = 0.05, \alpha/2 = 0.025$):
-
-$$t_{\alpha/2,\, 15} = t_{0.025,\, 15} = \mathbf{2.131} \quad (\text{exact } 2.1314)$$
+For a $95\%$ two-sided confidence interval ($\alpha = 0.05$):
+$$t_{0.025,\, 15} = 2.131$$
 
 #### 5. Maximum Error of Estimate ($E$)
 
-$$E = t_{\alpha/2,\, n-1} \times \frac{s}{\sqrt{n}} = 2.131 \times 1.1455 \approx \mathbf{2.4411}$$
+$$E = t_{0.025,\, 15} \times \frac{\sigma}{\sqrt{n}} = 2.131 \times 1.145 \approx 2.44$$
 
 #### 6. 95% Confidence Interval Limits
 
-$$\text{Confidence Limits} = \bar{x} \pm E = 15.0625 \pm 2.4411$$
+$$\text{Confidence Limits} = \bar{x} \pm E = 15.06 \pm 2.44$$
 
-$$\text{Lower Limit} = 15.0625 - 2.4411 = \mathbf{12.6214} \quad (\approx 12.62)$$
+$$\text{Lower Limit} = 15.06 - 2.44 = \mathbf{12.62}$$
 
-$$\text{Upper Limit} = 15.0625 + 2.4411 = \mathbf{17.5036} \quad (\approx 17.50)$$
+$$\text{Upper Limit} = 15.06 + 2.44 = \mathbf{17.50}$$
 
-$$\mathbf{95\% \text{ Confidence Interval: } (12.62, \; 17.50)}$$
+$$\mathbf{95\% \text{ Confidence Interval: } [12.62, \; 17.50]}$$

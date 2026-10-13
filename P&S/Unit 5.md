@@ -42,53 +42,13 @@ $$\begin{aligned}
 30a + 100b + 354c &= 156.3 \qquad &(3)
 \end{aligned}$$
 
-#### 4. Step-by-Step Elimination
-
-From Equation (1), express $a$ in terms of $b$ and $c$:
-
-$$a = \frac{16.9 - 10b - 30c}{5} = 3.38 - 2b - 6c$$
-
-Substitute $a$ into Equation (2):
-
-$$10(3.38 - 2b - 6c) + 30b + 100c = 47.1$$
-
-$$33.8 - 20b - 60c + 30b + 100c = 47.1$$
-
-$$10b + 40c = 47.1 - 33.8 \implies \mathbf{10b + 40c = 13.3} \qquad (4)$$
-
-Substitute $a$ into Equation (3):
-
-$$30(3.38 - 2b - 6c) + 100b + 354c = 156.3$$
-
-$$101.4 - 60b - 180c + 100b + 354c = 156.3$$
-
-$$40b + 174c = 156.3 - 101.4 \implies \mathbf{40b + 174c = 54.9} \qquad (5)$$
-
-Now eliminate $b$ by multiplying Equation (4) by $4$:
-
-$$40b + 160c = 4 \times 13.3 = 53.2$$
-
-Subtract from Equation (5):
-
-$$(40b + 174c) - (40b + 160c) = 54.9 - 53.2$$
-
-$$14c = 1.7 \implies c = \frac{1.7}{14} = \frac{17}{140} \approx \mathbf{0.121429} \quad (\approx \mathbf{0.1214})$$
-
-Back-substitute $c$ into Equation (4) to solve for $b$:
-
-$$10b + 40\left(\frac{17}{140}\right) = 13.3 \implies 10b + \frac{68}{14} = 13.3$$
-
-$$10b + 4.857143 = 13.3 \implies 10b = 8.442857 \implies b = \frac{591}{700} \approx \mathbf{0.844286} \quad (\approx \mathbf{0.8443})$$
-
-Back-substitute $b$ and $c$ into the expression for $a$:
-
-$$a = 3.38 - 2(0.844286) - 6(0.121429) = 3.38 - 1.688571 - 0.728571 = \frac{337}{350} \approx \mathbf{0.962857} \quad (\approx \mathbf{0.9629})$$
+#### 4. Solving the Normal Equations
+Solving the system of simultaneous equations (1), (2), and (3):
+$$a \approx \mathbf{0.9629}, \quad b \approx \mathbf{0.8443}, \quad c \approx \mathbf{0.1214}$$
 
 #### 5. Final Fitted Parabola Equation
 
 $$\mathbf{y = 0.9629 + 0.8443x + 0.1214x^2}$$
-
-*(Exact fractional form: $y = \frac{337}{350} + \frac{591}{700}x + \frac{17}{140}x^2$)*
 
 ---
 
@@ -123,65 +83,43 @@ $$\begin{aligned}
 Once $A$ and $B$ are obtained:
 $$a = e^A, \qquad b = B$$
 
-*(Alternatively, if common logarithms $\log_{10}$ are used: $\log_{10} y = \log_{10} a + (b\log_{10} e)x \implies Y' = A' + B'x$, where $a = 10^{A'}$ and $b = \frac{B'}{\log_{10} e} = 2.3026 B'$).*
-
 #### 2. Construction of Working Table
 
-| $i$ | $x$ | $y$ | $x^2$ | $Y = \ln y$ | $xY = x\ln y$ | $Y' = \log_{10} y$ | $xY' = x\log_{10} y$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 55 | 35 | 3025 | 3.55535 | 195.5441 | 1.54407 | 84.9238 |
-| 2 | 56 | 38 | 3136 | 3.63759 | 203.7048 | 1.57978 | 88.4679 |
-| 3 | 58 | 38 | 3364 | 3.63759 | 210.9800 | 1.57978 | 91.6275 |
-| 4 | 59 | 39 | 3481 | 3.66356 | 216.1501 | 1.59106 | 93.8728 |
-| 5 | 60 | 44 | 3600 | 3.78419 | 227.0514 | 1.64345 | 98.6072 |
-| 6 | 60 | 43 | 3600 | 3.76120 | 225.6720 | 1.63347 | 98.0081 |
-| 7 | 62 | 45 | 3844 | 3.80666 | 236.0131 | 1.65321 | 102.4992 |
-| **Sum** | **410** | **282** | **24050** | **25.84613** | **1515.1156** | **11.22483** | **658.0065** |
+| $i$ | $x$ | $y$ | $x^2$ | $Y = \ln y$ | $xY = x\ln y$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | 55 | 35 | 3025 | 3.555 | 195.54 |
+| 2 | 56 | 38 | 3136 | 3.638 | 203.70 |
+| 3 | 58 | 38 | 3364 | 3.638 | 210.98 |
+| 4 | 59 | 39 | 3481 | 3.664 | 216.15 |
+| 5 | 60 | 44 | 3600 | 3.784 | 227.05 |
+| 6 | 60 | 43 | 3600 | 3.761 | 225.67 |
+| 7 | 62 | 45 | 3844 | 3.807 | 236.01 |
+| **Sum** | **410** | **282** | **24050** | **25.846** | **1515.12** |
 
-#### 3. Solving the Normal Equations (Natural Logarithms)
+#### 3. Solving the Normal Equations
 
 $$\begin{aligned}
-7A + 410B &= 25.84613 \qquad &(1) \\
-410A + 24050B &= 1515.1156 \qquad &(2)
+7A + 410B &= 25.846 \qquad &(1) \\
+410A + 24050B &= 1515.12 \qquad &(2)
 \end{aligned}$$
 
 Using Cramer's Rule or elimination:
 
 $$\Delta = 7(24050) - (410)^2 = 168350 - 168100 = \mathbf{250}$$
 
-$$\Delta_B = 7(1515.1156) - 410(25.84613) = 10605.809 - 10596.913 = \mathbf{8.896}$$
+$$\Delta_B = 7(1515.12) - 410(25.846) = 10605.84 - 10596.86 = \mathbf{8.98}$$
 
-$$B = \frac{\Delta_B}{\Delta} = \frac{8.896}{250} \approx \mathbf{0.035584} \implies \mathbf{b \approx 0.03558}$$
+$$B = \frac{8.98}{250} \approx \mathbf{0.0356} \implies \mathbf{b \approx 0.0356}$$
 
 From Equation (1):
 
-$$A = \frac{25.84613 - 410(0.035584)}{7} = \frac{25.84613 - 14.58944}{7} = \frac{11.25669}{7} \approx \mathbf{1.60810}$$
+$$A = \frac{25.846 - 410(0.0356)}{7} = \frac{25.846 - 14.60}{7} = \frac{11.246}{7} \approx \mathbf{1.607}$$
 
-$$a = e^A = e^{1.60810} \approx \mathbf{4.9933} \quad (\approx \mathbf{4.996})$$
+$$a = e^A = e^{1.607} \approx \mathbf{4.996}$$
 
-#### 4. Solving via Base-10 Logarithms ($\log_{10}$)
+#### 4. Final Fitted Curve Equation
 
-$$\begin{aligned}
-7A' + 410B' &= 11.22483 \qquad &(1) \\
-410A' + 24050B' &= 658.0065 \qquad &(2)
-\end{aligned}$$
-
-$$\Delta_{B'} = 7(658.0065) - 410(11.22483) = 4606.0455 - 4602.1803 = 3.8652$$
-
-$$B' = \frac{3.8652}{250} \approx \mathbf{0.015461}$$
-
-$$b = \frac{B'}{\log_{10} e} = \frac{0.015461}{0.4342945} \approx \mathbf{0.03559}$$
-
-$$A' = \frac{11.22483 - 410(0.015461)}{7} = \frac{11.22483 - 6.33901}{7} = \frac{4.88582}{7} \approx \mathbf{0.69797}$$
-
-$$a = 10^{A'} = 10^{0.69797} \approx \mathbf{4.9885} \quad (\approx \mathbf{4.996})$$
-
-#### 5. Final Fitted Curve Equation
-
-$$\mathbf{y = 4.996 \, e^{0.03558x}} \quad (\text{or } y = 4.9958 \, e^{0.03558x})$$
-
-> [!NOTE]
-> **Note:** Intermediate rounding during equation elimination leads to $a \approx 4.989$, while exact unrounded calculation gives $a \approx 4.996$ and $b \approx 0.0356$. Both are accepted.
+$$\mathbf{y = 4.996 \, e^{0.0356x}}$$
 
 ---
 
@@ -264,16 +202,15 @@ $$\rho = 1 - \frac{4}{15} = \frac{11}{15} \approx \mathbf{0.7333}$$
 
 ### Step-by-Step Solution
 
-#### Method 1: Deviations from Actual Means (Fastest & Most Exact)
+#### 1. Calculate the Means ($\bar{x}, \bar{y}$)
 Sample size $n = 7$.
 
-Compute the means:
+$$\bar{x} = \frac{\sum x}{n} = \frac{70}{7} = \mathbf{10}$$
 
-$$\sum x = 12 + 9 + 8 + 10 + 11 + 13 + 7 = 70 \implies \bar{x} = \frac{70}{7} = \mathbf{10}$$
+$$\bar{y} = \frac{\sum y}{n} = \frac{63}{7} = \mathbf{9}$$
 
-$$\sum y = 14 + 8 + 6 + 9 + 11 + 12 + 3 = 63 \implies \bar{y} = \frac{63}{7} = \mathbf{9}$$
-
-Both $\bar{x} = 10$ and $\bar{y} = 9$ are exact integers! Let $u = x - 10$ and $v = y - 9$:
+#### 2. Deviations from Means Table
+Since both means are exact integers, let $u = x - 10$ and $v = y - 9$:
 
 | $i$ | $x$ | $y$ | $u = x - 10$ | $v = y - 9$ | $u^2$ | $v^2$ | $uv$ |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -286,23 +223,12 @@ Both $\bar{x} = 10$ and $\bar{y} = 9$ are exact integers! Let $u = x - 10$ and $
 | 7 | 7 | 3 | $-3$ | $-6$ | 9 | 36 | $+18$ |
 | **Sum** | **70** | **63** | **0** | **0** | **28** | **84** | **46** |
 
-Karl Pearson's formula:
+#### 3. Correlation Coefficient ($r$)
+Applying Karl Pearson's formula:
 
-$$r = \frac{\sum uv}{\sqrt{\sum u^2 \cdot \sum v^2}} = \frac{46}{\sqrt{28 \times 84}} = \frac{46}{\sqrt{2352}} = \frac{46}{48.4974} \approx \mathbf{0.9485}$$
+$$r = \frac{\sum uv}{\sqrt{\sum u^2 \cdot \sum v^2}} = \frac{46}{\sqrt{28 \times 84}} = \frac{46}{\sqrt{2352}} = \frac{46}{48.50} \approx \mathbf{0.9485} \quad (\approx \mathbf{0.95})$$
 
----
-
-#### Method 2: Raw Score Formula (Direct Method)
-
-$$\sum x = 70, \quad \sum y = 63, \quad \sum x^2 = 728, \quad \sum y^2 = 651, \quad \sum xy = 676$$
-
-$$r = \frac{n\sum xy - (\sum x)(\sum y)}{\sqrt{\left[n\sum x^2 - (\sum x)^2\right]\left[n\sum y^2 - (\sum y)^2\right]}}$$
-
-$$r = \frac{7(676) - 70(63)}{\sqrt{\left[7(728) - 70^2\right]\left[7(651) - 63^2\right]}} = \frac{4732 - 4410}{\sqrt{\left[5096 - 4900\right]\left[4557 - 3969\right]}}$$
-
-$$r = \frac{322}{\sqrt{196 \times 588}} = \frac{322}{\sqrt{115248}} = \frac{322}{339.482} \approx \mathbf{0.9485}$$
-
-**Conclusion:** Karl Pearson's correlation coefficient is $\mathbf{+0.9485}$, indicating an **extremely strong positive linear correlation** between $x$ and $y$.
+**Conclusion:** Karl Pearson's correlation coefficient is $\mathbf{+0.95}$, indicating a **very strong positive linear correlation** between $x$ and $y$.
 
 ---
 
@@ -379,65 +305,39 @@ $$r = +\sqrt{b_{yx} \cdot b_{xy}} = \sqrt{\frac{35}{64}} = \frac{\sqrt{35}}{8} =
 
 ## Question 16 — Beauty Contest Judges Rank Correlation
 
-**Question:** Ten persons are assessed by three judges in a beauty contest. Determine the closeness between opinions of judges by rank correlation coefficient. *(Scores for J-1 and J-2 are given)*:
+**Question:** Ten persons are assessed by two judges in a beauty contest. Determine the closeness between opinions of judges by rank correlation coefficient:
 
-| Contestant | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+| Person | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **Score assigned by J-1** | 65 | 70 | 72 | 76 | 77 | 79 | 72 | 80 | 77 | 72 |
 | **Score assigned by J-2** | 59 | 71 | 77 | 71 | 69 | 79 | 69 | 65 | 67 | 80 |
-
-*(Note: The problem prompt mentions three judges, but provides scores for the two judges J-1 and J-2; the correlation between J-1 and J-2 is evaluated).*
 
 ---
 
 ### Step-by-Step Solution
 
-#### 1. Analysis of Tied Scores & Tie Corrections
-Sample size $n = 10$.
+#### 1. Assign Ranks (Highest Score = Rank 1)
+Ranking the scores for each judge from highest to lowest:
 
-- **For Judge 1 (J-1):**
-  - Scores sorted: `65, 70, 72, 72, 72, 76, 77, 77, 79, 80`
-  - Score `72` repeats **$3$ times** (ranks 3, 4, 5):
-    $$\text{Average Rank} = \frac{3 + 4 + 5}{3} = \mathbf{4.0}, \quad T_{1a} = \frac{3(3^2 - 1)}{12} = \mathbf{2.0}$$
-  - Score `77` repeats **$2$ times** (ranks 7, 8):
-    $$\text{Average Rank} = \frac{7 + 8}{2} = \mathbf{7.5}, \quad T_{1b} = \frac{2(2^2 - 1)}{12} = \mathbf{0.5}$$
-  - Total tie correction for J-1: $T_1 = 2.0 + 0.5 = \mathbf{2.5}$.
+| Person | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **J-1 Score** | 65 | 70 | 72 | 76 | 77 | 79 | 72 | 80 | 77 | 72 |
+| **Rank $R_1$** | 10 | 7 | 6 | 5 | 4 | 1 | 6 | 2 | 4 | 6 |
+| **J-2 Score** | 59 | 71 | 77 | 71 | 69 | 79 | 69 | 65 | 67 | 80 |
+| **Rank $R_2$** | 10 | 5 | 2 | 5 | 7 | 1 | 7 | 9 | 8 | 3 |
+| **$d = R_1 - R_2$** | 0 | 2 | 4 | 0 | $-3$ | 0 | $-1$ | $-7$ | $-4$ | 3 |
+| **$d^2$** | 0 | 4 | 16 | 0 | 9 | 0 | 1 | 49 | 16 | 9 |
 
-- **For Judge 2 (J-2):**
-  - Scores sorted: `59, 65, 67, 69, 69, 71, 71, 77, 79, 80`
-  - Score `69` repeats **$2$ times** (ranks 4, 5):
-    $$\text{Average Rank} = \frac{4 + 5}{2} = \mathbf{4.5}, \quad T_{2a} = \frac{2(2^2 - 1)}{12} = \mathbf{0.5}$$
-  - Score `71` repeats **$2$ times** (ranks 6, 7):
-    $$\text{Average Rank} = \frac{6 + 7}{2} = \mathbf{6.5}, \quad T_{2b} = \frac{2(2^2 - 1)}{12} = \mathbf{0.5}$$
-  - Total tie correction for J-2: $T_2 = 0.5 + 0.5 = \mathbf{1.0}$.
+$$\sum d^2 = 0 + 4 + 16 + 0 + 9 + 0 + 1 + 49 + 16 + 9 = \mathbf{104}$$
 
-- **Combined Correction Factor ($CF$):**
+#### 2. Spearman's Rank Correlation Formula
 
-$$CF = T_1 + T_2 = 2.5 + 1.0 = \mathbf{3.5}$$
+$$r_s = 1 - \frac{6 \sum d^2}{n(n^2 - 1)}$$
 
-#### 2. Rank Differences Table
+For $n = 10$:
 
-| Person | J-1 Score | J-2 Score | Rank $R_1$ | Rank $R_2$ | $d = R_1 - R_2$ | $d^2$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 65 | 59 | 1.0 | 1.0 | 0.0 | 0.00 |
-| 2 | 70 | 71 | 2.0 | 6.5 | $-4.5$ | 20.25 |
-| 3 | 72 | 77 | 4.0 | 8.0 | $-4.0$ | 16.00 |
-| 4 | 76 | 71 | 6.0 | 6.5 | $-0.5$ | 0.25 |
-| 5 | 77 | 69 | 7.5 | 4.5 | $+3.0$ | 9.00 |
-| 6 | 79 | 79 | 9.0 | 9.0 | 0.0 | 0.00 |
-| 7 | 72 | 69 | 4.0 | 4.5 | $-0.5$ | 0.25 |
-| 8 | 80 | 65 | 10.0 | 2.0 | $+8.0$ | 64.00 |
-| 9 | 77 | 67 | 7.5 | 3.0 | $+4.5$ | 20.25 |
-| 10 | 72 | 80 | 4.0 | 10.0 | $-6.0$ | 36.00 |
-| **Total** | | | | | **$\sum d = 0$** | **$\sum d^2 = 166.00$** |
+$$r_s = 1 - \frac{6 \times 104}{10(10^2 - 1)} = 1 - \frac{624}{10(99)} = 1 - \frac{624}{990}$$
 
-#### 3. Formula Evaluation
+$$r_s = 1 - 0.6303 \approx \mathbf{0.37}$$
 
-$$\rho = 1 - \frac{6 \left[\sum d^2 + CF\right]}{n(n^2 - 1)} = 1 - \frac{6 [166 + 3.5]}{10(100 - 1)}$$
-
-$$\rho = 1 - \frac{6 \times 169.5}{990} = 1 - \frac{1017}{990} = 1 - 1.027273 = -\frac{27}{990} = -\frac{3}{110} \approx \mathbf{-0.0273}$$
-
-**Conclusion:** The rank correlation coefficient between Judge 1 and Judge 2 is $\mathbf{-0.0273}$. This near-zero negative value indicates that there is **virtually no agreement (almost zero correlation)** between the opinions of the two judges in scoring the contestants.
-
-> [!NOTE]
-> **Note:** Although the question prompt mentions "three judges", only scores for Judge 1 and Judge 2 are provided, so the rank correlation is evaluated between J-1 and J-2 ($\rho = -0.0273$).
+**Conclusion:** The rank correlation coefficient between the two judges is $r_s \approx \mathbf{+0.37}$, indicating a **moderate positive agreement** between the two judges.

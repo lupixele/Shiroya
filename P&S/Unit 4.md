@@ -18,66 +18,56 @@ Would you say that the sampling techniques adopted by the two researchers are si
 
 ### Step-by-Step Solution
 
-#### Step 1: Formulate the Hypotheses
-- **Null Hypothesis ($H_0$):** There is **no significant difference** between the sampling techniques adopted by the two researchers (i.e., the intelligence level classification is independent of the researcher / sampling technique).
-- **Alternative Hypothesis ($H_1$):** There **is a significant difference** between the sampling techniques adopted by the two researchers (the two distributions differ significantly).
+#### Step 1: State the Hypothesis ($H_0$)
+- **Null Hypothesis ($H_0$):** There is no significant difference between the sampling techniques adopted by the two researchers (i.e., intelligence classification is independent of researcher).
+- **Alternative Hypothesis ($H_1$):** There is a significant difference between the sampling techniques adopted by the two researchers.
 
-#### Step 2: Level of Significance & Critical Value
-- Significance level: $\alpha = 0.05$ (5%).
-- Degrees of freedom for an $r \times c$ contingency table:
+#### Step 2: Level of Significance
+Assume level of significance $\alpha = 0.05$.
 
-$$\nu = df = (r - 1)(c - 1) = (2 - 1)(4 - 1) = 1 \times 3 = \mathbf{3}$$
+#### Step 3: Test Statistic Formula
 
-From the Chi-Square Distribution Table at $\alpha = 0.05$ with $3$ degrees of freedom:
+$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
 
-$$\chi^2_{0.05,\, 3} = \mathbf{7.815}$$
+#### Step 4: Find the Expected Frequencies
 
-#### Step 3: Compute Expected Frequencies ($E_{ij}$)
-Formula for each cell:
-
-$$E_{ij} = \frac{(\text{Row } i \text{ Total}) \times (\text{Column } j \text{ Total})}{\text{Grand Total } (N = 300)}$$
-
-For Researcher X (Row Total $= 200$):
-- Below Average: $E_{11} = \frac{200 \times 126}{300} = \mathbf{84.0}$
-- Average: $E_{12} = \frac{200 \times 93}{300} = \mathbf{62.0}$
-- Above Average: $E_{13} = \frac{200 \times 69}{300} = \mathbf{46.0}$
-- Genius: $E_{14} = \frac{200 \times 12}{300} = \mathbf{8.0}$
-
-For Researcher Y (Row Total $= 100$):
-- Below Average: $E_{21} = \frac{100 \times 126}{300} = \mathbf{42.0}$
-- Average: $E_{22} = \frac{100 \times 93}{300} = \mathbf{31.0}$
-- Above Average: $E_{23} = \frac{100 \times 69}{300} = \mathbf{23.0}$
-- Genius: $E_{24} = \frac{100 \times 12}{300} = \mathbf{4.0}$
-
-#### Step 4: Chi-Square ($\chi^2$) Test Statistic Calculation
 Formula:
+$$E_i = \frac{\text{Row total} \times \text{Column total}}{\text{Grand total} \; (N = 300)}$$
 
-$$\chi^2 = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+**(a) Observed Frequencies ($O$):**
 
-| Category | Observed ($O$) | Expected ($E$) | $(O - E)$ | $(O - E)^2$ | $\dfrac{(O - E)^2}{E}$ |
+| Researcher | Below Average | Average | Above Average | Genius | Total |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| **X: Below Average** | 86 | 84.0 | $+2$ | 4 | $\frac{4}{84} \approx \mathbf{0.0476}$ |
-| **X: Average** | 60 | 62.0 | $-2$ | 4 | $\frac{4}{62} \approx \mathbf{0.0645}$ |
-| **X: Above Average** | 44 | 46.0 | $-2$ | 4 | $\frac{4}{46} \approx \mathbf{0.0870}$ |
-| **X: Genius** | 10 | 8.0 | $+2$ | 4 | $\frac{4}{8} = \mathbf{0.5000}$ |
-| **Y: Below Average** | 40 | 42.0 | $-2$ | 4 | $\frac{4}{42} \approx \mathbf{0.0952}$ |
-| **Y: Average** | 33 | 31.0 | $+2$ | 4 | $\frac{4}{31} \approx \mathbf{0.1290}$ |
-| **Y: Above Average** | 25 | 23.0 | $+2$ | 4 | $\frac{4}{23} \approx \mathbf{0.1739}$ |
-| **Y: Genius** | 2 | 4.0 | $-2$ | 4 | $\frac{4}{4} = \mathbf{1.0000}$ |
-| **Total** | **300** | **300.0** | **0** | | $\chi^2_{\mathrm{cal}} \approx \mathbf{2.0972}$ |
+| **X** | 86 | 60 | 44 | 10 | 200 |
+| **Y** | 40 | 33 | 25 | 2 | 100 |
+| **Total** | 126 | 93 | 69 | 12 | 300 |
 
-$$\chi^2_{\mathrm{cal}} = 0.0476 + 0.0645 + 0.0870 + 0.5000 + 0.0952 + 0.1290 + 0.1739 + 1.0000 = \mathbf{2.0972} \quad (\approx 2.10)$$
+**(b) Expected Frequencies ($E$):**
 
-#### Step 5: Statistical Decision & Conclusion
+| Researcher | Below Average | Average | Above Average | Genius | Total |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| **X** | $\frac{200 \times 126}{300} = 84$ | $\frac{200 \times 93}{300} = 62$ | $\frac{200 \times 69}{300} = 46$ | $\frac{200 \times 12}{300} = 8$ | 200 |
+| **Y** | $\frac{100 \times 126}{300} = 42$ | $\frac{100 \times 93}{300} = 31$ | $\frac{100 \times 69}{300} = 23$ | $\frac{100 \times 12}{300} = 4$ | 100 |
+| **Total** | 126 | 93 | 69 | 12 | 300 |
 
-$$\chi^2_{\mathrm{cal}} = 2.0972 < \chi^2_{0.05,\, 3} = 7.815$$
+**(c) Calculation of $\chi^2$:**
 
-Since the calculated value of $\chi^2$ ($2.0972$) is significantly less than the critical table value ($7.815$), we **fail to reject (accept) the null hypothesis $H_0$**.
+$$\begin{aligned}
+\chi^2 &= \frac{(86 - 84)^2}{84} + \frac{(60 - 62)^2}{62} + \frac{(44 - 46)^2}{46} + \frac{(10 - 8)^2}{8} \\
+&\quad + \frac{(40 - 42)^2}{42} + \frac{(33 - 31)^2}{31} + \frac{(25 - 23)^2}{23} + \frac{(2 - 4)^2}{4} \\
+&= \frac{4}{84} + \frac{4}{62} + \frac{4}{46} + \frac{4}{8} + \frac{4}{42} + \frac{4}{31} + \frac{4}{23} + \frac{4}{4} \\
+&= 0.0476 + 0.0645 + 0.0870 + 0.5000 + 0.0952 + 0.1290 + 0.1739 + 1.0000 \\
+&= 2.0972 \approx \mathbf{2.10}
+\end{aligned}$$
 
-**Conclusion:** There is **no significant difference** between the sampling techniques adopted by the two researchers. Both techniques yield consistent proportions across the intelligence levels.
+#### Step 5: Conclusion
+- **Degrees of freedom:**
+  $$df = (r - 1)(c - 1) = (2 - 1)(4 - 1) = 1 \times 3 = \mathbf{3}$$
+- At $\alpha = 0.05$, critical value from table:
+  $$\chi^2_{0.05,\, 3} = \mathbf{7.815}$$
+- **Decision:** Since $\chi^2_{\mathrm{cal}} = 2.10 < 7.815$, we **accept $H_0$** (fail to reject).
 
-> [!NOTE]
-> **Correction Note:** The handwritten notes mistakenly formulated $H_1$ with *"no significant difference"*. The alternative hypothesis $H_1$ must state that there **is** a significant difference between the sampling techniques.
+**Conclusion:** Therefore, there is **no significant difference** between the sampling techniques adopted by the two researchers.
 
 ---
 
@@ -90,35 +80,87 @@ Since the calculated value of $\chi^2$ ($2.0972$) is significantly less than the
 ### Step-by-Step Solution
 
 #### Step 1: Given Data
-- **District 1 (Sample 1):** Size $n_1 = 100$ ($\ge 30$, large sample), Sample mean $\bar{x}_1 = 210\text{ lbs}$, Sample S.D. $s_1 = 10\text{ lbs}$.
-- **District 2 (Sample 2):** Size $n_2 = 50$ ($\ge 30$, large sample), Sample mean $\bar{x}_2 = 220\text{ lbs}$, Sample S.D. $s_2 = 12\text{ lbs}$.
+- **District 1 (Sample 1):** Size $n_1 = 100$, Sample mean $\bar{x}_1 = 210\text{ lbs}$, S.D. $\sigma_1 = 10\text{ lbs}$.
+- **District 2 (Sample 2):** Size $n_2 = 50$, Sample mean $\bar{x}_2 = 220\text{ lbs}$, S.D. $\sigma_2 = 12\text{ lbs}$.
 
 #### Step 2: Formulate Hypotheses
-- **Null Hypothesis ($H_0$):** $\mu_1 = \mu_2$ (There is **no significant difference** between the mean wheat yields of the two districts).
-- **Alternative Hypothesis ($H_1$):** $\mu_1 \neq \mu_2$ (There is a significant difference between the mean wheat yields — **two-tailed test**).
+- **Null Hypothesis ($H_0$):** $\mu_1 = \mu_2$ (No significant difference between mean yields).
+- **Alternative Hypothesis ($H_1$):** $\mu_1 \neq \mu_2$ (Significant difference — **two-tailed test**).
 
 #### Step 3: Level of Significance & Critical Value
-- $\alpha = 0.05$ (5% level of significance).
-- Critical value for a two-tailed $Z$-test:
-
-$$|Z_{\alpha/2}| = |Z_{0.025}| = \mathbf{1.96}$$
-
-Rejection criterion: Reject $H_0$ if $|Z_{\mathrm{cal}}| > 1.96$.
+- $\alpha = 0.05$.
+- Critical value: $|Z_{\alpha/2}| = Z_{0.025} = \mathbf{1.96}$.
 
 #### Step 4: Test Statistic Calculation
-Since $n_1, n_2 \ge 30$, sample variances $s_1^2, s_2^2$ are unbiased estimates of population variances $\sigma_1^2, \sigma_2^2$:
+Since $n_1, n_2 \ge 30$, use two-sample $Z$-test:
 
-$$\text{Standard Error } SE = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}} = \sqrt{\frac{10^2}{100} + \frac{12^2}{50}} = \sqrt{\frac{100}{100} + \frac{144}{50}}$$
+$$Z = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\dfrac{\sigma_1^2}{n_1} + \dfrac{\sigma_2^2}{n_2}}} = \frac{210 - 220}{\sqrt{\dfrac{10^2}{100} + \dfrac{12^2}{50}}} = \frac{-10}{\sqrt{1 + 2.88}} = \frac{-10}{\sqrt{3.88}} = \frac{-10}{1.97} \approx \mathbf{-5.08}$$
 
-$$\frac{100}{100} = 1.0, \qquad \frac{144}{50} = \mathbf{2.88}$$
-
-$$SE = \sqrt{1.0 + 2.88} = \sqrt{3.88} \approx \mathbf{1.96977}$$
-
-$$Z = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\dfrac{s_1^2}{n_1} + \dfrac{s_2^2}{n_2}}} = \frac{210 - 220}{1.96977} = \frac{-10}{1.96977} \approx \mathbf{-5.0767} \quad (\approx \mathbf{-5.08})$$
-
-Taking the absolute value:
-
+Taking absolute value:
 $$|Z_{\mathrm{cal}}| = \mathbf{5.08}$$
+
+#### Step 5: Statistical Decision & Conclusion
+
+$$|Z_{\mathrm{cal}}| = 5.08 \gg Z_{\alpha/2} = 1.96$$
+
+Since $|Z_{\mathrm{cal}}| = 5.08$ is far greater than the critical value $1.96$, the sample difference is highly significant ($p < 0.00001$). We **reject the null hypothesis $H_0$**.
+
+**Conclusion:** There is a **highly significant difference** between the mean yields of crops in the two districts. Specifically, the mean yield in District 2 ($220\text{ lbs}$) is significantly higher than that in District 1 ($210\text{ lbs}$).
+
+> [!NOTE]
+> **Correction Note:** The handwritten notes evaluated $\frac{144}{50} = 2.8$ instead of $2.88$, yielding $Z = -5.13$. The correct arithmetic is $\sqrt{1 + 2.88} = \sqrt{3.88} \approx 1.97$, giving $Z = -5.08$.
+
+---
+
+## Question 9 — Paired Student's $t$-Test (Soldiers' Training)
+
+**Question:** Ten soldiers participated in a shooting competition in the first week. After intensive training they participated in the competition in the second week. Their scores before and after training are given as follows:
+
+| Soldier | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Scores Before ($x_i$)** | 67 | 24 | 57 | 55 | 63 | 54 | 56 | 68 | 33 | 43 |
+| **Scores After ($y_i$)** | 70 | 38 | 58 | 58 | 56 | 67 | 68 | 75 | 42 | 38 |
+
+Do the data indicate that the soldiers have been benefited by the training? (Test at $\alpha = 0.05$).
+
+---
+
+### Step-by-Step Solution
+
+#### Step 1: Formulate Hypotheses
+Because the same $10$ soldiers are measured before and after training, the two sets of observations are **dependent (paired)**.
+Let $d_i = y_i - x_i = \text{Score After} - \text{Score Before}$.
+- **Null Hypothesis ($H_0$):** $\mu_d = 0$ (Training has not produced any increase in shooting scores; soldiers have not benefited).
+- **Alternative Hypothesis ($H_1$):** $\mu_d > 0$ (Training has increased shooting scores; soldiers have benefited — **one-tailed right-tail test**).
+
+#### Step 2: Level of Significance & Critical Value
+- Significance level: $\alpha = 0.05$.
+- Degrees of freedom: $\nu = df = n - 1 = 10 - 1 = \mathbf{9}$.
+- From Student's $t$-table for a one-tailed test with $df = 9$ at $\alpha = 0.05$:
+
+$$t_{\alpha,\, 9} = t_{0.05,\, 9} = \mathbf{1.833}$$
+
+Rejection criterion: Reject $H_0$ if $t_{\mathrm{cal}} > 1.833$.
+
+#### Step 3: Compute Differences ($d$) and Standard Deviation ($\sigma$)
+Let difference $d = \text{After} - \text{Before}$:
+$$d = [3, 14, 1, 3, -7, 13, 12, 7, 9, -5]$$
+
+Mean difference ($\bar{d}$):
+$$\sum d = 50 \implies \bar{d} = \frac{50}{10} = \mathbf{5.0}$$
+
+Sum of squared differences ($\sum d^2$):
+$$\sum d^2 = 3^2 + 14^2 + 1^2 + 3^2 + (-7)^2 + 13^2 + 12^2 + 7^2 + 9^2 + (-5)^2 = \mathbf{732}$$
+
+Variance ($\sigma^2$):
+$$\sigma^2 = \frac{1}{n - 1} \left[\sum d^2 - n(\bar{d})^2\right] = \frac{1}{9} [732 - 10(5)^2] = \frac{1}{9}[732 - 250] = \frac{482}{9} \approx \mathbf{53.56}$$
+
+Standard deviation ($\sigma$):
+$$\sigma = \sqrt{53.56} \approx \mathbf{7.32}$$
+
+#### Step 4: Paired $t$-Test Statistic
+
+$$t = \frac{\bar{d}}{\sigma / \sqrt{n}} = \frac{5}{7.32 / \sqrt{10}} = \frac{5}{7.32 / 3.162} = \frac{5}{2.31} \approx \mathbf{2.16}$$
 
 #### Step 5: Statistical Decision & Conclusion
 
@@ -235,7 +277,7 @@ Rejection criterion: Reject $H_0$ if $|Z_{\mathrm{cal}}| > 1.96$.
 
 $$\text{Standard Error } SE = \frac{\sigma}{\sqrt{n}} = \frac{25}{\sqrt{64}} = \frac{25}{8} = \mathbf{3.125}$$
 
-$$Z = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} = \frac{70 - 56}{3.125} = \frac{14}{3.125} = \mathbf{+4.48}$$
+$$Z = \frac{\bar{x} - \mu}{\sigma / \sqrt{n}} = \frac{70 - 56}{25 / \sqrt{64}} = \frac{14}{25/8} = \frac{14 \times 8}{25} = \frac{112}{25} = \mathbf{4.48}$$
 
 Taking absolute value:
 

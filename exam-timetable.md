@@ -15,14 +15,14 @@
 
 ## Quick Filter: CSE (Data Science) Courses
 
-| S.No | Course Code | Course Name | Session | Date & Day |
-| :---: | :---: | :--- | :---: | :--- |
-| 3 | `2501CS10` | Advanced Data Structures & Algorithm Analysis (ADSA) | **FN** | 13.10.2026 (Tuesday) |
-| 15 | `2501CS08` | Object Oriented Programming through C++ | **AN** | 13.10.2026 (Tuesday) |
-| 22 | `2501IT05` | Database Management Systems (DBMS) | **FN** | 14.10.2026 (Wednesday) |
-| 32 | `2501MA09` | Probability & Statistics (P&S) | **AN** | 14.10.2026 (Wednesday) |
-| 40 | `2501IT07` | Agile Software Engineering (ASE) | **FN** | 15.10.2026 (Thursday) |
-| 45 | `2501CS34` | Fundamentals of Data Science (FDS) | **FN** | 16.10.2026 (Friday) |
+| S.No | Course Code | Course Name                                          | Session | Date & Day             |
+| :--: | :---------: | :--------------------------------------------------- | :-----: | :--------------------- |
+|  3   | `2501CS10`  | Advanced Data Structures & Algorithm Analysis (ADSA) | **FN**  | 13.10.2026 (Tuesday)   |
+|  15  | `2501CS08`  | Object Oriented Programming through C++              | **AN**  | 13.10.2026 (Tuesday)   |
+|  22  | `2501IT05`  | Database Management Systems (DBMS)                   | **FN**  | 14.10.2026 (Wednesday) |
+|  32  | `2501MA09`  | Probability & Statistics (P&S)                       | **AN**  | 14.10.2026 (Wednesday) |
+|  40  | `2501IT07`  | Agile Software Engineering (ASE)                     | **FN**  | 15.10.2026 (Thursday)  |
+|  45  | `2501CS34`  | Fundamentals of Data Science (FDS)                   | **FN**  | 16.10.2026 (Friday)    |
 
 ---
 

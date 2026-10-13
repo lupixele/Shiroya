@@ -114,13 +114,6 @@ int main() {
 }
 ```
 
-### Output
-```text
-Result: 5 + 9i
-```
-
----
-
 ## Q3. Explain operator overloading using friend functions with syntax and an example.
 
 ### Friend Function in Operator Overloading
@@ -140,6 +133,13 @@ ReturnType operator op(Type1 a, Type2 b) {
     // function body
 }
 ```
+
+### Output
+```text
+Result: 5 + 9i
+```
+
+---
 
 ### Code Example
 ```cpp

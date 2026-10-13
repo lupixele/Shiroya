@@ -478,22 +478,18 @@ To guarantee data integrity and reliability, every DBMS transaction must satisfy
 
 #### 1. Atomicity ("All-or-Nothing" Property)
 - **Definition:** A transaction is treated as a single, **indivisible (atomic) unit of execution**. Either **all** of its operations are executed completely, or **none** of them are executed at all. No partial changes are ever left behind.
-- **DBMS Component Responsible:** *Transaction Management / Recovery Manager (Undo Log)*.
 - **Example:** In the bank transfer of $₹1000$ from Account $A$ to Account $B$, if $₹1000$ is debited from $A$ (`write(A)`) and a system crash occurs before it is credited to $B$, **Atomicity** ensures the debit from $A$ is rolled back so money is not lost.
 
 #### 2. Consistency (Correctness Preservation)
 - **Definition:** A transaction must transform the database from **one valid (consistent) state to another valid state**, preserving all defined database integrity constraints, business rules, and invariants.
-- **DBMS Component Responsible:** *Application Programmer & Integrity Constraint Checker*.
 - **Example:** Suppose initially $A = ₹3000$ and $B = ₹2000$, so the total sum is $A + B = ₹5000$. After transferring $₹1000$ ($A = ₹2000, B = ₹3000$), the total sum $A + B$ must still equal **$₹5000$**, and no account balance rule (such as $\text{Balance} \ge 0$) is violated.
 
 #### 3. Isolation (Concurrency Independence)
 - **Definition:** Although multiple transactions may execute **concurrently**, the execution of one transaction must be **isolated** from the intermediate, uncommitted states of other concurrently running transactions. The final effect must be equivalent to some **serial** (one-after-another) execution.
-- **DBMS Component Responsible:** *Concurrency Control Manager (Locking / Timestamping)*.
 - **Example:** While Transaction $T_1$ is transferring $₹1000$ from $A$ to $B$ (after debiting $A$ but before crediting $B$), another concurrent Transaction $T_2$ calculating $A + B$ must **not** read the intermediate state where $₹1000$ appears missing.
 
 #### 4. Durability (Permanence)
 - **Definition:** Once a transaction has successfully completed and executed **`COMMIT`**, its changes to the database are **permanent** and must never be lost — even if a power outage, operating system crash, or hardware failure occurs immediately afterward.
-- **DBMS Component Responsible:** *Recovery Subsystem (Write-Ahead Logging / Redo Log)*.
 - **Example:** Once the bank displays *"Transfer of ₹1000 Successful"* (`COMMIT`), the updated balances ($A = ₹2000, B = ₹3000$) remain permanently saved in non-volatile storage even if the server crashes one millisecond later.
 
 ---

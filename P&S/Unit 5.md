@@ -1,6 +1,6 @@
 # Unit 5 — Correlation and Regression
 
-Complete exam-ready questions, worked solutions, and handwritten notes verification for **Unit-V** of Probability & Statistics (Aditya University / JNTU curriculum).
+Complete exam-ready questions and worked solutions for **Unit-V** of Probability & Statistics (Aditya University / JNTU curriculum).
 
 ---
 
@@ -18,15 +18,15 @@ Complete exam-ready questions, worked solutions, and handwritten notes verificat
 
 ## Quick Navigation / Table of Contents
 
-| Section | Topic | Question Source | Status & Verification |
+| Section | Topic | Question Source | Key Result |
 |:---|:---|:---|:---|
-| [**Question 11**](#question-11--least-squares-parabola-curve-fitting) | Fit a Parabola $y = a + bx + cx^2$ | Assignment-II Q11 | **Verified Correct** ($y = 0.9629 + 0.8443x + 0.1214x^2$) |
-| [**Question 12**](#question-12--exponential-curve-fitting-y--aebx) | Fit Exponential Curve $y = ae^{bx}$ | Assignment-II Q12 | **Verified & Clarified** (Ill-conditioned rounding in notes explained) |
-| [**Question 13**](#question-13--spearmans-rank-correlation-with-tied-ranks) | Spearman's Rank Correlation with Ties | Assignment-II Q13 | **Verified Correct** ($\rho = \frac{11}{15} \approx 0.7333$) |
-| [**Question 14**](#question-14--karl-pearsons-coefficient-of-correlation) | Karl Pearson's Correlation Coefficient ($r$) | Assignment-II Q14 | **Verified Correct** ($r = \frac{46}{\sqrt{2352}} \approx 0.9485$) |
-| [**Question 15**](#question-15--regression-equations-means-and-correlation) | Regression Lines, Means & Correlation | Assignment-II Q15 | **Verified & Corrected** (Fixed $r^2 = b_{yx} + b_{xy}$ formula error) |
-| [**Question 16**](#question-16--beauty-contest-judges-rank-correlation) | Beauty Contest Judges Rank Correlation | Assignment-II Q16 | **Verified Correct** ($\rho = -\frac{3}{110} \approx -0.0273$) |
-| [**Supplementary Section**](#supplementary-unit-5-core-topics--notes-verification) | Power Curves, Missing Solns & Angle $\theta$ Audit | Notes & Slide Sets | **Audited & Solved** (Fixed $y=66$ error, solved missing Q7) |
+| [**Question 11**](#question-11--least-squares-parabola-curve-fitting) | Fit a Parabola $y = a + bx + cx^2$ | Assignment-II Q11 | $y = 0.9629 + 0.8443x + 0.1214x^2$ |
+| [**Question 12**](#question-12--exponential-curve-fitting-y--aebx) | Fit Exponential Curve $y = ae^{bx}$ | Assignment-II Q12 | $y = 4.996\,e^{0.0356x}$ |
+| [**Question 13**](#question-13--spearmans-rank-correlation-with-tied-ranks) | Spearman's Rank Correlation with Ties | Assignment-II Q13 | $\rho = \frac{11}{15} \approx 0.7333$ |
+| [**Question 14**](#question-14--karl-pearsons-coefficient-of-correlation) | Karl Pearson's Correlation Coefficient ($r$) | Assignment-II Q14 | $r = \frac{46}{\sqrt{2352}} \approx 0.9485$ |
+| [**Question 15**](#question-15--regression-equations-means-and-correlation) | Regression Lines, Means & Correlation | Assignment-II Q15 | $\bar{x} = -3/29, \bar{y} = 15/29, r \approx 0.7395$ |
+| [**Question 16**](#question-16--beauty-contest-judges-rank-correlation) | Beauty Contest Judges Rank Correlation | Assignment-II Q16 | $\rho = -\frac{3}{110} \approx -0.0273$ |
+| [**Supplementary Section**](#supplementary-unit-5-core-topics--notes-verification) | Additional Curve Fitting & Regression Review | Core Topics | Power curve, angle between regression lines |
 
 ---
 
@@ -120,15 +120,6 @@ $$\mathbf{y = 0.9629 + 0.8443x + 0.1214x^2}$$
 
 ---
 
-### Handwritten Notes Verification for Q11
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 14–16) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 11) both execute this elimination and obtain $a \approx 0.9629$, $b \approx 0.8443$, $c \approx 0.1214$.
-> - All summations, elimination steps, and coefficients are **100% mathematically correct**.
-
----
-
 ## Question 12 — Exponential Curve Fitting ($y = ae^{bx}$)
 
 **Question:** For the following data, fit the curve of the form $y = ae^{bx}$:
@@ -217,23 +208,8 @@ $$a = 10^{A'} = 10^{0.69797} \approx \mathbf{4.9885} \quad (\approx \mathbf{4.99
 
 $$\mathbf{y = 4.996 \, e^{0.03558x}} \quad (\text{or } y = 4.9958 \, e^{0.03558x})$$
 
----
-
-### Handwritten Notes Verification for Q12
-
 > [!NOTE]
-> **Audit & Explanation of Discrepancy between Note Versions:**
-> - In `MId_2_answers.pdf` (Pages 16–17), the student wrote:
->   $$A = \frac{25.8462 - 410B}{7}$$
->   and substituted it into $410A + 24050B = 1515.1197$.
->   Because $x$ is large ($55$ to $62$), the system is **ill-conditioned** ($\Delta = 250$ vs diagonal product $> 1.6 \times 10^5$).
->   The student rounded intermediate terms:
->   $$410 \times \frac{25.8462}{7} = 1513.8488, \quad 24050 - \frac{410^2}{7} = 35.7143$$
->   $$1515.1197 - 1513.8488 = 1.2709 \implies B = \frac{1.2709}{35.7143} \approx 0.035586 \approx \mathbf{0.0356}$$
->   Then back-substituting rounded $B = 0.0356$:
->   $$A = \frac{25.8462 - 410(0.0356)}{7} = \frac{25.8462 - 14.5960}{7} = \mathbf{1.6072} \implies a = e^{1.6072} \approx \mathbf{4.9888}$$
-> - In `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 12), the author used $\log_{10}$ and obtained $a = 4.996$, $b = 0.03558$.
-> - Both answers ($a = 4.989$ and $a = 4.996$) stem from the identical least-squares normal equations; $a \approx 4.996, b \approx 0.03558$ is the exact unrounded solution.
+> **Note:** Intermediate rounding during equation elimination leads to $a \approx 4.989$, while exact unrounded calculation gives $a \approx 4.996$ and $b \approx 0.0356$. Both are accepted.
 
 ---
 
@@ -304,15 +280,6 @@ $$\rho = 1 - \frac{4}{15} = \frac{11}{15} \approx \mathbf{0.7333}$$
 
 ---
 
-### Handwritten Notes Verification for Q13
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Page 18) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 13) both evaluate $\sum d^2 = 41$, $CF = 3$, and $\rho = \frac{11}{15} \approx \mathbf{0.7333}$.
-> - **Note Typo in PPT Notes:** In `P&S_Unit-V_Notes_AUS - Copy.pdf` (Page 14, Example 1), row 9 printed $d = 5$ and $d^2 = 25$ by mistake, but still recorded the correct sum $\sum d^2 = 41$. Both student PDFs fixed this error. The worked answer $\mathbf{0.7333}$ is **100% correct**.
-
----
-
 ## Question 14 — Karl Pearson's Coefficient of Correlation
 
 **Question:** Calculate Karl Pearson's coefficient of correlation for the following data:
@@ -364,16 +331,6 @@ $$r = \frac{7(676) - 70(63)}{\sqrt{\left[7(728) - 70^2\right]\left[7(651) - 63^2
 $$r = \frac{322}{\sqrt{196 \times 588}} = \frac{322}{\sqrt{115248}} = \frac{322}{339.482} \approx \mathbf{0.9485}$$
 
 **Conclusion:** Karl Pearson's correlation coefficient is $\mathbf{+0.9485}$, indicating an **extremely strong positive linear correlation** between $x$ and $y$.
-
----
-
-### Handwritten Notes Verification for Q14
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Page 19) used Method 1 and obtained $r = \frac{46}{\sqrt{2352}} \approx 0.948$.
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 14) used Method 2 and obtained $r = \frac{322}{\sqrt{115248}} \approx 0.9485$.
-> - In `P&S_Unit-V_Notes_AUS - Copy.pdf` (Page 9, Example 1), the printed text had a minor typo printing $10 \times 9 = 91$ for $xy$ instead of $90$, but the correct total $\sum xy = 676$ was used. Both student handwritten solutions are **100% correct**.
 
 ---
 
@@ -443,18 +400,8 @@ Since both regression coefficients $b_{yx} = \frac{7}{16}$ and $b_{xy} = \frac{5
 
 $$r = +\sqrt{b_{yx} \cdot b_{xy}} = \sqrt{\frac{35}{64}} = \frac{\sqrt{35}}{8} = \frac{5.91608}{8} \approx \mathbf{0.7395}$$
 
----
-
-### Handwritten Notes Verification for Q15
-
-> [!WARNING]
-> **Formula Notation Error in `MId_2_answers.pdf`:**
-> - In `MId_2_answers.pdf` (Pages 20 and 21), the student wrote:
->   $$r^2 = b_{yx} + b_{xy} \quad \text{\textbf{[FORMULA ERROR - PLUS SIGN WRITTEN]}}$$
->   This formula was written with a **plus sign** twice! The true relationship is the **product (geometric mean)**:
->   $$r^2 = b_{yx} \cdot b_{xy}$$
->   Fortunately, on Page 21 line 2, the student multiplied $\frac{7}{16} \times \frac{5}{4} = \frac{35}{64}$ and evaluated $r = \frac{\sqrt{35}}{8} \approx 0.7395$. The final number was correct, but writing a plus sign in the formula is a serious theoretical error that would lose marks in an examination.
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 15) correctly wrote $r^2 = b_{yx} \times b_{xy}$ and solved $\bar{x} = -3/29$, $\bar{y} = 15/29$, $r = 0.7395$.
+> [!NOTE]
+> **Correction Note:** The handwritten notes mistakenly wrote $r^2 = b_{yx} + b_{xy}$ with a plus sign. The correct formula is the geometric mean product: $r^2 = b_{yx} \cdot b_{xy} \implies r = \sqrt{b_{yx} \cdot b_{xy}}$.
 
 ---
 
@@ -520,16 +467,8 @@ $$\rho = 1 - \frac{6 \times 169.5}{990} = 1 - \frac{1017}{990} = 1 - 1.027273 = 
 
 **Conclusion:** The rank correlation coefficient between Judge 1 and Judge 2 is $\mathbf{-0.0273}$. This near-zero negative value indicates that there is **virtually no agreement (almost zero correlation)** between the opinions of the two judges in scoring the contestants.
 
----
-
-### Handwritten Notes Verification for Q16
-
 > [!NOTE]
-> **Comparison of Two Solution Approaches in Notes:**
-> - `MId_2_answers.pdf` (Pages 21–22) applied the official textbook Spearman tie-correction formula:
->   $$\rho = 1 - \frac{6(166 + 3.5)}{990} = -\frac{3}{110} \approx \mathbf{-0.0273}$$
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 16) assigned ranks in descending order (highest score = 1, giving identical $\sum d^2 = 166$), but computed Pearson's product-moment correlation on the averaged ranks, obtaining $r \approx \mathbf{-0.0279}$ ($\approx -0.028$).
-> - In university examinations, Spearman's tie-corrected formula $\rho = -\frac{3}{110} \approx \mathbf{-0.0273}$ is the standard required answer.
+> **Note:** Although the question prompt mentions "three judges", only scores for Judge 1 and Judge 2 are provided, so the rank correlation is evaluated between J-1 and J-2 ($\rho = -0.0273$).
 
 ---
 

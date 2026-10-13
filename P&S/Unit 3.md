@@ -1,6 +1,6 @@
 # Unit 3 — Data Analytics and Sampling Theory
 
-Complete exam-ready questions, worked solutions, and handwritten notes verification for **Unit-III** of Probability & Statistics (Aditya University / JNTU curriculum).
+Complete exam-ready questions and worked solutions for **Unit-III** of Probability & Statistics (Aditya University / JNTU curriculum).
 
 ---
 
@@ -18,15 +18,15 @@ Complete exam-ready questions, worked solutions, and handwritten notes verificat
 
 ## Quick Navigation / Table of Contents
 
-| Section | Topic | Question Source | Status & Verification |
+| Section | Topic | Question Source | Key Result |
 |:---|:---|:---|:---|
-| [**Question 1**](#question-1--sampling-distribution-without-replacement) | Sampling Distribution without Replacement ($N=5, n=3$) | Assignment-II Q1 | **Verified Correct** (Identified Slide 141 error in PPT) |
-| [**Question 2**](#question-2--sampling-distribution-with-replacement) | Sampling Distribution with Replacement ($N=5, n=2$) | Assignment-II Q2 | **Verified Correct** |
-| [**Question 3**](#question-3--median-for-grouped-frequency-distribution) | Median for Grouped Frequency Table ($N=44$) | Assignment-II Q3 | **Verified Correct** ($64.5$) |
-| [**Question 4**](#question-4--types-of-data-and-methods-of-collection) | Types of Data & Methods of Data Collection | Assignment-II Q4 | **Verified & Expanded** |
-| [**Question 5**](#question-5--central-limit-theorem-probabilities) | Central Limit Theorem Probabilities ($n=100, \mu=76, \sigma=16$) | Assignment-II Q5 | **Verified Correct** ($0.6284, 0.9938$) |
-| [**Question 6**](#question-6--95-confidence-limits-for-population-mean) | 95% Confidence Limits for Mean ($n=16$, Small Sample $t$) | Assignment-II Q6 | **Verified Correct** ($(12.62, 17.50)$) |
-| [**Supplementary Section**](#supplementary-unit-3-core-topics--notes-verification) | Central Tendency & Dispersion Notes Audit | Notes & Slide Sets | **Audited & Corrected** (Fixed H.M. 0.135 error) |
+| [**Question 1**](#question-1--sampling-distribution-without-replacement) | Sampling Distribution without Replacement ($N=5, n=3$) | Assignment-II Q1 | $\mu=12, \sigma \approx 8.49, \mu_{\bar{x}}=12, \sigma_{\bar{x}} \approx 3.46$ |
+| [**Question 2**](#question-2--sampling-distribution-with-replacement) | Sampling Distribution with Replacement ($N=5, n=2$) | Assignment-II Q2 | $\mu=6, \sigma \approx 3.29, \mu_{\bar{x}}=6, \sigma_{\bar{x}} \approx 2.32$ |
+| [**Question 3**](#question-3--median-for-grouped-frequency-distribution) | Median for Grouped Frequency Table ($N=44$) | Assignment-II Q3 | $\text{Median} = 64.5$ |
+| [**Question 4**](#question-4--types-of-data-and-methods-of-collection) | Types of Data & Methods of Data Collection | Assignment-II Q4 | Primary vs. Secondary, Qualitative vs. Quantitative |
+| [**Question 5**](#question-5--central-limit-theorem-probabilities) | Central Limit Theorem Probabilities ($n=100, \mu=76, \sigma=16$) | Assignment-II Q5 | $P(75 < \bar{X} < 78) = 0.6284, P(\bar{X} > 72) = 0.9938$ |
+| [**Question 6**](#question-6--95-confidence-limits-for-population-mean) | 95% Confidence Limits for Mean ($n=16$, Small Sample $t$) | Assignment-II Q6 | $95\% \text{ CI} = (12.62, 17.50)$ |
+| [**Supplementary Section**](#supplementary-unit-3-core-topics-measures-of-central-tendency--dispersion) | Central Tendency & Dispersion Review | Core Topics | Formulae, Geometric & Harmonic Mean |
 
 ---
 
@@ -94,34 +94,16 @@ This confirms the statistical theorem: $\mu_{\bar{x}} = \mu = 12$.
 
 #### 4. Standard Deviation of the Sampling Distribution ($\sigma_{\bar{x}}$)
 
-**Method A: Direct Calculation from the 10 Sample Means**
-Compute deviations from $\mu_{\bar{x}} = 12$:
+Using the standard formula for sampling without replacement (with Finite Population Correction):
 
-$$\sum_{i=1}^{10} (\bar{x}_i - \mu_{\bar{x}})^2 = (6-12)^2 + (8-12)^2 + (12-12)^2 + (9-12)^2 + (13-12)^2 + (15-12)^2 + (10-12)^2 + (14-12)^2 + (16-12)^2 + (17-12)^2$$
+$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} \sqrt{\frac{N - n}{N - 1}}$$
 
-$$= 36 + 16 + 0 + 9 + 1 + 9 + 4 + 4 + 16 + 25 = \mathbf{120}$$
+Substituting $\sigma = \sqrt{72}$, $n = 3$, and $N = 5$:
 
-$$\sigma_{\bar{x}}^2 = \frac{\sum (\bar{x}_i - \mu_{\bar{x}})^2}{10} = \frac{120}{10} = \mathbf{12}$$
+$$\sigma_{\bar{x}} = \frac{\sqrt{72}}{\sqrt{3}} \sqrt{\frac{5 - 3}{5 - 1}} = \sqrt{\frac{72}{3}} \sqrt{\frac{2}{4}} = \sqrt{24 \times \frac{1}{2}} = \sqrt{12} = 2\sqrt{3} \approx \mathbf{3.4641} \quad (\approx \mathbf{3.46})$$
 
-$$\sigma_{\bar{x}} = \sqrt{12} = 2\sqrt{3} \approx \mathbf{3.4641} \quad (\approx 3.46)$$
-
-**Method B: Using Finite Population Correction (FPC) Formula**
-
-$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} \sqrt{\frac{N - n}{N - 1}} = \frac{\sqrt{72}}{\sqrt{3}} \sqrt{\frac{5 - 3}{5 - 1}} = \sqrt{24} \sqrt{\frac{2}{4}} = \sqrt{24 \times \frac{1}{2}} = \sqrt{12} \approx \mathbf{3.4641}$$
-
-Both methods yield the exact same result: $\sigma_{\bar{x}} = \sqrt{12} \approx 3.4641$.
-
----
-
-### Handwritten Notes Verification for Q1
-
-> [!IMPORTANT]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Page 1) computed $\mu = 12$, $\sigma \approx 8.485$, $\mu_{\bar{x}} = 12$, and $\sigma_{\bar{x}} = \sqrt{12} \approx 3.464$ correctly via the formula. However, it **omitted listing the 10 samples and their means**, despite the explicit instruction in the question prompt: *"Consider all possible samples of size 3 that can be drawn without replacement from this population"*.
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 1) correctly listed all 10 samples and verified $\mu_{\bar{x}} = 12$.
-> - **Major Slide Error Found:** In `P&S-Unit-3(Data Analytics and Sampling Theory).pdf` (Slide 141–142), this exact same question is solved by hand. On Slide 141, the slide author computes the sum of squared deviations of the 10 means and incorrectly writes:
->   $$\sigma_{\bar{x}}^2 = \frac{133}{10} = 13.3 \implies \sigma_{\bar{x}} = \sqrt{13.3} = 3.65 \quad \text{\textbf{[WRONG]}}$$
->   The true sum is $36 + 16 + 0 + 9 + 1 + 9 + 4 + 4 + 16 + 25 = \mathbf{120}$, giving $\sigma_{\bar{x}}^2 = 12.0$ and $\sigma_{\bar{x}} = \sqrt{12} \approx \mathbf{3.464}$. The slide result of $3.65$ was an arithmetic error.
+> [!NOTE]
+> **Correction Note:** In some lecture slides, the sum of squared deviations was miscalculated as $133$ ($\sigma_{\bar{x}} = 3.65$). The correct value is $\sigma_{\bar{x}} = \sqrt{12} \approx 3.46$.
 
 ---
 
@@ -178,38 +160,13 @@ Matches population mean $\mu = 6$.
 
 #### 4. Standard Deviation of the Sampling Distribution ($\sigma_{\bar{x}}$)
 
-**Method A: Theoretical Sampling Formula (With Replacement / Infinite)**
+Using the standard theoretical sampling formula for sampling with replacement:
 
-$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} = \frac{\sqrt{10.8}}{\sqrt{2}} = \sqrt{\frac{10.8}{2}} = \sqrt{5.4} \approx \mathbf{2.3238}$$
+$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$
 
-**Method B: Direct Calculation from the 25 Sample Means**
-Sum of squared deviations $\sum_{i=1}^{25} (\bar{x}_i - 6)^2$:
-- $(2-6)^2 = 16$
-- $2 \times (2.5-6)^2 = 2 \times 12.25 = 24.5$
-- $(3-6)^2 = 9$
-- $2 \times (4-6)^2 = 2 \times 4 = 8$
-- $2 \times (4.5-6)^2 = 2 \times 2.25 = 4.5$
-- $2 \times (5-6)^2 = 2 \times 1 = 2$
-- $2 \times (5.5-6)^2 = 2 \times 0.25 = 0.5$
-- $(6-6)^2 = 0$
-- $2 \times (6.5-6)^2 = 2 \times 0.25 = 0.5$
-- $3 \times (7-6)^2 = 3 \times 1 = 3$
-- $(8-6)^2 = 4$
-- $2 \times (8.5-6)^2 = 2 \times 6.25 = 12.5$
-- $2 \times (9.5-6)^2 = 2 \times 12.25 = 24.5$
-- $(11-6)^2 = 25$
-- Total sum of squares $= 16 + 24.5 + 9 + 8 + 4.5 + 2 + 0.5 + 0 + 0.5 + 3 + 4 + 12.5 + 24.5 + 25 = \mathbf{135}$
+Substituting $\sigma = \sqrt{10.8}$ and $n = 2$:
 
-$$\sigma_{\bar{x}}^2 = \frac{135}{25} = \mathbf{5.4} \implies \sigma_{\bar{x}} = \sqrt{5.4} \approx \mathbf{2.3238}$$
-
----
-
-### Handwritten Notes Verification for Q2
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Page 2) obtained $\mu = 6$, $\sigma \approx 3.2863$, $\mu_{\bar{x}} = 6$, $\sigma_{\bar{x}} = \sqrt{5.4} \approx 2.3238$. Calculations are **100% mathematically correct**.
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 2) also explicitly constructed the $5 \times 5$ matrix of means. Both solutions are verified correct.
+$$\sigma_{\bar{x}} = \frac{\sqrt{10.8}}{\sqrt{2}} = \sqrt{\frac{10.8}{2}} = \sqrt{5.4} \approx \mathbf{2.3238} \quad (\approx \mathbf{2.32})$$
 
 ---
 
@@ -262,15 +219,6 @@ Taking the class $59.5 - 64.5$:
 $$\text{Median} = 59.5 + \left[\frac{22 - 12}{10}\right] \times 5 = 59.5 + \left[\frac{10}{10}\right] \times 5 = 59.5 + 5 = \mathbf{64.5}$$
 
 *(Note: Applying the next class $64.5 - 69.5$ with $L = 64.5, cf = 22, f = 9$: $\text{Median} = 64.5 + \left[\frac{22 - 22}{9}\right] \times 5 = \mathbf{64.5}$. Both perspectives agree perfectly).*
-
----
-
-### Handwritten Notes Verification for Q3
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Page 3) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 3) correctly identified the half-correction $0.5$, converted to $49.5-54.5$, setup $cf$, and evaluated $\text{Median} = \mathbf{64.5}$.
-> - Both handwritten solutions are **100% mathematically correct**.
 
 ---
 
@@ -367,15 +315,6 @@ Discrete Continuous Nominal  Ordinal
 
 ---
 
-### Handwritten Notes Verification for Q4
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 4–5) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 4) provide a standard qualitative breakdown of primary/secondary data and collection methods.
-> - The above solution verifies and expands upon the handwritten notes, ensuring all academic syllabus requirements (Aditya University Unit 3 syllabus: Qualitative/Quantitative, Discrete/Continuous, Independent/Dependent, Methods of Collection) are exhaustively answered.
-
----
-
 ## Question 5 — Central Limit Theorem Probabilities
 
 **Question:** A random sample of size $100$ is taken from an infinite population having the mean $\mu = 76$ and the variance $\sigma^2 = 256$. Find the probability that the sample mean ($\bar{X}$) will:
@@ -453,18 +392,6 @@ From Standard Normal Tables:
 
 ---
 
-### Handwritten Notes Verification for Q5
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 5–6) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 5) correctly evaluated:
->   - $SE = 1.6$
->   - $Z_1 = -0.625, Z_2 = 1.25 \implies P = 0.6284$
->   - $Z = -2.5 \implies P = 0.9938$
-> - All steps, values, and normal table lookups are **100% mathematically correct**.
-
----
-
 ## Question 6 — 95% Confidence Limits for Population Mean
 
 **Question:** Find $95\%$ confidence limits for the mean of a normally distributed population from which the following sample was taken:
@@ -538,15 +465,6 @@ $$\text{Lower Limit} = 15.0625 - 2.4411 = \mathbf{12.6214} \quad (\approx 12.62)
 $$\text{Upper Limit} = 15.0625 + 2.4411 = \mathbf{17.5036} \quad (\approx 17.50)$$
 
 $$\mathbf{95\% \text{ Confidence Interval: } (12.62, \; 17.50)}$$
-
----
-
-### Handwritten Notes Verification for Q6
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 7–8) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 6) both correctly evaluated $\bar{x} = 15.0625$, $\sum(x_i-\bar{x})^2 = 314.9375$, $s^2 = 20.9958$, $s = 4.5821$, $t_{0.025, 15} = 2.131$, $E = 2.4411$, and $\text{CI} = (12.62, 17.50)$.
-> - Both handwritten solutions are **100% mathematically correct**.
 
 ---
 

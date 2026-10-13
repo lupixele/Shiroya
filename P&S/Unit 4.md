@@ -1,6 +1,6 @@
 # Unit 4 — Testing of Hypothesis
 
-Complete exam-ready questions, worked solutions, and handwritten notes verification for **Unit-IV** of Probability & Statistics (Aditya University / JNTU curriculum).
+Complete exam-ready questions and worked solutions for **Unit-IV** of Probability & Statistics (Aditya University / JNTU curriculum).
 
 ---
 
@@ -18,13 +18,13 @@ Complete exam-ready questions, worked solutions, and handwritten notes verificat
 
 ## Quick Navigation / Table of Contents
 
-| Section | Topic | Question Source | Status & Verification |
+| Section | Topic | Question Source | Key Result |
 |:---|:---|:---|:---|
-| [**Question 7**](#question-7--chi-square-test-for-independence-of-sampling-techniques) | Chi-Square Test of Independence ($2 \times 4$ Table, $N=300$) | Assignment-II Q7 | **Verified & Corrected** (Fixed fatal $H_1$ error in notes) |
-| [**Question 8**](#question-8--two-sample-large-sample-z-test-for-means) | Two-Sample Large-Sample $Z$-Test (Wheat Yields) | Assignment-II Q8 | **Verified & Corrected** (Fixed arithmetic error $144/50 = 2.8$ in notes) |
-| [**Question 9**](#question-9--paired-students-t-test-soldiers-training) | Paired Student's $t$-Test (10 Soldiers Before/After) | Assignment-II Q9 | **Verified Correct** ($t = 2.16 > 1.833$) |
-| [**Question 10**](#question-10--single-sample-large-sample-z-test-for-mean) | Single-Sample Large-Sample $Z$-Test ($n=64$) | Assignment-II Q10 | **Verified Correct** ($Z = 4.48 > 1.96$) |
-| [**Supplementary Section**](#supplementary-unit-4-core-topics--notes-verification) | Proportions, Two-Sample $t$, Snedecor's $F$ & $\chi^2$ Audit | Notes & Slide Sets | **Audited & Corrected** (Fixed independent vs paired $t$-test in BP data) |
+| [**Question 7**](#question-7--chi-square-test-for-independence-of-sampling-techniques) | Chi-Square Test of Independence ($2 \times 4$ Table, $N=300$) | Assignment-II Q7 | $\chi^2_{\mathrm{cal}} = 2.10 < 7.815 \implies \text{Accept } H_0$ |
+| [**Question 8**](#question-8--two-sample-large-sample-z-test-for-means) | Two-Sample Large-Sample $Z$-Test (Wheat Yields) | Assignment-II Q8 | $|Z_{\mathrm{cal}}| = 5.08 > 1.96 \implies \text{Reject } H_0$ |
+| [**Question 9**](#question-9--paired-students-t-test-soldiers-training) | Paired Student's $t$-Test (10 Soldiers Before/After) | Assignment-II Q9 | $t_{\mathrm{cal}} = 2.16 > 1.833 \implies \text{Reject } H_0$ |
+| [**Question 10**](#question-10--single-sample-large-sample-z-test-for-mean) | Single-Sample Large-Sample $Z$-Test ($n=64$) | Assignment-II Q10 | $|Z_{\mathrm{cal}}| = 4.48 > 1.96 \implies \text{Reject } H_0$ |
+| [**Supplementary Section**](#supplementary-unit-4-core-topics--notes-verification) | Additional Hypothesis Tests Review | Core Topics | Proportions, Two-Sample $t$, Snedecor's $F$, Paired $t$ |
 
 ---
 
@@ -102,20 +102,8 @@ Since the calculated value of $\chi^2$ ($2.0972$) is significantly less than the
 
 **Conclusion:** There is **no significant difference** between the sampling techniques adopted by the two researchers. Both techniques yield consistent proportions across the intelligence levels.
 
----
-
-### Handwritten Notes Verification for Q7
-
-> [!WARNING]
-> **Fatal Hypothesis Error in Handwritten Notes:**
-> - In `MId_2_answers.pdf` (Page 9), the student wrote:
->   - $H_0$: *"There is no significant difference between the sampling techniques adopted by the two researchers."*
->   - $H_1$: *"There is **no** significant diff between the sampling techniques adopted by the two researchers."* **[FATAL ERROR]**
->   - The student mistakenly wrote *"no"* in both $H_0$ and $H_1$. $H_1$ must always contradict $H_0$ and state: *"There **is** a significant difference..."*.
-> - **Arithmetic Typo in Notes:**
->   - In `MId_2_answers.pdf` Page 9, the expected table's bottom total under `Below Avg` is written as `123` instead of `126` ($84 + 42 = 126$).
->   - In the calculation of $X_{\text{expected}}$ for `Above Avg`, the denominator is written as `30` instead of `300` ($\frac{200 \times 69}{30} = 46$), though the resulting number `46` was correct.
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 7) correctly stated both $H_0$ and $H_1$ and evaluated $\chi^2 = 2.10$.
+> [!NOTE]
+> **Correction Note:** The handwritten notes mistakenly formulated $H_1$ with *"no significant difference"*. The alternative hypothesis $H_1$ must state that there **is** a significant difference between the sampling techniques.
 
 ---
 
@@ -166,21 +154,8 @@ Since $|Z_{\mathrm{cal}}| = 5.08$ is far greater than the critical value $1.96$,
 
 **Conclusion:** There is a **highly significant difference** between the mean yields of crops in the two districts. Specifically, the mean yield in District 2 ($220\text{ lbs}$) is significantly higher than that in District 1 ($210\text{ lbs}$).
 
----
-
-### Handwritten Notes Verification for Q8
-
-> [!CAUTION]
-> **Calculation Error in `MId_2_answers.pdf`:**
-> - In `MId_2_answers.pdf` (Page 11), the student wrote:
->   $$\sqrt{\frac{100}{100} + \frac{144}{50}} = \sqrt{1 + 2.8} = \sqrt{3.8} \approx 1.949 \quad \text{\textbf{[ARITHMETIC ERROR]}}$$
->   The student evaluated $\frac{144}{50}$ as **`2.8`** instead of **`2.88`**!
->   As a result, they computed:
->   $$Z = \frac{-10}{1.949} = \mathbf{-5.13} \quad \text{[INCORRECT VALUE]}$$
-> - **The True Value is:**
->   $$\sqrt{1 + 2.88} = \sqrt{3.88} = 1.9698 \implies Z = \frac{-10}{1.9698} = \mathbf{-5.08}$$
-> - `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 8) correctly computed $\frac{144}{50} = 2.88$, $\sqrt{3.88} = 1.9698$, and $Z = -5.08$.
-> - Additionally, `MId_2_answers.pdf` forgot to explicitly state $H_0$ and $H_1$ at the beginning of Question 8.
+> [!NOTE]
+> **Correction Note:** The handwritten notes evaluated $\frac{144}{50} = 2.8$ instead of $2.88$, yielding $Z = -5.13$. The correct arithmetic is $\sqrt{1 + 2.88} = \sqrt{3.88} \approx 1.97$, giving $Z = -5.08$.
 
 ---
 
@@ -256,19 +231,6 @@ Since the calculated $t$-statistic ($2.16$) exceeds the critical value ($1.833$)
 
 ---
 
-### Handwritten Notes Verification for Q9
-
-> [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 12–13) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 9) correctly evaluated:
->   - $\sum d_i = 50 \implies \bar{d} = 5$
->   - $\sum (d_i - \bar{d})^2 = 482 \implies s_d = \sqrt{482/9} \approx 7.318$
->   - $t_{\mathrm{cal}} = \frac{5}{7.318/\sqrt{10}} = 2.16$
->   - Comparison: $2.16 > 1.833 \implies \text{Reject } H_0$.
-> - Both handwritten solutions are **100% mathematically correct**. (Note: `MId_2_answers.pdf` omitted stating $H_0$ and $H_1$ explicitly at the top of the question, which has been completed above).
-
----
-
 ## Question 10 — Single-Sample Large-Sample $Z$-Test for Mean
 
 **Question:** A sample of $64\text{ students}$ has a mean weight of $70\text{ kgs}$. Can this be regarded as a sample from a population with mean weight $56\text{ kgs}$ and standard deviation $25\text{ kgs}$? (Test at $\alpha = 0.05$).
@@ -313,14 +275,8 @@ Since $|Z_{\mathrm{cal}}| = 4.48$ is far greater than the critical value $1.96$,
 
 **Conclusion:** No, this sample **cannot be regarded as drawn from a population** with mean weight $56\text{ kgs}$ and standard deviation $25\text{ kgs}$.
 
----
-
-### Handwritten Notes Verification for Q10
-
 > [!NOTE]
-> **Verification Verdict:**
-> - `MId_2_answers.pdf` (Pages 13–14) and `Probability_Statistics_Assignment_II_Handwritten_Q1-Q16_updated (1).pdf` (Page 10) correctly computed $Z = \frac{14}{3.125} = 4.48 > 1.96$ and rejected $H_0$.
-> - **Minor Terminology Note:** `MId_2_answers.pdf` listed $\sigma = 25\text{ kgs}$ under the label *"Sample standard deviation ($s$) = 25 kgs"*. The problem prompt explicitly states *"a population with mean weight 56 kgs and standard deviation 25 kgs"*, so $25$ is the **population** parameter $\sigma$. The numerical calculation remains identical.
+> **Note:** The standard deviation $25\text{ kg}$ is the population parameter ($\sigma$), not sample $s$.
 
 ---
 

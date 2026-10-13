@@ -297,70 +297,63 @@ Discrete Continuous Nominal  Ordinal
 
 ### Step-by-Step Solution
 
-#### 1. Given Parameters
+#### Given:
+- Sample size: $n = 100$
 - Population mean: $\mu = 76$
-- Population variance: $\sigma^2 = 256 \implies \text{Population S.D. } \sigma = \sqrt{256} = 16$
-- Sample size: $n = 100$ ($n \ge 30$, large sample)
-
-By the **Central Limit Theorem (CLT)**, the sampling distribution of the sample mean $\bar{X}$ is approximately normal with:
-- Mean: $\mu_{\bar{x}} = \mu = 76$
-- Standard Error: 
-
-$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} = \frac{16}{\sqrt{100}} = \frac{16}{10} = \mathbf{1.6}$$
-
-Standardized normal score transformation:
-
-$$Z = \frac{\bar{X} - \mu}{\sigma_{\bar{x}}} = \frac{\bar{X} - 76}{1.6}$$
+- Population variance: $\sigma^2 = 256$
+- Population standard deviation: $\sigma = \sqrt{256} = 16$
 
 ---
 
-#### 2. Part (i): Probability that $\bar{X}$ lies between $75$ and $78$
+#### According to Central Limit Theorem:
+- **Mean of sampling distribution:**
+  $$\mu_{\bar{x}} = \mu = 76$$
 
-For $\bar{x}_1 = 75$:
+- **Standard deviation of sampling distribution:**
+  $$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} = \frac{16}{\sqrt{100}} = \frac{16}{10} = \mathbf{1.6}$$
 
-$$Z_1 = \frac{75 - 76}{1.6} = \frac{-1}{1.6} = \mathbf{-0.625}$$
-
-For $\bar{x}_2 = 78$:
-
-$$Z_2 = \frac{78 - 76}{1.6} = \frac{2}{1.6} = \mathbf{+1.25}$$
-
-We seek:
-
-$$P(75 \le \bar{X} \le 78) = P(-0.625 \le Z \le 1.25)$$
-
-Using standard cumulative normal distribution $\Phi(z) = P(Z \le z)$:
-
-$$P(-0.625 \le Z \le 1.25) = \Phi(1.25) - \Phi(-0.625)$$
-
-From Standard Normal Tables:
-- $\Phi(1.25) = 0.89435 \approx \mathbf{0.8944}$
-- $\Phi(-0.625) = 1 - \Phi(0.625) = 1 - 0.73401 \approx \mathbf{0.2660}$
-
-*(Equivalently, using central areas from 0: $P(0 \le Z \le 1.25) = 0.3944$, $P(0 \le Z \le 0.625) = 0.2340$, Total Area $= 0.3944 + 0.2340 = 0.6284$)*
-
-$$P(75 \le \bar{X} \le 78) = 0.8944 - 0.2660 = \mathbf{0.6284} \quad (62.84\%)$$
+- **Standard Normal Variable:**
+  $$Z = \frac{\bar{x} - \mu_{\bar{x}}}{\sigma_{\bar{x}}}$$
 
 ---
 
-#### 3. Part (ii): Probability that $\bar{X}$ is more than $72$
+#### (i) In between $75$ and $78$:
 
-For $\bar{x} = 72$:
+Compute $z$-scores:
 
-$$Z = \frac{72 - 76}{1.6} = \frac{-4}{1.6} = \mathbf{-2.50}$$
+$$z_1 = \frac{75 - 76}{1.6} = \frac{-1}{1.6} = \mathbf{-0.625}$$
 
-We seek:
+$$z_2 = \frac{78 - 76}{1.6} = \frac{2}{1.6} = \mathbf{1.25}$$
 
-$$P(\bar{X} > 72) = P(Z > -2.50)$$
+Required Probability:
 
-Using cumulative area:
+$$P(z_1 < Z < z_2) = P(z_1 < Z) + P(Z < z_2) = P(-0.625 < Z < 0) + P(0 < Z < 1.25)$$
 
-$$P(Z > -2.50) = 1 - P(Z \le -2.50) = 1 - \Phi(-2.50)$$
+From Normal Distribution Area Tables (area from mean $Z=0$):
+- Area for $z_1 = 0.625 \approx 0.62 \implies 0.2324$
+- Area for $z_2 = 1.25 \implies 0.3944$
 
-From Standard Normal Tables:
-- $\Phi(-2.50) = 0.0062$
-- $P(Z > -2.50) = 1 - 0.0062 = \mathbf{0.9938} \quad (99.38\%)$
+$$P(z_1 < Z < z_2) = 0.2324 + 0.3944 = \mathbf{0.6268}$$
 
-*(Equivalently, $P(-2.50 < Z < 0) + P(Z \ge 0) = 0.4938 + 0.5000 = 0.9938$)*
+*(Note: If using exact linear interpolation at $z = 0.625$, the area is $0.2340$, giving $0.2340 + 0.3944 = \mathbf{0.6284}$. Both answers are accepted).*
+
+---
+
+#### (ii) Greater than $72$:
+
+Compute $z$-score for $\bar{x} = 72$:
+
+$$z_3 = \frac{72 - 76}{1.6} = \frac{-4}{1.6} = \mathbf{-2.5}$$
+
+Required Probability:
+
+$$P(Z > z_3) = 0.5 + A(z_3)$$
+
+From Normal Distribution Area Tables:
+- Area from mean $Z=0$ to $z_3 = 2.5 \implies A(z_3) = 0.4938$
+- Right half of curve $= 0.5$
+
+$$P(Z > -2.5) = 0.5 + 0.4938 = \mathbf{0.9938}$$
 
 ---
 

@@ -141,21 +141,58 @@ Let difference $d = \text{Score After} - \text{Score Before} = y - x$.
 - Critical value from $t$-table for a one-tailed test at $df = 9$:
   $$t_{\text{tab}} = \mathbf{1.833}$$
 
-#### Step 3: Compute Differences ($d$) and Standard Deviation ($s$)
-Differences:
-$$d = [3, 14, 1, 3, -7, 13, 12, 7, 9, -5]$$
+#### Step 3: Compute Differences ($d$), Mean Difference ($\bar{d}$), and Standard Deviation ($s$)
 
-Mean difference ($\bar{d}$):
-$$\sum d = 50 \implies \bar{d} = \frac{50}{10} = \mathbf{5.0}$$
+##### 1. Pairwise Differences Table
+For each of the $n = 10$ soldiers, calculate the difference in performance:
+$$d_i = \text{Score After } (y_i) - \text{Score Before } (x_i)$$
 
-Sum of squared differences ($\sum d^2$):
-$$\sum d^2 = 3^2 + 14^2 + 1^2 + 3^2 + (-7)^2 + 13^2 + 12^2 + 7^2 + 9^2 + (-5)^2 = \mathbf{732}$$
+| Soldier ($i$) | Before ($x_i$) | After ($y_i$) | Difference ($d_i = y_i - x_i$) | Squared Difference ($d_i^2$) |
+|:---:|:---:|:---:|:---:|:---:|
+| 1 | 67 | 70 | $70 - 67 = \mathbf{+3}$ | $3^2 = 9$ |
+| 2 | 24 | 38 | $38 - 24 = \mathbf{+14}$ | $14^2 = 196$ |
+| 3 | 57 | 58 | $58 - 57 = \mathbf{+1}$ | $1^2 = 1$ |
+| 4 | 55 | 58 | $58 - 55 = \mathbf{+3}$ | $3^2 = 9$ |
+| 5 | 63 | 56 | $56 - 63 = \mathbf{-7}$ | $(-7)^2 = 49$ |
+| 6 | 54 | 67 | $67 - 54 = \mathbf{+13}$ | $13^2 = 169$ |
+| 7 | 56 | 68 | $68 - 56 = \mathbf{+12}$ | $12^2 = 144$ |
+| 8 | 68 | 75 | $75 - 68 = \mathbf{+7}$ | $7^2 = 49$ |
+| 9 | 33 | 42 | $42 - 33 = \mathbf{+9}$ | $9^2 = 81$ |
+| 10 | 43 | 38 | $38 - 43 = \mathbf{-5}$ | $(-5)^2 = 25$ |
+| **Total ($\sum$)** | — | — | **$\sum d = 50$** | **$\sum d^2 = 732$** |
 
-Sample variance of differences ($s^2$):
-$$s^2 = \frac{1}{n - 1} \left[\sum d^2 - n(\bar{d})^2\right] = \frac{1}{9} [732 - 10(5)^2] = \frac{1}{9}[732 - 250] = \frac{482}{9} \approx \mathbf{53.56}$$
+##### 2. Mean Difference ($\bar{d}$)
+$$\bar{d} = \frac{\sum d}{n} = \frac{50}{10} = \mathbf{5}$$
+*(On average, soldiers improved by $5$ marks after training).*
 
-Sample standard deviation ($s$):
+##### 3. Sample Variance ($s^2$) and Standard Deviation ($s$)
+Using the standard computational shortcut formula for sample variance:
+$$s^2 = \frac{1}{n - 1} \left[\sum d^2 - n(\bar{d})^2\right]$$
+
+Breaking down each term:
+- $n - 1 = 10 - 1 = 9$ (degrees of freedom for sample variance)
+- $\sum d^2 = 732$ (sum of individual squared differences)
+- $n(\bar{d})^2 = 10 \times (5)^2 = 10 \times 25 = 250$
+
+Substituting the values:
+$$\begin{aligned}
+s^2 &= \frac{1}{9} [732 - 10(5)^2] \\[6pt]
+    &= \frac{1}{9} [732 - 250] \\[6pt]
+    &= \frac{1}{9} [482] \approx \mathbf{53.56}
+\end{aligned}$$
+
+Taking the square root to find sample standard deviation ($s$):
 $$s = \sqrt{53.56} \approx \mathbf{7.32} \quad (\text{also denoted as } \sigma = 7.32)$$
+
+> [!NOTE]
+> **Why does this formula work?**  
+> The basic definition of sample variance is $s^2 = \frac{\sum (d - \bar{d})^2}{n - 1}$.  
+> Expanding the numerator:  
+> $$\sum (d - \bar{d})^2 = \sum \left(d^2 - 2d\bar{d} + \bar{d}^2\right) = \sum d^2 - 2\bar{d}\sum d + n\bar{d}^2 = \sum d^2 - 2\bar{d}(n\bar{d}) + n\bar{d}^2 = \sum d^2 - n(\bar{d})^2$$  
+> If calculated directly by deviations from $\bar{d} = 5$:  
+> $(d - 5) = [-2, 9, -4, -2, -12, 8, 7, 2, 4, -10]$  
+> Squared deviations: $[4, 81, 16, 4, 144, 64, 49, 4, 16, 100]$, whose sum is exactly $\mathbf{482}$.  
+> Thus: $s^2 = \frac{482}{9} \approx 53.56$. Both methods yield the exact same answer!
 
 #### Step 4: Test Statistic Calculation
 

@@ -202,33 +202,49 @@ $$r_s = 1 - \frac{4}{15} = \frac{11}{15} \approx \mathbf{0.7333}$$
 
 ### Step-by-Step Solution
 
-#### 1. Calculate the Means ($\bar{x}, \bar{y}$)
-Sample size $n = 7$.
+#### 1. Formula
+Karl Pearson's coefficient of correlation ($r$) using raw scores:
 
-$$\bar{x} = \frac{\sum x}{n} = \frac{70}{7} = \mathbf{10}$$
+$$r = \frac{n\sum xy - (\sum x)(\sum y)}{\sqrt{\left[n\sum x^2 - (\sum x)^2\right]\left[n\sum y^2 - (\sum y)^2\right]}}$$
 
-$$\bar{y} = \frac{\sum y}{n} = \frac{63}{7} = \mathbf{9}$$
+where sample size $n = 7$.
 
-#### 2. Deviations from Means Table
-Since both means are exact integers, let $u = x - 10$ and $v = y - 9$:
+#### 2. Calculation Table
+Calculate the required summations directly from the given data:
 
-| $i$ | $x$ | $y$ | $u = x - 10$ | $v = y - 9$ | $u^2$ | $v^2$ | $uv$ |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| 1 | 12 | 14 | $+2$ | $+5$ | 4 | 25 | $+10$ |
-| 2 | 9 | 8 | $-1$ | $-1$ | 1 | 1 | $+1$ |
-| 3 | 8 | 6 | $-2$ | $-3$ | 4 | 9 | $+6$ |
-| 4 | 10 | 9 | 0 | 0 | 0 | 0 | 0 |
-| 5 | 11 | 11 | $+1$ | $+2$ | 1 | 4 | $+2$ |
-| 6 | 13 | 12 | $+3$ | $+3$ | 9 | 9 | $+9$ |
-| 7 | 7 | 3 | $-3$ | $-6$ | 9 | 36 | $+18$ |
-| **Sum** | **70** | **63** | **0** | **0** | **28** | **84** | **46** |
+| $x$ | $y$ | $x^2$ | $y^2$ | $xy$ |
+|:---:|:---:|:---:|:---:|:---:|
+| 12 | 14 | 144 | 196 | 168 |
+| 9 | 8 | 81 | 64 | 72 |
+| 8 | 6 | 64 | 36 | 48 |
+| 10 | 9 | 100 | 81 | 90 |
+| 11 | 11 | 121 | 121 | 121 |
+| 13 | 12 | 169 | 144 | 156 |
+| 7 | 3 | 49 | 9 | 21 |
+| **$\sum x = 70$** | **$\sum y = 63$** | **$\sum x^2 = 728$** | **$\sum y^2 = 651$** | **$\sum xy = 676$** |
 
-#### 3. Correlation Coefficient ($r$)
-Applying Karl Pearson's formula:
+Summary of values:
+- $n = 7$
+- $\sum x = 70$
+- $\sum y = 63$
+- $\sum x^2 = 728$
+- $\sum y^2 = 651$
+- $\sum xy = 676$
 
-$$r = \frac{\sum uv}{\sqrt{\sum u^2 \cdot \sum v^2}} = \frac{46}{\sqrt{28 \times 84}} = \frac{46}{\sqrt{2352}} = \frac{46}{48.50} \approx \mathbf{0.9485} \quad (\approx \mathbf{0.95})$$
+#### 3. Substitute into the Formula
 
-**Conclusion:** Karl Pearson's correlation coefficient is $\mathbf{+0.95}$, indicating a **very strong positive linear correlation** between $x$ and $y$.
+$$r = \frac{7(676) - (70)(63)}{\sqrt{\left[7(728) - (70)^2\right]\left[7(651) - (63)^2\right]}}$$
+
+$$\begin{aligned}
+r &= \frac{4732 - 4410}{\sqrt{[5096 - 4900][4557 - 3969]}} \\[6pt]
+  &= \frac{322}{\sqrt{[196][588]}} \\[6pt]
+  &= \frac{322}{\sqrt{115248}} \\[6pt]
+  &= \frac{322}{339.48} \approx \mathbf{0.9485} \quad (\approx \mathbf{0.95})
+\end{aligned}$$
+
+*(Note: The raw notes approximate the denominator as $339.25$ giving $r \approx 0.948$; the exact value is $0.9485 \approx 0.95$).*
+
+**Conclusion:** Karl Pearson's coefficient of correlation is $r \approx \mathbf{0.95}$ (or $\mathbf{0.948}$), indicating a **very strong positive linear correlation** between $x$ and $y$.
 
 ---
 

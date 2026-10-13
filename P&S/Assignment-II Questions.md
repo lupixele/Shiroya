@@ -198,7 +198,7 @@ Calculate Karl Pearson's coefficient of correlation for the following data:
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | **$y$** | 14 | 8 | 6 | 9 | 11 | 12 | 3 |
 
-> **Difficulty:** 🟢 **Easy** — Both means are exact integers ($\bar{x} = 10, \bar{y} = 9$), resulting in small single-digit deviations and fast arithmetic.  
+> **Difficulty:** 🟢 **Easy** — Direct 5-column summation table ($x, y, x^2, y^2, xy$) with 7 points; standard Karl Pearson raw score formula substitution.  
 > **Worked Solution:** [See `Unit 5.md` — Question 14](Unit%205.md#question-14--karl-pearsons-coefficient-of-correlation)
 
 ---

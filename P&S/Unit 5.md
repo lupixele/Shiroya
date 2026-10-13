@@ -178,15 +178,15 @@ Using the standard convention (ranking smallest value as 1):
 
 #### 4. Formula Application
 
-$$\rho = 1 - \frac{6 \left[\sum d^2 + CF\right]}{n(n^2 - 1)} = 1 - \frac{6 \left[41 + 3\right]}{10(10^2 - 1)}$$
+$$r_s = 1 - \frac{6 \left[\sum d^2 + CF\right]}{n(n^2 - 1)} = 1 - \frac{6 \left[41 + 3\right]}{10(10^2 - 1)}$$
 
-$$\rho = 1 - \frac{6 \times 44}{10 \times 99} = 1 - \frac{264}{990}$$
+$$r_s = 1 - \frac{6 \times 44}{10 \times 99} = 1 - \frac{264}{990}$$
 
 Dividing numerator and denominator by $66$:
 
-$$\rho = 1 - \frac{4}{15} = \frac{11}{15} \approx \mathbf{0.7333}$$
+$$r_s = 1 - \frac{4}{15} = \frac{11}{15} \approx \mathbf{0.7333}$$
 
-**Conclusion:** The rank correlation coefficient is $\mathbf{+0.7333}$, indicating a **fairly strong positive relationship** between $x$ and $y$.
+**Conclusion:** The rank correlation coefficient is $r_s \approx \mathbf{+0.7333}$, indicating a **fairly strong positive relationship** between $x$ and $y$.
 
 ---
 

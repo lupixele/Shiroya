@@ -366,34 +366,31 @@ $$15, 17, 10, 18, 16, 9, 7, 11, 13, 14, 20, 13, 19, 25, 18, 16$$
 
 ### Step-by-Step Solution
 
-Given $n = 16$.
+Given sample size $n = 16$.
 
 #### 1. Sample Mean ($\bar{x}$)
 
 $$\bar{x} = \frac{\sum x}{n} = \frac{15 + 17 + 10 + 18 + 16 + 9 + 7 + 11 + 13 + 14 + 20 + 13 + 19 + 25 + 18 + 16}{16} = \frac{241}{16} = \mathbf{15.0625}$$
 
-#### 2. Sample Variance ($\sigma^2$)
+#### 2. Sample Variance ($s^2$)
 
-$$\sigma^2 = \frac{1}{n - 1} \sum (x_i - \bar{x})^2 = \frac{314.94}{15} \approx \mathbf{20.996}$$
+$$s^2 = \frac{1}{n - 1} \sum (x_i - \bar{x})^2 = \frac{314.94}{15} \approx \mathbf{20.996} \quad (\text{also denoted as } \sigma^2)$$
 
-#### 3. Sample Standard Deviation ($\sigma$)
+#### 3. Sample Standard Deviation ($s$)
 
-$$\sigma = \sqrt{\sigma^2} = \sqrt{20.996} \approx \mathbf{4.582}$$
+$$s = \sqrt{s^2} = \sqrt{20.996} \approx \mathbf{4.582} \quad (\text{also denoted as } \sigma)$$
 
-#### 4. Degrees of Freedom ($\nu$)
+#### 4. Degrees of Freedom ($df$)
 
-$$\nu = n - 1 = 16 - 1 = \mathbf{15}$$
+$$df = n - 1 = 16 - 1 = \mathbf{15}$$
 
-#### 5. $t$-Value
-For $95\%$ confidence:
-$$1 - \alpha = 0.95 \implies \alpha = 0.05 \implies \frac{\alpha}{2} = 0.025$$
+#### 5. Critical Table Value ($t_{\text{tab}}$)
+For a $95\%$ confidence interval ($\alpha = 0.05, \alpha/2 = 0.025$) with $df = 15$:
+$$t_{\text{tab}} = t_{0.025,\, 15} = \mathbf{2.131}$$
 
-For $\nu = 15$:
-$$t_{0.025} = \mathbf{2.131}$$
+#### 6. 95% Confidence Interval Limits
 
-#### 6. 95% Confidence Interval
-
-$$\text{Confidence Limits} = \bar{x} \pm t_{\alpha/2} \left(\frac{\sigma}{\sqrt{n}}\right)$$
+$$\text{Confidence Limits} = \bar{x} \pm t_{\text{tab}} \left(\frac{s}{\sqrt{n}}\right)$$
 
 $$= 15.06 \pm 2.131 \left(\frac{4.58}{\sqrt{16}}\right)$$
 $$= 15.06 \pm 2.44$$

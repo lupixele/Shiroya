@@ -366,46 +366,41 @@ $$15, 17, 10, 18, 16, 9, 7, 11, 13, 14, 20, 13, 19, 25, 18, 16$$
 
 ### Step-by-Step Solution
 
-#### 1. Sample Size and Mean ($\bar{x}$)
-Given sample data ($n = 16$ observations):
+Given $n = 16$.
 
-$$\sum_{i=1}^{16} x_i = 15 + 17 + 10 + 18 + 16 + 9 + 7 + 11 + 13 + 14 + 20 + 13 + 19 + 25 + 18 + 16 = \mathbf{241}$$
+#### 1. Sample Mean ($\bar{x}$)
 
-$$\bar{x} = \frac{\sum x_i}{n} = \frac{241}{16} = \mathbf{15.0625}$$
+$$\bar{x} = \frac{\sum x}{n} = \frac{15 + 17 + 10 + 18 + 16 + 9 + 7 + 11 + 13 + 14 + 20 + 13 + 19 + 25 + 18 + 16}{16} = \frac{241}{16} = \mathbf{15.0625}$$
 
-#### 2. Sample Variance ($\sigma^2$) and Standard Deviation ($\sigma$)
-Using the shortcut summation formula:
-$$\sum x_i = 241, \quad \sum x_i^2 = 3945$$
+#### 2. Sample Variance ($\sigma^2$)
 
-$$\sum (x_i - \bar{x})^2 = \sum x_i^2 - \frac{(\sum x_i)^2}{n} = 3945 - \frac{(241)^2}{16} = 3945 - 3630.06 = 314.94$$
+$$\sigma^2 = \frac{1}{n - 1} \sum (x_i - \bar{x})^2 = \frac{314.94}{15} \approx \mathbf{20.996}$$
 
-Sample variance:
-$$\sigma^2 = \frac{\sum (x_i - \bar{x})^2}{n - 1} = \frac{314.94}{15} \approx 21.00 \quad (\text{exact } 20.996)$$
+#### 3. Sample Standard Deviation ($\sigma$)
 
-Sample standard deviation:
-$$\sigma = \sqrt{21.00} \approx 4.58 \quad (\text{exact } 4.582)$$
+$$\sigma = \sqrt{\sigma^2} = \sqrt{20.996} \approx \mathbf{4.582}$$
 
-#### 3. Standard Error of the Mean ($SE$)
+#### 4. Degrees of Freedom ($\nu$)
 
-$$SE = \frac{\sigma}{\sqrt{n}} = \frac{4.58}{\sqrt{16}} = \frac{4.58}{4} = 1.145$$
+$$\nu = n - 1 = 16 - 1 = \mathbf{15}$$
 
-#### 4. Critical Value from Student's $t$-Distribution
-Since sample size $n = 16 < 30$, we use **Student's $t$-distribution** with degrees of freedom:
-$$\nu = df = n - 1 = 16 - 1 = 15$$
+#### 5. $t$-Value
+For $95\%$ confidence:
+$$1 - \alpha = 0.95 \implies \alpha = 0.05 \implies \frac{\alpha}{2} = 0.025$$
 
-For a $95\%$ two-sided confidence interval ($\alpha = 0.05$):
-$$t_{0.025,\, 15} = 2.131$$
+For $\nu = 15$:
+$$t_{0.025} = \mathbf{2.131}$$
 
-#### 5. Maximum Error of Estimate ($E$)
+#### 6. 95% Confidence Interval
 
-$$E = t_{0.025,\, 15} \times \frac{\sigma}{\sqrt{n}} = 2.131 \times 1.145 \approx 2.44$$
+$$\text{Confidence Limits} = \bar{x} \pm t_{\alpha/2} \left(\frac{\sigma}{\sqrt{n}}\right)$$
 
-#### 6. 95% Confidence Interval Limits
+$$= 15.06 \pm 2.131 \left(\frac{4.58}{\sqrt{16}}\right)$$
+$$= 15.06 \pm 2.44$$
 
-$$\text{Confidence Limits} = \bar{x} \pm E = 15.06 \pm 2.44$$
+- **Lower Limit:** $15.06 - 2.44 = \mathbf{12.62}$
+- **Upper Limit:** $15.06 + 2.44 = \mathbf{17.50}$
 
-$$\text{Lower Limit} = 15.06 - 2.44 = \mathbf{12.62}$$
+$$\mathbf{12.62 < \mu < 17.50}$$
 
-$$\text{Upper Limit} = 15.06 + 2.44 = \mathbf{17.50}$$
-
-$$\mathbf{95\% \text{ Confidence Interval: } [12.62, \; 17.50]}$$
+**Conclusion:** The $95\%$ confidence limits for the population mean are $\mathbf{12.62}$ and $\mathbf{17.50}$.

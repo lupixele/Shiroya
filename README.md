@@ -43,9 +43,12 @@ Shiroya/
 ## Subjects included
 
 - ADSA — Design and Analysis of Algorithms
+- ASE — Agile Software Engineering notes and exam answers (Units 3, 4, 5)
+- CPP — Object Oriented Programming through C++ notes and worked answers (Units 3, 4, 5)
 - DBMS — Database Management Systems
 - EMP — Quantitative aptitude and reasoning study materials
-- P&S — Probability and Statistics notes and reference materials
+- FDS — Fundamentals of Data Science notes and worked answers (Units 3, 4, 5)
+- P&S — Probability and Statistics notes and worked solutions (Units 3, 4, 5)
 - Additional topic folders are continuously added by the community for other academic subjects and revision materials.
 
 ## Purpose

@@ -1,6 +1,6 @@
 # Unit 3 — Answers
 
-[⬅ Back to Questions](questions.md#unit-3)
+> **Questions File:** [`questions.md` — Unit 3](questions.md#unit-3)
 
 ---
 
@@ -42,8 +42,6 @@ Product Backlog → Sprint Planning → Sprint Backlog → SPRINT (1-4 wks)
 ```
 
 **Conclusion:** Scrum gives a clear structure of roles, artifacts and events that helps teams deliver value quickly and adapt to change.
-
-[⬆ Back to top](#unit-3--answers)
 
 ---
 
@@ -91,8 +89,6 @@ Exploration → Planning → Iterations to Release → Productionizing → Maint
 
 **Conclusion:** XP's lifecycle is short, test-driven and customer-centred, so it suits projects where requirements change often.
 
-[⬆ Back to top](#unit-3--answers)
-
 ---
 
 ### 3. Summarize the lifecycle phases of Adaptive Software Development
@@ -132,8 +128,6 @@ SPECULATE  →  COLLABORATE  →  LEARN ──────┘
 
 **Conclusion:** ASD gives a flexible, learning-based way of developing software where each cycle improves the next.
 
-[⬆ Back to top](#unit-3--answers)
-
 ---
 
 ### 4. Differentiate between traditional requirements elicitation and Agile requirements elicitation
@@ -158,8 +152,6 @@ SPECULATE  →  COLLABORATE  →  LEARN ──────┘
 
 **Conclusion:** Traditional elicitation is plan-driven and document-heavy, while Agile elicitation is people-driven, flexible and continuous.
 
-[⬆ Back to top](#unit-3--answers)
-
 ---
 
 ### 5. Analyze the challenges involved in managing changing requirements in Agile projects
@@ -183,8 +175,6 @@ Agile welcomes change, but handling constant change is not easy. The main challe
 - Hold regular **reviews** with the customer.
 
 **Conclusion:** Agile makes change possible, but it needs strong discipline, good communication and technical practices to manage it well.
-
-[⬆ Back to top](#unit-3--answers)
 
 ---
 
@@ -215,8 +205,6 @@ Both **Scrum** and **XP** are Agile methods. They are iterative, customer-focuse
 
 **Conclusion:** Scrum tells *how to manage* the work, while XP tells *how to write* the code.
 
-[⬆ Back to top](#unit-3--answers)
-
 ---
 
 ### 7. How does Agile accommodate changing customer requirements?
@@ -240,8 +228,6 @@ Customer feedback → New / changed story → Backlog re-prioritised
 ```
 
 **Conclusion:** By combining short cycles, constant feedback and strong technical practices, Agile turns changing requirements into a chance to deliver a better product.
-
-[⬆ Back to top](#unit-3--answers)
 
 ---
 
@@ -272,8 +258,6 @@ XP has about 12 core practices. They can be grouped as follows.
 12. **Sustainable Pace (40-hour week):** avoid overtime so the team stays fresh and produces good quality.
 
 **Benefits of these practices:** better quality, fewer bugs, quick feedback, shared knowledge and the ability to handle change.
-
-[⬆ Back to top](#unit-3--answers)
 
 ---
 

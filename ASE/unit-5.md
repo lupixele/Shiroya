@@ -1,6 +1,6 @@
 # Unit 5 — Answers
 
-[⬅ Back to Questions](questions.md#unit-5)
+> **Questions File:** [`questions.md` — Unit 5](questions.md#unit-5)
 
 ---
 
@@ -36,8 +36,6 @@ Developer refactors / adds code → Commit → CI server builds & runs tests
 ```
 
 **Conclusion:** Refactoring keeps the code clean and CI keeps it working. Together they maintain high quality even when requirements change often.
-
-[⬆ Back to top](#unit-5--answers)
 
 ---
 
@@ -75,8 +73,6 @@ Developer refactors / adds code → Commit → CI server builds & runs tests
 - Do not add new features at the same time.
 
 **Conclusion:** These techniques improve readability and design while keeping the behaviour the same.
-
-[⬆ Back to top](#unit-5--answers)
 
 ---
 
@@ -123,8 +119,6 @@ class Triangle  implements Shape { double area() { return 0.5*b*h; } }   // new,
 
 **Conclusion:** OCP lets a system grow by adding new code instead of changing old code, which makes software stable and easy to maintain.
 
-[⬆ Back to top](#unit-5--answers)
-
 ---
 
 ### 4. Explain the role of Git in Agile software development
@@ -169,8 +163,6 @@ Working folder → git add → Staging → git commit → Local repo → git pus
 
 **Conclusion:** Git gives Agile teams a safe, fast and collaborative way to manage code changes.
 
-[⬆ Back to top](#unit-5--answers)
-
 ---
 
 ### 5. Why are design principles important when requirements change frequently?
@@ -197,8 +189,6 @@ Working folder → git add → Staging → git commit → Local repo → git pus
 - **DRY:** Don't Repeat Yourself. **KISS:** Keep It Simple. **YAGNI:** You Aren't Gonna Need It.
 
 **Conclusion:** Design principles make the code flexible, so frequent requirement changes can be handled quickly, cheaply and safely.
-
-[⬆ Back to top](#unit-5--answers)
 
 ---
 
@@ -233,8 +223,6 @@ Developer → Commit/Push → Shared Repository → CI Server → Build → Auto
 **Good CI practices:** keep the build fast, commit often, never leave the build broken, and write automated tests.
 
 **Conclusion:** CI keeps the code base healthy and supports quick, reliable delivery in Agile.
-
-[⬆ Back to top](#unit-5--answers)
 
 ---
 
@@ -280,8 +268,6 @@ Developer → Commit/Push → Shared Repository → CI Server → Build → Auto
 
 **Conclusion:** Git fits Agile's short iterations, teamwork and frequent releases, which is why it is the most widely used tool in Agile teams.
 
-[⬆ Back to top](#unit-5--answers)
-
 ---
 
 ### 8. How does version control support team collaboration in Agile projects?
@@ -314,8 +300,6 @@ Developer C ─┘                (shared repository)
 **Best practices:** commit small and often, write clear commit messages, pull latest changes before pushing, and never break the main branch.
 
 **Conclusion:** Version control keeps the team in sync, protects their work and makes frequent, safe collaboration possible in Agile projects.
-
-[⬆ Back to top](#unit-5--answers)
 
 ---
 

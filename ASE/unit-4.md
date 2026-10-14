@@ -1,6 +1,6 @@
 # Unit 4 — Answers
 
-[⬅ Back to Questions](questions.md#unit-4)
+> **Questions File:** [`questions.md` — Unit 4](questions.md#unit-4)
 
 ---
 
@@ -45,8 +45,6 @@
 
 **Benefits:** best use of limited time, serious defects found early, clear communication of quality status to stakeholders.
 
-[⬆ Back to top](#unit-4--answers)
-
 ---
 
 ### 2. Describe the role of scenarios in Agile testing
@@ -76,8 +74,6 @@
 
 **Conclusion:** Scenarios turn requirements into testable examples, which improves clarity, quality and teamwork in Agile projects.
 
-[⬆ Back to top](#unit-4--answers)
-
 ---
 
 ### 3. What is exploratory testing? Mention its advantages in Agile projects
@@ -104,8 +100,6 @@
 **Limitations (brief):** results depend on tester skill, and it is harder to measure coverage. These are reduced by using charters and session notes.
 
 **Conclusion:** Exploratory testing gives flexible, quick and creative testing that suits the fast pace of Agile.
-
-[⬆ Back to top](#unit-4--answers)
 
 ---
 
@@ -147,8 +141,6 @@
 
 **Conclusion:** These tools make the Red-Green-Refactor cycle fast, automatic and reliable.
 
-[⬆ Back to top](#unit-4--answers)
-
 ---
 
 ### 5. Differentiate between Agile testing and traditional software testing
@@ -174,8 +166,6 @@
 - In traditional testing, testers wait until the full product is built. Defects found at that point are expensive to fix.
 
 **Conclusion:** Agile testing is early, collaborative and flexible, while traditional testing is late, formal and document-driven.
-
-[⬆ Back to top](#unit-4--answers)
 
 ---
 
@@ -226,8 +216,6 @@
 
 **Conclusion:** Automating unit, regression, API and acceptance tests saves time and supports continuous delivery in Agile.
 
-[⬆ Back to top](#unit-4--answers)
-
 ---
 
 ### 7. How are user stories converted into acceptance tests?
@@ -271,8 +259,6 @@ User Story → Acceptance Criteria → Scenarios (Given-When-Then) → Automated
 ```
 
 **Conclusion:** Acceptance tests turn a short story into clear, testable conditions that confirm the customer's need is met.
-
-[⬆ Back to top](#unit-4--answers)
 
 ---
 
@@ -319,8 +305,6 @@ User Story → Acceptance Criteria → Scenarios (Given-When-Then) → Automated
 - Gives confidence while refactoring.
 
 **Conclusion:** Red-Green-Refactor builds quality into the code from the start and is a key practice of Agile and XP.
-
-[⬆ Back to top](#unit-4--answers)
 
 ---
 

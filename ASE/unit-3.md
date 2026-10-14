@@ -42,8 +42,6 @@ Product Backlog → Sprint Planning → Sprint Backlog → SPRINT (1-4 wks)
   Retrospective ← Sprint Review ←────────────── Working Increment
 ```
 
-### Conclusion
-Scrum gives a clear structure of roles, artifacts and events that helps teams deliver value quickly and adapt to change.
 
 ---
 
@@ -85,8 +83,6 @@ Exploration → Planning → Iterations to Release → Productionizing → Maint
 ### Core XP Values
 The 5 values that guide the lifecycle are **Communication, Simplicity, Feedback, Courage, and Respect**.
 
-### Conclusion
-XP's lifecycle is short, test-driven and customer-centred, so it suits projects where requirements change often.
 
 ---
 
@@ -126,8 +122,6 @@ SPECULATE  →  COLLABORATE  →  LEARN ──────┘
 - **Risk-driven** (risky parts are tackled early).
 - **Change-tolerant:** change is seen as a chance to learn.
 
-### Conclusion
-ASD gives a flexible, learning-based way of developing software where each cycle improves the next.
 
 ---
 
@@ -150,12 +144,6 @@ ASD gives a flexible, learning-based way of developing software where each cycle
 | **Feedback** | Late (after the product is built) | Early and regular (every iteration) |
 | **Risk** | High: wrong requirements found late | Low: wrong requirements found early |
 
-### Core Differences Explained
-- In the **traditional** approach, all requirements are frozen first. If the customer's need changes later, the cost of change is very high.
-- In the **Agile** approach, only a rough idea is needed at the start. Details are discussed just before each iteration, so the product stays close to what the customer really wants.
-
-### Conclusion
-Traditional elicitation is plan-driven and document-heavy, while Agile elicitation is people-driven, flexible and continuous.
 
 ---
 
@@ -181,8 +169,6 @@ Agile welcomes change, but handling constant change is not easy.
 - Use **refactoring, automated tests and CI** to make change safe.
 - Hold regular **reviews** with the customer.
 
-### Conclusion
-Agile makes change possible, but it needs strong discipline, good communication and technical practices to manage it well.
 
 ---
 
@@ -206,17 +192,8 @@ Both **Scrum** and **XP** are Agile methods. They are iterative, customer-focuse
 | **Team style** | Self-organising team | Team works closely, collective code ownership |
 | **Testing** | Left to the team | Strongly built-in (test-first) |
 
-### Key Similarities
-- Both are **iterative and incremental**.
-- Both deliver **working software** frequently.
-- Both give high value to **customer collaboration** and **feedback**.
-- Both support **self-organising teams** and welcome changing requirements.
-
 ### Combining Scrum and XP
 Many teams combine them: **Scrum** to manage the project and **XP practices** to build the code.
-
-### Conclusion
-Scrum tells *how to manage* the work, while XP tells *how to write* the code.
 
 ---
 
@@ -242,8 +219,6 @@ Customer feedback → New / changed story → Backlog re-prioritised
   Working increment ← Built in next iteration ←────┘
 ```
 
-### Conclusion
-By combining short cycles, constant feedback and strong technical practices, Agile turns changing requirements into a chance to deliver a better product.
 
 ---
 
@@ -276,8 +251,6 @@ XP has about 12 core practices designed to improve code quality, customer satisf
 #### Team Practice
 12. **Sustainable Pace (40-hour week):** avoid overtime so the team stays fresh and produces good quality.
 
-### Benefits & Takeaways
-Better quality, fewer bugs, quick feedback, shared knowledge and the ability to handle change.
 
 ---
 

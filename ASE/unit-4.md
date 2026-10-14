@@ -21,6 +21,12 @@ $$\text{Risk} = \text{Probability of failure} \times \text{Impact of failure}$$
    - Use simple scales: High / Medium / Low.
 3. **Prioritise risks**
    - Rank items using the risk score. Example matrix:
+
+     | Probability \ Impact | Low Impact | High Impact |
+     |---|---|---|
+     | **High Probability** | Medium | **Critical** |
+     | **Low Probability** | Low | Medium |
+
 4. **Plan the testing**
    - Choose test types and techniques for each risk level.
    - **High risk:** more tests, early testing, automation, exploratory testing.
@@ -32,16 +38,6 @@ $$\text{Risk} = \text{Probability of failure} \times \text{Impact of failure}$$
    - Fix defects, add extra checks or change the design where risks remain high.
 7. **Monitor, review and update**
    - Risks change every Sprint. Re-check the list in each iteration and adjust the test plan.
-
-### Risk Matrix Table
-
-| Probability \ Impact | Low Impact | High Impact |
-|---|---|---|
-| **High Probability** | Medium | **Critical** |
-| **Low Probability** | Low | Medium |
-
-### Benefits & Takeaways
-Best use of limited time, serious defects found early, clear communication of quality status to stakeholders.
 
 ---
 
@@ -70,8 +66,6 @@ A **scenario** is a short, realistic description of **how a user will use the sy
 7. **Supports automation and BDD:** tools such as **Cucumber** and **SpecFlow** can run scenarios directly as automated tests.
 8. **Living documentation:** scenarios stay up to date with the product and serve as light documentation.
 
-### Conclusion
-Scenarios turn requirements into testable examples, which improves clarity, quality and teamwork in Agile projects.
 
 ---
 
@@ -96,11 +90,6 @@ Scenarios turn requirements into testable examples, which improves clarity, qual
 7. **Improves learning:** testers understand the product better with each session.
 8. **Complements automation:** automation covers repetitive regression, while exploratory testing covers new and risky areas.
 
-### Limitations & Mitigation
-Results depend on tester skill, and it is harder to measure coverage. These are reduced by using charters and session notes.
-
-### Conclusion
-Exploratory testing gives flexible, quick and creative testing that suits the fast pace of Agile.
 
 ---
 
@@ -141,10 +130,6 @@ Exploratory testing gives flexible, quick and creative testing that suits the fa
 | **pytest** | Python | Simple, flexible unit tests |
 | **Mockito** | Java | Mock objects for isolation |
 
-*(Other tools: **Selenium** for web UI testing, **Cucumber** for behaviour-driven tests, **Jest** for JavaScript.)*
-
-### Conclusion
-These tools make the Red-Green-Refactor cycle fast, automatic and reliable.
 
 ---
 
@@ -169,12 +154,6 @@ These tools make the Red-Green-Refactor cycle fast, automatic and reliable.
 | **Responsibility** | **Whole team** owns quality | Only testers own quality |
 | **Delivery** | Small working increments | Single big release |
 
-### Core Differences Explained
-- In Agile, a tester works with developers in every Sprint, tests each story as soon as it is ready and gives immediate feedback.
-- In traditional testing, testers wait until the full product is built. Defects found at that point are expensive to fix.
-
-### Conclusion
-Agile testing is early, collaborative and flexible, while traditional testing is late, formal and document-driven.
 
 ---
 
@@ -206,8 +185,6 @@ Automate tests that are **repeated often, stable, time-consuming and easy to scr
 ### Tests Better Kept Manual
 Exploratory testing, usability testing, one-time tests and tests for rapidly changing features. Keep these **manual**.
 
-### Conclusion
-Automating unit, regression, API and acceptance tests saves time and supports continuous delivery in Agile.
 
 ---
 
@@ -235,8 +212,6 @@ Automating unit, regression, API and acceptance tests saves time and supports co
 User Story → Acceptance Criteria → Scenarios (Given-When-Then) → Automated Acceptance Tests → Story "Done"
 ```
 
-### Conclusion
-Acceptance tests turn a short story into clear, testable conditions that confirm the customer's need is met.
 
 ---
 
@@ -281,8 +256,6 @@ Acceptance tests turn a short story into clear, testable conditions that confirm
 - Developers think about requirements before coding.
 - Gives confidence while refactoring.
 
-### Conclusion
-Red-Green-Refactor builds quality into the code from the start and is a key practice of Agile and XP.
 
 ---
 

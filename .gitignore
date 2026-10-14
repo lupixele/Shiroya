@@ -9,3 +9,23 @@ desktop.ini
 
 # Temporary scratch directories
 scratch/
+
+# Raw source archives (kept on disk for reference/authoring, excluded from git)
+raw/
+**/raw/
+PPTS/
+**/PPTS/
+**/PPT_S/
+
+# Past semester archive (kept locally on disk)
+SEM-2/
+
+# Heavy document & slide binaries
+*.pdf
+*.pptx
+*.ppt
+*.docx
+*.doc
+*.xlsx
+*.csv
+*.odp

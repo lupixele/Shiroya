@@ -37,8 +37,6 @@ Developer refactors / adds code → Commit → CI server builds & runs tests
         └──── fix quickly if red ◄──── Pass / Fail ─┘
 ```
 
-### Conclusion
-Refactoring keeps the code clean and CI keeps it working. Together they maintain high quality even when requirements change often.
 
 ---
 
@@ -70,15 +68,6 @@ Refactoring keeps the code clean and CI keeps it working. Together they maintain
 - **Example:** `price * 0.18` → `price * GST_RATE`.
 - **Benefit:** easy to understand and changes are made in one place.
 
-### Additional Techniques & Refactoring Rules
-- **Other common techniques:** Remove Duplicate Code, Extract Class, Inline Method, Replace Conditional with Polymorphism, Introduce Parameter Object.
-- **Rules while refactoring:**
-  - Make **small steps**.
-  - **Run tests** after every step.
-  - Do not add new features at the same time.
-
-### Conclusion
-These techniques improve readability and design while keeping the external behaviour strictly the same.
 
 ---
 
@@ -114,8 +103,6 @@ class Triangle  implements Shape { double area() { return 0.5 * b * h; } } // ne
 ```
 `AreaCalculator` simply calls `shape.area()`. A new shape is added by **creating a new class only**, without editing tested code.
 
-### Real-Life Analogy
-A mobile phone charger socket: you can plug in new devices (extension) without changing the internal wiring of the wall socket (modification).
 
 ### Implementation Techniques & Benefits
 - **How OCP is achieved:** by using **abstraction, interfaces, and inheritance / polymorphism**.
@@ -125,8 +112,6 @@ A mobile phone charger socket: you can plug in new devices (extension) without c
   - Code is **flexible and reusable**.
   - Supports frequent requirement change in Agile sprints.
 
-### Conclusion
-OCP lets a system grow by adding new code instead of changing old code, making software stable and maintainable.
 
 ---
 
@@ -163,8 +148,6 @@ OCP lets a system grow by adding new code instead of changing old code, making s
 Working folder → git add → Staging → git commit → Local repo → git push → Remote repo
 ```
 
-### Conclusion
-Git gives Agile teams a safe, fast and collaborative way to manage code changes.
 
 ---
 
@@ -193,8 +176,6 @@ Git gives Agile teams a safe, fast and collaborative way to manage code changes.
 - **KISS:** Keep It Simple, Stupid.
 - **YAGNI:** You Aren't Gonna Need It.
 
-### Conclusion
-Design principles make the code flexible, so frequent requirement changes can be handled quickly, cheaply, and safely.
 
 ---
 
@@ -228,17 +209,14 @@ Developer → Commit/Push → Shared Repository → CI Server → Build → Auto
 7. **Less manual work:** build and test are automated.
 8. **Better team visibility:** everyone sees the status of the build.
 
-### Best Practices & Conclusion
-- **Best practices:** keep the build fast, commit often, never leave the build broken, and write automated tests.
-- **Conclusion:** CI keeps the codebase healthy and supports quick, reliable delivery in Agile.
+### Best Practices
+- Keep the build fast, commit often, never leave the build broken, and write automated tests.
 
 ---
 
 ## 7. What is the role of Git in Agile software development?
 
 ### Definition & Context
-*(This question is similar to Q4. Write the core points from Q4 and add the workflow and command angle below to make it complete.)*
-
 **Git** is a distributed version control system that records every change in the source code. It lets an Agile team build features in parallel and merge them safely.
 
 ### Key Git Concepts
@@ -269,12 +247,11 @@ Developer → Commit/Push → Shared Repository → CI Server → Build → Auto
 6. After approval, the branch is **merged** into the main branch.
 7. At the end of the Sprint, the main branch is **tagged** as the release.
 
-### Role Summary & Conclusion
+### Role Summary
 - Keeps the **history** of every Sprint's work.
 - Allows **parallel development** of many stories.
 - Supports **code review** and **CI**.
 - Makes **rollback** easy if a change fails.
-- **Conclusion:** Git fits Agile's short iterations, teamwork, and frequent releases, making it the most essential tool in modern Agile teams.
 
 ---
 
@@ -304,9 +281,8 @@ Developer B ─┼─► Branches → Pull Request & Review → Merge → Main b
 Developer C ─┘                (shared repository)
 ```
 
-### Collaboration Best Practices & Conclusion
-- **Best practices:** commit small and often, write clear commit messages, pull latest changes before pushing, and never break the main branch.
-- **Conclusion:** Version control keeps the team in sync, protects their work, and makes frequent, safe collaboration possible in Agile projects.
+### Best Practices
+- Commit small and often, write clear commit messages, pull latest changes before pushing, and never break the main branch.
 
 ---
 

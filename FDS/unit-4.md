@@ -8,20 +8,26 @@
 
 ## Question Overview & Revision Priority
 
-| Q no. | Priority | Marks | Question Topic |
-| :---: | :---: | :---: | :--- |
-| 1 | P1 | 8 | Measures of descriptive statistics (central tendency, dispersion, shape) |
-| 2 | P1 | 8 | Data visualization techniques in EDA (histogram, box plot, scatter, heatmap) |
-| 3 | P1 | 8 | Correlation and covariance analysis techniques (formulas & interpretation) |
-| 4 | P1 | 8 | Univariate, Bivariate, and Multivariate analysis (comparison & plots) |
-| 5 | P2 | 8 | Anomaly detection and pattern identification (IQR rule, Z-score, trends) |
+| Q no. | Priority | Marks | Question Topic | Direct Answer Link |
+| :---: | :---: | :---: | :--- | :--- |
+| 1 | P1 | 8 | Measures of descriptive statistics (central tendency, dispersion, shape) | [→ Question 1](#question-1--measures-of-descriptive-statistics) |
+| 2 | P1 | 8 | Data visualization techniques in EDA (histogram, box plot, scatter, heatmap) | [→ Question 2](#question-2--data-visualization-techniques-in-eda) |
+| 3 | P1 | 8 | Correlation and covariance analysis techniques (formulas & interpretation) | [→ Question 3](#question-3--correlation-and-covariance-analysis-techniques) |
+| 4 | P1 | 8 | Univariate, Bivariate, and Multivariate analysis (comparison & plots) | [→ Question 4](#question-4--univariate-bivariate-and-multivariate-analysis) |
+| 5 | P2 | 8 | Anomaly detection and pattern identification (IQR rule, Z-score, trends) | [→ Question 5](#question-5--anomaly-detection-and-pattern-identification) |
 
 ---
 
-## Priority 1 (Must Prepare)
+## Question 1 — Measures of Descriptive Statistics
 
-### Q1. Describe the commonly used measures of descriptive statistics with suitable examples. [P1 | 8 marks]
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Describe the commonly used measures of descriptive statistics with suitable examples.
 
+---
+
+### Step-by-Step Solution
+
+#### 1. Central Tendency, Dispersion & Shape Measures
 Descriptive statistics summarise a dataset using a few numbers. They are grouped into central tendency, dispersion and shape.
 
 1. **Mean:** sum of values divided by count. Affected by outliers.
@@ -32,12 +38,14 @@ Descriptive statistics summarise a dataset using a few numbers. They are grouped
 6. **Quartiles and IQR:** Q1, Q2, Q3 divide sorted data into four parts. IQR = Q3 - Q1.
 7. **Skewness and kurtosis:** skewness shows asymmetry of the distribution. Kurtosis shows how heavy the tails are.
 
+#### 2. Worked Calculation Example
 Worked example for data 2, 4, 4, 6, 9:
 
 - Mean = 25/5 = 5. Median = 4. Mode = 4. Range = 9 - 2 = 7.
 - Squared deviations: 9, 1, 1, 1, 16. Sum = 28.
 - Sample variance = 28/4 = 7. Standard deviation = 2.65.
 
+#### 3. Python Implementation (`pandas` describe)
 ```python
 import pandas as pd
 s = pd.Series([2, 4, 4, 6, 9])
@@ -48,8 +56,18 @@ print(s.skew(), s.kurt())
 
 `describe()` returns count, mean, std, min, quartiles and max in one call.
 
-### Q2. Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples. [P1 | 8 marks]
+---
 
+## Question 2 — Data Visualization Techniques in EDA
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Core Visualization Plots (Histogram, Box, Scatter, Bar, Heatmap)
 Visualization shows the shape, spread, relationships and outliers of data that numbers alone may hide.
 
 1. **Histogram:** shows the distribution of one numeric variable using bins.
@@ -58,6 +76,7 @@ Visualization shows the shape, spread, relationships and outliers of data that n
 4. **Bar chart:** compares values across categories.
 5. **Heatmap:** shows a matrix of values by colour, commonly a correlation matrix.
 
+#### 2. Python Code Implementation (`matplotlib` & `seaborn`)
 ```python
 import numpy as np, pandas as pd, seaborn as sns
 import matplotlib.pyplot as plt
@@ -72,10 +91,21 @@ sns.heatmap(df.corr(), annot=True, ax=ax[1,1])
 plt.show()
 ```
 
+#### 3. Interpretation of Graphical Outputs
 Reading the output: the histogram is bell shaped, the box plot shows the middle 50 percent of values, the scatter plot rises left to right (positive relationship), the bars show category totals, and the heatmap shows a high correlation between `a` and `c`.
 
-### Q3. Analyze the correlation and covariance techniques by using suitable example. [P1 | 8 marks]
+---
 
+## Question 3 — Correlation and Covariance Analysis Techniques
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Analyze the correlation and covariance techniques by using suitable example.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Core Formulas & Concepts (Covariance vs. Correlation)
 Covariance and correlation measure how two variables change together.
 
 1. **Covariance:** cov(X, Y) = sum((xi - mean X)(yi - mean Y)) / (n - 1).
@@ -86,12 +116,14 @@ Covariance and correlation measure how two variables change together.
 6. **Strength:** about 0.7 or more in magnitude is strong, 0.3 to 0.7 moderate, below 0.3 weak.
 7. **Caution:** correlation does not prove causation. Spearman correlation suits ranked or non-linear monotonic data.
 
+#### 2. Worked Calculation Example
 Worked example: X = 1, 2, 3, 4, 5 and Y = 2, 4, 5, 4, 5.
 
 - Mean X = 3, mean Y = 4.
 - Products of deviations: 4, 0, 0, 0, 2. Sum = 6. Covariance = 6/4 = 1.5.
 - sX = 1.58, sY = 1.22. r = 1.5 / (1.58 x 1.22) = 0.77, a strong positive correlation.
 
+#### 3. Python Verification (`df.cov` & `df.corr`)
 ```python
 import pandas as pd
 df = pd.DataFrame({"X": [1, 2, 3, 4, 5], "Y": [2, 4, 5, 4, 5]})
@@ -99,8 +131,18 @@ print(df.cov())    # X-Y covariance 1.5
 print(df.corr())   # X-Y correlation 0.774597
 ```
 
-### Q4. Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples. [P1 | 8 marks]
+---
 
+## Question 4 — Univariate, Bivariate, and Multivariate Analysis
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Comprehensive Comparison Table
 | Basis | Univariate | Bivariate | Multivariate |
 |---|---|---|---|
 | Variables | One | Two | Three or more |
@@ -110,6 +152,7 @@ print(df.corr())   # X-Y correlation 0.774597
 | Typical plots | Histogram, box plot, bar chart | Scatter plot, grouped bar, line plot | Pair plot, heatmap, 3D plot, bubble chart |
 | Question answered | How are marks distributed? | Do study hours affect marks? | How do study hours, attendance and sleep affect marks? |
 
+#### 2. Practical Examples & Plots
 Examples:
 
 - **Univariate:** distribution of students' marks shown with a histogram.
@@ -118,10 +161,16 @@ Examples:
 
 ---
 
-## Priority 2 (Likely to Appear)
+## Question 5 — Anomaly Detection and Pattern Identification
 
-### Q5. Analyze a dataset to identify possible Anomalies and Pattern Detection. [P2 | 8 marks]
+**Priority:** Priority 2 (Likely to Appear) | **Marks:** 8 Marks  
+**Question:** Analyze a dataset to identify possible Anomalies and Pattern Detection.
 
+---
+
+### Step-by-Step Solution
+
+#### 1. Detection Principles (IQR Rule & Z-Score)
 An anomaly is a value that differs strongly from the rest of the data. A pattern is a regular structure such as a trend or a cluster. Both are found during EDA.
 
 Dataset: 10, 12, 11, 13, 12, 11, 12, 14, 10, 13, 12, 11, 13, 12, 95.
@@ -131,6 +180,7 @@ Dataset: 10, 12, 11, 13, 12, 11, 12, 14, 10, 13, 12, 11, 13, 12, 95.
 3. **Box plot:** shows the outlier as a separate point.
 4. **Scatter plot:** shows isolated points away from the main group.
 
+#### 2. Python Code Implementation & Outlier Visualization
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -143,6 +193,7 @@ print(s[z.abs() > 3].tolist())                               # [95]
 s.plot(kind="box"); plt.show()
 ```
 
+#### 3. Pattern Types in EDA
 Pattern types:
 
 - **Trend:** steady rise or fall over time.
@@ -158,4 +209,4 @@ Pattern types:
 2. describe() gives count, mean, std, min, quartiles and max.
 3. r = cov / (sX x sY), range -1 to +1; correlation is not causation.
 4. Univariate uses one variable, bivariate two, multivariate three or more.
-5. IQR rule limits are Q1 - 1.5 IQR and Q3 + 1.5 IQR; z-score outlier means |z| above 3.
+5. IQR rule limits are Q1 - 1.5 IQR and Q3 - 1.5 IQR; z-score outlier means |z| above 3.

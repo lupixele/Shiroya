@@ -2,12 +2,12 @@
 
 > **Course:** `2501CS34` — Fundamentals of Data Science (FDS)  
 > **Unit:** UNIT III – Data Loading, Storage and File Formats  
-> **Source Documents in [`raw/`](raw/):**
-> - [`raw/FDS 8M Sem Imp Questions.pdf`](raw/FDS%208M%20Sem%20Imp%20Questions.pdf) *(8-Mark Important Questions)*
-> - [`raw/FDS 2M Sem Imp  Questions.pdf`](raw/FDS%202M%20Sem%20Imp%20%20Questions.pdf) *(2-Mark Short Questions)*
-> - [`raw/III Sem FDS_Model Question Paper.pdf`](raw/III%20Sem%20FDS_Model%20Question%20Paper.pdf) *(Model Question Paper — Unit III Section)*
-> - [`raw/UNIT 3 FDS PPT.pptx`](raw/UNIT%203%20FDS%20PPT.pptx) *(Classroom Presentation Slides)*
-> - [`raw/Basic_HTML_Tags_with_Examples (1).docx`](raw/Basic_HTML_Tags_with_Examples%20(1).docx) *(HTML Reference for Web Scraping)*
+> **Source Documents in [`raw/`](../raw/):**
+> - [`raw/FDS 8M Sem Imp Questions.pdf`](../raw/FDS%208M%20Sem%20Imp%20Questions.pdf) *(8-Mark Important Questions)*
+> - [`raw/FDS 2M Sem Imp  Questions.pdf`](../raw/FDS%202M%20Sem%20Imp%20%20Questions.pdf) *(2-Mark Short Questions)*
+> - [`raw/III Sem FDS_Model Question Paper.pdf`](../raw/III%20Sem%20FDS_Model%20Question%20Paper.pdf) *(Model Question Paper — Unit III Section)*
+> - [`raw/UNIT 3 FDS PPT.pptx`](../raw/UNIT%203%20FDS%20PPT.pptx) *(Classroom Presentation Slides)*
+> - [`raw/Basic_HTML_Tags_with_Examples (1).docx`](../raw/Basic_HTML_Tags_with_Examples%20(1).docx) *(HTML Reference for Web Scraping)*
 >
 > **Questions Index:** [`questions.md` — UNIT III](questions.md#unit-iii--data-loading-storage-and-file-formats)
 
@@ -120,7 +120,7 @@ When processing massive datasets (e.g., 10 GB log files or transaction dumps) on
 
 **Chunking** is the systematic technique of loading a large file sequentially in fixed-size portions (chunks) so that only a small, predictable block of data resides in memory at any single moment.
 
-![Chunking Concept in Pandas](figures/unit3_chunking_concept.png)
+![Chunking Concept in Pandas](../figures/unit3_chunking_concept.png)
 
 ---
 

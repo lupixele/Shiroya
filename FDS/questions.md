@@ -1,25 +1,30 @@
-# FDS Sessional-II Questions
+# FDS IE 2 Important Questions
 
-## Unit 3
+Priority: P1 = must prepare, P2 = likely, P3 = if time permits. Marks are the target answer weight (6 or 8).
 
-1. Explain the different ways to read and write data in text format using Python. Hint: include methods like `read_csv()`, `read_table()` and `to_csv()`. [P1 | 8 marks]
-2. What is JSON data? Describe how to read and write JSON files in Python using suitable examples. [P1 | 8 marks]
-3. What is web scraping? Explain how XML and HTML data can be extracted using Python libraries. [P1 | 8 marks]
-4. What are binary data formats? Discuss how the HDF5 format is used for storing large numerical datasets. [P2 | 6 marks]
-5. How can we read data from Microsoft Excel files and interact with databases using Python? Mention relevant libraries such as pandas, sqlite3 or SQLAlchemy. [P2 | 8 marks]
+## Unit III: Data Loading, Storage and File Formats
 
-## Unit 4
+1. Describe the methods used to read and write data in text files. [P1 | 8 marks]
+2. Explain how a large text file can be read in pieces. [P2 | 6 marks]
+3. Demonstrate how to work with delimited data formats using a suitable example. [P2 | 6 marks]
+4. Describe the structure and uses of JSON data format with a suitable example. [P1 | 8 marks]
+5. Classify the main features of HTML and XML data format with suitable examples. [P2 | 6 marks]
+6. Demonstrate the process of collecting data from a web page using web scraping. [P1 | 8 marks]
+7. Distinguish between Binary data formats such as HDF5 and traditional file formats. Indicate their advantages and suitable use cases. [P2 | 8 marks]
+8. Apply NoSQL Mongo DB CRUD operations to store and retrieve by taking suitable data as an example. [P1 | 8 marks]
 
-1. What is Exploratory Data Analysis (EDA)? Explain its importance in the data analysis process. [P1 | 6 marks]
-2. What are Descriptive Statistics? Explain how measures like mean, median, mode, variance and standard deviation help in understanding data. [P1 | 8 marks]
-3. Explain the difference between Univariate, Bivariate and Multivariate analysis with suitable examples. [P1 | 8 marks]
-4. What is the role of Correlation and Covariance analysis in EDA? How do they help in understanding relationships between variables? [P2 | 8 marks]
-5. What is Pattern Detection and Anomaly Identification? Explain how EDA techniques help in finding patterns and detecting outliers in a dataset. [P2 | 8 marks]
+## Unit IV: Exploratory Data Analysis
 
-## Unit 5
+1. Describe the commonly used measures of descriptive statistics with suitable examples. [P1 | 8 marks]
+2. Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples. [P1 | 8 marks]
+3. Analyze the correlation and covariance techniques by using suitable example. [P1 | 8 marks]
+4. Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples. [P1 | 8 marks]
+5. Analyze a dataset to identify possible Anomalies and Pattern Detection. [P2 | 8 marks]
 
-1. What is Neo4j? Explain how it is used for dealing with graph databases. [P1 | 8 marks]
-2. What is the Cypher Query Language? Explain its purpose and basic syntax used in Neo4j. [P1 | 8 marks]
-3. What is Text Mining and Analytics? Explain its importance in data science. [P2 | 6 marks]
-4. Explain the role of the NLTK (Natural Language Toolkit) library in text mining and analytics. [P1 | 8 marks]
-5. What is SQLite? Describe how it can be used to store and manage text data in data analytics projects. [P3 | 6 marks]
+## Unit V: Data Science Tools
+
+1. Describe Neo4j and its basic features as a graph database. [P1 | 8 marks]
+2. Demonstrate basic Cypher queries with suitable examples. [P1 | 8 marks]
+3. Describe the role of NLTK in text mining and analytics with suitable examples. [P1 | 8 marks]
+4. Analyze the differences between Neo4j and SQLite based on their data models and uses. [P2 | 6 marks]
+5. Apply different tools used for text analytics and review the use of SQLite in managing text-based data. [P2 | 8 marks]

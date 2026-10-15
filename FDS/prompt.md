@@ -1,10 +1,10 @@
-# Prompt: Exam-Ready Answers for FDS Sessional-II (Units 3, 4, 5)
+# Prompt: Exam-Ready Answers for FDS IE 2 (Units 3, 4, 5)
 
 Copy everything below the line into any AI agent. The questions, priorities and target marks are already included, so nothing else needs to be pasted.
 
 ---
 
-You are preparing a student for the **Fundamentals of Data Science (FDS)** Sessional-II exam (B.Tech III Sem CSE, Data Science). Write **exam-ready answers** for the 15 questions listed at the bottom. The student will read, memorise and write these in the exam hall.
+You are preparing a student for the **Fundamentals of Data Science (FDS)** IE 2 exam (B.Tech III Sem CSE, Data Science). Write **exam-ready answers** for the 18 questions listed at the bottom. The student will read, memorise and write these in the exam hall.
 
 ## Hard rules (do not break these)
 
@@ -38,6 +38,9 @@ Decide from the question verb.
 | Explain difference between A, B and C | A comparison table (Basis / A / B / C), 5-6 rows, then one example per type |
 | Role of X in Y | 4-6 points, each as "Point: how it helps" |
 | Discuss / How is X used | Definition, working principle, 3-5 uses, one example |
+| Demonstrate / Apply | One line of purpose, then a complete runnable code block with sample data and the output as a comment, then 2-3 lines on what the code shows |
+| Classify / Distinguish / Analyze differences | A comparison table (Basis / A / B), 6-7 rows, then a short line on when to use each |
+| Describe X and its features | Definition, 5-6 features as one-line points, one small example |
 
 ## Code rules
 
@@ -45,6 +48,7 @@ Decide from the question verb.
 - Use small inline sample data so the code runs without any external file (for example `io.StringIO` or a small dict). Where a file is unavoidable, name it plainly (`data.csv`).
 - Add the output as a short comment under the code only where it helps the examiner see the result.
 - Cypher keywords in upper case. Show only the minimal pattern the question needs.
+- MongoDB: use `pymongo` (`MongoClient`, `insert_one`, `insert_many`, `find`, `find_one`, `update_one`, `delete_one`). Use a local connection string and a small student or product collection as sample data. State that a running MongoDB server is assumed. Cover Create, Read, Update and Delete, one short snippet each.
 - Use fenced code blocks with the language tag. Do not explain code line by line; one sentence above the block is enough.
 
 ## Diagrams
@@ -71,26 +75,29 @@ Each question carries a priority. Mirror it in the output so the student knows w
 
 ## Questions
 
-### Unit 3
+### Unit III: Data Loading, Storage and File Formats
 
-1. Explain the different ways to read and write data in text format using Python. Hint: include methods like `read_csv()`, `read_table()` and `to_csv()`. [P1 | 8 marks | code required: a snippet for each method]
-2. What is JSON data? Describe how to read and write JSON files in Python using suitable examples. [P1 | 8 marks | code required: `json.load`, `json.dump`, `json.loads`, `json.dumps`]
-3. What is web scraping? Explain how XML and HTML data can be extracted using Python libraries. [P1 | 8 marks | code required: BeautifulSoup for HTML, `xml.etree.ElementTree` or lxml for XML]
-4. What are binary data formats? Discuss how the HDF5 format is used for storing large numerical datasets. [P2 | 6 marks | short h5py or pandas `HDFStore` snippet]
-5. How can we read data from Microsoft Excel files and interact with databases using Python? Mention relevant libraries such as pandas, sqlite3 or SQLAlchemy. [P2 | 8 marks | code required: `read_excel`, `sqlite3` connect/query, `read_sql`]
+1. Describe the methods used to read and write data in text files. [P1 | 8 marks | code: `open()`, `read_csv()`, `read_table()`, `to_csv()`]
+2. Explain how a large text file can be read in pieces. [P2 | 6 marks | code: `chunksize` with `read_csv`, and `nrows`]
+3. Demonstrate how to work with delimited data formats using a suitable example. [P2 | 6 marks | code: CSV, TSV and a custom delimiter using `sep`, plus the `csv` module]
+4. Describe the structure and uses of JSON data format with a suitable example. [P1 | 8 marks | structure (objects, arrays, key-value), uses, code: `json.loads`, `json.dumps`, `json.load`, `json.dump`]
+5. Classify the main features of HTML and XML data format with suitable examples. [P2 | 6 marks | comparison table plus a tiny HTML and XML sample]
+6. Demonstrate the process of collecting data from a web page using web scraping. [P1 | 8 marks | steps as a numbered flow, code: `requests` plus BeautifulSoup, extract text, links and a table]
+7. Distinguish between Binary data formats such as HDF5 and traditional file formats. Indicate their advantages and suitable use cases. [P2 | 8 marks | comparison table, advantages, use cases, short h5py or `HDFStore` snippet]
+8. Apply NoSQL Mongo DB CRUD operations to store and retrieve by taking suitable data as an example. [P1 | 8 marks | code: create, read, update, delete with `pymongo`]
 
-### Unit 4
+### Unit IV: Exploratory Data Analysis
 
-1. What is Exploratory Data Analysis (EDA)? Explain its importance in the data analysis process. [P1 | 6 marks | include a text workflow diagram]
-2. What are Descriptive Statistics? Explain how measures like mean, median, mode, variance and standard deviation help in understanding data. [P1 | 8 marks | include a small worked numeric example and a pandas snippet]
-3. Explain the difference between Univariate, Bivariate and Multivariate analysis with suitable examples. [P1 | 8 marks | comparison table plus one example and typical plot for each]
-4. What is the role of Correlation and Covariance analysis in EDA? How do they help in understanding relationships between variables? [P2 | 8 marks | include the formulas, the range of correlation, and a `df.corr()` / `df.cov()` snippet]
-5. What is Pattern Detection and Anomaly Identification? Explain how EDA techniques help in finding patterns and detecting outliers in a dataset. [P2 | 8 marks | cover box plot, IQR rule, z-score and scatter plot]
+1. Describe the commonly used measures of descriptive statistics with suitable examples. [P1 | 8 marks | central tendency, dispersion and shape; small worked numeric example and a pandas `describe()` snippet]
+2. Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples. [P1 | 8 marks | histogram, box plot, scatter plot, bar chart, heatmap; matplotlib or seaborn snippet and one line on what each shows]
+3. Analyze the correlation and covariance techniques by using suitable example. [P1 | 8 marks | formulas, interpretation of sign and range, worked small example, `df.corr()` and `df.cov()` snippet]
+4. Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples. [P1 | 8 marks | comparison table plus one example and typical plot for each]
+5. Analyze a dataset to identify possible Anomalies and Pattern Detection. [P2 | 8 marks | small dataset, IQR rule, z-score, box plot and scatter plot, pattern types such as trend and clusters]
 
-### Unit 5
+### Unit V: Data Science Tools
 
-1. What is Neo4j? Explain how it is used for dealing with graph databases. [P1 | 8 marks | nodes, relationships, properties, labels, plus a small node-relationship diagram]
-2. What is the Cypher Query Language? Explain its purpose and basic syntax used in Neo4j. [P1 | 8 marks | code required: `CREATE`, `MATCH`, `WHERE`, `RETURN`, `SET`, `DELETE` with one line each]
-3. What is Text Mining and Analytics? Explain its importance in data science. [P2 | 6 marks | include the basic pipeline as a text flow]
-4. Explain the role of the NLTK (Natural Language Toolkit) library in text mining and analytics. [P1 | 8 marks | code required: tokenization, stop-word removal, stemming or lemmatization, POS tagging]
-5. What is SQLite? Describe how it can be used to store and manage text data in data analytics projects. [P3 | 6 marks | short `sqlite3` snippet: create table, insert, select]
+1. Describe Neo4j and its basic features as a graph database. [P1 | 8 marks | nodes, relationships, properties, labels, ACID, schema flexibility; small node-relationship text diagram]
+2. Demonstrate basic Cypher queries with suitable examples. [P1 | 8 marks | code: `CREATE`, `MATCH`, `WHERE`, `RETURN`, `SET`, `DELETE`, relationship query; one line of meaning for each]
+3. Describe the role of NLTK in text mining and analytics with suitable examples. [P1 | 8 marks | code: tokenization, stop-word removal, stemming, lemmatization, POS tagging]
+4. Analyze the differences between Neo4j and SQLite based on their data models and uses. [P2 | 6 marks | comparison table covering data model, query language, schema, relationships, scalability and typical uses]
+5. Apply different tools used for text analytics and review the use of SQLite in managing text-based data. [P2 | 8 marks | list the tools (NLTK, spaCy, scikit-learn text features, TextBlob, Gensim) with one line each, then a short `sqlite3` snippet: create table, insert, select with LIKE]

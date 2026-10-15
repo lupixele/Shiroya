@@ -2,12 +2,12 @@
 
 > **Course:** `2501CS34` — Fundamentals of Data Science (FDS)  
 > **Unit:** UNIT V – Data Science Tools (Neo4j, Cypher, NLTK, SQLite)  
-> **Source Documents in [`raw/`](raw/):**
-> - [`raw/FDS 8M Sem Imp Questions.pdf`](raw/FDS%208M%20Sem%20Imp%20Questions.pdf) *(8-Mark Important Questions)*
-> - [`raw/FDS 2M Sem Imp  Questions.pdf`](raw/FDS%202M%20Sem%20Imp%20%20Questions.pdf) *(2-Mark Short Questions)*
-> - [`raw/III Sem FDS_Model Question Paper.pdf`](raw/III%20Sem%20FDS_Model%20Question%20Paper.pdf) *(Model Question Paper — Unit V Section)*
-> - [`raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf`](raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf) *(Step-by-Step Practical Teaching Guide on Neo4j Aura & Colab)*
-> - [`raw/nltk library for text analytics - Colab.pdf`](raw/nltk%20library%20for%20text%20analytics%20-%20Colab.pdf) *(Practical Guide on NLTK Text Processing & POS Tagging)*
+> **Source Documents in [`raw/`](../raw/):**
+> - [`raw/FDS 8M Sem Imp Questions.pdf`](../raw/FDS%208M%20Sem%20Imp%20Questions.pdf) *(8-Mark Important Questions)*
+> - [`raw/FDS 2M Sem Imp  Questions.pdf`](../raw/FDS%202M%20Sem%20Imp%20%20Questions.pdf) *(2-Mark Short Questions)*
+> - [`raw/III Sem FDS_Model Question Paper.pdf`](../raw/III%20Sem%20FDS_Model%20Question%20Paper.pdf) *(Model Question Paper — Unit V Section)*
+> - [`raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf`](../raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf) *(Step-by-Step Practical Teaching Guide on Neo4j Aura & Colab)*
+> - [`raw/nltk library for text analytics - Colab.pdf`](../raw/nltk%20library%20for%20text%20analytics%20-%20Colab.pdf) *(Practical Guide on NLTK Text Processing & POS Tagging)*
 >
 > **Questions Index:** [`questions.md` — UNIT V](questions.md#unit-v--data-science-tools)
 
@@ -142,7 +142,7 @@ ORDER BY Student_Count DESC;
 ---
 
 ### 3. Connecting Python to Neo4j Aura (Colab Workflow)
-As detailed in [`raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf`](raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf):
+As detailed in [`raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf`](../raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf):
 
 ```python
 from neo4j import GraphDatabase

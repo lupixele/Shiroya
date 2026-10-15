@@ -11,13 +11,13 @@
 | Q no. | Priority | Marks | Question Topic | Direct Answer Link |
 | :---: | :---: | :---: | :--- | :--- |
 | 1 | P1 | 8 | Methods to read and write data in text files (`open`, `read_csv`, `to_csv`) | [→ Question 1](#question-1--methods-to-read-and-write-data-in-text-files) |
-| 4 | P1 | 8 | Structure and uses of JSON data format with examples (`json.loads/dumps`) | [→ Question 4](#question-4--structure-and-uses-of-json-data-format) |
-| 6 | P1 | 8 | Collecting data from web pages using web scraping (`requests`, BeautifulSoup) | [→ Question 6](#question-6--web-scraping-workflow-using-beautifulsoup) |
-| 8 | P1 | 8 | NoSQL MongoDB CRUD operations (`pymongo`: insert, find, update, delete) | [→ Question 8](#question-8--nosql-mongodb-crud-operations) |
 | 2 | P2 | 6 | Reading large text files in pieces (`chunksize`, `nrows`) | [→ Question 2](#question-2--reading-large-text-files-in-pieces-chunking) |
 | 3 | P2 | 6 | Working with delimited data formats (CSV, TSV, custom delimiters) | [→ Question 3](#question-3--working-with-delimited-data-formats) |
+| 4 | P1 | 8 | Structure and uses of JSON data format with examples (`json.loads/dumps`) | [→ Question 4](#question-4--structure-and-uses-of-json-data-format) |
 | 5 | P2 | 6 | Main features of HTML and XML data formats (comparison & parsing) | [→ Question 5](#question-5--main-features-of-html-and-xml-formats) |
+| 6 | P1 | 8 | Collecting data from web pages using web scraping (`requests`, BeautifulSoup) | [→ Question 6](#question-6--web-scraping-workflow-using-beautifulsoup) |
 | 7 | P2 | 8 | Binary data formats (HDF5) vs. traditional file formats | [→ Question 7](#question-7--binary-data-formats-hdf5-vs-traditional-formats) |
+| 8 | P1 | 8 | NoSQL MongoDB CRUD operations (`pymongo`: insert, find, update, delete) | [→ Question 8](#question-8--nosql-mongodb-crud-operations) |
 
 ---
 
@@ -55,153 +55,6 @@ tsv = pd.read_table(io.StringIO("name\tmarks\nAsha\t85\n"))
 df.to_csv("out.csv", index=False)
 # notes.txt content is printed; df has 2 rows, 2 columns
 ```
-
----
-
-## Question 4 — Structure and Uses of JSON Data Format
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Describe the structure and uses of JSON data format with a suitable example.
-
----
-
-### Step-by-Step Solution
-
-#### 1. JSON Data Structure & Core Rules
-JSON (JavaScript Object Notation) is a lightweight, text-based format for exchanging data. It is easy for humans to read and for machines to parse.
-
-1. **Object:** A set of key-value pairs inside `{ }`. Keys are strings.
-2. **Array:** An ordered list of values inside `[ ]`.
-3. **Values:** string, number, true/false, null, object or array. They can be nested.
-
-#### 2. Python Type Mapping, Uses & Advantages
-4. **Python mapping:** object to `dict`, array to `list`, null to `None`, true to `True`.
-5. **Uses:** Web APIs, configuration files, data exchange between server and client, and NoSQL storage such as MongoDB.
-6. **Advantage:** Language independent and lighter than XML.
-
-#### 3. JSON Sample & Python Implementation (`json` module)
-Example:
-
-```json
-{"name": "Asha", "marks": [85, 90], "active": true, "address": {"city": "Kakinada"}}
-```
-
-```python
-import json
-d = json.loads('{"name": "Asha", "marks": [85, 90], "active": true}')
-print(d["marks"][0])        # 85
-s = json.dumps(d, indent=2) # dict to JSON string
-with open("s.json", "w") as f:
-    json.dump(d, f)         # dict to JSON file
-with open("s.json") as f:
-    d2 = json.load(f)       # JSON file to dict
-```
-
-`loads` and `dumps` work on strings. `load` and `dump` work on files.
-
----
-
-## Question 6 — Web Scraping Workflow Using BeautifulSoup
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Demonstrate the process of collecting data from a web page using web scraping.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Web Scraping Lifecycle Steps
-Web scraping is the automatic extraction of data from web pages. `requests` fetches the page and BeautifulSoup parses the HTML.
-
-Steps:
-
-1. Choose the target URL and check the site's terms and robots.txt.
-2. Send an HTTP GET request with `requests.get()`.
-3. Check the status code (200 means success).
-4. Parse the HTML with BeautifulSoup.
-5. Locate elements by tag, class or id with `find()` and `find_all()`.
-6. Extract text, links and table rows.
-7. Store the result in a DataFrame or file.
-
-#### 2. Fetching & Parsing HTML (`requests` & BeautifulSoup)
-Fetch and parse:
-
-```python
-import requests
-from bs4 import BeautifulSoup
-resp = requests.get("https://example.com", timeout=10)
-soup = BeautifulSoup(resp.text, "html.parser")
-print(resp.status_code, soup.title.text)
-```
-
-#### 3. Extracting Elements (Text, Links & Tables)
-Extract text, links and a table (sample HTML used so it runs offline):
-
-```python
-from bs4 import BeautifulSoup
-html = """<h1>Report</h1><a href="/a">Link A</a>
-<table><tr><th>Name</th></tr><tr><td>Asha</td><td>85</td></tr></table>"""
-soup = BeautifulSoup(html, "html.parser")
-print(soup.h1.text)                                  # Report
-print([a["href"] for a in soup.find_all("a")])       # ['/a']
-rows = [[c.text for c in r.find_all(["th", "td"])] for r in soup.find_all("tr")]
-print(rows)                                          # [['Name', 'Marks'], ['Asha', '85']]
-```
-
-The code shows how text comes from tags, links from the `href` attribute, and a table from `tr`, `th` and `td` tags.
-
----
-
-## Question 8 — NoSQL MongoDB CRUD Operations
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Apply NoSQL Mongo DB CRUD operations to store and retrieve by taking suitable data as an example.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Overview & Setup
-MongoDB is a document-oriented NoSQL database. It stores data as JSON-like documents inside collections. CRUD means Create, Read, Update, Delete. A running MongoDB server on localhost is assumed. Sample data is a `students` collection.
-
-#### 2. CRUD Operations in Python (`pymongo`)
-Create:
-
-```python
-from pymongo import MongoClient
-col = MongoClient("mongodb://localhost:27017/")["college"]["students"]
-col.insert_one({"name": "Asha", "age": 20})
-col.insert_many([{"name": "Ravi", "age": 21}, {"name": "Meena", "age": 19}])
-```
-
-Read:
-
-```python
-print(col.find_one({"name": "Asha"}))
-for d in col.find({"age": {"$gt": 19}}):
-    print(d)   # Asha and Ravi
-```
-
-Update:
-
-```python
-col.update_one({"name": "Asha"}, {"$set": {"age": 21}})
-```
-
-Delete:
-
-```python
-col.delete_one({"name": "Ravi"})
-```
-
-#### 3. Key MongoDB Points & Rules
-Points:
-
-1. **insert_one / insert_many:** add one or many documents. MongoDB adds a unique `_id` automatically.
-2. **find / find_one:** retrieve documents using a filter. An empty filter returns all.
-3. **$set:** changes only the given fields.
-4. **delete_one:** removes the first matching document.
-5. **Schema-less:** documents in one collection can have different fields.
 
 ---
 
@@ -269,6 +122,49 @@ Points:
 
 ---
 
+## Question 4 — Structure and Uses of JSON Data Format
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Describe the structure and uses of JSON data format with a suitable example.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. JSON Data Structure & Core Rules
+JSON (JavaScript Object Notation) is a lightweight, text-based format for exchanging data. It is easy for humans to read and for machines to parse.
+
+1. **Object:** A set of key-value pairs inside `{ }`. Keys are strings.
+2. **Array:** An ordered list of values inside `[ ]`.
+3. **Values:** string, number, true/false, null, object or array. They can be nested.
+
+#### 2. Python Type Mapping, Uses & Advantages
+4. **Python mapping:** object to `dict`, array to `list`, null to `None`, true to `True`.
+5. **Uses:** Web APIs, configuration files, data exchange between server and client, and NoSQL storage such as MongoDB.
+6. **Advantage:** Language independent and lighter than XML.
+
+#### 3. JSON Sample & Python Implementation (`json` module)
+Example:
+
+```json
+{"name": "Asha", "marks": [85, 90], "active": true, "address": {"city": "Kakinada"}}
+```
+
+```python
+import json
+d = json.loads('{"name": "Asha", "marks": [85, 90], "active": true}')
+print(d["marks"][0])        # 85
+s = json.dumps(d, indent=2) # dict to JSON string
+with open("s.json", "w") as f:
+    json.dump(d, f)         # dict to JSON file
+with open("s.json") as f:
+    d2 = json.load(f)       # JSON file to dict
+```
+
+`loads` and `dumps` work on strings. `load` and `dump` work on files.
+
+---
+
 ## Question 5 — Main Features of HTML and XML Formats
 
 **Priority:** Priority 2 (Likely to Appear) | **Marks:** 6 Marks  
@@ -302,6 +198,57 @@ XML sample:
 ```
 
 HTML describes how content looks. XML describes what the content means. Both are tree structured and use nested tags.
+
+---
+
+## Question 6 — Web Scraping Workflow Using BeautifulSoup
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Demonstrate the process of collecting data from a web page using web scraping.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Web Scraping Lifecycle Steps
+Web scraping is the automatic extraction of data from web pages. `requests` fetches the page and BeautifulSoup parses the HTML.
+
+Steps:
+
+1. Choose the target URL and check the site's terms and robots.txt.
+2. Send an HTTP GET request with `requests.get()`.
+3. Check the status code (200 means success).
+4. Parse the HTML with BeautifulSoup.
+5. Locate elements by tag, class or id with `find()` and `find_all()`.
+6. Extract text, links and table rows.
+7. Store the result in a DataFrame or file.
+
+#### 2. Fetching & Parsing HTML (`requests` & BeautifulSoup)
+Fetch and parse:
+
+```python
+import requests
+from bs4 import BeautifulSoup
+resp = requests.get("https://example.com", timeout=10)
+soup = BeautifulSoup(resp.text, "html.parser")
+print(resp.status_code, soup.title.text)
+```
+
+#### 3. Extracting Elements (Text, Links & Tables)
+Extract text, links and a table (sample HTML used so it runs offline):
+
+```python
+from bs4 import BeautifulSoup
+html = """<h1>Report</h1><a href="/a">Link A</a>
+<table><tr><th>Name</th></tr><tr><td>Asha</td><td>85</td></tr></table>"""
+soup = BeautifulSoup(html, "html.parser")
+print(soup.h1.text)                                  # Report
+print([a["href"] for a in soup.find_all("a")])       # ['/a']
+rows = [[c.text for c in r.find_all(["th", "td"])] for r in soup.find_all("tr")]
+print(rows)                                          # [['Name', 'Marks'], ['Asha', '85']]
+```
+
+The code shows how text comes from tags, links from the `href` attribute, and a table from `tr`, `th` and `td` tags.
 
 ---
 
@@ -345,6 +292,59 @@ with h5py.File("data.h5", "w") as f:
 with h5py.File("data.h5", "r") as f:
     print(f["scores"][2:5])   # [2 3 4]
 ```
+
+---
+
+## Question 8 — NoSQL MongoDB CRUD Operations
+
+**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
+**Question:** Apply NoSQL Mongo DB CRUD operations to store and retrieve by taking suitable data as an example.
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Overview & Setup
+MongoDB is a document-oriented NoSQL database. It stores data as JSON-like documents inside collections. CRUD means Create, Read, Update, Delete. A running MongoDB server on localhost is assumed. Sample data is a `students` collection.
+
+#### 2. CRUD Operations in Python (`pymongo`)
+Create:
+
+```python
+from pymongo import MongoClient
+col = MongoClient("mongodb://localhost:27017/")["college"]["students"]
+col.insert_one({"name": "Asha", "age": 20})
+col.insert_many([{"name": "Ravi", "age": 21}, {"name": "Meena", "age": 19}])
+```
+
+Read:
+
+```python
+print(col.find_one({"name": "Asha"}))
+for d in col.find({"age": {"$gt": 19}}):
+    print(d)   # Asha and Ravi
+```
+
+Update:
+
+```python
+col.update_one({"name": "Asha"}, {"$set": {"age": 21}})
+```
+
+Delete:
+
+```python
+col.delete_one({"name": "Ravi"})
+```
+
+#### 3. Key MongoDB Points & Rules
+Points:
+
+1. **insert_one / insert_many:** add one or many documents. MongoDB adds a unique `_id` automatically.
+2. **find / find_one:** retrieve documents using a filter. An empty filter returns all.
+3. **$set:** changes only the given fields.
+4. **delete_one:** removes the first matching document.
+5. **Schema-less:** documents in one collection can have different fields.
 
 ---
 

@@ -9,16 +9,20 @@ This directory serves as the centralized academic exam preparation hub for **Fun
 
 ## Current Study Set: IE 2 (Units 3, 4, 5)
 
-Priority-tagged questions (6 or 8 marks). Answers are generated with the prompt below.
+Priority-tagged questions (6 or 8 marks) with exam-ready answers. Study these first.
 
 | File | Contents |
 | :--- | :--- |
 | [`questions.md`](questions.md) | The 18 IE 2 questions with priority (P1/P2/P3) and marks |
-| [`prompt.md`](prompt.md) | Prompt that produces exam-ready answers for these questions in any AI agent |
+| [`unit-3.md`](unit-3.md) | Unit III answers |
+| [`unit-4.md`](unit-4.md) | Unit IV answers |
+| [`unit-5.md`](unit-5.md) | Unit V answers |
+| [`prompt.md`](prompt.md) | Prompt that produces answers for these questions in any AI agent |
 
 Earlier sets are kept for reference:
 
-- [`archive/sessional-2-v1/`](archive/sessional-2-v1/): previous question list, its answers (`unit3.md`, `unit4.md`, `unit5.md`) and its prompt.
+- [`archive/ie2-v1/`](archive/ie2-v1/): IE 2 question list before the answers were added.
+- [`archive/sessional-2-v1/`](archive/sessional-2-v1/): previous Sessional-II questions, answers and prompt.
 - [`sem imp/`](sem%20imp/): semester-important set (8-mark and 2-mark questions with answers).
 
 ---

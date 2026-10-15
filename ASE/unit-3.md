@@ -25,7 +25,7 @@
 #### Artifacts
 1. **Product Backlog:** ordered list of everything the product may need (features, fixes, ideas).
 2. **Sprint Backlog:** items selected for the current Sprint plus the plan to finish them.
-3. **Increment:** the sum of all finished items; must be in a usable condition.
+3. **Product Increment:** the sum of all finished items; must be in a usable condition.
 
 #### Events (Ceremonies)
 1. **Sprint Planning:** team decides what to build in the Sprint and how.

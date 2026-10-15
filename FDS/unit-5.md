@@ -1,12 +1,24 @@
-## Unit V: Data Science Tools
+# Unit V: Data Science Tools
 
-| Q no. | Priority | Marks |
-|---|---|---|
-| 1 | P1 | 8 |
-| 2 | P1 | 8 |
-| 3 | P1 | 8 |
-| 4 | P2 | 6 |
-| 5 | P2 | 8 |
+> **Course Code:** `2501CS34` — Fundamentals of Data Science (FDS) | Aditya University  
+> **Exam Scope:** Internal Examinations 2 (Mid-2)  
+> **Questions Map:** [`questions.md` — Unit V](questions.md#unit-v-data-science-tools)
+
+---
+
+## Question Overview & Revision Priority
+
+| Q no. | Priority | Marks | Question Topic |
+| :---: | :---: | :---: | :--- |
+| 1 | P1 | 8 | Neo4j architecture and features as a graph database |
+| 2 | P1 | 8 | Demonstrating basic Cypher queries (`CREATE`, `MATCH`, `WHERE`, `SET`, `DELETE`) |
+| 3 | P1 | 8 | Role of NLTK in text mining and analytics (tokenization, stopwords, stemming, POS) |
+| 4 | P2 | 6 | Differences between Neo4j and SQLite (graph vs. relational models) |
+| 5 | P2 | 8 | Text analytics tools and using SQLite for text-based data management |
+
+---
+
+## Priority 1 (Must Prepare)
 
 ### Q1. Describe Neo4j and its basic features as a graph database. [P1 | 8 marks]
 
@@ -104,6 +116,10 @@ print(WordNetLemmatizer().lemmatize("cats"))          # cat
 print(nltk.pos_tag(tokens)[:3])   # [('The', 'DT'), ('cats', 'NNS'), ('are', 'VBP')]
 ```
 
+---
+
+## Priority 2 (Likely to Appear)
+
 ### Q4. Analyze the differences between Neo4j and SQLite based on their data models and uses. [P2 | 6 marks]
 
 | Basis | Neo4j | SQLite |
@@ -143,7 +159,9 @@ print(rows)   # [(1, 'data science is fun'), (2, 'big data tools')]
 
 The query returns the documents that contain the word "data".
 
-### Quick revision
+---
+
+## Quick Revision
 
 1. Neo4j stores nodes, relationships, labels and properties; it is ACID and queried with Cypher.
 2. Cypher: CREATE adds, MATCH finds, WHERE filters, RETURN outputs, SET updates, DELETE removes (DETACH DELETE for nodes).

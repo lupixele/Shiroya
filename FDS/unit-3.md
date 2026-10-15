@@ -1,15 +1,27 @@
-## Unit III: Data Loading, Storage and File Formats
+# Unit III: Data Loading, Storage and File Formats
 
-| Q no. | Priority | Marks |
-|---|---|---|
-| 1 | P1 | 8 |
-| 4 | P1 | 8 |
-| 6 | P1 | 8 |
-| 8 | P1 | 8 |
-| 2 | P2 | 6 |
-| 3 | P2 | 6 |
-| 5 | P2 | 6 |
-| 7 | P2 | 8 |
+> **Course Code:** `2501CS34` — Fundamentals of Data Science (FDS) | Aditya University  
+> **Exam Scope:** Internal Examinations 2 (Mid-2)  
+> **Questions Map:** [`questions.md` — Unit III](questions.md#unit-iii-data-loading-storage-and-file-formats)
+
+---
+
+## Question Overview & Revision Priority
+
+| Q no. | Priority | Marks | Question Topic |
+| :---: | :---: | :---: | :--- |
+| 1 | P1 | 8 | Methods to read and write data in text files (`open`, `read_csv`, `to_csv`) |
+| 4 | P1 | 8 | Structure and uses of JSON data format with examples (`json.loads/dumps`) |
+| 6 | P1 | 8 | Collecting data from web pages using web scraping (`requests`, BeautifulSoup) |
+| 8 | P1 | 8 | NoSQL MongoDB CRUD operations (`pymongo`: insert, find, update, delete) |
+| 2 | P2 | 6 | Reading large text files in pieces (`chunksize`, `nrows`) |
+| 3 | P2 | 6 | Working with delimited data formats (CSV, TSV, custom delimiters) |
+| 5 | P2 | 6 | Main features of HTML and XML data formats (comparison & parsing) |
+| 7 | P2 | 8 | Binary data formats (HDF5) vs. traditional file formats |
+
+---
+
+## Priority 1 (Must Prepare)
 
 ### Q1. Describe the methods used to read and write data in text files. [P1 | 8 marks]
 
@@ -145,6 +157,10 @@ Points:
 4. **delete_one:** removes the first matching document.
 5. **Schema-less:** documents in one collection can have different fields.
 
+---
+
+## Priority 2 (Likely to Appear)
+
 ### Q2. Explain how a large text file can be read in pieces. [P2 | 6 marks]
 
 A very large file may not fit in memory. pandas can read it in smaller parts instead of loading it whole.
@@ -243,7 +259,9 @@ with h5py.File("data.h5", "r") as f:
     print(f["scores"][2:5])   # [2 3 4]
 ```
 
-### Quick revision
+---
+
+## Quick Revision
 
 1. open() modes r, w, a; read() readline() readlines(); write() writelines().
 2. read_csv uses comma, read_table uses tab; to_csv(index=False) writes output.

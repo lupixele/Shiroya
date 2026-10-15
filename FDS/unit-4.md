@@ -1,12 +1,24 @@
-## Unit IV: Exploratory Data Analysis
+# Unit IV: Exploratory Data Analysis
 
-| Q no. | Priority | Marks |
-|---|---|---|
-| 1 | P1 | 8 |
-| 2 | P1 | 8 |
-| 3 | P1 | 8 |
-| 4 | P1 | 8 |
-| 5 | P2 | 8 |
+> **Course Code:** `2501CS34` — Fundamentals of Data Science (FDS) | Aditya University  
+> **Exam Scope:** Internal Examinations 2 (Mid-2)  
+> **Questions Map:** [`questions.md` — Unit IV](questions.md#unit-iv-exploratory-data-analysis)
+
+---
+
+## Question Overview & Revision Priority
+
+| Q no. | Priority | Marks | Question Topic |
+| :---: | :---: | :---: | :--- |
+| 1 | P1 | 8 | Measures of descriptive statistics (central tendency, dispersion, shape) |
+| 2 | P1 | 8 | Data visualization techniques in EDA (histogram, box plot, scatter, heatmap) |
+| 3 | P1 | 8 | Correlation and covariance analysis techniques (formulas & interpretation) |
+| 4 | P1 | 8 | Univariate, Bivariate, and Multivariate analysis (comparison & plots) |
+| 5 | P2 | 8 | Anomaly detection and pattern identification (IQR rule, Z-score, trends) |
+
+---
+
+## Priority 1 (Must Prepare)
 
 ### Q1. Describe the commonly used measures of descriptive statistics with suitable examples. [P1 | 8 marks]
 
@@ -104,6 +116,10 @@ Examples:
 - **Bivariate:** study hours against marks shown with a scatter plot.
 - **Multivariate:** study hours, attendance and sleep against marks shown with a pair plot or correlation heatmap.
 
+---
+
+## Priority 2 (Likely to Appear)
+
 ### Q5. Analyze a dataset to identify possible Anomalies and Pattern Detection. [P2 | 8 marks]
 
 An anomaly is a value that differs strongly from the rest of the data. A pattern is a regular structure such as a trend or a cluster. Both are found during EDA.
@@ -134,7 +150,9 @@ Pattern types:
 - **Clusters:** groups of similar points on a scatter plot.
 - **Correlation:** two variables moving together.
 
-### Quick revision
+---
+
+## Quick Revision
 
 1. Mean is sensitive to outliers, median is not; sample variance divides by n - 1.
 2. describe() gives count, mean, std, min, quartiles and max.

@@ -80,14 +80,16 @@ Visualization shows the shape, spread, relationships and outliers of data that n
 ```python
 import numpy as np, pandas as pd, seaborn as sns
 import matplotlib.pyplot as plt
-a = np.random.normal(50, 10, 100)
-df = pd.DataFrame({"a": a, "c": a*0.5 + np.random.normal(0, 3, 100)})
-fig, ax = plt.subplots(2, 3, figsize=(12, 7))
-ax[0,0].hist(a, bins=10)
-ax[0,1].boxplot(a)
-ax[0,2].scatter(df["a"], df["c"])
-ax[1,0].bar(["X", "Y", "Z"], [5, 8, 3])
-sns.heatmap(df.corr(), annot=True, ax=ax[1,1])
+
+x = np.random.normal(50, 10, 100)
+y = x * 0.5 + np.random.normal(0, 3, 100)
+df = pd.DataFrame({"x": x, "y": y})
+
+fig, ax = plt.subplots(2, 2, figsize=(10, 7))
+ax[0,0].hist(x)                      # distribution
+ax[0,1].boxplot(x)                   # outliers
+ax[1,0].scatter(x, y)                # relationship
+sns.heatmap(df.corr(), annot=True, ax=ax[1,1])  # correlation
 plt.show()
 ```
 

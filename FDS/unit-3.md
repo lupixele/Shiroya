@@ -229,9 +229,9 @@ Fetch and parse:
 ```python
 import requests
 from bs4 import BeautifulSoup
-resp = requests.get("https://example.com", timeout=10)
-soup = BeautifulSoup(resp.text, "html.parser")
-print(resp.status_code, soup.title.text)
+response = requests.get("https://example.com")
+soup = BeautifulSoup(response.text, "html.parser")
+print(response.status_code, soup.title.text)
 ```
 
 #### 3. Extracting Elements (Text, Links & Tables)

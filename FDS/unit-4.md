@@ -48,10 +48,12 @@ Worked example for data 2, 4, 4, 6, 9:
 #### 3. Python Implementation (`pandas` describe)
 ```python
 import pandas as pd
-s = pd.Series([2, 4, 4, 6, 9])
-print(s.describe())
-# count 5.0, mean 5.0, std 2.645751, min 2.0, 25% 4.0, 50% 4.0, 75% 6.0, max 9.0
-print(s.skew(), s.kurt())
+
+df = pd.DataFrame({'Marks': [2, 4, 4, 6, 9]})
+
+print(df.describe())
+print(df['Marks'].skew())
+print(df['Marks'].kurt())
 ```
 
 `describe()` returns count, mean, std, min, quartiles and max in one call.
@@ -78,18 +80,28 @@ Visualization shows the shape, spread, relationships and outliers of data that n
 
 #### 2. Python Code Implementation (`matplotlib` & `seaborn`)
 ```python
-import numpy as np, pandas as pd, seaborn as sns
+import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 x = np.random.normal(50, 10, 100)
 y = x * 0.5 + np.random.normal(0, 3, 100)
-df = pd.DataFrame({"x": x, "y": y})
 
-fig, ax = plt.subplots(2, 2, figsize=(10, 7))
-ax[0,0].hist(x)                      # distribution
-ax[0,1].boxplot(x)                   # outliers
-ax[1,0].scatter(x, y)                # relationship
-sns.heatmap(df.corr(), annot=True, ax=ax[1,1])  # correlation
+df = pd.DataFrame({'x': x, 'y': y})
+
+plt.subplot(2, 2, 1)
+plt.hist(x)                 # Distribution
+
+plt.subplot(2, 2, 2)
+plt.boxplot(x)              # Outliers
+
+plt.subplot(2, 2, 3)
+plt.scatter(x, y)           # Relationship
+
+plt.subplot(2, 2, 4)
+sns.heatmap(df.corr(), annot=True)  # Correlation
+
 plt.show()
 ```
 

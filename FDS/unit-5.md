@@ -134,20 +134,22 @@ Roles:
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-for p in ["punkt", "punkt_tab", "stopwords", "wordnet", "averaged_perceptron_tagger", "averaged_perceptron_tagger_eng"]:
-    nltk.download(p)
+
 text = "The cats are running faster than the dogs"
 tokens = word_tokenize(text)
-clean = [t for t in tokens if t.lower() not in stopwords.words("english")]
-print(clean)   # ['cats', 'running', 'faster', 'dogs']
+
+clean = [
+    t for t in tokens
+    if t.lower() not in stopwords.words("english")
+]
+
+print(clean)
 ```
 
-```python
-from nltk.stem import PorterStemmer, WordNetLemmatizer
-print(PorterStemmer().stem("running"))                # run
-print(WordNetLemmatizer().lemmatize("running", "v"))  # run
-print(WordNetLemmatizer().lemmatize("cats"))          # cat
-print(nltk.pos_tag(tokens)[:3])   # [('The', 'DT'), ('cats', 'NNS'), ('are', 'VBP')]
+##### Output
+
+```
+['cats', 'running', 'faster', 'dogs']
 ```
 
 ---

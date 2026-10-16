@@ -90,18 +90,16 @@ y = x * 0.5 + np.random.normal(0, 3, 100)
 
 df = pd.DataFrame({'x': x, 'y': y})
 
-plt.subplot(2, 2, 1)
 plt.hist(x)                 # Distribution
+plt.show()
 
-plt.subplot(2, 2, 2)
 plt.boxplot(x)              # Outliers
+plt.show()
 
-plt.subplot(2, 2, 3)
 plt.scatter(x, y)           # Relationship
+plt.show()
 
-plt.subplot(2, 2, 4)
 sns.heatmap(df.corr(), annot=True)  # Correlation
-
 plt.show()
 ```
 

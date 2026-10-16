@@ -45,15 +45,15 @@ A text file stores data as plain characters. Python reads and writes it with the
 
 #### 3. Python Code Example & Verification
 ```python
-import io, pandas as pd
+import pandas as pd
+
 with open("notes.txt", "w") as f:
-    f.write("Asha,85\nRavi,72\n")
-with open("notes.txt") as f:
-    print(f.read())
-df = pd.read_csv(io.StringIO("name,marks\nAsha,85\nRavi,72\n"))
-tsv = pd.read_table(io.StringIO("name\tmarks\nAsha\t85\n"))
+    f.write("name,marks\nAsha,85\nRavi,72\n")
+
+df = pd.read_csv("notes.txt")
+print(df)
+
 df.to_csv("out.csv", index=False)
-# notes.txt content is printed; df has 2 rows, 2 columns
 ```
 
 ---
@@ -77,13 +77,22 @@ A very large file may not fit in memory. pandas can read it in smaller parts ins
 
 #### 2. Python Code Implementation & Verification
 ```python
-import io, pandas as pd
-data = "id,val\n" + "\n".join(f"{i},{i*2}" for i in range(1, 11))
-first = pd.read_csv(io.StringIO(data), nrows=3)       # first 3 rows
+import pandas as pd
+
+data = "id,val\n" + "\n".join(
+    f"{i},{i*2}" for i in range(1, 11)
+)
+
+with open("data.csv", "w") as f:
+    f.write(data)
+
+first = pd.read_csv("data.csv", nrows=3)
+
 total = 0
-for chunk in pd.read_csv(io.StringIO(data), chunksize=4):
+for chunk in pd.read_csv("data.csv", chunksize=4):
     total += chunk["val"].sum()
-print(total)   # 110
+
+print(total)  # 110
 ```
 
 The file is read in chunks of 4, 4 and 2 rows. The running total gives the same result as reading it whole.
@@ -103,13 +112,16 @@ The file is read in chunks of 4, 4 and 2 rows. The running total gives the same 
 A delimited file separates fields with a fixed character: comma (CSV), tab (TSV), pipe or semicolon. In pandas the `sep` argument tells the reader which delimiter to use.
 
 ```python
-import io, csv, pandas as pd
-csv_txt = "name,age\nAsha,20\nRavi,21\n"
-df1 = pd.read_csv(io.StringIO(csv_txt))
-df2 = pd.read_csv(io.StringIO("name\tage\nAsha\t20\n"), sep="\t")
-df3 = pd.read_csv(io.StringIO("name|age\nAsha|20\n"), sep="|")
-for row in csv.reader(io.StringIO(csv_txt), delimiter=","):
-    print(row)   # ['name', 'age'] then ['Asha', '20'] then ['Ravi', '21']
+import pandas as pd
+import csv
+
+df1 = pd.read_csv("data.csv")
+df2 = pd.read_csv("data.tsv", sep="\t")
+df3 = pd.read_csv("data.txt", sep="|")
+
+with open("data.csv") as f:
+    for row in csv.reader(f):
+        print(row)
 ```
 
 #### 2. Key Delimiter Rules & `csv` Module Methods

@@ -173,46 +173,55 @@ Examples:
 
 ---
 
-## Question 5 — Anomaly Detection and Pattern Identification
+# Question 5 — Anomaly Detection and Pattern Identification (8 Marks)
 
-**Priority:** Priority 2 (Likely to Appear) | **Marks:** 8 Marks  
-**Question:** Analyze a dataset to identify possible Anomalies and Pattern Detection.
+## 1. Meaning
 
----
+- **Anomaly:** A value that is very different from other values.
+- **Pattern:** A regular trend or relationship in data.
 
-### Step-by-Step Solution
+## 2. Methods of Anomaly Detection
 
-#### 1. Detection Principles (IQR Rule & Z-Score)
-An anomaly is a value that differs strongly from the rest of the data. A pattern is a regular structure such as a trend or a cluster. Both are found during EDA.
+1. **IQR Method:** Outliers are values below `Q1 - 1.5 * IQR` or above `Q3 + 1.5 * IQR`.
+2. **Z-score:** `z = (x - mean) / standard deviation`. Usually, `|z| > 3` indicates an outlier.
+3. **Box Plot:** Displays outliers as separate points.
+4. **Scatter Plot:** Shows unusual points away from the main group.
 
-Dataset: 10, 12, 11, 13, 12, 11, 12, 14, 10, 13, 12, 11, 13, 12, 95.
+**Example:** Dataset: `10, 12, 11, 13, 12, 11, 12, 14, 10, 13, 12, 11, 13, 12, 95`
 
-1. **IQR rule:** a value is an outlier if it lies below Q1 - 1.5 x IQR or above Q3 + 1.5 x IQR. Here Q1 = 11, Q3 = 13, IQR = 2, limits are 8 and 16. Only 95 is outside.
-2. **Z-score:** z = (x - mean) / standard deviation. A value with |z| above 3 is an outlier. For 95, z is about 3.6.
-3. **Box plot:** shows the outlier as a separate point.
-4. **Scatter plot:** shows isolated points away from the main group.
+Here, **95 is an outlier** because it is much larger than the other values.
 
-#### 2. Python Code Implementation & Outlier Visualization
+## 3. Python Program
+
 ```python
 import pandas as pd
 import matplotlib.pyplot as plt
-s = pd.Series([10,12,11,13,12,11,12,14,10,13,12,11,13,12,95])
-q1, q3 = s.quantile(0.25), s.quantile(0.75)
+
+s = pd.Series([10, 12, 11, 13, 12, 11, 12, 14,
+               10, 13, 12, 11, 13, 12, 95])
+
+q1 = s.quantile(0.25)
+q3 = s.quantile(0.75)
 iqr = q3 - q1
-print(s[(s < q1 - 1.5*iqr) | (s > q3 + 1.5*iqr)].tolist())   # [95]
-z = (s - s.mean()) / s.std()
-print(s[z.abs() > 3].tolist())                               # [95]
-s.plot(kind="box"); plt.show()
+
+print(s[(s < q1 - 1.5*iqr) | (s > q3 + 1.5*iqr)])
+
+plt.boxplot(s)
+plt.show()
 ```
 
-#### 3. Pattern Types in EDA
-Pattern types:
+**Output:**
 
-- **Trend:** steady rise or fall over time.
-- **Seasonality:** repeating rise and fall at fixed intervals.
-- **Clusters:** groups of similar points on a scatter plot.
-- **Correlation:** two variables moving together.
+```
+[95]
+```
 
+## 4. Types of Patterns
+
+- **Trend:** Data increases or decreases over time.
+- **Seasonality:** A pattern repeats at regular intervals.
+- **Clusters:** Similar data points form groups.
+- **Correlation:** Shows the relationship between two variables.
 ---
 
 ## Quick Revision

@@ -3,39 +3,39 @@
 ## Important Questions by Teacher (IE 2)
 
 ### Unit 3
-1. [Merge Sort](UNIT-III.md#2-merge-sort)
-2. [Quick Sort](UNIT-III.md#3-quick-sort)
-3. [Kruskal's Algorithm](UNIT-III.md#a-kruskals-algorithm-sort-edges-by-weight-add-an-edge-if-it-does-not-form-a-cycle)
-4. [Prim's Algorithm](UNIT-III.md#b-prims-algorithm-start-at-a-repeatedly-add-the-cheapest-edge-connecting-the-tree-to-a-new-vertex)
-5. [Fractional Knapsack](UNIT-III.md#5-fractional-knapsack-using-greedy)
-6. [Job Sequencing with Deadlines](UNIT-III.md#4-greedy-job-sequencing-with-deadlines)
+1. [Merge Sort](unit-3.md#2-merge-sort)
+2. [Quick Sort](unit-3.md#3-quick-sort)
+3. [Kruskal's Algorithm](unit-3.md#a-kruskals-algorithm-sort-edges-by-weight-add-an-edge-if-it-does-not-form-a-cycle)
+4. [Prim's Algorithm](unit-3.md#b-prims-algorithm-start-at-a-repeatedly-add-the-cheapest-edge-connecting-the-tree-to-a-new-vertex)
+5. [Fractional Knapsack](unit-3.md#5-fractional-knapsack-using-greedy)
+6. [Job Sequencing with Deadlines](unit-3.md#4-greedy-job-sequencing-with-deadlines)
 
 ### Unit 4
-1. [0/1 Knapsack – Dynamic Programming (DP)](UNIT-IV.md#5-01-knapsack-using-dynamic-programming)
-2. [Optimal Binary Search Tree (OBST)](UNIT-IV.md#4-optimal-binary-search-tree-obst-using-dynamic-programming)
-3. [Bellman–Ford Algorithm – Single-Source Shortest Path](UNIT-IV.md#2-bellmanford-algorithm-from-source-s)
-4. [Travelling Salesperson Problem (TSP)](UNIT-IV.md#6-travelling-salesperson-problem-tsp-using-heldkarp-dynamic-programming)
-5. [All-Pairs Shortest Path](UNIT-IV.md#3-floydwarshall-algorithm-for-all-pairs-shortest-paths)
+1. [0/1 Knapsack – Dynamic Programming (DP)](unit-4.md#5-01-knapsack-using-dynamic-programming)
+2. [Optimal Binary Search Tree (OBST)](unit-4.md#4-optimal-binary-search-tree-obst-using-dynamic-programming)
+3. [Bellman–Ford Algorithm – Single-Source Shortest Path](unit-4.md#2-bellmanford-algorithm-from-source-s)
+4. [Travelling Salesperson Problem (TSP)](unit-4.md#6-travelling-salesperson-problem-tsp-using-heldkarp-dynamic-programming)
+5. [All-Pairs Shortest Path](unit-4.md#3-floydwarshall-algorithm-for-all-pairs-shortest-paths)
 
 ### Unit 5
-1. [4 Queens Problem — Backtracking](UNIT-V.md#2-4-queens-problem-using-backtracking)
-2. [Graph Coloring — Backtracking](UNIT-V.md#4-graph-coloring-using-backtracking-3-colors)
-3. [Difference Between Backtracking and Branch and Bound](UNIT-V.md#8-compare-and-contrast-backtracking-and-branch-and-bound)
-4. [Sum of Subsets Problem — Backtracking](UNIT-V.md#3-sum-of-subsets-using-backtracking)
-5. [0/1 Knapsack Using LC Branch and Bound (LC-BB)](UNIT-V.md#6-01-knapsack-using-least-cost-lc-branch-and-bound)
-6. [Travelling Salesperson Problem Using LC Branch and Bound (LC-BB)](UNIT-V.md#7-travelling-salesperson-problem-tsp-using-branch-and-bound)
+1. [4 Queens Problem — Backtracking](unit-5.md#2-4-queens-problem-using-backtracking)
+2. [Graph Coloring — Backtracking](unit-5.md#4-graph-coloring-using-backtracking-3-colors)
+3. [Difference Between Backtracking and Branch and Bound](unit-5.md#8-compare-and-contrast-backtracking-and-branch-and-bound)
+4. [Sum of Subsets Problem — Backtracking](unit-5.md#3-sum-of-subsets-using-backtracking)
+5. [0/1 Knapsack Using LC Branch and Bound (LC-BB)](unit-5.md#6-01-knapsack-using-least-cost-lc-branch-and-bound)
+6. [Travelling Salesperson Problem Using LC Branch and Bound (LC-BB)](unit-5.md#7-travelling-salesperson-problem-tsp-using-branch-and-bound)
 
 ### Questions NOT Mentioned by Teacher (Optional / Excluded from IE 2)
 The following questions from Units 3, 4, and 5 are in the full question bank but were **not** mentioned by the teacher for IE 2:
 
 - **Unit 3:**
-  - [Divide and Conquer Methodology & Binary Search](UNIT-III.md#1-divide-and-conquer-and-binary-search) (Question 1)
-  - [Dijkstra's Algorithm from Source A](UNIT-III.md#7-dijkstras-algorithm-from-source-a) (Question 7)
+  - [Divide and Conquer Methodology & Binary Search](unit-3.md#1-divide-and-conquer-and-binary-search) (Question 1)
+  - [Dijkstra's Algorithm from Source A](unit-3.md#7-dijkstras-algorithm-from-source-a) (Question 7)
 - **Unit 4:**
-  - [Dynamic Programming Methodology vs. Divide and Conquer](UNIT-IV.md#1-dynamic-programming-methodology-optimal-substructure-overlapping-subproblems-and-comparison-with-divide-and-conquer) (Question 1)
+  - [Dynamic Programming Methodology vs. Divide and Conquer](unit-4.md#1-dynamic-programming-methodology-optimal-substructure-overlapping-subproblems-and-comparison-with-divide-and-conquer) (Question 1)
 - **Unit 5:**
-  - [Backtracking General Methodology & State-Space Tree](UNIT-V.md#1-backtracking-general-methodology-state-space-tree-bounding-conditions-and-comparison-with-exhaustive-search) (Question 1)
-  - [Hamiltonian Cycles using Backtracking](UNIT-V.md#5-hamiltonian-cycles-using-backtracking) (Question 5)
+  - [Backtracking General Methodology & State-Space Tree](unit-5.md#1-backtracking-general-methodology-state-space-tree-bounding-conditions-and-comparison-with-exhaustive-search) (Question 1)
+  - [Hamiltonian Cycles using Backtracking](unit-5.md#5-hamiltonian-cycles-using-backtracking) (Question 5)
 
 *(Note: Unit 1 and Unit 2 were covered in IE 1.)*
 
@@ -46,42 +46,42 @@ The following questions from Units 3, 4, and 5 are in the full question bank but
 ### 1. Importance of Algorithm Analysis and Time vs. Space Complexity
 Explain the importance of algorithm analysis. Differentiate between time complexity and space complexity with suitable examples.
 
-- [→ Answer](UNIT-I.md#1-importance-of-algorithm-analysis-and-time-vs-space-complexity)
+- [→ Answer](unit-1.md#1-importance-of-algorithm-analysis-and-time-vs-space-complexity)
 
 ---
 
 ### 2. Asymptotic Notations: Big-O, Omega, and Theta
 Describe the asymptotic notations $O$, $\Omega$, and $\Theta$. Illustrate each notation with suitable examples.
 
-- [→ Answer](UNIT-I.md#2-asymptotic-notations-big-o-omega-and-theta)
+- [→ Answer](unit-1.md#2-asymptotic-notations-big-o-omega-and-theta)
 
 ---
 
 ### 3. Time Complexity of Matrix Multiplication
 Analyze the time complexity for matrix multiplication algorithm (tabular method) using asymptotic notation and justify your answer.
 
-- [→ Answer](UNIT-I.md#3-time-complexity-of-matrix-multiplication-tabular-step-count-method)
+- [→ Answer](unit-1.md#3-time-complexity-of-matrix-multiplication-tabular-step-count-method)
 
 ---
 
 ### 4. Concept of Hashing and Hash Functions
 Explain the concept of hashing. Discuss different hash functions with suitable examples.
 
-- [→ Answer](UNIT-I.md#4-concept-of-hashing-and-hash-functions)
+- [→ Answer](unit-1.md#4-concept-of-hashing-and-hash-functions)
 
 ---
 
 ### 5. Collision Resolution Techniques
 Explain the collision resolution techniques Linear Probing, Quadratic Probing, Double Hashing, and Separate Chaining.
 
-- [→ Answer](UNIT-I.md#5-collision-resolution-techniques)
+- [→ Answer](unit-1.md#5-collision-resolution-techniques)
 
 ---
 
 ### 6. Static Hashing vs. Dynamic Hashing (Extendible Hashing)
 Differentiate between Static Hashing and Dynamic Hashing. Explain the working of Dynamic Hashing (Extendible hashing) with an example.
 
-- [→ Answer](UNIT-I.md#6-static-hashing-vs-dynamic-hashing-extendible-hashing)
+- [→ Answer](unit-1.md#6-static-hashing-vs-dynamic-hashing-extendible-hashing)
 
 ---
 
@@ -90,14 +90,14 @@ Differentiate between Static Hashing and Dynamic Hashing. Explain the working of
 ### 1. Construct AVL Tree
 Construct an AVL Tree by inserting the following keys: `50, 25, 12, 80, 90, 37, 45, 18, 19, 6`. Show the required rotations after each step.
 
-- [→ Answer](UNIT-II.md#1-construct-an-avl-tree-by-step-by-step-insertion)
+- [→ Answer](unit-2.md#1-construct-an-avl-tree-by-step-by-step-insertion)
 
 ---
 
 ### 2. Four Types of AVL Tree Rotations and Applications
 Explain the four types of AVL Tree rotations with suitable examples. Discuss the applications of AVL Trees.
 
-- [→ Answer](UNIT-II.md#2-four-types-of-avl-tree-rotations-and-applications)
+- [→ Answer](unit-2.md#2-four-types-of-avl-tree-rotations-and-applications)
 
 ---
 
@@ -116,28 +116,28 @@ Explain the deletion procedure in AVL tree. Show the balancing operations after 
                62
 ```
 
-- [→ Answer](UNIT-II.md#3-deletion-procedure-in-avl-tree-delete-15)
+- [→ Answer](unit-2.md#3-deletion-procedure-in-avl-tree-delete-15)
 
 ---
 
 ### 4. Construct B-Tree of Order 4
 Construct a B-Tree of order 4 by inserting the following keys: `5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8`.
 
-- [→ Answer](UNIT-II.md#4-construct-a-b-tree-of-order-4)
+- [→ Answer](unit-2.md#4-construct-a-b-tree-of-order-4)
 
 ---
 
 ### 5. Deletion Operation in B-Tree and Applications
 Explain the deletion operation in a B-Tree with a suitable example, and discuss practical applications of B-Trees.
 
-- [→ Answer](UNIT-II.md#5-deletion-operation-in-a-b-tree-and-applications)
+- [→ Answer](unit-2.md#5-deletion-operation-in-a-b-tree-and-applications)
 
 ---
 
 ### 6. Construct Min Heap and Max Heap
 Construct a Min Heap and Max Heap by inserting the following elements: `40, 15, 30, 10, 12, 6, 25, 18`. Show all intermediate steps.
 
-- [→ Answer](UNIT-II.md#6-construct-a-min-heap-and-max-heap)
+- [→ Answer](unit-2.md#6-construct-a-min-heap-and-max-heap)
 
 ---
 
@@ -156,14 +156,14 @@ Perform one deletion operation on given Max Heap and show the step-by-step proce
      10   5 8
 ```
 
-- [→ Answer](UNIT-II.md#7-deletion-operation-on-given-max-heap)
+- [→ Answer](unit-2.md#7-deletion-operation-on-given-max-heap)
 
 ---
 
 ### 8. Binary Heap Operations and Priority Queue Applications
 Explain the basic operations of a Binary Heap with their time complexities and discuss the applications of Priority Queues.
 
-- [→ Answer](UNIT-II.md#8-basic-operations-of-a-binary-heap-and-applications-of-priority-queues)
+- [→ Answer](unit-2.md#8-basic-operations-of-a-binary-heap-and-applications-of-priority-queues)
 
 ---
 
@@ -173,7 +173,7 @@ Explain the basic operations of a Binary Heap with their time complexities and d
 - **A)** Explain the general methodology of the Divide and Conquer strategy. Illustrate its three fundamental steps with suitable examples.
 - **B)** Apply the Binary Search algorithm to locate the desired key in the sorted array. Show the low, high, and mid values at every iteration and determine the total number of comparisons *(Consider your own example dataset with minimum 15 keys)*.
 
-- [→ Answer](UNIT-III.md#1-divide-and-conquer-and-binary-search)
+- [→ Answer](unit-3.md#1-divide-and-conquer-and-binary-search)
 
 ---
 
@@ -184,7 +184,7 @@ Demonstrate the Merge Sort algorithm on the following dataset. Draw the splittin
 
 Explain the recurrence relation and derive the time complexity of Merge Sort.
 
-- [→ Answer](UNIT-III.md#2-merge-sort)
+- [→ Answer](unit-3.md#2-merge-sort)
 
 ---
 
@@ -195,7 +195,7 @@ Analyze the working of Quick Sort using the following dataset. Consider the firs
 
 Show the partitioning process, identify the pivot positions after each pass, and obtain the sorted array. Compare the best-case and worst-case time complexities of Quick Sort.
 
-- [→ Answer](UNIT-III.md#3-quick-sort)
+- [→ Answer](unit-3.md#3-quick-sort)
 
 ---
 
@@ -214,7 +214,7 @@ Apply the Greedy Job Sequencing algorithm to schedule the following jobs to maxi
 
 Determine the selected jobs, their execution order, and the maximum achievable profit. Justify your scheduling decisions.
 
-- [→ Answer](UNIT-III.md#4-greedy-job-sequencing-with-deadlines)
+- [→ Answer](unit-3.md#4-greedy-job-sequencing-with-deadlines)
 
 ---
 
@@ -231,7 +231,7 @@ Analyze the Fractional Knapsack problem using the Greedy approach for the follow
 
 Calculate the profit-to-weight ratio of each item, determine the optimal selection, and compute the maximum profit. Explain why the Greedy strategy is applicable to this problem.
 
-- [→ Answer](UNIT-III.md#5-fractional-knapsack-using-greedy)
+- [→ Answer](unit-3.md#5-fractional-knapsack-using-greedy)
 
 ---
 
@@ -240,8 +240,8 @@ Construct a Minimum Spanning Tree for the following weighted undirected graph us
 
 ![Minimum Spanning Tree Weighted Undirected Graph](figures/unit3_q6_mst.png)
 
-- [→ Answer — Kruskal's](UNIT-III.md#a-kruskals-algorithm-sort-edges-by-weight-add-an-edge-if-it-does-not-form-a-cycle)
-- [→ Answer — Prim's](UNIT-III.md#b-prims-algorithm-start-at-a-repeatedly-add-the-cheapest-edge-connecting-the-tree-to-a-new-vertex)
+- [→ Answer — Kruskal's](unit-3.md#a-kruskals-algorithm-sort-edges-by-weight-add-an-edge-if-it-does-not-form-a-cycle)
+- [→ Answer — Prim's](unit-3.md#b-prims-algorithm-start-at-a-repeatedly-add-the-cheapest-edge-connecting-the-tree-to-a-new-vertex)
 
 ---
 
@@ -252,7 +252,7 @@ Evaluate the shortest paths from source vertex **A** to all other vertices using
 
 Discuss the limitation of Dijkstra's algorithm when negative edge weights are present.
 
-- [→ Answer](UNIT-III.md#7-dijkstras-algorithm-from-source-a)
+- [→ Answer](unit-3.md#7-dijkstras-algorithm-from-source-a)
 
 ---
 
@@ -261,7 +261,7 @@ Discuss the limitation of Dijkstra's algorithm when negative edge weights are pr
 ### 1. Dynamic Programming Methodology
 Explain the Dynamic Programming methodology. Discuss the principles of optimal substructure and overlapping subproblems. Compare Dynamic Programming with the Divide and Conquer approach.
 
-- [→ Answer](UNIT-IV.md#1-dynamic-programming-methodology-optimal-substructure-overlapping-subproblems-and-comparison-with-divide-and-conquer)
+- [→ Answer](unit-4.md#1-dynamic-programming-methodology-optimal-substructure-overlapping-subproblems-and-comparison-with-divide-and-conquer)
 
 ---
 
@@ -270,7 +270,7 @@ Apply the Bellman–Ford algorithm to find the shortest paths from source vertex
 
 ![Bellman-Ford Directed Weighted Graph](figures/unit4_q2_bellman_ford.png)
 
-- [→ Answer](UNIT-IV.md#2-bellmanford-algorithm-from-source-s)
+- [→ Answer](unit-4.md#2-bellmanford-algorithm-from-source-s)
 
 ---
 
@@ -283,7 +283,7 @@ $$
 
 Explain the significance of the intermediate vertex in each iteration and derive the time complexity.
 
-- [→ Answer](UNIT-IV.md#3-floydwarshall-algorithm-for-all-pairs-shortest-paths)
+- [→ Answer](unit-4.md#3-floydwarshall-algorithm-for-all-pairs-shortest-paths)
 
 ---
 
@@ -292,7 +292,7 @@ Analyze the Optimal Binary Search Tree problem for the following ordered keys an
 
 Construct the Optimal Binary Search Tree using Dynamic Programming. Show the cost table, identify the root at each subproblem, draw the final tree, and calculate the minimum expected search cost.
 
-- [→ Answer](UNIT-IV.md#4-optimal-binary-search-tree-obst-using-dynamic-programming)
+- [→ Answer](unit-4.md#4-optimal-binary-search-tree-obst-using-dynamic-programming)
 
 ---
 
@@ -309,7 +309,7 @@ Solve the 0/1 Knapsack problem using Dynamic Programming for the following datas
 
 Construct the DP table, identify the selected items, and determine the maximum profit. Explain why selecting items solely by profit-to-weight ratio may not produce the optimal solution.
 
-- [→ Answer](UNIT-IV.md#5-01-knapsack-using-dynamic-programming)
+- [→ Answer](unit-4.md#5-01-knapsack-using-dynamic-programming)
 
 ---
 
@@ -322,7 +322,7 @@ $$
 
 Determine the optimal tour and minimum travel cost using the Held–Karp approach. Show the relevant subproblem calculations and explain how overlapping subproblems are utilized.
 
-- [→ Answer](UNIT-IV.md#6-travelling-salesperson-problem-tsp-using-heldkarp-dynamic-programming)
+- [→ Answer](unit-4.md#6-travelling-salesperson-problem-tsp-using-heldkarp-dynamic-programming)
 
 ---
 
@@ -331,21 +331,21 @@ Determine the optimal tour and minimum travel cost using the Held–Karp approac
 ### 1. Backtracking Methodology & State-Space Tree
 Explain the general methodology of Backtracking. Discuss the state-space tree, and its basic terms, and the role of bounding conditions. Illustrate the Backtracking approach with a suitable example and distinguish it from the exhaustive search technique.
 
-- [→ Answer](UNIT-V.md#1-backtracking-general-methodology-state-space-tree-bounding-conditions-and-comparison-with-exhaustive-search)
+- [→ Answer](unit-5.md#1-backtracking-general-methodology-state-space-tree-bounding-conditions-and-comparison-with-exhaustive-search)
 
 ---
 
 ### 2. 4-Queens Problem
 Apply the Backtracking technique to solve the 4-Queens problem. Draw the state-space tree, demonstrate the placement of queens row by row, and identify the safe and unsafe positions. Show all distinct solutions and explain how the promising function eliminates invalid configurations.
 
-- [→ Answer](UNIT-V.md#2-4-queens-problem-using-backtracking)
+- [→ Answer](unit-5.md#2-4-queens-problem-using-backtracking)
 
 ---
 
 ### 3. Sum of Subsets
 Use the Backtracking method to identify all subsets whose sum is equal to **30** from the following set $S = \{5, 10, 12, 13, 15, 18\}$. Draw the state-space tree, indicate the promising and non-promising nodes, and list all valid subsets. Explain the pruning conditions used to reduce the search space.
 
-- [→ Answer](UNIT-V.md#3-sum-of-subsets-using-backtracking)
+- [→ Answer](unit-5.md#3-sum-of-subsets-using-backtracking)
 
 ---
 
@@ -354,7 +354,7 @@ Analyze the complete undirected graph $K_5$ using the Backtracking algorithm and
 
 ![3-Coloring Undirected Graph](figures/unit5_q4_graph_coloring.png)
 
-- [→ Answer](UNIT-V.md#4-graph-coloring-using-backtracking-3-colors)
+- [→ Answer](unit-5.md#4-graph-coloring-using-backtracking-3-colors)
 
 ---
 
@@ -365,7 +365,7 @@ Apply the Backtracking algorithm to identify all Hamiltonian cycles in the follo
 
 Draw the state-space tree for the possible paths and list the distinct Hamiltonian cycles, treating reverse traversals as the same cycle.
 
-- [→ Answer](UNIT-V.md#5-hamiltonian-cycles-using-backtracking)
+- [→ Answer](unit-5.md#5-hamiltonian-cycles-using-backtracking)
 
 ---
 
@@ -382,7 +382,7 @@ Analyze the 0/1 Knapsack problem using the Least Cost search Branch and Bound te
 
 Construct the state-space tree, calculate the upper bound and cost at each relevant node, identify the nodes pruned, and determine the optimal item selection and maximum profit.
 
-- [→ Answer](UNIT-V.md#6-01-knapsack-using-least-cost-lc-branch-and-bound)
+- [→ Answer](unit-5.md#6-01-knapsack-using-least-cost-lc-branch-and-bound)
 
 ---
 
@@ -395,11 +395,11 @@ $$
 
 Construct the state-space tree, calculate lower bounds for promising partial tours, eliminate non-promising branches, and determine the optimal tour and its total cost.
 
-- [→ Answer](UNIT-V.md#7-travelling-salesperson-problem-tsp-using-branch-and-bound)
+- [→ Answer](unit-5.md#7-travelling-salesperson-problem-tsp-using-branch-and-bound)
 
 ---
 
 ### 8. Backtracking vs. Branch and Bound
 Compare and contrast the Backtracking and Branch and Bound methods based on problem type, tree traversal, bounding mechanism, memory requirements, and efficiency.
 
-- [→ Answer](UNIT-V.md#8-compare-and-contrast-backtracking-and-branch-and-bound)
+- [→ Answer](unit-5.md#8-compare-and-contrast-backtracking-and-branch-and-bound)

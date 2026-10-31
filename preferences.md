@@ -86,7 +86,7 @@ Shiroya/
 
 | Category | Standard Pattern | Examples | Prohibited Variations |
 | :--- | :--- | :--- | :--- |
-| **Unit Answers** | `unit<N>.md` (all lowercase, no space, no hyphen) | `unit1.md`<br>`unit2.md`<br>`unit3.md`<br>`unit4.md`<br>`unit5.md` | ❌ `UNIT-I.md`<br>❌ `Unit 3.md`<br>❌ `unit 3 answers.md`<br>❌ `unit-4.md` |
+| **Unit Answers** | `unit-<N>.md` or `unit<N>.md` (all lowercase, hyphenated standard) | `unit-1.md`<br>`unit-2.md`<br>`unit-3.md`<br>`unit-4.md`<br>`unit-5.md` | ❌ `UNIT-I.md`<br>❌ `Unit 3.md`<br>❌ `unit 3 answers.md` |
 | **Question Index** | `questions.md` | `questions.md` | ❌ `question.md`<br>❌ `IMP-QUESTIONS.md`<br>❌ `Important Questions.md`<br>❌ `QUESTIONS.md` |
 | **Subject Index** | `README.md` | `README.md` | ❌ `readme.md`, `index.md` |
 | **Raw Folder** | `raw/` | `<SUBJECT>/raw/` | ❌ `Raw/`, `PDFs/`, `sources/` |
@@ -227,7 +227,7 @@ Whenever new notes or questions are prepared:
 
 ### Standardization Checklist for Existing Subjects
 Existing folders in the repository should be migrated to match this standard:
-- [ ] Rename `UNIT-I.md`, `UNIT-II.md`, etc., or `Unit 3.md`, `unit 3 answers.md` → `unit1.md`, `unit2.md`, `unit3.md`, `unit4.md`, `unit5.md`.
+- [ ] Rename `UNIT-I.md`, `UNIT-II.md`, etc., or `Unit 3.md`, `unit 3 answers.md` → `unit-1.md`–`unit-5.md` (or `unit1.md`–`unit5.md`).
 - [ ] Rename all variants of `IMP-QUESTIONS.md`, `question.md`, `Important Questions.md` → `questions.md`.
 - [ ] Ensure all raw PDFs/PPTs in subject roots are moved into their respective `raw/` subdirectories.
 - [ ] Update `questions.md` to ensure no question text is wrapped in full blue hyperlink blocks.

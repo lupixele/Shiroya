@@ -4,6 +4,103 @@
 
 ---
 
+## Part A: 2-Mark Short Questions
+
+### 2M-Q1: What is an algorithm?
+*L1 · CO1 · 2M*
+
+#### Definition
+A finite sequence of well-defined steps that solves a problem. It takes zero or more inputs, produces at least one output, and terminates after a finite number of steps.
+
+#### Key Properties
+- **Input:** Zero or more externally supplied quantities.
+- **Output:** At least one quantity produced.
+- **Definiteness:** Each instruction must be clear and unambiguous.
+- **Finiteness:** Must terminate after a finite number of steps for all cases.
+- **Effectiveness:** Every operation must be basic enough to be carried out in principle.
+
+---
+
+### 2M-Q2: Differentiate between time complexity and space complexity.
+*L1 · CO1 · 2M*
+
+#### Comparison
+| Basis | Time Complexity | Space Complexity |
+|---|---|---|
+| **Measures** | Running time as a function of input size $n$ | Total memory required as a function of input size $n$ |
+| **Counted by** | Number of basic / elementary operations executed | Input space + extra auxiliary space + call stack |
+| **Example (Merge Sort)** | $O(n \log n)$ | $O(n)$ |
+
+---
+
+### 2M-Q3: What is the purpose of Asymptotic notations?
+*L1 · CO1 · 2M*
+
+#### Definition
+Asymptotic notations describe the mathematical rate of growth of an algorithm's running time or memory usage as input size $n \to \infty$, ignoring hardware-specific constants and low-order terms.
+
+#### Core Notations
+| Notation | Name | Mathematical Condition | Bound Represented |
+|---|---|---|---|
+| $O(g(n))$ | Big-O | $f(n) \le c \cdot g(n)$ for $n \ge n_0$ | Upper bound (Worst case) |
+| $\Omega(g(n))$ | Big-Omega | $f(n) \ge c \cdot g(n)$ for $n \ge n_0$ | Lower bound (Best case) |
+| $\Theta(g(n))$ | Big-Theta | $c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)$ | Tight bound (Average / Exact order) |
+
+---
+
+### 2M-Q4: Define hashing.
+*L1 · CO1 · 2M*
+
+#### Definition
+Hashing is a technique that transforms a key of arbitrary size into a fixed-size table index using a mathematical hash function $h(k)$, enabling direct $O(1)$ average-time access, insertion, and deletion.
+
+---
+
+### 2M-Q5: What is a hash table? State any two desirable properties of a good hash function.
+*L1 · CO1 · 2M*
+
+#### Hash Table
+A data structure that stores key-value pairs in an array indexed by a hash function $h(k)$.
+
+#### Two Desirable Properties
+1. **Uniform Distribution (Low Collisions):** Spreads keys uniformly across all slots so each slot is equally likely.
+2. **Fast Computation:** Computes index in $O(1)$ time with minimal arithmetic overhead.
+
+---
+
+### 2M-Q6: What is the use of a hash function?
+*L1 · CO1 · 2M*
+
+#### Core Purpose
+Maps a large search key space into a bounded array index range $[0, m-1]$.
+- Achieves $O(1)$ average search, insertion, and deletion.
+- Applied in database indexing, symbol tables in compilers, caches, and cryptography.
+
+---
+
+### 2M-Q7: Define collision resolution.
+*L1 · CO1 · 2M*
+
+#### Definition
+A collision occurs when two distinct keys hash to the same table slot ($h(k_1) = h(k_2)$ for $k_1 \neq k_2$). Collision resolution is the systematic algorithm used to allocate an alternative slot or chain multiple keys sharing that slot.
+
+---
+
+### 2M-Q8: List out all collision resolution techniques.
+*L2 · CO1 · 2M*
+
+#### Classification
+| Technique Category | Specific Methods | Working Principle |
+|---|---|---|
+| **Open Hashing (Chaining)** | Separate Chaining | Each slot maintains a linked list of colliding elements. |
+| **Closed Hashing (Open Addressing)** | Linear Probing | Search sequentially: $h(k, i) = (h(k) + i) \bmod m$. |
+| | Quadratic Probing | Search quadratic jumps: $h(k, i) = (h(k) + c_1 i + c_2 i^2) \bmod m$. |
+| | Double Hashing | Search with second hash step: $h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m$. |
+
+---
+
+## Part B: 8-Mark Long Questions
+
 ## 1. Importance of Algorithm Analysis and Time vs. Space Complexity
 
 **Q1. Explain the importance of algorithm analysis. Differentiate between time complexity and space complexity with suitable examples.**

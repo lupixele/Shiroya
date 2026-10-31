@@ -4,6 +4,97 @@
 
 ---
 
+## Part A: 2-Mark Short Questions
+
+### 2M-Q1: What is Backtracking?
+*L1 · CO5 · 2M*
+
+#### Definition
+A systematic algorithmic technique for solving constraint satisfaction problems by incrementally building candidate solutions via Depth-First Search (DFS) and abandoning ("backtracking" from) a candidate as soon as it is determined that it cannot lead to a valid solution.
+
+---
+
+### 2M-Q2: What is a State-Space Tree?
+*L1 · CO5 · 2M*
+
+#### Definition
+A tree representation of all possible paths of state configurations in a problem:
+- **Root:** Represents the initial unassigned state.
+- **Internal Nodes:** Represent partial candidate solutions.
+- **Leaves:** Represent complete solutions or dead-end states.
+
+---
+
+### 2M-Q3: What is a promising node in a backtracking solution tree? Why is it important?
+*L1 · CO5 · 2M*
+
+#### Promising Node
+An intermediate node in the state-space tree whose partial solution satisfies all problem constraints and has the potential to lead to a feasible or optimal solution.
+
+#### Why It Is Important
+- Distinguishes viable search paths from dead ends.
+- Non-promising nodes are immediately **pruned** (killed), preventing exponential exploration of invalid branches and making backtracking dramatically faster than brute-force search.
+
+---
+
+### 2M-Q4: What is the Branch and Bound technique?
+*L1 · CO5 · 2M*
+
+#### Definition
+An optimization search strategy applied to discrete/combinatorial problems. It divides the problem into sub-problems (**branching**) and computes upper or lower bounds (**bounding**) on the objective function to prune subtrees that cannot yield a better solution than the best one found so far.
+
+---
+
+### 2M-Q5: Define Bounding Function in Branch and Bound.
+*L1 · CO5 · 2M*
+
+#### Definition
+A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimistic bound (lower bound for minimization, upper bound for maximization) on the value of any solution reachable in the subtree rooted at $x$. If the bound is worse than the current best known solution, the node is pruned.
+
+---
+
+### 2M-Q6: Differentiate between Backtracking and Branch & Bound.
+*L2 · CO5 · 2M*
+
+#### Comparison
+| Basis | Backtracking | Branch & Bound |
+|---|---|---|
+| **Search Strategy** | Depth-First Search (DFS) | Breadth-First (FIFO) or Best-First (Least-Cost) |
+| **Problem Type** | Decision and constraint problems (find one or all solutions) | Optimization problems (minimize cost or maximize profit) |
+| **Pruning Mechanism** | Bounding / constraint checks prune invalid branches | Cost bounds ($\hat{c}$) prune non-optimal branches |
+| **Data Structure** | Implicit recursion stack | Explicit Queue / Priority Queue (min/max heap) |
+
+---
+
+### 2M-Q7: What is the difference between FIFO Branch & Bound and LIFO Branch & Bound?
+*L1 · CO5 · 2M*
+
+#### Comparison
+| Type | Live Nodes Data Structure | Node Selection Rule |
+|---|---|---|
+| **FIFO BB** | First-In-First-Out Queue | Children of current node are explored in queue arrival order (standard BFS). |
+| **LIFO BB** | Last-In-First-Out Stack | Most recently generated child is explored next (similar to D-Search). |
+| **LC BB (Least-Cost)** | Priority Queue / Heap | The node with the most promising bound ($\min \hat{c}$) is selected next. |
+
+---
+
+### 2M-Q8: List out two applications of Backtracking and two applications of Branch & Bound.
+*L1 · CO5 · 2M*
+
+#### Applications
+- **Backtracking:**
+  1. $N$-Queens Puzzle
+  2. Graph Coloring (e.g. Map coloring, Register allocation)
+  3. Subset Sum Problem / Sudoku Solver
+- **Branch and Bound:**
+  1. Travelling Salesperson Problem (TSP — Minimization)
+  2. 0/1 Knapsack Problem (Maximization)
+  3. Job Shop Scheduling
+
+---
+
+## Part B: 8-Mark Long Questions
+
 ## 1. Backtracking: General Methodology, State-Space Tree, Bounding Conditions, and Comparison with Exhaustive Search
 
 **Q1. Explain the general methodology of Backtracking. Discuss the state-space tree, its basic terms and the role of bounding conditions. Distinguish it from exhaustive search.**

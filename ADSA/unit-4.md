@@ -4,6 +4,95 @@
 
 ---
 
+## Part A: 2-Mark Short Questions
+
+### 2M-Q1: What is Dynamic Programming?
+*L1 · CO4 · 2M*
+
+#### Definition
+An algorithmic paradigm that solves optimization problems by breaking them down into simpler, overlapping sub-problems, computing each sub-problem solution once, and memoizing or tabulating results to eliminate redundant work.
+
+---
+
+### 2M-Q2: What are the two core properties required for Dynamic Programming?
+*L1 · CO4 · 2M*
+
+#### Two Essential Properties
+1. **Optimal Substructure:** An optimal solution to the overall problem can be constructed from optimal solutions to its sub-problems.
+2. **Overlapping Subproblems:** The recursive solution visits the exact same sub-problems repeatedly rather than generating new sub-problems each time.
+
+---
+
+### 2M-Q3: Define Optimal Substructure with an example.
+*L1 · CO4 · 2M*
+
+#### Definition
+A problem exhibits optimal substructure if an optimal solution to the problem contains within it optimal solutions to sub-problems.
+
+#### Example
+In shortest paths: if the shortest path from $A$ to $C$ passes through $B$ ($A \to B \to C$), then the subpath $A \to B$ must be the shortest path from $A$ to $B$, and $B \to C$ must be the shortest path from $B$ to $C$.
+
+---
+
+### 2M-Q4: Define Overlapping Subproblems with an example.
+*L1 · CO4 · 2M*
+
+#### Definition
+A property where a recursive divide-and-conquer strategy solves the same small sub-problems over and over again, resulting in exponential time complexity unless results are cached.
+
+#### Example
+Computing Fibonacci $F(5) = F(4) + F(3)$: $F(3)$ is evaluated once for $F(5)$ and again inside $F(4)$, recalculating $F(2)$ and $F(1)$ repeatedly. DP computes each $F(i)$ exactly once in $O(n)$ time.
+
+```text
+              fib(5)
+            /        \
+        fib(4)      fib(3)  <-- duplicate
+       /      \     /     \
+    fib(3)  fib(2) fib(2) fib(1)
+```
+
+---
+
+### 2M-Q5: State the Principle of Optimality.
+*L1 · CO4 · 2M*
+
+#### Definition (Bellman's Principle of Optimality)
+*"An optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision."*
+
+---
+
+### 2M-Q6: Differentiate between Dynamic Programming and Greedy Method.
+*L2 · CO4 · 2M*
+
+#### Comparison
+| Feature | Dynamic Programming | Greedy Method |
+|---|---|---|
+| **Decision Choice** | Evaluates all choices and picks the best; can reconsider sub-solutions | Makes locally optimal choice immediately; never reconsiders |
+| **Subproblem Overlap** | High overlap; requires caching / table | No overlap needed; proceeds forward |
+| **Optimality Guarantee** | Always guarantees global optimum | Does not guarantee optimum for all problems |
+| **Typical Time Complexity** | Polynomial (often $O(n^2)$ or $O(n \cdot W)$) | Often faster ($O(n)$ or $O(n \log n)$) |
+
+---
+
+### 2M-Q7: What is the purpose of the Floyd–Warshall algorithm?
+*L1 · CO4 · 2M*
+
+#### Purpose
+To find the shortest path lengths between **all pairs of vertices** in a weighted directed or undirected graph (allowing negative edge weights, but no negative-weight cycles) using dynamic programming in $\Theta(V^3)$ time and $\Theta(V^2)$ space.
+
+---
+
+### 2M-Q8: What is an Optimal Binary Search Tree (OBST)?
+*L1 · CO4 · 2M*
+
+#### Definition
+A binary search tree constructed from a set of sorted keys $K = \{k_1, k_2, \dots, k_n\}$ with known access probabilities $P = \{p_1, \dots, p_n\}$ and dummy keys $D = \{d_0, \dots, d_n\}$ with failure probabilities $Q = \{q_0, \dots, q_n\}$, such that the **total expected search cost** is minimized:
+$$\text{Expected Cost} = \sum_{i=1}^n (\text{level}(k_i) + 1) \cdot p_i + \sum_{j=0}^n \text{level}(d_j) \cdot q_j$$
+
+---
+
+## Part B: 8-Mark Long Questions
+
 ## 1. Dynamic Programming: methodology, optimal substructure, overlapping subproblems, and comparison with Divide and Conquer
 
 **Q1. Explain the general methodology of Dynamic Programming. Discuss optimal substructure and overlapping subproblems. Differentiate DP from Divide and Conquer.**

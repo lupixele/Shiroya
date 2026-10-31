@@ -4,6 +4,94 @@
 
 ---
 
+## Part A: 2-Mark Short Questions
+
+### 2M-Q1: What is the divide-and-conquer strategy?
+*L1 · CO3 · 2M*
+
+#### Definition
+An algorithmic paradigm that breaks a problem of size $n$ into smaller, independent sub-problems of the same type, solves them recursively, and combines their solutions to form the global solution.
+
+---
+
+### 2M-Q2: What are the three fundamental steps in divide-and-conquer?
+*L1 · CO3 · 2M*
+
+#### The Three Steps
+1. **Divide:** Partition the original problem into two or more smaller sub-problems.
+2. **Conquer:** Solve the sub-problems recursively. If small enough (base case), solve directly.
+3. **Combine:** Merge the sub-problem solutions into the solution for the original problem.
+
+---
+
+### 2M-Q3: What is the recurrence relation for Merge Sort? State its time complexity.
+*L1 · CO3 · 2M*
+
+#### Recurrence Relation
+$$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\ 2T(n/2) + \Theta(n) & \text{if } n > 1 \end{cases}$$
+*(where $2T(n/2)$ is the recursive sorting of two halves, and $\Theta(n)$ is the linear merge step).*
+
+#### Time Complexity
+- By Master Theorem ($a=2, b=2, f(n)=n \implies n^{\log_2 2} = n^1 \implies$ Case 2):
+  $$\text{Best Case} = \Theta(n \log n), \quad \text{Average Case} = \Theta(n \log n), \quad \text{Worst Case} = \Theta(n \log n)$$
+
+---
+
+### 2M-Q4: What is the best, average, and worst-case time complexity of Quick Sort?
+*L1 · CO3 · 2M*
+
+#### Complexity Summary
+| Case | Time Complexity | Partition Condition |
+|---|---|---|
+| **Best Case** | $\Theta(n \log n)$ | Pivot always splits array into equal halves ($\approx n/2 : n/2$). |
+| **Average Case** | $\Theta(n \log n)$ | Typical random or balanced splits over all permutations. |
+| **Worst Case** | $\Theta(n^2)$ | Array is already sorted/reverse-sorted and pivot chosen is extreme (split $0 : n-1$). |
+
+---
+
+### 2M-Q5: What is the Greedy Method?
+*L1 · CO3 · 2M*
+
+#### Definition
+An optimization approach that constructs a solution piece by piece, always choosing the locally optimal choice at each step without ever backtracking, hoping to achieve a globally optimal solution.
+
+#### Essential Properties
+1. **Greedy-Choice Property:** A global optimum can be arrived at by making locally optimal decisions.
+2. **Optimal Substructure:** Optimal solution to the problem contains optimal solutions to sub-problems.
+
+---
+
+### 2M-Q6: What is a feasible solution in the Job Sequencing with Deadlines problem?
+*L1 · CO3 · 2M*
+
+#### Definition
+In Job Sequencing with unit-time jobs, a **feasible solution** is any subset of jobs $J$ such that every job $i \in J$ can be scheduled in an available time slot $[t-1, t]$ where $t \le d_i$ (its deadline), with no two jobs scheduled in the same unit time slot.
+
+---
+
+### 2M-Q7: What is a Minimum Spanning Tree (MST)?
+*L1 · CO3 · 2M*
+
+#### Definition
+For a connected, undirected, edge-weighted graph $G = (V, E)$, an MST is a spanning subgraph that is a tree (contains all $|V|$ vertices and exactly $|V|-1$ edges with no cycles) whose total edge weight sum is minimized.
+
+---
+
+### 2M-Q8: Differentiate between Fractional Knapsack and 0/1 Knapsack.
+*L2 · CO3 · 2M*
+
+#### Comparison
+| Feature | Fractional Knapsack | 0/1 Knapsack |
+|---|---|---|
+| **Item Divisibility** | Items can be broken/fractioned ($0 \le x_i \le 1$) | Item must be taken completely or left ($x_i \in \{0, 1\}$) |
+| **Design Technique** | Greedy Method (sort by $p_i/w_i$) | Dynamic Programming / Branch & Bound |
+| **Time Complexity** | $O(n \log n)$ | $O(n \cdot W)$ pseudo-polynomial |
+| **Greedy Guarantees Optimum?** | Yes | No (greedy fails) |
+
+---
+
+## Part B: 8-Mark Long Questions
+
 ## 1. Divide and Conquer and Binary Search
 
 ### 1(A) Explain the general methodology of Divide and Conquer. Illustrate its three fundamental steps with examples. (8 marks)

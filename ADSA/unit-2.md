@@ -4,6 +4,112 @@
 
 ---
 
+## Part A: 2-Mark Short Questions
+
+### 2M-Q1: What condition must be satisfied by every node in an AVL tree?
+*L1 · CO2 · 2M*
+
+#### Mandatory Conditions
+Every node $x$ in an AVL tree must satisfy two conditions simultaneously:
+1. **Binary Search Tree Property:** All keys in the left subtree $< key(x) <$ all keys in the right subtree.
+2. **Balance Factor Condition:** The difference in height between its left and right subtrees must not exceed 1:
+   $$\text{Balance Factor } BF(x) = \text{height}(\text{left}) - \text{height}(\text{right}) \in \{-1, 0, +1\}$$
+
+---
+
+### 2M-Q2: What is the purpose of balance factor in an AVL tree?
+*L1 · CO2 · 2M*
+
+#### Definition
+$$\text{Balance Factor (BF)} = \text{height}(\text{left subtree}) - \text{height}(\text{right subtree})$$
+
+#### Key Points
+- Permissible values: $-1, 0, +1$.
+- When an insertion or deletion causes $BF = \pm 2$, an imbalance is detected and immediately corrected via rotations ($LL, RR, LR, RL$).
+- Guarantees worst-case tree height of $O(\log n)$, preventing degenerate $O(n)$ skewed trees.
+
+```text
+      30 (-1)
+     /      \
+  20 (0)   40 (-1)
+              \
+             50 (0)
+```
+
+---
+
+### 2M-Q3: Define the order of a B-Tree.
+*L1 · CO2 · 2M*
+
+#### Definition
+The **order $m$** of a B-Tree is the maximum number of children any internal node can possess.
+
+#### Structural Bounds
+- **Maximum keys per node:** $m - 1$
+- **Minimum keys (non-root):** $\lceil m / 2 \rceil - 1$
+- **Minimum children (non-root internal):** $\lceil m / 2 \rceil$
+- All leaf nodes exist strictly at the same depth.
+
+---
+
+### 2M-Q4: What are the applications of B-Trees?
+*L1 · CO2 · 2M*
+
+#### Key Applications
+1. **Database Indexing:** Primary and secondary indexing in relational databases (MySQL InnoDB, PostgreSQL, Oracle).
+2. **File Systems:** Directory and block indexing in modern file systems (NTFS, ext4, Btrfs, HFS+).
+3. **Massive Storage Systems:** Minimizes expensive disk I/O reads by packing hundreds of keys into a single disk-block node.
+
+---
+
+### 2M-Q5: Define binary heap.
+*L1 · CO2 · 2M*
+
+#### Definition
+A binary heap is a complete binary tree stored compactly in an array that satisfies the **heap-order property**:
+- **Completeness:** Every level is fully filled, except possibly the last level, which is filled from left to right.
+- **Array Representation:** For element at index $i$:
+  - Parent: $\lfloor (i - 1) / 2 \rfloor$
+  - Left Child: $2i + 1$, Right Child: $2i + 2$
+
+---
+
+### 2M-Q6: Define Max-Heap and Min-Heap.
+*L1 · CO2 · 2M*
+
+#### Comparison
+| Property | Max-Heap | Min-Heap |
+|---|---|---|
+| **Heap-Order Condition** | $key(\text{parent}) \ge key(\text{child})$ | $key(\text{parent}) \le key(\text{child})$ |
+| **Root Element** | Always contains the maximum key | Always contains the minimum key |
+| **Common Use** | Heapsort (ascending), Max-priority queue | Dijkstra's, Prim's, Min-priority queue |
+
+---
+
+### 2M-Q7: Define Priority Queue.
+*L1 · CO2 · 2M*
+
+#### Definition
+An abstract data type (ADT) where each element has an associated numerical priority. Elements are dequeued strictly by priority rather than arrival order (FIFO).
+
+#### Core Operations & Complexities (Binary Heap)
+- `insert(x)`: $O(\log n)$
+- `extractMax()` / `extractMin()`: $O(\log n)$
+- `peek()` / `getMax()`: $O(1)$
+
+---
+
+### 2M-Q8: What is the time complexity of the heapify operation?
+*L1 · CO2 · 2M*
+
+#### Complexity Bounds
+- **Single-node sink down (`Heapify(i)` on tree of size $n$):** $O(\log n)$ — traverses the height of the tree.
+- **Building an entire heap from an unordered array (`Build-Heap`):** $O(n)$ linear time — mathematically bounded by $\sum_{h=0}^{\lfloor\log n\rfloor} \frac{n}{2^{h+1}} O(h) = O(n)$.
+
+---
+
+## Part B: 8-Mark Long Questions
+
 ## 1. Construct an AVL Tree by Step-by-Step Insertion
 
 **Q1. Construct an AVL tree by inserting the keys `50, 25, 12, 80, 90, 37, 45, 18, 19, 6`. Show the required rotations.**

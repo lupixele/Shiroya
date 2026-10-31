@@ -1,6 +1,8 @@
 # UNIT V — Backtracking and Branch & Bound
 
-> **Source:** *Advanced Data Structures & Algorithm Analysis (2501CS10) — Unit-wise Important Questions — Answers | Aditya University*
+> **Course:** Advanced Data Structures & Algorithm Analysis (`2501CS10`) | Aditya University  
+> **Exam Priority:** Priority 5 (State-Space Trees & Pruning) · **Unit Difficulty:** Hard (8/10)  
+> **Source:** *Unit-wise Important Questions — Answers | Aditya University*
 
 ---
 

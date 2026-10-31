@@ -1,6 +1,8 @@
 # UNIT II — Balanced Trees and Heaps
 
-> **Source:** *Advanced Data Structures & Algorithm Analysis (2501CS10) — Unit-wise Important Questions — Answers | Aditya University*
+> **Course:** Advanced Data Structures & Algorithm Analysis (`2501CS10`) | Aditya University  
+> **Exam Priority:** Priority 3 (Mechanical Tree Tracing) · **Unit Difficulty:** Medium (5/10)  
+> **Source:** *Unit-wise Important Questions — Answers | Aditya University*
 
 ---
 

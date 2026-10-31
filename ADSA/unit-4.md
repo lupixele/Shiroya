@@ -1,6 +1,8 @@
 # UNIT IV — Dynamic Programming
 
-> **Source:** *Advanced Data Structures & Algorithm Analysis (2501CS10) — Unit-wise Important Questions — Answers | Aditya University*
+> **Course:** Advanced Data Structures & Algorithm Analysis (`2501CS10`) | Aditya University  
+> **Exam Priority:** Priority 4 (Table-Filling / High Weightage) · **Unit Difficulty:** Hard (7.5/10)  
+> **Source:** *Unit-wise Important Questions — Answers | Aditya University*
 
 ---
 

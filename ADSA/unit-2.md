@@ -102,7 +102,7 @@ An abstract data type (ADT) where each element has an associated numerical prior
 
 ## Part B: 8-Mark Questions
 
-## 1. Construct an AVL Tree by Step-by-Step Insertion
+### 1. Construct an AVL Tree by Step-by-Step Insertion
 
 **Q1. Construct an AVL tree by inserting the keys `50, 25, 12, 80, 90, 37, 45, 18, 19, 6`. Show the required rotations.**
 
@@ -121,7 +121,7 @@ An AVL tree keeps the balance factor ($\text{height of left subtree} - \text{hei
 | 9 | 19 | `19` right of `18`: node `12` has balance $-2$ (RR case) | Left rotation at `12` → `18 (12, 19)` |
 | 10 | 6 | `6` left of `12`: node `50` has balance $+2$, left child `25` is left-heavy (LL case) | Right rotation at `50` |
 
-### Final AVL tree
+#### Final AVL tree
 
 ```text
           25
@@ -137,13 +137,13 @@ Height $= 4$, all balance factors are in $\{-1, 0, +1\}$. Rotations used: 2 sing
 
 ---
 
-## 2. Four Types of AVL Tree Rotations and Applications
+### 2. Four Types of AVL Tree Rotations and Applications
 
 **Q2. Explain the four types of AVL tree rotations with suitable examples. Discuss the applications of AVL trees.**
 
 Let $z$ be the lowest unbalanced node, $y$ its taller child, and $x$ the taller child of $y$.
 
-### 1. LL Rotation (Right rotation) — insertion into left subtree of left child
+#### 1. LL Rotation (Right rotation) — insertion into left subtree of left child
 
 ```text
       z (+2)          y
@@ -155,7 +155,7 @@ Let $z$ be the lowest unbalanced node, $y$ its taller child, and $x$ the taller 
 
 - *Example:* insert `30, 20, 10` $\to$ root `20 (10, 30)`.
 
-### 2. RR Rotation (Left rotation) — insertion into right subtree of right child
+#### 2. RR Rotation (Left rotation) — insertion into right subtree of right child
 
 ```text
   z (-2)              y
@@ -167,7 +167,7 @@ Let $z$ be the lowest unbalanced node, $y$ its taller child, and $x$ the taller 
 
 - *Example:* insert `10, 20, 30` $\to$ root `20 (10, 30)`.
 
-### 3. LR Rotation (Left–Right) — insertion into right subtree of left child
+#### 3. LR Rotation (Left–Right) — insertion into right subtree of left child
 
 Left rotation at $y$, then right rotation at $z$.
 
@@ -181,7 +181,7 @@ Left rotation at $y$, then right rotation at $z$.
 
 - *Example:* insert `30, 10, 20` $\to$ root `20 (10, 30)`.
 
-### 4. RL Rotation (Right–Left) — insertion into left subtree of right child
+#### 4. RL Rotation (Right–Left) — insertion into left subtree of right child
 
 Right rotation at $y$, then left rotation at $z$.
 
@@ -202,7 +202,7 @@ Right rotation at $y$, then left rotation at $z$.
 | LR | Left-Right | Left then right (double) |
 | RL | Right-Left | Right then left (double) |
 
-### Applications of AVL trees
+#### Applications of AVL trees
 
 - Databases and indexing where lookups dominate insertions.
 - In-memory dictionaries and sets requiring guaranteed $O(\log n)$ search.
@@ -212,18 +212,18 @@ Right rotation at $y$, then left rotation at $z$.
 
 ---
 
-## 3. Deletion Procedure in AVL Tree (Delete 15)
+### 3. Deletion Procedure in AVL Tree (Delete 15)
 
 **Q3. Explain the deletion procedure in an AVL tree. Show the balancing operations after deletion of `15` from the given AVL tree.**
 
-### Deletion procedure
+#### Deletion procedure
 
 1. Delete the node as in a BST (leaf: remove; one child: replace by child; two children: replace by inorder successor/predecessor and delete that node).
 2. Walk back up to the root, updating heights and balance factors.
 3. At the first unbalanced node, perform the suitable rotation (LL, RR, LR, RL). For deletion, the rotation type is chosen by the balance factor of the taller child (if it is $0$, a single rotation is used).
 4. Continue upward, because a rotation may reduce the height and cause further imbalance (unlike insertion, more than one rotation may be needed).
 
-### Given tree
+#### Given tree
 
 Root `50`: `50 (25 (15, 40 (35, –)), 75 (60 (55, 65 (62, –)), 80 (–, 90)))`.
 
@@ -239,14 +239,14 @@ Root `50`: `50 (25 (15, 40 (35, –)), 75 (60 (55, 65 (62, –)), 80 (–, 90)))
                62
 ```
 
-### Delete 15 (a leaf)
+#### Delete 15 (a leaf)
 
 1. Remove `15`. Node `25` now has no left child and right child `40` (height 2): balance factor $= -2$.
 2. The right child `40` is left-heavy (it has left child `35`), so this is the RL case. Right rotate at `40`, then left rotate at `25`. Result: `35 (25, 40)`.
 3. Moving up, the subtree at `35` now has height 2 while the right subtree of `50` (rooted at `75`) has height 4: node `50` has balance factor $= -2$.
 4. The right child `75` is left-heavy (`60` side is taller), so again an RL case: right rotate at `75`, then left rotate at `50`. Node `60` becomes the new root.
 
-### Final tree after deletion of 15
+#### Final tree after deletion of 15
 
 ```text
           60
@@ -262,7 +262,7 @@ All balance factors are within $\{-1, 0, +1\}$. Two double (RL) rotations were r
 
 ---
 
-## 4. Construct a B-Tree of Order 4
+### 4. Construct a B-Tree of Order 4
 
 **Q4. Construct a B-Tree of order 4 by inserting the keys `5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8`.**
 
@@ -281,7 +281,7 @@ All balance factors are within $\{-1, 0, +1\}$. Two double (RL) rotations were r
 | `4` | `[1 2 3 4]` overflows, `2` goes up; the parent `[2 5 9 12]` overflows too, `5` goes up: new root `[5]` |
 | `8` | goes to leaf `[7]` giving `[7 8]` |
 
-### Final B-tree
+#### Final B-tree
 
 ```text
             [ 5 ]
@@ -295,11 +295,11 @@ Height $= 3$ (root + 2 more levels). *(If the 3rd key is chosen as the median fo
 
 ---
 
-## 5. Deletion Operation in a B-Tree and Applications
+### 5. Deletion Operation in a B-Tree and Applications
 
 **Q5. Explain the deletion operation in a B-Tree with a suitable example, and the applications of B-Trees.**
 
-### Deletion cases (order $m$, minimum keys $= \lceil m/2 \rceil - 1$; for order 4 the minimum is 1 key)
+#### Deletion cases (order $m$, minimum keys $= \lceil m/2 \rceil - 1$; for order 4 the minimum is 1 key)
 
 1. **Key in a leaf with more than the minimum keys:** simply remove it.
 2. **Key in a leaf with minimum keys (underflow):**
@@ -308,7 +308,7 @@ Height $= 3$ (root + 2 more levels). *(If the 3rd key is chosen as the median fo
 3. **Key in an internal node:** replace it with its inorder predecessor or successor (from a leaf) and delete that key from the leaf (then apply case 1 or 2).
 4. If merging makes the parent underflow, repeat upward; if the root becomes empty, the tree height shrinks by one.
 
-### Example (using the tree built in Q4)
+#### Example (using the tree built in Q4)
 
 Root `[5]`; internal nodes `[2]` and `[9 12]`; leaves `[1]`, `[3 4]`, `[7 8]`, `[10]`, `[13 21]`.
 
@@ -316,7 +316,7 @@ Root `[5]`; internal nodes `[2]` and `[9 12]`; leaves `[1]`, `[3 4]`, `[7 8]`, `
 - **Delete `10`:** leaf `[10]` would become empty (underflow). Its left sibling `[7 8]` has a spare key, so borrow through the parent: `9` moves down into the leaf and `8` moves up. Result: parent `[8 12]`, leaves `[7]`, `[9]`, `[13 21]`.
 - **Delete `1`:** leaf `[1]` becomes empty and its sibling `[3]` has no spare key, so merge the empty leaf, the separator `2` and `[3]` into the leaf `[2 3]`. The parent `[2]` is now empty (underflow). Its sibling `[8 12]` has a spare key, so borrow through the root: `5` moves down, `8` moves up, and leaf `[7]` becomes the child of the node holding `5`.
 
-### Final tree after the three deletions
+#### Final tree after the three deletions
 
 ```text
           [ 8 ]
@@ -326,7 +326,7 @@ Root `[5]`; internal nodes `[2]` and `[9 12]`; leaves `[1]`, `[3 4]`, `[7 8]`, `
   [2 3]  [7] [9]  [13 21]
 ```
 
-### Applications of B-trees
+#### Applications of B-trees
 
 - Database indexes (MySQL InnoDB uses $\text{B}^+$-trees).
 - File systems (NTFS, ext4, HFS+, Btrfs) for directory and metadata indexing.
@@ -336,11 +336,11 @@ Root `[5]`; internal nodes `[2]` and `[9 12]`; leaves `[1]`, `[3 4]`, `[7 8]`, `
 
 ---
 
-## 6. Construct a Min Heap and Max Heap
+### 6. Construct a Min Heap and Max Heap
 
 **Q6. Construct a Min/Max Heap by inserting the elements `40, 15, 30, 10, 12, 6, 25, 18`. Show all intermediate steps.**
 
-### Max Heap ($\text{parent} \ge \text{children}$)
+#### Max Heap ($\text{parent} \ge \text{children}$)
 
 Insert at the end, then sift up while larger than the parent.
 
@@ -355,7 +355,7 @@ Insert at the end, then sift up while larger than the parent.
 | 25 | `[40, 15, 30, 10, 12, 6, 25]` | $25 < 30$, stays |
 | 18 | `[40, 18, 30, 15, 12, 6, 25, 10]` | $18 > 10$ swap; $18 > 15$ swap; $18 < 40$ stop |
 
-#### Final Max Heap
+##### Final Max Heap
 
 ```text
           40
@@ -367,7 +367,7 @@ Insert at the end, then sift up while larger than the parent.
  10
 ```
 
-### Min Heap ($\text{parent} \le \text{children}$)
+#### Min Heap ($\text{parent} \le \text{children}$)
 
 Sift up while smaller than the parent.
 
@@ -382,7 +382,7 @@ Sift up while smaller than the parent.
 | 25 | `[6, 12, 10, 40, 15, 30, 25]` | $25 > 10$, stays |
 | 18 | `[6, 12, 10, 18, 15, 30, 25, 40]` | $18 < 40$ swap; $18 > 12$ stop |
 
-#### Final Min Heap
+##### Final Min Heap
 
 ```text
           6
@@ -396,7 +396,7 @@ Sift up while smaller than the parent.
 
 ---
 
-## 7. Deletion Operation on Given Max Heap
+### 7. Deletion Operation on Given Max Heap
 
 **Q7. Perform one deletion operation on the given Max Heap and show the step-by-step process for the final Max Heap.**
 
@@ -412,7 +412,7 @@ The standard deletion is **delete-max** (remove the root `90`):
    - Array: `[75, 60, 30, 50, 40, 8, 20, 10, 5]`
 4. `8` has no children now; stop.
 
-### Final Max Heap
+#### Final Max Heap
 
 ```text
           75
@@ -428,7 +428,7 @@ Every parent is greater than or equal to its children. Deleted element: `90`. Ti
 
 ---
 
-## 8. Basic Operations of a Binary Heap and Applications of Priority Queues
+### 8. Basic Operations of a Binary Heap and Applications of Priority Queues
 
 **Q8. Explain the basic operations of a Binary Heap with their time complexities and discuss the applications of priority queues.**
 
@@ -444,7 +444,7 @@ A binary heap is a complete binary tree stored in an array that satisfies the he
 | Increase/Decrease key | Change the key and sift up/down | $O(\log n)$ |
 | Heap sort | Build-heap + $n$ extractions | $O(n \log n)$ |
 
-### Applications of priority queues (implemented with heaps)
+#### Applications of priority queues (implemented with heaps)
 
 1. Dijkstra's shortest path and Prim's MST algorithms.
 2. Huffman coding (data compression).

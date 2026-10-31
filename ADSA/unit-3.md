@@ -84,13 +84,13 @@ For a connected, undirected, edge-weighted graph $G = (V, E)$, an MST is a spann
 
 ## Part B: 8-Mark Questions
 
-## 1. Divide and Conquer and Binary Search
+### 1. Divide and Conquer and Binary Search
 
-### 1(A) Explain the general methodology of Divide and Conquer. Illustrate its three fundamental steps with examples. (8 marks)
+#### 1(A) Explain the general methodology of Divide and Conquer. Illustrate its three fundamental steps with examples. (8 marks)
 
 Divide and Conquer (D&C) solves a problem by breaking it into smaller sub-problems of the same type, solving them recursively, and combining their results.
 
-#### Three steps
+##### Three steps
 
 1. **Divide:** Split the problem of size $n$ into $a$ sub-problems, each of size about $n/b$.
 2. **Conquer:** Solve each sub-problem recursively (a small sub-problem is solved directly — the base case).
@@ -104,7 +104,7 @@ $$
 
 where $f(n)$ is the cost of dividing and combining. (Master theorem gives the solution.)
 
-#### General algorithm
+##### General algorithm
 
 ```text
 DAndC(P):
@@ -113,7 +113,7 @@ DAndC(P):
     return Combine( DAndC(P1), DAndC(P2), ..., DAndC(Pk) )
 ```
 
-#### Examples
+##### Examples
 
 | Problem | Divide | Conquer | Combine | Time |
 |---|---|---|---|---|
@@ -123,7 +123,7 @@ DAndC(P):
 
 ---
 
-### 1(B) Apply Binary Search to locate a key in a sorted array of at least 15 keys. Show low, high, and mid at every iteration and count comparisons. (8 marks)
+#### 1(B) Apply Binary Search to locate a key in a sorted array of at least 15 keys. Show low, high, and mid at every iteration and count comparisons. (8 marks)
 
 **Own dataset (15 sorted keys), indices 0 to 14:**
 
@@ -145,11 +145,11 @@ Search key $= 81$. $\text{mid} = \lfloor (\text{low} + \text{high}) / 2 \rfloor$
 
 ---
 
-## 2. Merge Sort
+### 2. Merge Sort
 
 **Q2. Demonstrate the Merge Sort algorithm on the dataset `42, 17, 8, 33, 25, 61, 14, 50, 9, 37`. Draw the splitting and merging stages. Explain the recurrence relation and derive the time complexity.**
 
-### Splitting (divide) and Merging (combine) stages
+#### Splitting (divide) and Merging (combine) stages
 
 ![Merge Sort Splitting and Merging Tree](figures/unit3_q2_merge_sort_tree.png)
 
@@ -162,7 +162,7 @@ Search key $= 81$. $\text{mid} = \lfloor (\text{low} + \text{high}) / 2 \rfloor$
 
 **Sorted output:** `8, 9, 14, 17, 25, 33, 37, 42, 50, 61`
 
-### Recurrence relation
+#### Recurrence relation
 
 - Divide: $O(1)$. Conquer: two sub-problems of size $n/2$. Combine (merge): $O(n)$.
 
@@ -170,7 +170,7 @@ $$
 T(n) = 2T(n/2) + n, \quad \text{with } T(1) = 1.
 $$
 
-### Derivation (expansion)
+#### Derivation (expansion)
 
 $$
 \begin{aligned}
@@ -192,7 +192,7 @@ $$
 
 ---
 
-## 3. Quick Sort
+### 3. Quick Sort
 
 **Q3. Analyze the working of Quick Sort on `35, 18, 42, 7, 29, 51, 13, 24, 46`, taking the first element as the pivot in every step.**
 
@@ -219,7 +219,7 @@ $$
 
 **Sorted array:** `7, 13, 18, 24, 29, 35, 42, 46, 51`
 
-### Complexity comparison
+#### Complexity comparison
 
 | Case | When | Recurrence | Time |
 |---|---|---|---|
@@ -231,11 +231,11 @@ $$
 
 ---
 
-## 4. Greedy Job Sequencing with Deadlines
+### 4. Greedy Job Sequencing with Deadlines
 
 **Q4. Apply the Greedy Job Sequencing algorithm to maximise total profit (each job takes one unit of time).**
 
-### Given jobs
+#### Given jobs
 
 | Job | J1 | J2 | J3 | J4 | J5 | J6 | J7 |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -256,7 +256,7 @@ $$
 | 6 | J2 (19) | 1 | slot 1 full | Rejected |
 | 7 | J5 (15) | 3 | slots 3, 2, 1 full | Rejected |
 
-### Schedule
+#### Schedule
 
 | Slot 1 | Slot 2 | Slot 3 |
 |:---:|:---:|:---:|
@@ -274,11 +274,11 @@ $$
 
 ---
 
-## 5. Fractional Knapsack using Greedy
+### 5. Fractional Knapsack using Greedy
 
 **Q5. Analyze the Fractional Knapsack problem using the Greedy approach (knapsack capacity $= 50$).**
 
-### Given items
+#### Given items
 
 | Item | Weight | Profit | Profit / Weight |
 |---|---:|---:|---:|
@@ -307,7 +307,7 @@ $$
 
 ---
 
-## 6. Minimum Spanning Tree using Kruskal’s and Prim’s algorithms
+### 6. Minimum Spanning Tree using Kruskal’s and Prim’s algorithms
 
 **Q6. Construct a Minimum Spanning Tree of the given weighted undirected graph using Kruskal's and Prim's algorithms.**
 
@@ -315,7 +315,7 @@ $$
 
 ![Kruskal's vs. Prim's MST Step-by-Step Diagram](figures/unit3_q6_kruskal_prim_steps.png)
 
-### Graph Summary & Problem Objective
+#### Graph Summary & Problem Objective
 - **Vertices ($V$):** 6 vertices — $\{A, B, C, D, E, F\}$
 - **Objective:** Find a spanning tree connecting all 6 vertices with minimum total edge weight.
 - **MST Property:** For a graph with $|V| = 6$ vertices, an MST must contain exactly:
@@ -337,9 +337,9 @@ $$
 
 ---
 
-### A. Kruskal's algorithm (sort edges by weight; add an edge if it does not form a cycle)
+#### A. Kruskal's algorithm (sort edges by weight; add an edge if it does not form a cycle)
 
-#### Intuition & Mechanism
+##### Intuition & Mechanism
 1. Start with 6 separate singleton components: `"{A}", "{B}", "{C}", "{D}", "{E}", "{F}"`.
 2. Consider edges one by one in non-decreasing order of weight.
 3. If an edge connects two **different components**, **ACCEPT** it and union the components.
@@ -348,9 +348,9 @@ $$
 
 ---
 
-#### Step-by-Step Execution of Kruskal's Algorithm
+##### Step-by-Step Execution of Kruskal's Algorithm
 
-##### Step 1: Consider Edge `(F, D)` — Weight = 1
+###### Step 1: Consider Edge `(F, D)` — Weight = 1
 - **Component of F:** `{F}` | **Component of D:** `{D}`
 - **Action:** **ACCEPT** (connects two separate components).
 - **Union:** Merge `{F}` and `{D}` $\rightarrow$ `{D, F}`.
@@ -363,7 +363,7 @@ $$
 
 ---
 
-##### Step 2: Consider Edge `(E, D)` — Weight = 2
+###### Step 2: Consider Edge `(E, D)` — Weight = 2
 - **Component of E:** `{E}` | **Component of D:** `{D, F}`
 - **Action:** **ACCEPT** (connects vertex `E` to component `{D, F}`).
 - **Union:** Merge `{E}` and `{D, F}` $\rightarrow$ `{D, E, F}`.
@@ -376,7 +376,7 @@ $$
 
 ---
 
-##### Step 3: Consider Edge `(B, C)` — Weight = 3
+###### Step 3: Consider Edge `(B, C)` — Weight = 3
 - **Component of B:** `{B}` | **Component of C:** `{C}`
 - **Action:** **ACCEPT** (creates a new connected component `{B, C}`).
 - **Union:** Merge `{B}` and `{C}` $\rightarrow$ `{B, C}`.
@@ -392,7 +392,7 @@ $$
 
 ---
 
-##### Step 4: Consider Edge `(A, B)` — Weight = 4
+###### Step 4: Consider Edge `(A, B)` — Weight = 4
 - **Component of A:** `{A}` | **Component of B:** `{B, C}`
 - **Action:** **ACCEPT** (connects singleton `{A}` to component `{B, C}`).
 - **Union:** Merge `{A}` and `{B, C}` $\rightarrow$ `{A, B, C}`.
@@ -406,7 +406,7 @@ $$
 
 ---
 
-##### Step 5: Consider Edge `(F, E)` — Weight = 5
+###### Step 5: Consider Edge `(F, E)` — Weight = 5
 - **Component of F:** `{D, E, F}` | **Component of E:** `{D, E, F}`
 - **Action:** ❌ **REJECT (Cycle Detected!)**
 - **Reason:** Both `F` and `E` already belong to the same connected component via path `F — D — E`. Adding `(F, E)` would close the loop `F — D — E — F`.
@@ -414,7 +414,7 @@ $$
 
 ---
 
-##### Step 6: Consider Edge `(C, D)` — Weight = 6
+###### Step 6: Consider Edge `(C, D)` — Weight = 6
 - **Component of C:** `{A, B, C}` | **Component of D:** `{D, E, F}`
 - **Action:** **ACCEPT** (bridges Component 1 and Component 2 together!).
 - **Union:** Merge `{A, B, C}` and `{D, E, F}` $\rightarrow$ `{A, B, C, D, E, F}` (All 6 vertices now united into 1 single spanning tree).
@@ -433,7 +433,7 @@ $$
 
 ---
 
-#### Kruskal's Decision Table Summary
+##### Kruskal's Decision Table Summary
 
 | Step | Edge Examined | Weight | Endpoints Components | Decision | Reason & Cycle Analysis | Running Cost |
 |:---:|:---:|:---:|:---:|:---:|:---|:---:|
@@ -447,9 +447,9 @@ $$
 
 ---
 
-### B. Prim's algorithm (start at A; repeatedly add the cheapest edge connecting the tree to a new vertex)
+#### B. Prim's algorithm (start at A; repeatedly add the cheapest edge connecting the tree to a new vertex)
 
-#### Intuition & Mechanism
+##### Intuition & Mechanism
 1. Start with an arbitrary seed vertex: **Start at vertex A**.
 2. Define the tree set: $S = \{A\}$. Non-tree vertices: $V \setminus S = \{B, C, D, E, F\}$.
 3. At each step, examine all **cut/crossing edges** connecting a vertex in $S$ to a vertex in $V \setminus S$.
@@ -458,9 +458,9 @@ $$
 
 ---
 
-#### Step-by-Step Execution of Prim's Algorithm
+##### Step-by-Step Execution of Prim's Algorithm
 
-##### Initial State:
+###### Initial State:
 - **Tree Vertices ($S$):** `{A}`
 - **Unvisited Vertices ($V \setminus S$):** `{B, C, D, E, F}`
 - **Visual in Text:**
@@ -470,7 +470,7 @@ $$
 
 ---
 
-##### Step 1: Grow from `{A}`
+###### Step 1: Grow from `{A}`
 - **Available Crossing Edges from A:**
   - `A — B` (weight 4)
   - `A — F` (weight 7)
@@ -486,7 +486,7 @@ $$
 
 ---
 
-##### Step 2: Grow from `{A, B}`
+###### Step 2: Grow from `{A, B}`
 - **Available Crossing Edges from `{A, B}` to `{C, D, E, F}`:**
   - From A: `A — F (7)`, `A — E (8)`
   - From B: `B — C (3)`, `B — F (9)`, `B — E (10)`, `B — D (11)`
@@ -501,7 +501,7 @@ $$
 
 ---
 
-##### Step 3: Grow from `{A, B, C}`
+###### Step 3: Grow from `{A, B, C}`
 - **Available Crossing Edges from `{A, B, C}` to `{D, E, F}`:**
   - From A: `A — F (7)`, `A — E (8)`
   - From B: `B — F (9)`, `B — E (10)`, `B — D (11)`
@@ -517,7 +517,7 @@ $$
 
 ---
 
-##### Step 4: Grow from `{A, B, C, D}`
+###### Step 4: Grow from `{A, B, C, D}`
 - **Available Crossing Edges from `{A, B, C, D}` to `{E, F}`:**
   - From A: `A — F (7)`, `A — E (8)`
   - From B: `B — F (9)`, `B — E (10)`
@@ -538,7 +538,7 @@ $$
 
 ---
 
-##### Step 5: Grow from `{A, B, C, D, F}` to `{E}`
+###### Step 5: Grow from `{A, B, C, D, F}` to `{E}`
 - **Available Crossing Edges to unvisited vertex `{E}`:**
   - From A: `A — E (8)`
   - From B: `B — E (10)`
@@ -560,7 +560,7 @@ $$
 
 ---
 
-#### Prim's Step-by-Step Decision Table
+##### Prim's Step-by-Step Decision Table
 
 | Step | Tree Vertices ($S$) | Candidate Crossing Edges to ($V \setminus S$) | Cheapest Crossing Edge Selected | New Vertex Added | Step Cost | Total Cost |
 |:---:|:---|:---|:---:|:---:|:---:|:---:|
@@ -572,7 +572,7 @@ $$
 
 ---
 
-### Final Minimum Spanning Tree Result (Cost = 16)
+#### Final Minimum Spanning Tree Result (Cost = 16)
 
 ![Minimum Spanning Tree Result](figures/unit3_q6_mst_tree.png)
 
@@ -594,7 +594,7 @@ $$
 
 ---
 
-### Comparison: Kruskal's vs. Prim's Algorithm
+#### Comparison: Kruskal's vs. Prim's Algorithm
 
 | Feature | Kruskal's Algorithm | Prim's Algorithm |
 |---|---|---|
@@ -607,7 +607,7 @@ $$
 
 ---
 
-## 7. Dijkstra’s algorithm from source A
+### 7. Dijkstra’s algorithm from source A
 
 **Q7. Evaluate the shortest paths from source A to all other vertices using Dijkstra's algorithm. Discuss the limitation with negative edge weights.**
 
@@ -629,7 +629,7 @@ $$
 
 *(Iteration 2: B relaxes $C = 4+3 = 7$, $F = 4+8 = 12$ (no improvement over 7), $E = 4+2 = 6$. Iteration 3: E relaxes $D = 6+2 = 8$. Later relaxations give no improvement, e.g. $C \to D = 13, F \to D = 10$.)*
 
-### Shortest paths from A
+#### Shortest paths from A
 
 | Destination | Distance | Path |
 |---|---:|---|
@@ -639,7 +639,7 @@ $$
 | F | 7 | `A → F` |
 | D | 8 | `A → B → E → D` |
 
-### Limitation with negative edge weights
+#### Limitation with negative edge weights
 
 Dijkstra's greedy assumption is that once a vertex is selected, its distance is final, because any other path can only be longer. With a negative edge, a longer path through unvisited vertices can later become shorter, so a finalised distance may be wrong. With a negative cycle, shortest paths are not even defined. Hence Dijkstra gives incorrect results on graphs with negative weights; use Bellman–Ford instead.
 

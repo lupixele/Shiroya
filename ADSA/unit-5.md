@@ -87,18 +87,18 @@ A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimi
 
 ## Part B: 8-Mark Questions
 
-## 1. Backtracking: General Methodology, State-Space Tree, Bounding Conditions, and Comparison with Exhaustive Search
+### 1. Backtracking: General Methodology, State-Space Tree, Bounding Conditions, and Comparison with Exhaustive Search
 
 **Q1. Explain the general methodology of Backtracking. Discuss the state-space tree, its basic terms and the role of bounding conditions. Distinguish it from exhaustive search.**
 
-### 1. General Methodology in Simple Words
+#### 1. General Methodology in Simple Words
 - **Backtracking** is a systematic search method (Depth-First Search) that builds a solution step-by-step.
 - At each step, it checks whether the current choice satisfies the problem's constraints.
 - If a partial solution breaks a constraint (a dead end), the algorithm **prunes** that entire branch, abandons the last choice, and **backtracks** to try the next alternative.
 
 ---
 
-### 2. State-Space Tree & Key Terms
+#### 2. State-Space Tree & Key Terms
 The **State-Space Tree** is a tree representation of all possible choices:
 - **Root:** Empty starting point (no choices made).
 - **Internal Nodes:** Partial solutions.
@@ -117,7 +117,7 @@ The **State-Space Tree** is a tree representation of all possible choices:
 
 ---
 
-### 3. Role of Bounding Conditions
+#### 3. Role of Bounding Conditions
 A **bounding condition** (or promising function) acts like an early warning system:
 - It tests a partial path before exploring deeper.
 - If it returns **false**, the entire subtree underneath is immediately killed (pruned).
@@ -136,7 +136,7 @@ Backtrack(k):
 
 ---
 
-### 4. Backtracking vs. Exhaustive Search (Brute Force)
+#### 4. Backtracking vs. Exhaustive Search (Brute Force)
 
 | Feature | Backtracking | Exhaustive Search (Brute Force) |
 |---|---|---|
@@ -148,24 +148,24 @@ Backtrack(k):
 
 ---
 
-## 2. 4-Queens Problem using Backtracking
+### 2. 4-Queens Problem using Backtracking
 
 **Q2. Apply Backtracking to the 4-Queens problem. Draw the state-space tree and show the solutions.**
 
-### 1. The Problem
+#### 1. The Problem
 Place 4 queens on a $4 \times 4$ chessboard such that **no two queens attack each other** (they cannot share the same row, column, or diagonal).
 - We place exactly **one queen per row**: let $x_k$ be the column where Queen $k$ is placed in Row $k$.
 
 ---
 
-### 2. The Simple Attack Test (Bounding Rule)
+#### 2. The Simple Attack Test (Bounding Rule)
 A new queen at row $k$, column $x_k$ attacks an earlier queen at row $i$, column $x_i$ if:
 1. **Same Column:** $x_k = x_i$
 2. **Same Diagonal:** $|x_k - x_i| = |k - i|$ (horizontal distance equals vertical distance).
 
 ---
 
-### 3. Step-by-Step Search Trace
+#### 3. Step-by-Step Search Trace
 
 1. **Start with Queen 1 in Column 1: $Q_1 = (1, 1)$**
    - **Row 2:** Col 1 (same col), Col 2 (diagonal) are unsafe. Col 3 is safe $\to Q_2 = (2, 3)$.
@@ -186,7 +186,7 @@ A new queen at row $k$, column $x_k$ attacks an earlier queen at row $i$, column
 
 ---
 
-### 4. The 2 Distinct Solutions
+#### 4. The 2 Distinct Solutions
 
 ```text
 Solution 1: (2, 4, 1, 3)              Solution 2: (3, 1, 4, 2)
@@ -202,18 +202,18 @@ Solution 1: (2, 4, 1, 3)              Solution 2: (3, 1, 4, 2)
 
 ---
 
-## 3. Sum of Subsets using Backtracking
+### 3. Sum of Subsets using Backtracking
 
 **Q3. Use Backtracking to find all subsets of $S = \{5, 10, 12, 13, 15, 18\}$ whose sum is 30. Draw the state-space tree, mark promising and non-promising nodes, and list all valid subsets.**
 
-### 1. Setup
+#### 1. Setup
 - Given Set: $S = \{5, 10, 12, 13, 15, 18\}$ (sorted in ascending order).
 - Target Sum: $M = 30$.
 - At each step $i$, we make a binary choice: **Include** ($x_i = 1$) or **Exclude** ($x_i = 0$) the element $w_i$.
 
 ---
 
-### 2. The 2 Simple Pruning (Bounding) Rules
+#### 2. The 2 Simple Pruning (Bounding) Rules
 Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 1. **Rule 1 (Too Heavy):**  
@@ -224,7 +224,7 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 3. All Valid Subsets with Sum 30
+#### 3. All Valid Subsets with Sum 30
 
 | Valid Subset | Element Sum | Binary Vector $(x_1, \dots, x_6)$ |
 |:---:|:---:|:---:|
@@ -234,7 +234,7 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 4. Examples of Non-Promising (Pruned) Nodes
+#### 4. Examples of Non-Promising (Pruned) Nodes
 - $\{5, 10, 12, 13\} \implies \text{Sum} = 40 > 30$ *(Fails Rule 1: Overshoots 30).*
 - Exclude 10, 12, 13, 15, leaving only 18 with $s=5 \implies 5 + 18 = 23 < 30$ *(Fails Rule 2: Cannot reach 30).*
 
@@ -242,13 +242,13 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-## 4. Graph Coloring using Backtracking (3 Colors)
+### 4. Graph Coloring using Backtracking (3 Colors)
 
 **Q4. Graph colouring with at most 3 colours using Backtracking (given undirected graph).**
 
 ![3-Coloring Undirected Graph](figures/unit5_q4_graph_coloring.png)
 
-### 1. The Graph
+#### 1. The Graph
 - Vertices: $\{A, B, C, D, E\}$.
 - Edges: Every vertex is connected to all 4 other vertices (10 edges total).
 - This is the **Complete Graph $K_5$**.
@@ -256,7 +256,7 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 2. The Coloring Rule & Quick Deduction
+#### 2. The Coloring Rule & Quick Deduction
 - **Rule:** No two adjacent vertices can have the same color.
 - **Deduction:**
   1. Vertices $A, B,$ and $C$ are all directly connected to each other (a triangle). Therefore, they must each take a different color:
@@ -268,7 +268,7 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 3. Conclusion for the Exam Question
+#### 3. Conclusion for the Exam Question
 - **Number of valid 3-colorings:** **$0$** (The graph is **NOT 3-colorable**).
 - **Chromatic Number:** For any complete graph $K_n$, exactly $n$ colors are required. For $K_5$, the chromatic number is **5**.
 - **Time Complexity:** $O(m^n)$ worst case ($m$ colors, $n$ vertices); pruning stops the search tree early.
@@ -277,10 +277,10 @@ Let $s$ = current running sum, and $r$ = sum of all remaining unused numbers:
 
 ---
 
-### 🌟 Bonus Version: Solvable 3-Coloring Example ($n = 4, m = 3$)
+#### 🌟 Bonus Version: Solvable 3-Coloring Example ($n = 4, m = 3$)
 *(From Professor's Lecture PPT Slide 26 — standard solvable problem frequently asked in exams)*
 
-#### Problem:
+##### Problem:
 Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-2, 2-3, 3-4, 4-1)$, determine all valid color assignments using $m = 3$ colors $\{1, 2, 3\}$ and draw the state-space tree.
 
 ```text
@@ -290,7 +290,7 @@ Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-
     (4) -------- (3)
 ```
 
-#### Step-by-Step Backtracking Trace (Fixing Vertex 1 = Color 1):
+##### Step-by-Step Backtracking Trace (Fixing Vertex 1 = Color 1):
 1. **Vertex 1 = Color 1**
 2. **Vertex 2** is connected to 1 $\implies$ Cannot be 1. Choices: **Color 2** or **Color 3**.
    - **Branch A: Vertex 2 = Color 2**
@@ -313,7 +313,7 @@ Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-
        - Vertex 4 connects to 1 (Color 1) and 3 (Color 2) $\implies$ Vertex 4 must be **Color 3**!
        - 🎉 **Solution 6:** `(1, 3, 2, 3)`
 
-#### State-Space Tree (with Vertex 1 = 1):
+##### State-Space Tree (with Vertex 1 = 1):
 ```text
                          [Root]
                            |
@@ -327,7 +327,7 @@ Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-
         Sol 1   Sol 2 Sol 3 Sol 4   Sol 5 Sol 6
 ```
 
-#### Total Valid Colorings:
+##### Total Valid Colorings:
 - Starting with Vertex 1 = Color 1 yields **6 valid colorings**.
 - Since Vertex 1 can also start with Color 2 or Color 3:
   $$\text{Total Valid Colorings} = 3 \times 6 = \mathbf{18}$$
@@ -335,13 +335,13 @@ Given a 4-vertex cycle graph $C_4$ with vertices $\{1, 2, 3, 4\}$ and edges $(1-
 
 ---
 
-## 5. Hamiltonian Cycles using Backtracking
+### 5. Hamiltonian Cycles using Backtracking
 
 **Q5. Apply Backtracking to find all Hamiltonian cycles in the given undirected graph, starting from vertex A.**
 
 ![Hamiltonian Cycles Undirected Graph](figures/unit5_q5_hamiltonian.png)
 
-### 1. Problem Definition & Adjacency
+#### 1. Problem Definition & Adjacency
 A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once** and returns to the start vertex $A$.
 - **Vertices:** $\{A, B, C, D, E\}$
 - **Edges:** `A-B, A-C, A-E, B-C, B-D, B-E, C-E, D-E` (8 edges total).
@@ -351,7 +351,7 @@ A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once
 
 ---
 
-### 2. Step-by-Step Cycle Search from Vertex A
+#### 2. Step-by-Step Cycle Search from Vertex A
 1. **Try path starting with edge $A \to B$:**
    - From $B$, we must go to $D$ (to visit $D$): $A \to B \to D \to E$.
    - From $E$, we must visit the remaining unvisited vertex $C$: $A \to B \to D \to E \to C$.
@@ -364,7 +364,7 @@ A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once
 
 ---
 
-### 3. Final Result
+#### 3. Final Result
 - **Distinct Hamiltonian Cycles:** Exactly **2** (their reverse loops are identical undirected cycles):
   1. **`A – B – D – E – C – A`**
   2. **`A – C – B – D – E – A`**
@@ -373,7 +373,7 @@ A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once
 
 ---
 
-## 6. 0/1 Knapsack using Least Cost (LC) Branch and Bound
+### 6. 0/1 Knapsack using Least Cost (LC) Branch and Bound
 
 **Q6. Analyze the 0/1 Knapsack problem using Least Cost (LC) Branch and Bound (capacity $= 16$).**
 
@@ -385,7 +385,7 @@ A **Hamiltonian Cycle** is a closed loop that visits **every vertex exactly once
 
 ---
 
-### 1. Step 1: Sort Items by Profit / Weight Ratio
+#### 1. Step 1: Sort Items by Profit / Weight Ratio
 Arrange items in decreasing ratio order:
 1. **$I_1$:** $(w = 2, v = 40, \text{ratio} = 20.0)$
 2. **$I_5$:** $(w = 4, v = 25, \text{ratio} = 6.25)$
@@ -395,7 +395,7 @@ Arrange items in decreasing ratio order:
 
 ---
 
-### 2. The Upper Bound ($ub$) Formula & Rules
+#### 2. The Upper Bound ($ub$) Formula & Rules
 The upper bound is computed using the formula:
 
 $$ub = v + (W - w) \times \left(\frac{v_{i+1}}{w_{i+1}}\right)$$
@@ -406,7 +406,7 @@ Where:
 - $W$ = total knapsack capacity ($16$)
 - $\frac{v_{i+1}}{w_{i+1}}$ = profit-to-weight ratio of the **next available item**
 
-#### The 3 Branch & Bound Decision Rules:
+##### The 3 Branch & Bound Decision Rules:
 1. **Branching:**
    - Left branch: `with i` (include item $i \implies w \leftarrow w + w_i,\ v \leftarrow v + v_i$).
    - Right branch: `w/o i` (exclude item $i \implies w \leftarrow w,\ v \leftarrow v$).
@@ -417,7 +417,7 @@ Where:
 
 ---
 
-### 3. Step-by-Step Node Calculations
+#### 3. Step-by-Step Node Calculations
 
 - **Node 0 (Root):** $w = 0, v = 0$
   $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \quad \text{(or fractional greedy: } \mathbf{120}\text{)}$$
@@ -444,7 +444,7 @@ Where:
 
 ---
 
-### 4. Summary Table of Nodes
+#### 4. Summary Table of Nodes
 
 | Node | Decision Branch | $w$ | $v$ | Upper Bound ($ub$) | Status |
 |:---:|:---|---:|---:|:---:|:---|
@@ -462,7 +462,7 @@ Where:
 
 ---
 
-### 5. Final Optimal Solution
+#### 5. Final Optimal Solution
 - **Optimal Items Selected:** **`I1, I5, I3`**
 - **Total Weight:** $2 + 4 + 10 = \mathbf{16}$
 - **Maximum Profit / Value:** $40 + 25 + 50 = \mathbf{115}$
@@ -471,11 +471,11 @@ Where:
 
 ---
 
-## 7. Travelling Salesperson Problem (TSP) using Branch and Bound
+### 7. Travelling Salesperson Problem (TSP) using Branch and Bound
 
 **Q7. Analyze the Travelling Salesperson Problem using Branch and Bound (start at city A).**
 
-### Cost Matrix (Cities A, B, C, D, E)
+#### Cost Matrix (Cities A, B, C, D, E)
 
 $$
 C =
@@ -490,7 +490,7 @@ $$
 
 ---
 
-### 1. The Core Idea: Matrix Reduction in 2 Easy Steps
+#### 1. The Core Idea: Matrix Reduction in 2 Easy Steps
 To find the lower bound of any matrix:
 1. **Row Reduction:** Find the smallest value in each row and subtract it from that row.
    - Row minima: Row A $= 8$, Row B $= 3$, Row C $= 2$, Row D $= 2$, Row E $= 4$.  
@@ -502,7 +502,7 @@ To find the lower bound of any matrix:
 
 ---
 
-### 2. Reduced Matrix at Root (Bound $= 24$)
+#### 2. Reduced Matrix at Root (Bound $= 24$)
 
 $$
 \begin{bmatrix}
@@ -516,7 +516,7 @@ $$
 
 ---
 
-### 3. Step-by-Step Branch Evaluation (Always Pick Lowest Bound)
+#### 3. Step-by-Step Branch Evaluation (Always Pick Lowest Bound)
 
 1. **Level 1 (From Start City A):**
    - Edge $A \to B$: $\text{Bound} = 24 + 3 + 2 = \mathbf{29}$
@@ -538,7 +538,7 @@ All other pending branches ($\ge 29$) are pruned!
 
 ---
 
-### 4. Optimal Tour & Cost
+#### 4. Optimal Tour & Cost
 - **Optimal Route:** **`A → E → D → C → B → A`**
 - **Total Minimum Cost:**
   $$\text{Cost} = c(A,E) + c(E,D) + c(D,C) + c(C,B) + c(B,A) = 8 + 4 + 2 + 3 + 12 = \mathbf{29}$$
@@ -547,11 +547,11 @@ All other pending branches ($\ge 29$) are pruned!
 
 ---
 
-## 8. Compare and Contrast Backtracking and Branch and Bound
+### 8. Compare and Contrast Backtracking and Branch and Bound
 
 **Q8. Compare and contrast Backtracking and Branch and Bound.**
 
-### 1. Key Differences
+#### 1. Key Differences
 
 | Aspect | Backtracking | Branch and Bound |
 |---|---|---|
@@ -564,7 +564,7 @@ All other pending branches ($\ge 29$) are pruned!
 
 ---
 
-### 2. Similarities
+#### 2. Similarities
 1. Both represent the solution space as a **State-Space Tree**.
 2. Both use intelligent **pruning** to avoid brute-force exhaustive search ($O(2^n)$ or $O(n!)$).
 3. Both have exponential worst-case time complexity, but execute dramatically faster in practice.

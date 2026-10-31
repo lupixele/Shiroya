@@ -93,13 +93,13 @@ A collision occurs when two distinct keys hash to the same table slot ($h(k_1) =
 
 ## Part B: 8-Mark Questions
 
-## 1. Importance of Algorithm Analysis and Time vs. Space Complexity
+### 1. Importance of Algorithm Analysis and Time vs. Space Complexity
 
 **Q1. Explain the importance of algorithm analysis. Differentiate between time complexity and space complexity with suitable examples.**
 
 Algorithm analysis is the process of estimating the resources (time and memory) an algorithm needs as a function of the input size $n$, independent of machine and language.
 
-### Importance
+#### Importance
 
 1. Compare different algorithms for the same problem and choose the best one.
 2. Predict performance for large inputs before implementation.
@@ -119,13 +119,13 @@ Algorithm analysis is the process of estimating the resources (time and memory) 
 
 ---
 
-## 2. Asymptotic Notations: Big-O, Omega, and Theta
+### 2. Asymptotic Notations: Big-O, Omega, and Theta
 
 **Q2. Describe the asymptotic notations $O$, $\Omega$ and $\Theta$. Illustrate each notation with suitable examples.**
 
 Asymptotic notations describe the growth rate of a function $f(n)$ for large $n$.
 
-### 1. Big-O (upper bound, worst case)
+#### 1. Big-O (upper bound, worst case)
 
 $$
 f(n) = O(g(n)) \text{ if there exist constants } c > 0 \text{ and } n_0 \text{ such that } f(n) \le c \cdot g(n) \text{ for all } n \ge n_0.
@@ -133,7 +133,7 @@ $$
 
 - **Example:** $f(n) = 3n + 2$. Since $3n + 2 \le 4n$ for $n \ge 2$, $f(n) = O(n)$ ($c = 4, n_0 = 2$).
 
-### 2. Big-Omega $\Omega$ (lower bound, best case)
+#### 2. Big-Omega $\Omega$ (lower bound, best case)
 
 $$
 f(n) = \Omega(g(n)) \text{ if there exist } c > 0 \text{ and } n_0 \text{ such that } f(n) \ge c \cdot g(n) \text{ for all } n \ge n_0.
@@ -141,7 +141,7 @@ $$
 
 - **Example:** $3n + 2 \ge 3n$ for $n \ge 1$, so $f(n) = \Omega(n)$ ($c = 3, n_0 = 1$).
 
-### 3. Big-Theta $\Theta$ (tight bound)
+#### 3. Big-Theta $\Theta$ (tight bound)
 
 $$
 f(n) = \Theta(g(n)) \text{ if there exist } c_1, c_2 > 0 \text{ and } n_0 \text{ such that } c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n) \text{ for all } n \ge n_0.
@@ -163,11 +163,11 @@ $$
 
 ---
 
-## 3. Time Complexity of Matrix Multiplication (Tabular / Step-Count Method)
+### 3. Time Complexity of Matrix Multiplication (Tabular / Step-Count Method)
 
 **Q3. Analyze the time complexity of the matrix multiplication algorithm (tabular method) using asymptotic notation and justify your answer.**
 
-### Algorithm (for two $n \times n$ matrices $A$ and $B$)
+#### Algorithm (for two $n \times n$ matrices $A$ and $B$)
 
 ```text
 for i = 1 to n          // runs n times
@@ -177,7 +177,7 @@ for i = 1 to n          // runs n times
             C[i][j] = C[i][j] + A[i][k] * B[k][j]
 ```
 
-### Analysis
+#### Analysis
 
 - The innermost statement executes once for every combination of $(i, j, k)$: $n \times n \times n = n^3$ times.
 - The statement `C[i][j] = 0` executes $n^2$ times.
@@ -187,7 +187,7 @@ $$
 T(n) = c_1 \cdot n^3 + c_2 \cdot n^2 + c_3 \cdot n + c_4
 $$
 
-### Justification
+#### Justification
 
 - **Upper bound:** $T(n) \le c \cdot n^3$ for large $n$, so $T(n) = O(n^3)$.
 - **Lower bound:** $T(n) \ge c' \cdot n^3$ (at least $n^3$ multiplications are performed in every case), so $T(n) = \Omega(n^3)$.
@@ -196,7 +196,7 @@ $$
 
 ---
 
-## 4. Concept of Hashing and Hash Functions
+### 4. Concept of Hashing and Hash Functions
 
 **Q4. Explain the concept of hashing. Discuss different hash functions with suitable examples.**
 
@@ -208,7 +208,7 @@ key ---> h(key) ---> index in hash table T[0 .. m-1]
 
 **Characteristics of a good hash function:** easy and fast to compute; distributes keys uniformly; minimises collisions; uses all parts of the key.
 
-### Common hash functions
+#### Common hash functions
 
 1. **Division method:** $h(k) = k \bmod m$ ($m$ is preferably a prime).
    - *Example:* $m = 10, k = 237$, so $h = 237 \bmod 10 = 7$.
@@ -222,7 +222,7 @@ key ---> h(key) ---> index in hash table T[0 .. m-1]
 
 ---
 
-## 5. Collision Resolution Techniques
+### 5. Collision Resolution Techniques
 
 **Q5. Explain the collision resolution techniques: Linear Probing, Quadratic Probing, Double Hashing and Separate Chaining.**
 
@@ -255,7 +255,7 @@ A collision occurs when $h(k_1) = h(k_2)$ for two different keys. Techniques are
 
 ---
 
-## 6. Static Hashing vs. Dynamic Hashing (Extendible Hashing)
+### 6. Static Hashing vs. Dynamic Hashing (Extendible Hashing)
 
 **Q6. Differentiate between Static Hashing and Dynamic Hashing. Explain the working of Dynamic (Extendable) Hashing with an example.**
 
@@ -268,7 +268,7 @@ A collision occurs when $h(k_1) = h(k_2)$ for two different keys. Techniques are
 | **Space** | Wasted if the file is small, overflow if large | Efficient use of space |
 | **Example** | Simple hash table | Extendable hashing, linear hashing |
 
-### Extendable Hashing — working
+#### Extendable Hashing — working
 
 - A directory of $2^d$ pointers is indexed by the first/last $d$ bits of $h(k)$ ($d =$ global depth).
 - Each bucket has a local depth $d' \le d$ and a fixed capacity.
@@ -277,7 +277,7 @@ A collision occurs when $h(k_1) = h(k_2)$ for two different keys. Techniques are
   - If $d' < d$: split the bucket, increase its local depth, redistribute keys.
   - If $d' = d$: double the directory ($d = d + 1$), then split the bucket.
 
-### Example
+#### Example
 
 Bucket capacity $= 2$, using the last bits of the binary key. Initial global depth $d = 1$.
 

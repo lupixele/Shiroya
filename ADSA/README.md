@@ -1,12 +1,12 @@
-# Design and Analysis of Algorithms — 8-Mark Answers
+# Advanced Data Structures and Algorithm Analysis (ADSA) — Semester Exam Notes
 
-Detailed exam-ready questions and worked answers split by unit in Markdown.
+Detailed exam-ready questions, 2-mark short questions, and 8-mark worked answers for Semester-End Examinations (Units 1–5).
 
 ## Map / Contents
 
 | File | Contents |
 |---|---|
-| [`questions.md`](questions.md) | ADSAA Important Questions for IE 2 (Units 3, 4, 5) with direct answer links |
+| [`questions.md`](questions.md) | ADSA Semester-End Exam Question Bank (Units 1–5, Top 5 Curated Questions per Unit) |
 | [`unit-1.md`](unit-1.md) | Algorithm Analysis, Time vs. Space Complexity, Asymptotic Notations ($O, \Omega, \Theta$), Matrix Multiplication Analysis, Hashing & Hash Functions, Collision Resolution, Static vs. Extendible Hashing |
 | [`unit-2.md`](unit-2.md) | AVL Tree Construction, Four AVL Rotations & Applications, AVL Deletion (`15`), B-Tree Order-4 Construction, B-Tree Deletion & Applications, Min/Max Heap Construction, Max Heap Deletion (`90`), Binary Heap Operations & Priority Queues |
 | [`unit-3.md`](unit-3.md) | Divide and Conquer, Binary Search, Merge Sort, Quick Sort, Greedy Job Sequencing, Fractional Knapsack, Minimum Spanning Tree (Kruskal & Prim), Dijkstra’s Algorithm |

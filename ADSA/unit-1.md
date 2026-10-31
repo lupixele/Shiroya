@@ -4,10 +4,9 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
+## Part A: 2-Mark Questions
 
-### 2M-Q1: What is an algorithm?
-*L1 · CO1 · 2M*
+### Q1: What is an algorithm?
 
 #### Definition
 A finite sequence of well-defined steps that solves a problem. It takes zero or more inputs, produces at least one output, and terminates after a finite number of steps.
@@ -21,8 +20,7 @@ A finite sequence of well-defined steps that solves a problem. It takes zero or 
 
 ---
 
-### 2M-Q2: Differentiate between time complexity and space complexity.
-*L1 · CO1 · 2M*
+### Q2: Differentiate between time complexity and space complexity.
 
 #### Comparison
 | Basis | Time Complexity | Space Complexity |
@@ -33,8 +31,7 @@ A finite sequence of well-defined steps that solves a problem. It takes zero or 
 
 ---
 
-### 2M-Q3: What is the purpose of Asymptotic notations?
-*L1 · CO1 · 2M*
+### Q3: What is the purpose of Asymptotic notations?
 
 #### Definition
 Asymptotic notations describe the mathematical rate of growth of an algorithm's running time or memory usage as input size $n \to \infty$, ignoring hardware-specific constants and low-order terms.
@@ -48,16 +45,14 @@ Asymptotic notations describe the mathematical rate of growth of an algorithm's 
 
 ---
 
-### 2M-Q4: Define hashing.
-*L1 · CO1 · 2M*
+### Q4: Define hashing.
 
 #### Definition
 Hashing is a technique that transforms a key of arbitrary size into a fixed-size table index using a mathematical hash function $h(k)$, enabling direct $O(1)$ average-time access, insertion, and deletion.
 
 ---
 
-### 2M-Q5: What is a hash table? State any two desirable properties of a good hash function.
-*L1 · CO1 · 2M*
+### Q5: What is a hash table? State any two desirable properties of a good hash function.
 
 #### Hash Table
 A data structure that stores key-value pairs in an array indexed by a hash function $h(k)$.
@@ -68,8 +63,7 @@ A data structure that stores key-value pairs in an array indexed by a hash funct
 
 ---
 
-### 2M-Q6: What is the use of a hash function?
-*L1 · CO1 · 2M*
+### Q6: What is the use of a hash function?
 
 #### Core Purpose
 Maps a large search key space into a bounded array index range $[0, m-1]$.
@@ -78,16 +72,14 @@ Maps a large search key space into a bounded array index range $[0, m-1]$.
 
 ---
 
-### 2M-Q7: Define collision resolution.
-*L1 · CO1 · 2M*
+### Q7: Define collision resolution.
 
 #### Definition
 A collision occurs when two distinct keys hash to the same table slot ($h(k_1) = h(k_2)$ for $k_1 \neq k_2$). Collision resolution is the systematic algorithm used to allocate an alternative slot or chain multiple keys sharing that slot.
 
 ---
 
-### 2M-Q8: List out all collision resolution techniques.
-*L2 · CO1 · 2M*
+### Q8: List out all collision resolution techniques.
 
 #### Classification
 | Technique Category | Specific Methods | Working Principle |
@@ -99,7 +91,7 @@ A collision occurs when two distinct keys hash to the same table slot ($h(k_1) =
 
 ---
 
-## Part B: 8-Mark Long Questions
+## Part B: 8-Mark Questions
 
 ## 1. Importance of Algorithm Analysis and Time vs. Space Complexity
 

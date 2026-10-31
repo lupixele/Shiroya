@@ -4,18 +4,16 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
+## Part A: 2-Mark Questions
 
-### 2M-Q1: What is Backtracking?
-*L1 · CO5 · 2M*
+### Q1: What is Backtracking?
 
 #### Definition
 A systematic algorithmic technique for solving constraint satisfaction problems by incrementally building candidate solutions via Depth-First Search (DFS) and abandoning ("backtracking" from) a candidate as soon as it is determined that it cannot lead to a valid solution.
 
 ---
 
-### 2M-Q2: What is a State-Space Tree?
-*L1 · CO5 · 2M*
+### Q2: What is a State-Space Tree?
 
 #### Definition
 A tree representation of all possible paths of state configurations in a problem:
@@ -25,8 +23,7 @@ A tree representation of all possible paths of state configurations in a problem
 
 ---
 
-### 2M-Q3: What is a promising node in a backtracking solution tree? Why is it important?
-*L1 · CO5 · 2M*
+### Q3: What is a promising node in a backtracking solution tree? Why is it important?
 
 #### Promising Node
 An intermediate node in the state-space tree whose partial solution satisfies all problem constraints and has the potential to lead to a feasible or optimal solution.
@@ -37,24 +34,21 @@ An intermediate node in the state-space tree whose partial solution satisfies al
 
 ---
 
-### 2M-Q4: What is the Branch and Bound technique?
-*L1 · CO5 · 2M*
+### Q4: What is the Branch and Bound technique?
 
 #### Definition
 An optimization search strategy applied to discrete/combinatorial problems. It divides the problem into sub-problems (**branching**) and computes upper or lower bounds (**bounding**) on the objective function to prune subtrees that cannot yield a better solution than the best one found so far.
 
 ---
 
-### 2M-Q5: Define Bounding Function in Branch and Bound.
-*L1 · CO5 · 2M*
+### Q5: Define Bounding Function in Branch and Bound.
 
 #### Definition
 A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimistic bound (lower bound for minimization, upper bound for maximization) on the value of any solution reachable in the subtree rooted at $x$. If the bound is worse than the current best known solution, the node is pruned.
 
 ---
 
-### 2M-Q6: Differentiate between Backtracking and Branch & Bound.
-*L2 · CO5 · 2M*
+### Q6: Differentiate between Backtracking and Branch & Bound.
 
 #### Comparison
 | Basis | Backtracking | Branch & Bound |
@@ -66,8 +60,7 @@ A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimi
 
 ---
 
-### 2M-Q7: What is the difference between FIFO Branch & Bound and LIFO Branch & Bound?
-*L1 · CO5 · 2M*
+### Q7: What is the difference between FIFO Branch & Bound and LIFO Branch & Bound?
 
 #### Comparison
 | Type | Live Nodes Data Structure | Node Selection Rule |
@@ -78,8 +71,7 @@ A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimi
 
 ---
 
-### 2M-Q8: List out two applications of Backtracking and two applications of Branch & Bound.
-*L1 · CO5 · 2M*
+### Q8: List out two applications of Backtracking and two applications of Branch & Bound.
 
 #### Applications
 - **Backtracking:**
@@ -93,7 +85,7 @@ A heuristic function $\hat{c}(x)$ computed at node $x$ that calculates an optimi
 
 ---
 
-## Part B: 8-Mark Long Questions
+## Part B: 8-Mark Questions
 
 ## 1. Backtracking: General Methodology, State-Space Tree, Bounding Conditions, and Comparison with Exhaustive Search
 

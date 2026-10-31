@@ -4,10 +4,9 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
+## Part A: 2-Mark Questions
 
-### 2M-Q1: What condition must be satisfied by every node in an AVL tree?
-*L1 · CO2 · 2M*
+### Q1: What condition must be satisfied by every node in an AVL tree?
 
 #### Mandatory Conditions
 Every node $x$ in an AVL tree must satisfy two conditions simultaneously:
@@ -17,8 +16,7 @@ Every node $x$ in an AVL tree must satisfy two conditions simultaneously:
 
 ---
 
-### 2M-Q2: What is the purpose of balance factor in an AVL tree?
-*L1 · CO2 · 2M*
+### Q2: What is the purpose of balance factor in an AVL tree?
 
 #### Definition
 $$\text{Balance Factor (BF)} = \text{height}(\text{left subtree}) - \text{height}(\text{right subtree})$$
@@ -38,8 +36,7 @@ $$\text{Balance Factor (BF)} = \text{height}(\text{left subtree}) - \text{height
 
 ---
 
-### 2M-Q3: Define the order of a B-Tree.
-*L1 · CO2 · 2M*
+### Q3: Define the order of a B-Tree.
 
 #### Definition
 The **order $m$** of a B-Tree is the maximum number of children any internal node can possess.
@@ -52,8 +49,7 @@ The **order $m$** of a B-Tree is the maximum number of children any internal nod
 
 ---
 
-### 2M-Q4: What are the applications of B-Trees?
-*L1 · CO2 · 2M*
+### Q4: What are the applications of B-Trees?
 
 #### Key Applications
 1. **Database Indexing:** Primary and secondary indexing in relational databases (MySQL InnoDB, PostgreSQL, Oracle).
@@ -62,8 +58,7 @@ The **order $m$** of a B-Tree is the maximum number of children any internal nod
 
 ---
 
-### 2M-Q5: Define binary heap.
-*L1 · CO2 · 2M*
+### Q5: Define binary heap.
 
 #### Definition
 A binary heap is a complete binary tree stored compactly in an array that satisfies the **heap-order property**:
@@ -74,8 +69,7 @@ A binary heap is a complete binary tree stored compactly in an array that satisf
 
 ---
 
-### 2M-Q6: Define Max-Heap and Min-Heap.
-*L1 · CO2 · 2M*
+### Q6: Define Max-Heap and Min-Heap.
 
 #### Comparison
 | Property | Max-Heap | Min-Heap |
@@ -86,8 +80,7 @@ A binary heap is a complete binary tree stored compactly in an array that satisf
 
 ---
 
-### 2M-Q7: Define Priority Queue.
-*L1 · CO2 · 2M*
+### Q7: Define Priority Queue.
 
 #### Definition
 An abstract data type (ADT) where each element has an associated numerical priority. Elements are dequeued strictly by priority rather than arrival order (FIFO).
@@ -99,8 +92,7 @@ An abstract data type (ADT) where each element has an associated numerical prior
 
 ---
 
-### 2M-Q8: What is the time complexity of the heapify operation?
-*L1 · CO2 · 2M*
+### Q8: What is the time complexity of the heapify operation?
 
 #### Complexity Bounds
 - **Single-node sink down (`Heapify(i)` on tree of size $n$):** $O(\log n)$ — traverses the height of the tree.
@@ -108,7 +100,7 @@ An abstract data type (ADT) where each element has an associated numerical prior
 
 ---
 
-## Part B: 8-Mark Long Questions
+## Part B: 8-Mark Questions
 
 ## 1. Construct an AVL Tree by Step-by-Step Insertion
 

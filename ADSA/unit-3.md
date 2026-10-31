@@ -4,18 +4,16 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
+## Part A: 2-Mark Questions
 
-### 2M-Q1: What is the divide-and-conquer strategy?
-*L1 · CO3 · 2M*
+### Q1: What is the divide-and-conquer strategy?
 
 #### Definition
 An algorithmic paradigm that breaks a problem of size $n$ into smaller, independent sub-problems of the same type, solves them recursively, and combines their solutions to form the global solution.
 
 ---
 
-### 2M-Q2: What are the three fundamental steps in divide-and-conquer?
-*L1 · CO3 · 2M*
+### Q2: What are the three fundamental steps in divide-and-conquer?
 
 #### The Three Steps
 1. **Divide:** Partition the original problem into two or more smaller sub-problems.
@@ -24,8 +22,7 @@ An algorithmic paradigm that breaks a problem of size $n$ into smaller, independ
 
 ---
 
-### 2M-Q3: What is the recurrence relation for Merge Sort? State its time complexity.
-*L1 · CO3 · 2M*
+### Q3: What is the recurrence relation for Merge Sort? State its time complexity.
 
 #### Recurrence Relation
 $$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\ 2T(n/2) + \Theta(n) & \text{if } n > 1 \end{cases}$$
@@ -37,8 +34,7 @@ $$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\ 2T(n/2) + \Theta(n) & \te
 
 ---
 
-### 2M-Q4: What is the best, average, and worst-case time complexity of Quick Sort?
-*L1 · CO3 · 2M*
+### Q4: What is the best, average, and worst-case time complexity of Quick Sort?
 
 #### Complexity Summary
 | Case | Time Complexity | Partition Condition |
@@ -49,8 +45,7 @@ $$T(n) = \begin{cases} \Theta(1) & \text{if } n = 1 \\ 2T(n/2) + \Theta(n) & \te
 
 ---
 
-### 2M-Q5: What is the Greedy Method?
-*L1 · CO3 · 2M*
+### Q5: What is the Greedy Method?
 
 #### Definition
 An optimization approach that constructs a solution piece by piece, always choosing the locally optimal choice at each step without ever backtracking, hoping to achieve a globally optimal solution.
@@ -61,24 +56,21 @@ An optimization approach that constructs a solution piece by piece, always choos
 
 ---
 
-### 2M-Q6: What is a feasible solution in the Job Sequencing with Deadlines problem?
-*L1 · CO3 · 2M*
+### Q6: What is a feasible solution in the Job Sequencing with Deadlines problem?
 
 #### Definition
 In Job Sequencing with unit-time jobs, a **feasible solution** is any subset of jobs $J$ such that every job $i \in J$ can be scheduled in an available time slot $[t-1, t]$ where $t \le d_i$ (its deadline), with no two jobs scheduled in the same unit time slot.
 
 ---
 
-### 2M-Q7: What is a Minimum Spanning Tree (MST)?
-*L1 · CO3 · 2M*
+### Q7: What is a Minimum Spanning Tree (MST)?
 
 #### Definition
 For a connected, undirected, edge-weighted graph $G = (V, E)$, an MST is a spanning subgraph that is a tree (contains all $|V|$ vertices and exactly $|V|-1$ edges with no cycles) whose total edge weight sum is minimized.
 
 ---
 
-### 2M-Q8: Differentiate between Fractional Knapsack and 0/1 Knapsack.
-*L2 · CO3 · 2M*
+### Q8: Differentiate between Fractional Knapsack and 0/1 Knapsack.
 
 #### Comparison
 | Feature | Fractional Knapsack | 0/1 Knapsack |
@@ -90,7 +82,7 @@ For a connected, undirected, edge-weighted graph $G = (V, E)$, an MST is a spann
 
 ---
 
-## Part B: 8-Mark Long Questions
+## Part B: 8-Mark Questions
 
 ## 1. Divide and Conquer and Binary Search
 

@@ -4,18 +4,16 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
+## Part A: 2-Mark Questions
 
-### 2M-Q1: What is Dynamic Programming?
-*L1 · CO4 · 2M*
+### Q1: What is Dynamic Programming?
 
 #### Definition
 An algorithmic paradigm that solves optimization problems by breaking them down into simpler, overlapping sub-problems, computing each sub-problem solution once, and memoizing or tabulating results to eliminate redundant work.
 
 ---
 
-### 2M-Q2: What are the two core properties required for Dynamic Programming?
-*L1 · CO4 · 2M*
+### Q2: What are the two core properties required for Dynamic Programming?
 
 #### Two Essential Properties
 1. **Optimal Substructure:** An optimal solution to the overall problem can be constructed from optimal solutions to its sub-problems.
@@ -23,8 +21,7 @@ An algorithmic paradigm that solves optimization problems by breaking them down 
 
 ---
 
-### 2M-Q3: Define Optimal Substructure with an example.
-*L1 · CO4 · 2M*
+### Q3: Define Optimal Substructure with an example.
 
 #### Definition
 A problem exhibits optimal substructure if an optimal solution to the problem contains within it optimal solutions to sub-problems.
@@ -34,8 +31,7 @@ In shortest paths: if the shortest path from $A$ to $C$ passes through $B$ ($A \
 
 ---
 
-### 2M-Q4: Define Overlapping Subproblems with an example.
-*L1 · CO4 · 2M*
+### Q4: Define Overlapping Subproblems with an example.
 
 #### Definition
 A property where a recursive divide-and-conquer strategy solves the same small sub-problems over and over again, resulting in exponential time complexity unless results are cached.
@@ -53,16 +49,14 @@ Computing Fibonacci $F(5) = F(4) + F(3)$: $F(3)$ is evaluated once for $F(5)$ an
 
 ---
 
-### 2M-Q5: State the Principle of Optimality.
-*L1 · CO4 · 2M*
+### Q5: State the Principle of Optimality.
 
 #### Definition (Bellman's Principle of Optimality)
 *"An optimal policy has the property that whatever the initial state and initial decision are, the remaining decisions must constitute an optimal policy with regard to the state resulting from the first decision."*
 
 ---
 
-### 2M-Q6: Differentiate between Dynamic Programming and Greedy Method.
-*L2 · CO4 · 2M*
+### Q6: Differentiate between Dynamic Programming and Greedy Method.
 
 #### Comparison
 | Feature | Dynamic Programming | Greedy Method |
@@ -74,16 +68,14 @@ Computing Fibonacci $F(5) = F(4) + F(3)$: $F(3)$ is evaluated once for $F(5)$ an
 
 ---
 
-### 2M-Q7: What is the purpose of the Floyd–Warshall algorithm?
-*L1 · CO4 · 2M*
+### Q7: What is the purpose of the Floyd–Warshall algorithm?
 
 #### Purpose
 To find the shortest path lengths between **all pairs of vertices** in a weighted directed or undirected graph (allowing negative edge weights, but no negative-weight cycles) using dynamic programming in $\Theta(V^3)$ time and $\Theta(V^2)$ space.
 
 ---
 
-### 2M-Q8: What is an Optimal Binary Search Tree (OBST)?
-*L1 · CO4 · 2M*
+### Q8: What is an Optimal Binary Search Tree (OBST)?
 
 #### Definition
 A binary search tree constructed from a set of sorted keys $K = \{k_1, k_2, \dots, k_n\}$ with known access probabilities $P = \{p_1, \dots, p_n\}$ and dummy keys $D = \{d_0, \dots, d_n\}$ with failure probabilities $Q = \{q_0, \dots, q_n\}$, such that the **total expected search cost** is minimized:
@@ -91,7 +83,7 @@ $$\text{Expected Cost} = \sum_{i=1}^n (\text{level}(k_i) + 1) \cdot p_i + \sum_{
 
 ---
 
-## Part B: 8-Mark Long Questions
+## Part B: 8-Mark Questions
 
 ## 1. Dynamic Programming: methodology, optimal substructure, overlapping subproblems, and comparison with Divide and Conquer
 

@@ -12,6 +12,10 @@
 
 #### Definition
 An algorithmic paradigm that breaks a problem of size $n$ into smaller, independent sub-problems of the same type, solves them recursively, and combines their solutions to form the global solution.
+The three basic steps are:
+1. Divide: Divide the problem into smaller subproblems.
+2. Conquer: Solve the subproblems recursively.
+3. Combine: Combine the solutions to get the final result.
 
 ---
 

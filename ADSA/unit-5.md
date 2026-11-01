@@ -422,52 +422,89 @@ Where:
 #### 3. Step-by-Step Node Calculations
 
 - **Node 0 (Root):** $w = 0, v = 0$
-  $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \quad \text{(or fractional greedy: } \mathbf{120}\text{)}$$
+  $$ub = 40 + (16 - 2) \times 6.25 = 40 + 87.5 = \mathbf{127.5}$$
+  *(Considering item $I_1$ and filling remaining capacity 14 with next ratio 6.25)*
 - **Node 1 (with $I_1$):** $w = 2, v = 40$
   $$ub = 40 + (16 - 2) \times 6.25 = 40 + 87.5 = \mathbf{127.5}$$
 - **Node 2 (w/o $I_1$):** $w = 0, v = 0$
-  $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \implies \text{\textbf{X inferior to node 9}}\ (100 < 115)$$
+  Next available item is $I_5$ (ratio 6.25):
+  $$ub = 0 + (16 - 0) \times 6.25 = \mathbf{100.0} \implies \text{\textbf{X Pruned (inferior to Node 9)}}\ (100.0 \le 115)$$
 - **Node 3 (with $I_5$):** $w = 2 + 4 = 6, v = 40 + 25 = 65$
+  Next available item is $I_2$ (ratio 6.0):
   $$ub = 65 + (16 - 6) \times 6.0 = 65 + 60 = \mathbf{125.0}$$
 - **Node 4 (w/o $I_5$):** $w = 2, v = 40$
-  $$ub = 40 + (16 - 2) \times 6.0 = 40 + 84 = \mathbf{124.0} \implies \text{\textbf{X inferior to node 9}}$$
+  Without $I_5$, next item is $I_2$ ($w=5, v=30$). Taking $I_2$ leaves capacity $16 - (2+5) = 9$. Next item is $I_3$ (ratio 5.0):
+  $$ub = (40 + 30) + 9 \times 5.0 = 70 + 45 = \mathbf{115.0} \implies \text{\textbf{X Pruned}}\ (115.0 \le 115)$$
 - **Node 5 (with $I_2$):** $w = 6 + 5 = 11, v = 65 + 30 = 95$
+  Next available item is $I_3$ (ratio 5.0):
   $$ub = 95 + (16 - 11) \times 5.0 = 95 + 25 = \mathbf{120.0}$$
 - **Node 6 (w/o $I_2$):** $w = 6, v = 65$
+  Next available item is $I_3$ (ratio 5.0):
   $$ub = 65 + (16 - 6) \times 5.0 = 65 + 50 = \mathbf{115.0}$$
 - **Node 7 (with $I_3$ from Node 5):** $w = 11 + 10 = 21$
-  $$21 > 16 \implies \text{\textbf{X not feasible (kill node)}}$$
+  $$21 > 16 \implies \text{\textbf{X Not Feasible (kill node)}}$$
 - **Node 8 (w/o $I_3$ from Node 5):** $w = 11, v = 95$
-  $$ub = 95 + (16 - 11) \times 2.0 = 95 + 10 = \mathbf{105.0} \implies \text{\textbf{X inferior to node 9}}\ (105 \le 115)$$
+  Next available item is $I_4$ (ratio 2.0):
+  $$ub = 95 + (16 - 11) \times 2.0 = 95 + 10 = \mathbf{105.0} \implies \text{\textbf{X Pruned}}\ (105.0 \le 115)$$
 - **Node 9 (with $I_3$ from Node 6):** $w = 6 + 10 = 16, v = 65 + 50 = 115$
-  $$ub = 115 + (16 - 16) \times 2.0 = \mathbf{115.0} \implies \mathbf{value = 115\ (OPTIMAL\ SOLUTION!)}$$
+  Remaining capacity $= 16 - 16 = 0$:
+  $$ub = 115 + 0 = \mathbf{115.0} \implies \mathbf{Value = 115\ (OPTIMAL\ FEASIBLE\ SOLUTION!)}$$
 - **Node 10 (w/o $I_3$ from Node 6):** $w = 6, v = 65$
-  $$ub = 65 + (16 - 6) \times 2.0 = 65 + 20 = \mathbf{85.0} \implies \text{\textbf{X inferior to node 9}}\ (85 < 115)$$
+  Next available item is $I_4$ ($w=5, v=10, \text{ratio}=2.0$):
+  $$ub = (65 + 10) + (16 - 11) \times 2.0 = 75 + 10 = \mathbf{85.0} \implies \text{\textbf{X Pruned}}\ (85.0 \le 115)$$
 
 ---
 
 #### 4. Summary Table of Nodes
 
-| Node | Decision Branch | $w$ | $v$ | Upper Bound ($ub$) | Status |
+| Node | Decision Branch | Weight ($w$) | Value ($v$) | Upper Bound ($ub$) | Action / Status |
 |:---:|:---|---:|---:|:---:|:---|
-| **0** | Root (start) | 0 | 0 | $127.5$ | Expand |
-| **1** | `with I1` | 2 | 40 | $127.5$ | Expand |
-| **2** | `w/o I1` | 0 | 0 | $100.0$ | **X inferior to node 9** ($100 < 115$) |
-| **3** | `with I5` | 6 | 65 | $125.0$ | Expand |
-| **4** | `w/o I5` | 2 | 40 | $115.0$ | **X inferior to node 9** ($115 \le 115$) |
-| **5** | `with I2` | 11 | 95 | $120.0$ | Expand |
-| **6** | `w/o I2` | 6 | 65 | $115.0$ | Expand |
-| **7** | `with I3` | 21 | — | — | **X not feasible** ($w > 16$) |
-| **8** | `w/o I3` | 11 | 95 | $105.0$ | **X inferior to node 9** ($105 \le 115$) |
-| **9** | **`with I3`** | **16** | **115** | **115.0** | **🎉 OPTIMAL SOLUTION (value = 115)** |
-| **10** | `w/o I3` | 6 | 65 | $85.0$ | **X inferior to node 9** ($85 < 115$) |
+| **0** | Root (start) | 0 | 0 | **$127.5$** | Live $\implies$ Explore |
+| **1** | `with I1` | 2 | 40 | **$127.5$** | Live $\implies$ Explore |
+| **2** | `w/o I1` | 0 | 0 | **$100.0$** | **X Pruned** ($ub = 100.0 \le 115$) |
+| **3** | `with I5` | 6 | 65 | **$125.0$** | Live $\implies$ Explore |
+| **4** | `w/o I5` | 2 | 40 | **$115.0$** | **X Pruned** ($ub = 115.0 \le 115$) |
+| **5** | `with I2` | 11 | 95 | **$120.0$** | Live $\implies$ Explore |
+| **6** | `w/o I2` | 6 | 65 | **$115.0$** | Live $\implies$ Explore |
+| **7** | `with I3` | 21 | — | — | **X Not Feasible** ($w = 21 > 16$) |
+| **8** | `w/o I3` | 11 | 95 | **$105.0$** | **X Pruned** ($ub = 105.0 \le 115$) |
+| **9** | **`with I3`** | **16** | **115** | **$115.0$** | **🎉 OPTIMAL SOLUTION (Profit = 115)** |
+| **10** | `w/o I3` | 6 | 65 | **$85.0$** | **X Pruned** ($ub = 85.0 \le 115$) |
 
 ---
 
-#### 5. Final Optimal Solution
-- **Optimal Items Selected:** **`I1, I5, I3`**
-- **Total Weight:** $2 + 4 + 10 = \mathbf{16}$
-- **Maximum Profit / Value:** $40 + 25 + 50 = \mathbf{115}$
+#### 5. Visual State-Space Tree (ASCII Representation)
+
+```text
+                      [Node 0: w=0, v=0, ub=127.5]
+                             /            \
+                   with I1  /              \ w/o I1
+                           /                \
+       [Node 1: w=2, v=40, ub=127.5]     [Node 2: w=0, v=0, ub=100.0]
+              /            \                   (X Pruned: ub <= 115)
+    with I5  /              \ w/o I5
+            /                \
+ [Node 3: w=6, v=65, ub=125.0]     [Node 4: w=2, v=40, ub=115.0]
+        /            \                   (X Pruned: ub <= 115)
+with I2/              \ w/o I2
+      /                \
+[Node 5: w=11, v=95]   [Node 6: w=6, v=65, ub=115.0]
+      (ub=120.0)             /            \
+     /          \    with I3/              \ w/o I3
+with/       w/o  \         /                \
+ [Node 7]     [Node 8] [Node 9: OPTIMAL]  [Node 10: w=6, v=65]
+  w=21        w=11,v=95   w=16, v=115          ub=85.0
+(X Infeas)    (ub=105.0)  (PROFIT = 115)   (X Pruned: ub <= 115)
+              (X Pruned)
+```
+
+---
+
+#### 6. Final Optimal Solution
+- **Optimal Items Selected:** **`I1, I5, I3`** (Items 1, 5, and 3)
+- **Total Weight:** $w = 2 + 4 + 10 = \mathbf{16}$ (Exactly utilizes full capacity $W = 16$)
+- **Maximum Profit:** $p = 40 + 25 + 50 = \mathbf{115}$
+- **Optimal Item Selection Vector:** $X = (x_1, x_2, x_3, x_4, x_5) = \mathbf{(1, 0, 1, 0, 1)}$
 
 ![0/1 Knapsack LC Branch and Bound State-Space Tree](figures/unit5_q6_bb_knapsack_tree.png)
 

@@ -204,8 +204,6 @@ Right rotation at $y$, then left rotation at $z$.
 | LR | Left-Right | Left then right (double) |
 | RL | Right-Left | Right then left (double) |
 
-![The Four AVL Tree Rotations](figures/unit2_q2_avl_rotations.png)
-
 #### Applications of AVL trees
 
 - **Database Indexing:** Used in database systems to speed up search, insert, and delete operations where lookups dominate.

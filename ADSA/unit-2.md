@@ -108,34 +108,159 @@ An abstract data type (ADT) where each element has an associated numerical prior
 
 **Q1. Construct an AVL tree by inserting the keys `50, 25, 12, 80, 90, 37, 45, 18, 19, 6`. Show the required rotations.**
 
-An AVL tree keeps the balance factor ($\text{height of left subtree} - \text{height of right subtree}$) of every node in $\{-1, 0, +1\}$.
+An AVL tree is a self-balancing Binary Search Tree where every node satisfies:
+$$\text{Balance Factor (BF)} = \text{height}(\text{left subtree}) - \text{height}(\text{right subtree}) \in \{-1, 0, +1\}$$
+If any node has $BF = \pm 2$, a rotation ($LL, RR, LR, RL$) is performed to restore balance.
 
-| Step | Insert | Result / problem | Rotation |
-|---:|---:|---|---|
-| 1 | 50 | `50` | none |
-| 2 | 25 | `50` (left `25`) | none |
-| 3 | 12 | `12` under `25` under `50`: node `50` has balance $+2$ (LL case) | Right rotation at `50` → `25 (12, 50)` |
-| 4 | 80 | `80` right of `50` | none |
-| 5 | 90 | `90` right of `80`: node `50` has balance $-2$ (RR case) | Left rotation at `50` → `25 (12, 80 (50, 90))` |
-| 6 | 37 | `37` left of `50`: node `25` has balance $-2$, right child `80` is left-heavy (RL case) | Right rotation at `80`, then left rotation at `25` → `50 (25 (12, 37), 80 (–, 90))` |
-| 7 | 45 | `45` right of `37` | none (all balanced) |
-| 8 | 18 | `18` right of `12` | none |
-| 9 | 19 | `19` right of `18`: node `12` has balance $-2$ (RR case) | Left rotation at `12` → `18 (12, 19)` |
-| 10 | 6 | `6` left of `12`: node `50` has balance $+2$, left child `25` is left-heavy (LL case) | Right rotation at `50` |
+---
 
-#### Final AVL tree
+#### Step-by-Step Construction with Visual Trees
 
+##### Step 1: Insert 50
 ```text
-          25
-        /    \
-      18      50
-     /  \    /  \
-   12   19  37   80
-   /         \     \
-  6          45    90
+  50 (0)
 ```
 
-Height $= 4$, all balance factors are in $\{-1, 0, +1\}$. Rotations used: 2 single-right (LL), 2 single-left (RR), 1 double (RL).
+##### Step 2: Insert 25
+```text
+    50 (1)
+   /
+ 25 (0)
+```
+
+##### Step 3: Insert 12 (LL Imbalance at 50)
+- `12` is inserted into the left subtree of left child `25`.
+- Node `50` gets $BF = 2$ (Unbalanced $\implies$ **LL Case**).
+- **Fix:** Perform **Single Right Rotation** at node `50`:
+
+```text
+       50 (2)                      25 (0)
+      /                           /      \
+    25 (1)         ====>        12 (0)   50 (0)
+   /
+ 12 (0)
+```
+
+##### Step 4: Insert 80
+`80` is $> 25$ and $> 50$, goes to right of `50`:
+```text
+      25 (-1)
+     /      \
+  12 (0)   50 (-1)
+              \
+              80 (0)
+```
+
+##### Step 5: Insert 90 (RR Imbalance at 25)
+- `90` goes to right of `80`.
+- Node `25` gets $BF = -2$ (Unbalanced $\implies$ **RR Case** at node `50`).
+- **Fix:** Perform **Single Left Rotation** at node `50`:
+
+```text
+       25 (-2)                              25 (-1)
+      /      \                             /      \
+   12 (0)    50 (-2)        ====>       12 (0)    80 (0)
+                \                                /      \
+                80 (-1)                        50 (0)   90 (0)
+                   \
+                   90 (0)
+```
+
+##### Step 6: Insert 37 (RL Imbalance at 25)
+- `37` goes to left of `50`. Node `25` gets $BF = -2$ (right-heavy), right child `80` has left subtree $\implies$ **RL Case**.
+- **Fix:** **Double Rotation** (Right-rotate at `80`, then Left-rotate at `25`).
+- Node `50` rises to become the new root of the entire tree:
+
+```text
+               25 (-2)                                 50 (0)
+              /      \                               /        \
+           12 (0)    80 (1)         ====>         25 (0)      80 (-1)
+                    /      \                     /      \           \
+                  50 (1)   90 (0)              12 (0)   37 (0)      90 (0)
+                 /
+               37 (0)
+```
+
+##### Step 7: Insert 45
+`45` goes to right child of `37`:
+```text
+               50 (0)
+             /        \
+         25 (0)       80 (-1)
+        /      \            \
+      12 (0)   37 (-1)      90 (0)
+                 \
+                 45 (0)
+```
+*(All balance factors are within $\{-1, 0, +1\}$; tree remains balanced).*
+
+##### Step 8: Insert 18
+`18` goes to right child of `12`:
+```text
+               50 (1)
+             /        \
+         25 (1)       80 (-1)
+        /      \            \
+     12 (-1)   37 (-1)      90 (0)
+        \        \
+        18 (0)   45 (0)
+```
+
+##### Step 9: Insert 19 (RR Imbalance at 12)
+- `19` goes to right of `18`. Node `12` gets $BF = -2$ (RR Case).
+- **Fix:** Perform **Single Left Rotation** at node `12`:
+
+```text
+      12 (-2)                          18 (0)
+         \                            /      \
+         18 (-1)       ====>       12 (0)    19 (0)
+            \
+            19 (0)
+```
+
+- Resulting tree:
+```text
+               50 (1)
+             /        \
+         25 (1)       80 (-1)
+        /      \            \
+     18 (0)    37 (-1)      90 (0)
+    /      \     \
+  12 (0)  19(0)  45 (0)
+```
+
+##### Step 10: Insert 6 (LL Imbalance at 50)
+- `6` goes to left of `12`.
+- Left subtree of `50` reaches height 4, right subtree is height 2 $\implies$ Node `50` gets $BF = +2$.
+- Left child `25` has $BF = +1$ (left-heavy $\implies$ **LL Case**).
+- **Fix:** Perform **Single Right Rotation** at root node `50`. Node `25` becomes the new root!
+
+```text
+                  50 (2)                                      25 (0)
+                /        \                                  /        \
+             25 (1)      80 (-1)                         18 (0)      50 (0)
+            /      \           \          ====>         /      \    /      \
+         18 (0)    37 (-1)     90 (0)                12 (1)   19(0) 37(-1) 80(-1)
+        /      \     \                              /               \       \
+      12 (1)  19(0)  45 (0)                        6 (0)            45(0)   90(0)
+     /
+    6 (0)
+```
+
+#### Final AVL Tree
+```text
+                 25 (0)
+               /        \
+           18 (0)       50 (0)
+          /      \     /      \
+        12 (1)  19(0) 37 (-1) 80 (-1)
+       /                \       \
+      6 (0)             45 (0)  90 (0)
+```
+
+- **Height:** 4 levels.
+- **Verification:** Every node has $BF \in \{-1, 0, +1\}$.
+- **Rotations Applied:** 2 Single Right (LL at `50`), 2 Single Left (RR at `50` and `12`), 1 Double (RL at `25`).
 
 ---
 
@@ -244,6 +369,22 @@ Right rotation at $y$, then left rotation at $z$.
 ##### Step 1: Remove Leaf Node 15
 - Node `15` is a leaf child of `25`. Remove `15` directly.
 
+**Tree Immediately After Deleting 15:**
+```text
+              50 (0)
+            /        \
+        25 (-2)*     75 (1)
+              \     /      \
+             40(1) 60 (-1) 80 (-1)
+            /     /   \       \
+          35(0) 55(0) 65(1)   90(0)
+                      /
+                    62(0)
+```
+*Node 25 is unbalanced ($BF = -2$)*
+
+---
+
 ##### Step 2: Trace Ancestor Balance Factors
 Trace upwards starting from parent `25`:
 
@@ -258,16 +399,50 @@ Trace upwards starting from parent `25`:
 | **65** | 0 | 1 | $-1$ | Balanced |
 | **35, 55, 62, 90** | 0 | 0 | 0 | Balanced (Leaves) |
 
+---
+
 ##### Step 3: Identify Imbalance & Apply RL Rotation
 - At node `25`: $BF(25) = -2$ (Right heavy).
 - Right child `40`: $BF(40) = +1$ (Left heavy).
 - **Condition:** Right-Left (RL) Case $\implies$ Requires **Double RL Rotation** at node `25`:
-  - **Sub-step 3.1 (Right Rotation at 40):** Right-rotate at node `40`. Node `35` moves up and becomes right child of `25`, with `40` as right child of `35`.
-  - **Sub-step 3.2 (Left Rotation at 25):** Left-rotate at node `25`. Node `35` rises to become the new root of the subtree, with `25` as its left child and `40` as its right child!
 
-##### Step 4: Final Verification
+**Sub-step 3.1: Right Rotation at Node 40:**
+```text
+        25 (-2)                        25 (-2)
+           \                              \
+          40 (1)         ====>            35 (0)
+         /                                  \
+       35 (0)                               40 (0)
+```
+
+**Sub-step 3.2: Left Rotation at Node 25:**
+```text
+        25 (-2)                        35 (0)
+           \                          /      \
+          35 (0)         ====>     25 (0)   40 (0)
+            \
+            40 (0)
+```
+Node `35` rises to become the new parent of `25` and `40`!
+
+---
+
+##### Step 4: Final Verification & Balanced Tree
+
+```text
+                  50 (0)
+                /        \
+            35 (0)       75 (1)
+           /      \     /      \
+         25 (0)  40(0) 60 (-1) 80 (-1)
+                      /   \       \
+                    55(0) 65(1)   90(0)
+                          /
+                        62(0)
+```
+
 - The restructured subtree rooted at `35 (25, 40)` has height 2.
-- At root `50`: left subtree height = 3 (via path `50 → 35 → 25` is height 3), right subtree height = 3 (via `50 → 75 → 60 → 65 → 62`).
+- At root `50`: left subtree height = 3 (via path `50 → 35 → 25`), right subtree height = 3 (via `50 → 75 → 60 → 65 → 62`).
 - Balance factor at root $50 = 3 - 3 = 0$.
 - **All nodes satisfy $BF \in \{-1, 0, +1\}$.** Tree is a valid balanced AVL tree.
 
@@ -467,21 +642,63 @@ Keys fit into the root node in sorted order:
 
 #### Max Heap ($\text{parent} \ge \text{children}$)
 
-Insert at the end, then sift up while larger than the parent.
+#### 1. Max Heap Construction ($\text{Parent} \ge \text{Children}$)
 
-| Insert | Array representation after insertion | Action |
-|---:|---|---|
-| 40 | `[40]` | root |
-| 15 | `[40, 15]` | $15 < 40$, stays |
-| 30 | `[40, 15, 30]` | $30 < 40$, stays |
-| 10 | `[40, 15, 30, 10]` | $10 < 15$, stays |
-| 12 | `[40, 15, 30, 10, 12]` | $12 < 15$, stays |
-| 6 | `[40, 15, 30, 10, 12, 6]` | $6 < 30$, stays |
-| 25 | `[40, 15, 30, 10, 12, 6, 25]` | $25 < 30$, stays |
-| 18 | `[40, 18, 30, 15, 12, 6, 25, 10]` | $18 > 10$ swap; $18 > 15$ swap; $18 < 40$ stop |
+In a Max-Heap, each newly inserted element is placed at the next available leaf position (left-to-right at the bottom level) and then **sifted up (heapified up)** by swapping with its parent while it is greater than the parent.
 
-##### Final Max Heap
+##### Step 1: Insert 40, 15, 30
+- `40` is root. `15` and `30` are smaller than `40`, so they stay in place:
+```text
+      40
+     /  \
+   15    30
+```
+*Array: `[ 40, 15, 30 ]`*
 
+---
+
+##### Step 2: Insert 10, 12
+- `10` and `12` are added as left and right children of `15`. Since $10 < 15$ and $12 < 15$, no swaps needed:
+```text
+        40
+       /  \
+     15    30
+    /  \
+  10    12
+```
+*Array: `[ 40, 15, 30, 10, 12 ]`*
+
+---
+
+##### Step 3: Insert 6, 25
+- `6` and `25` are added as left and right children of `30`. Since $6 < 30$ and $25 < 30$, no swaps needed:
+```text
+        40
+       /  \
+     15    30
+    /  \   /  \
+  10   12 6   25
+```
+*Array: `[ 40, 15, 30, 10, 12, 6, 25 ]`*
+
+---
+
+##### Step 4: Insert 18 (Sift-Up Swaps)
+1. `18` is placed at index 7 (left child of `10`):
+```text
+          40
+         /  \
+       15    30
+      /  \   /  \
+    10   12 6   25
+    /
+  18 (greater than parent 10!)
+```
+2. **Swap 1:** $18 > 10 \implies$ Swap `18` with parent `10`.
+3. **Swap 2:** $18 > 15 \implies$ Swap `18` with parent `15`.
+4. $18 < 40 \implies$ Sift-up terminates.
+
+##### Final Max Heap Tree
 ```text
           40
         /    \
@@ -491,24 +708,76 @@ Insert at the end, then sift up while larger than the parent.
    /
  10
 ```
+*Final Array: `[ 40, 18, 30, 15, 12, 6, 25, 10 ]`*
 
-#### Min Heap ($\text{parent} \le \text{children}$)
+---
 
-Sift up while smaller than the parent.
+#### 2. Min Heap Construction ($\text{Parent} \le \text{Children}$)
 
-| Insert | Array after insertion | Action |
-|---:|---|---|
-| 40 | `[40]` | root |
-| 15 | `[15, 40]` | $15 < 40$ swap |
-| 30 | `[15, 40, 30]` | $30 > 15$, stays |
-| 10 | `[10, 15, 30, 40]` | $10 < 40$ swap; $10 < 15$ swap (becomes root) |
-| 12 | `[10, 12, 30, 40, 15]` | $12 < 15$ swap; $12 > 10$ stop |
-| 6 | `[6, 12, 10, 40, 15, 30]` | $6 < 30$ swap; $6 < 10$ swap; root |
-| 25 | `[6, 12, 10, 40, 15, 30, 25]` | $25 > 10$, stays |
-| 18 | `[6, 12, 10, 18, 15, 30, 25, 40]` | $18 < 40$ swap; $18 > 12$ stop |
+In a Min-Heap, every parent must be $\le$ its children. Each element is added at the end and **sifted up** while it is smaller than its parent.
 
-##### Final Min Heap
+##### Step 1: Insert 40, 15, 30
+- Insert `40` (root).
+- Insert `15`: $15 < 40 \implies$ Swap with `40`. Node `15` becomes root.
+- Insert `30`: $30 > 15$, stays as right child:
+```text
+      15
+     /  \
+   40    30
+```
+*Array: `[ 15, 40, 30 ]`*
 
+---
+
+##### Step 2: Insert 10 (Sifts to Root)
+- Insert `10` as left child of `40`.
+- $10 < 40 \implies$ Swap with `40`.
+- $10 < 15 \implies$ Swap with `15`. Node `10` becomes root!
+```text
+        10
+       /  \
+     15    30
+    /
+  40
+```
+*Array: `[ 10, 15, 30, 40 ]`*
+
+---
+
+##### Step 3: Insert 12
+- Insert `12` as right child of `15`.
+- $12 < 15 \implies$ Swap with `15`. $12 > 10$, stop:
+```text
+        10
+       /  \
+     12    30
+    /  \
+  40    15
+```
+*Array: `[ 10, 12, 30, 40, 15 ]`*
+
+---
+
+##### Step 4: Insert 6 (Sifts to Root)
+- Insert `6` as left child of `30`.
+- $6 < 30 \implies$ Swap with `30`.
+- $6 < 10 \implies$ Swap with root `10`. Node `6` becomes root!
+```text
+        6
+       /  \
+     12    10
+    /  \   /
+  40   15 30
+```
+*Array: `[ 6, 12, 10, 40, 15, 30 ]`*
+
+---
+
+##### Step 5: Insert 25, 18
+- Insert `25` as right child of `10`: $25 > 10$, stays.
+- Insert `18` as left child of `40`: $18 < 40 \implies$ Swap with `40`. $18 > 12$, stop.
+
+##### Final Min Heap Tree
 ```text
           6
         /   \
@@ -518,6 +787,7 @@ Sift up while smaller than the parent.
    /
  40
 ```
+*Final Array: `[ 6, 12, 10, 18, 15, 30, 25, 40 ]`*
 
 ---
 
@@ -528,47 +798,88 @@ Sift up while smaller than the parent.
 ![Binary Max Heap Deletion](figures/unit2_q7_max_heap_deletion.png)
 
 #### Given Max Heap
-- **Tree Structure:** Complete binary tree with root `90`.
-- **Level-Order Array Representation (1-based / 0-based):**
-  - Indices 0 to 9: `[ 90, 60, 75, 50, 40, 30, 20, 10, 5, 8 ]`
+- **Complete Binary Tree with Root `90`:**
+```text
+             90
+          /      \
+        60        75
+       /  \      /  \
+     50    40  30    20
+    /  \   /
+  10    5 8
+```
+- **Level-Order Array:** `[ 90, 60, 75, 50, 40, 30, 20, 10, 5, 8 ]`
 
-#### Deletion Procedure (Step-by-Step Tracing)
+---
 
-1. **Step 1: Extract Maximum Element (Root):**
-   - The root element `90` is removed (saved as the output of `deleteMax()`).
-   - The **last leaf element in level-order**, which is `8` (at index 9), is moved to replace the root.
-   - Array size shrinks to 9:
-     ```text
-     Array: [ 8, 60, 75, 50, 40, 30, 20, 10, 5 ]
-     ```
-2. **Step 2: Sift-Down (Heapify at Root Index 0):**
-   - Compare node `8` with its left child `60` (index 1) and right child `75` (index 2).
-   - Find the maximum among parent and children: $\max(8, 60, 75) = 75$.
-   - Since child `75 > 8`, swap `8` with `75`:
-     ```text
-     Array: [ 75, 60, 8, 50, 40, 30, 20, 10, 5 ]
-     ```
-3. **Step 3: Continue Sift-Down (Heapify at Index 2):**
-   - Node `8` is now at index 2.
-   - Its left child is at index $2(2) + 1 = 5$ (value `30`) and right child at index $2(2) + 2 = 6$ (value `20`).
-   - Find maximum among parent and children: $\max(8, 30, 20) = 30$.
-   - Since child `30 > 8`, swap `8` with `30`:
-     ```text
-     Array: [ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]
-     ```
-4. **Step 4: Termination:**
-   - Node `8` is now at index 5. Its left child would be at $2(5) + 1 = 11$, which exceeds array bounds (length 9).
-   - Node `8` is now a leaf. The heapify process terminates.
+#### Step-by-Step Deletion Procedure (Visual Tracing)
 
-#### Final Verification & Time Complexity
-- **Final Level-Order Array:** `[ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]`
-- **Heap Property Check:**
-  - `75 ≥ 60, 30` (holds)
-  - `60 ≥ 50, 40` (holds)
-  - `30 ≥ 8, 20` (holds)
-  - `50 ≥ 10, 5` (holds)
-- **Time Complexity:** $O(\log n)$ (traverses down the tree height $h = \lfloor \log_2 10 \rfloor = 3$).
-- **Space Complexity:** $O(1)$ auxiliary space (in-place array swaps).
+##### Step 1: Remove Root `90` and Move Last Element `8` to Root
+- Root `90` is deleted.
+- The last element in level-order, `8` (at index 9), replaces the root:
+```text
+             8 (Root)
+          /      \
+        60        75
+       /  \      /  \
+     50    40  30    20
+    /  \
+  10    5
+```
+*Array: `[ 8, 60, 75, 50, 40, 30, 20, 10, 5 ]`*
+
+---
+
+##### Step 2: Sift-Down at Root (Compare 8 with Children 60 and 75)
+- Children of `8` are `60` and `75`.
+- Largest child is `75`. Since $75 > 8$, swap `8` with `75`:
+```text
+             75
+          /      \
+        60        8 (swapped)
+       /  \      /  \
+     50    40  30    20
+    /  \
+  10    5
+```
+*Array: `[ 75, 60, 8, 50, 40, 30, 20, 10, 5 ]`*
+
+---
+
+##### Step 3: Continue Sift-Down at Index 2 (Compare 8 with Children 30 and 20)
+- Node `8` now has children `30` (index 5) and `20` (index 6).
+- Largest child is `30`. Since $30 > 8$, swap `8` with `30`:
+```text
+             75
+          /      \
+        60        30
+       /  \      /  \
+     50    40  8     20
+    /  \
+  10    5
+```
+*Array: `[ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]`*
+
+---
+
+##### Step 4: Termination & Final Balanced Max Heap
+- Node `8` is now at index 5. Its left child index would be $2(5) + 1 = 11 > 9$ (array length).
+- `8` has no children (it is a leaf). The heapify process halts.
+
+```text
+             75
+          /      \
+        60        30
+       /  \      /  \
+     50    40  8     20
+    /  \
+  10    5
+```
+
+- **Output:** Deleted maximum element = `90`.
+- **Final Level-Order Array:** `[ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]`.
+- **Time Complexity:** $O(\log n)$ (sifts down along tree height $h = 3$).
+- **Space Complexity:** $O(1)$ in-place swaps.
 
 ---
 

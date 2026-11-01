@@ -277,32 +277,98 @@ Trace upwards starting from parent `25`:
 
 **Q4. Construct a B-Tree of order 4 by inserting the keys `5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8`.**
 
-**B-tree of order 4:** each node has at most 4 children (3 keys) and at least 2 children (1 key) except the root; all leaves are at the same level. When a node overflows (4 keys), it is split and the 2nd key moves up to the parent.
+#### Structural Rules (Order $m = 4$)
+- **Maximum children per node:** $m = 4$
+- **Maximum keys per node:** $m - 1 = 3$
+- **Minimum children (non-root internal):** $\lceil m / 2 \rceil = 2$
+- **Minimum keys (non-root):** $\lceil m / 2 \rceil - 1 = 1$
+- **Overflow & Splitting:** When a node reaches 4 keys, it splits. The median key (2nd key) is promoted up to its parent.
 
-| Insert | Tree after insertion |
-|---|---|
-| `5, 3, 21` | `[3 5 21]` |
-| `9` | Overflow `[3 5 9 21]`, split, `5` goes up: `[5]` with children `[3]` and `[9 21]` |
-| `1` | `[5]` → `[1 3]`, `[9 21]` |
-| `13` | `[5]` → `[1 3]`, `[9 13 21]` |
-| `2` | `[5]` → `[1 2 3]`, `[9 13 21]` |
-| `7` | `[7 9 13 21]` overflows, `9` goes up: `[5 9]` → `[1 2 3]`, `[7]`, `[13 21]` |
-| `10` | `[5 9]` → `[1 2 3]`, `[7]`, `[10 13 21]` |
-| `12` | `[10 12 13 21]` overflows, `12` goes up: `[5 9 12]` → `[1 2 3]`, `[7]`, `[10]`, `[13 21]` |
-| `4` | `[1 2 3 4]` overflows, `2` goes up; the parent `[2 5 9 12]` overflows too, `5` goes up: new root `[5]` |
-| `8` | goes to leaf `[7]` giving `[7 8]` |
+---
 
-#### Final B-tree
+#### Step-by-Step Construction Tracing
 
+##### Step 1: Insert 5, 3, 21
+Keys fit into the root node in sorted order:
 ```text
-            [ 5 ]
-           /     \
-       [ 2 ]     [ 9  12 ]
-       /   \     /   |    \
-     [1] [3 4] [7 8] [10] [13 21]
+[ 3  5  21 ]
 ```
 
-Height $= 3$ (root + 2 more levels). *(If the 3rd key is chosen as the median for splitting, the shape differs slightly; always state the convention you use.)*
+---
+
+##### Step 2: Insert 9 (Root Overflows & Splits)
+- Inserting `9` produces `[ 3  5  9  21 ]` (4 keys $\implies$ Overflow!).
+- Split at median key `5`. Key `5` moves up to form the new root:
+```text
+        [ 5 ]
+       /     \
+    [ 3 ]   [ 9  21 ]
+```
+
+---
+
+##### Step 3: Insert 1, 13, 2
+- `1` and `2` are $< 5$, inserted into left leaf `[ 3 ]` $\to `[ 1  2  3 ]`.
+- `13` is $> 5$, inserted into right leaf `[ 9  21 ]` $\to `[ 9  13  21 ]`.
+```text
+          [ 5 ]
+         /     \
+    [ 1  2  3 ]   [ 9  13  21 ]
+```
+
+---
+
+##### Step 4: Insert 7 (Right Leaf Overflows & Splits)
+- `7` is $> 5$, goes into right leaf $\to `[ 7  9  13  21 ]` (Overflow!).
+- Split at median `9`. Key `9` moves up to the root:
+```text
+          [ 5   9 ]
+         /    |    \
+   [ 1 2 3 ] [ 7 ] [ 13 21 ]
+```
+
+---
+
+##### Step 5: Insert 10, 12 (Rightmost Leaf Overflows & Splits)
+- `10` is $> 9$, goes into `[ 13  21 ]` $\to `[ 10  13  21 ]`.
+- `12` is $> 9$, goes into `[ 10  13  21 ]` $\to `[ 10  12  13  21 ]` (Overflow!).
+- Split at median `12`. Key `12` moves up to the root:
+```text
+           [ 5   9   12 ]
+          /    |   \     \
+    [ 1 2 3 ] [ 7 ] [ 10 ] [ 13 21 ]
+```
+
+---
+
+##### Step 6: Insert 4 (Double Split: Leaf & Root Overflow)
+- `4` is $< 5$, goes into left leaf `[ 1  2  3 ]` $\to `[ 1  2  3  4 ]` (Overflow!).
+- **Leaf Split:** Split at median `2`. Key `2` moves up to parent root.
+- **Root Overflow:** Root now contains `[ 2  5  9  12 ]` (4 keys $\implies$ Overflows!).
+- **Root Split:** Split at median `5`. Key `5` becomes the new root; tree height increases:
+```text
+                 [ 5 ]
+                /     \
+            [ 2 ]     [ 9   12 ]
+           /     \    /   |    \
+        [ 1 ]  [ 3 4 ] [ 7 ] [ 10 ] [ 13 21 ]
+```
+
+---
+
+##### Step 7: Insert 8 (Final Insertion)
+- `8` falls between `5` and `9`, so it enters leaf `[ 7 ]` to become `[ 7  8 ]` (fits without overflow):
+
+```text
+                 [ 5 ]
+                /     \
+            [ 2 ]     [ 9   12 ]
+           /     \    /   |    \
+        [ 1 ]  [ 3 4 ] [ 7 8 ] [ 10 ] [ 13 21 ]
+```
+
+- **Height:** 3 levels (Root + 1 internal level + Leaves).
+- **All B-tree properties hold:** every non-root has 1–3 keys, all leaves are at the exact same depth.
 
 ---
 
@@ -310,40 +376,88 @@ Height $= 3$ (root + 2 more levels). *(If the 3rd key is chosen as the median fo
 
 **Q5. Explain the deletion operation in a B-Tree with a suitable example, and the applications of B-Trees.**
 
-#### Deletion cases (order $m$, minimum keys $= \lceil m/2 \rceil - 1$; for order 4 the minimum is 1 key)
+#### Deletion Rules (Order $m = 4$, Minimum Keys $= 1$)
+1. **Case 1 (Leaf with $\ge 2$ keys):** Simply remove the key. No rebalancing needed.
+2. **Case 2 (Leaf with minimum 1 key — Underflow):**
+   - **Case 2A (Borrow from Sibling):** If an immediate sibling has $\ge 2$ keys, borrow a key via rotation through the parent.
+   - **Case 2B (Merge with Sibling):** If both immediate siblings have only 1 key, merge the node with a sibling and pull down the separating key from the parent.
+3. **Case 3 (Internal Node):** Replace the key with its inorder predecessor (largest in left subtree) or inorder successor (smallest in right subtree), then delete that key from the leaf.
+4. **Case 4 (Shrinking Height):** If root loses all keys during a merge, its sole child becomes the new root.
 
-1. **Key in a leaf with more than the minimum keys:** simply remove it.
-2. **Key in a leaf with minimum keys (underflow):**
-   - Borrow from a sibling that has extra keys (rotate through the parent), or
-   - Merge with a sibling and the separating key from the parent if no sibling can lend.
-3. **Key in an internal node:** replace it with its inorder predecessor or successor (from a leaf) and delete that key from the leaf (then apply case 1 or 2).
-4. If merging makes the parent underflow, repeat upward; if the root becomes empty, the tree height shrinks by one.
+---
 
-#### Example (using the tree built in Q4)
+#### Step-by-Step Deletion Example (Starting from Q4 Final Tree)
 
-Root `[5]`; internal nodes `[2]` and `[9 12]`; leaves `[1]`, `[3 4]`, `[7 8]`, `[10]`, `[13 21]`.
-
-- **Delete `4`:** leaf `[3 4]` has 2 keys, so simply remove `4`, giving `[3]`.
-- **Delete `10`:** leaf `[10]` would become empty (underflow). Its left sibling `[7 8]` has a spare key, so borrow through the parent: `9` moves down into the leaf and `8` moves up. Result: parent `[8 12]`, leaves `[7]`, `[9]`, `[13 21]`.
-- **Delete `1`:** leaf `[1]` becomes empty and its sibling `[3]` has no spare key, so merge the empty leaf, the separator `2` and `[3]` into the leaf `[2 3]`. The parent `[2]` is now empty (underflow). Its sibling `[8 12]` has a spare key, so borrow through the root: `5` moves down, `8` moves up, and leaf `[7]` becomes the child of the node holding `5`.
-
-#### Final tree after the three deletions
-
+**Initial B-Tree:**
 ```text
-          [ 8 ]
-         /     \
-     [ 5 ]     [ 12 ]
-     /   \     /    \
-  [2 3]  [7] [9]  [13 21]
+                 [ 5 ]
+                /     \
+            [ 2 ]     [ 9   12 ]
+           /     \    /   |    \
+        [ 1 ]  [ 3 4 ] [ 7 8 ] [ 10 ] [ 13 21 ]
 ```
 
-#### Applications of B-trees
+---
 
-- Database indexes (MySQL InnoDB uses $\text{B}^+$-trees).
-- File systems (NTFS, ext4, HFS+, Btrfs) for directory and metadata indexing.
-- Storing large data on disk, since a node corresponds to a disk block, so tree height (disk accesses) is minimal.
-- Multilevel indexing, key-value stores and search engines.
-- Search, insert, delete: $O(\log n)$.
+##### Step 1: Delete 4 (Case 1: Leaf with Extra Keys)
+- Node `[ 3  4 ]` has 2 keys (minimum required is 1).
+- Simply delete `4`. The node retains `[ 3 ]` with no underflow:
+```text
+                 [ 5 ]
+                /     \
+            [ 2 ]     [ 9   12 ]
+           /     \    /   |    \
+        [ 1 ]   [ 3 ]  [ 7 8 ] [ 10 ] [ 13 21 ]
+```
+
+---
+
+##### Step 2: Delete 10 (Case 2A: Underflow $\to$ Borrow from Left Sibling)
+- Delete `10` from leaf `[ 10 ]` $\implies$ node becomes empty `[ ]` (Underflow!).
+- Look at left sibling `[ 7  8 ]`: it has 2 keys (can spare key `8`).
+- **Borrow via parent `[ 9  12 ]`:**
+  - Sibling's largest key `8` moves up to parent.
+  - Parent separator key `9` moves down into the empty leaf:
+```text
+                 [ 5 ]
+                /     \
+            [ 2 ]     [ 8   12 ]
+           /     \    /   |    \
+        [ 1 ]   [ 3 ]  [ 7 ]  [ 9 ] [ 13 21 ]
+```
+
+---
+
+##### Step 3: Delete 1 (Case 2B & Case 4: Merge Siblings & Parent Borrow)
+- Delete `1` from leaf `[ 1 ]` $\implies$ node becomes empty `[ ]` (Underflow!).
+- Sibling `[ 3 ]` has only 1 key (cannot lend).
+- **Action 3.1: Merge Leaves & Parent Key:**
+  - Merge empty leaf + parent key `2` + sibling `[ 3 ]` into leaf `[ 2  3 ]`.
+  - Parent node `[ 2 ]` loses key `2` and becomes empty `[ ]` (Underflow at parent level!).
+- **Action 3.2: Resolve Parent Underflow:**
+  - Parent's sibling `[ 8  12 ]` has 2 keys (can spare key `8`).
+  - Borrow via root `[ 5 ]`:
+    - Root key `5` moves down to left internal node.
+    - Sibling's first key `8` moves up to become the new root.
+    - Sibling's child `[ 7 ]` moves across to become right child of `[ 5 ]`.
+
+**Final Tree After Deletions:**
+```text
+            [ 8 ]
+           /     \
+       [ 5 ]     [ 12 ]
+       /   \     /    \
+    [ 2 3 ] [ 7 ] [ 9 ] [ 13 21 ]
+```
+
+---
+
+#### Real-World Applications of B-Trees
+1. **Database Indexing:** Powers primary and secondary B-tree indexes in relational databases (MySQL InnoDB, PostgreSQL, Oracle).
+2. **File Systems:** Manages directory hierarchies and file allocation blocks in modern file systems (NTFS, ext4, HFS+, Btrfs).
+3. **Minimizing Disk I/O:** Designed specifically for block storage; a single disk block holds a large node, keeping tree height extremely low ($O(\log_m n)$).
+4. **Multilevel Indexing:** Ideal for massive datasets that do not fit into RAM.
+5. **Guaranteed Efficiency:** Search, insert, and delete operations all complete in $O(\log n)$ worst-case time.
 
 ---
 

@@ -123,78 +123,118 @@ Algorithm analysis is the process of estimating the resources (time and memory) 
 
 ### 2. Asymptotic Notations: Big-O, Omega, and Theta
 
-**Q2. Describe the asymptotic notations $O$, $\Omega$ and $\Theta$. Illustrate each notation with suitable examples.**
+**Q2. Describe the asymptotic notations $O$, $\Omega$, and $\Theta$. Illustrate each notation with suitable examples.**
 
-Asymptotic notations describe the growth rate of a function $f(n)$ for large $n$.
+Asymptotic notations are mathematical tools used to characterize the runtime or memory growth of an algorithm as input size $n \to \infty$, independent of specific hardware, compiler, or processor speeds.
 
-#### 1. Big-O (upper bound, worst case)
+![Asymptotic Notations Growth Curves](figures/unit1_q2_asymptotic_notations.png)
 
-$$
-f(n) = O(g(n)) \text{ if there exist constants } c > 0 \text{ and } n_0 \text{ such that } f(n) \le c \cdot g(n) \text{ for all } n \ge n_0.
-$$
+#### 1. Big-O Notation ($O$ — Upper Bound / Worst Case)
 
-- **Example:** $f(n) = 3n + 2$. Since $3n + 2 \le 4n$ for $n \ge 2$, $f(n) = O(n)$ ($c = 4, n_0 = 2$).
-
-#### 2. Big-Omega $\Omega$ (lower bound, best case)
+Big-O represents the upper bound on the growth rate of an algorithm. It specifies that an algorithm will take *at most* this amount of time.
 
 $$
-f(n) = \Omega(g(n)) \text{ if there exist } c > 0 \text{ and } n_0 \text{ such that } f(n) \ge c \cdot g(n) \text{ for all } n \ge n_0.
+f(n) = O(g(n)) \iff \exists \text{ positive constants } c > 0 \text{ and } n_0 \ge 1 \text{ such that } 0 \le f(n) \le c \cdot g(n) \quad \forall n \ge n_0
 $$
 
-- **Example:** $3n + 2 \ge 3n$ for $n \ge 1$, so $f(n) = \Omega(n)$ ($c = 3, n_0 = 1$).
+- **Mathematical Proof:** Prove $f(n) = 3n + 2 = O(n)$:
+  - Given $f(n) = 3n + 2$ and $g(n) = n$.
+  - We require $3n + 2 \le c \cdot n$.
+  - For $c = 4$ and $n_0 = 2$:
+    $$3(2) + 2 = 8 \le 4(2) = 8 \quad (\text{holds for all } n \ge 2)$$
+  - Hence, $3n + 2 = O(n)$ with $c = 4, n_0 = 2$.
 
-#### 3. Big-Theta $\Theta$ (tight bound)
+#### 2. Big-Omega Notation ($\Omega$ — Lower Bound / Best Case)
+
+Big-Omega represents the lower bound on the growth rate. It specifies the minimum amount of time an algorithm will take for large $n$.
 
 $$
-f(n) = \Theta(g(n)) \text{ if there exist } c_1, c_2 > 0 \text{ and } n_0 \text{ such that } c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n) \text{ for all } n \ge n_0.
+f(n) = \Omega(g(n)) \iff \exists \text{ positive constants } c > 0 \text{ and } n_0 \ge 1 \text{ such that } 0 \le c \cdot g(n) \le f(n) \quad \forall n \ge n_0
 $$
 
-- **Example:** $3n \le 3n + 2 \le 4n$ for $n \ge 2$, so $f(n) = \Theta(n)$. Equivalent to $f(n) = O(g(n))$ and $f(n) = \Omega(g(n))$.
+- **Mathematical Proof:** Prove $f(n) = 5n^2 + 10 = \Omega(n^2)$:
+  - Given $f(n) = 5n^2 + 10$ and $g(n) = n^2$.
+  - We require $c \cdot n^2 \le 5n^2 + 10$.
+  - Choose $c = 5$ and $n_0 = 1$:
+    $$5(1)^2 = 5 \le 5(1)^2 + 10 = 15 \quad (\text{holds for all } n \ge 1)$$
+  - Hence, $5n^2 + 10 = \Omega(n^2)$ with $c = 5, n_0 = 1$.
 
-| Notation | Meaning | Bound | Typical use |
+#### 3. Big-Theta Notation ($\Theta$ — Tight Bound / Average Case)
+
+Big-Theta bounds the function both from above and below within constant factors. It gives the exact rate of growth.
+
+$$
+f(n) = \Theta(g(n)) \iff \exists \text{ constants } c_1, c_2 > 0 \text{ and } n_0 \ge 1 \text{ such that } 0 \le c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n) \quad \forall n \ge n_0
+$$
+
+- **Mathematical Proof:** Prove $f(n) = 3n + 2 = \Theta(n)$:
+  - We need $c_1 \cdot n \le 3n + 2 \le c_2 \cdot n$.
+  - Choose $c_1 = 3, c_2 = 4$, and $n_0 = 2$:
+    $$3n \le 3n + 2 \le 4n \quad \forall n \ge 2$$
+  - Since $f(n) = O(n)$ and $f(n) = \Omega(n)$ simultaneously, $f(n) = \Theta(n)$.
+
+| Notation | Mathematical Definition | Bound Type | Exam / Practical Use |
 |---|---|---|---|
-| $O(g)$ | $f$ grows no faster than $g$ | Upper | Worst case |
-| $\Omega(g)$ | $f$ grows at least as fast as $g$ | Lower | Best case |
-| $\Theta(g)$ | $f$ grows exactly like $g$ | Tight | Exact rate |
+| **$O(g(n))$** | $f(n) \le c \cdot g(n)$ | Asymptotic Upper Bound | Worst-case performance guarantee |
+| **$\Omega(g(n))$** | $f(n) \ge c \cdot g(n)$ | Asymptotic Lower Bound | Best-case benchmark |
+| **$\Theta(g(n))$** | $c_1 \cdot g(n) \le f(n) \le c_2 \cdot g(n)$ | Asymptotic Tight Bound | True average / exact rate of growth |
 
-**Order of growth:**
+**Common Orders of Growth (Ascending):**
 
 $$
-1 < \log n < n < n \log n < n^2 < n^3 < 2^n < n!
+O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2) < O(n^3) < O(2^n) < O(n!)
 $$
 
 ---
 
 ### 3. Time Complexity of Matrix Multiplication (Tabular / Step-Count Method)
 
-**Q3. Analyze the time complexity of the matrix multiplication algorithm (tabular method) using asymptotic notation and justify your answer.**
+**Q3. Analyze the time complexity for matrix multiplication algorithm (tabular method) using asymptotic notation and justify your answer.**
 
-#### Algorithm (for two $n \times n$ matrices $A$ and $B$)
+#### Standard Matrix Multiplication Algorithm (C / Pseudo-code)
 
-```text
-for i = 1 to n          // runs n times
-    for j = 1 to n      // runs n times for each i
-        C[i][j] = 0
-        for k = 1 to n  // runs n times for each (i, j)
-            C[i][j] = C[i][j] + A[i][k] * B[k][j]
+```c
+void MatrixMultiplication(int A[n][n], int B[n][n], int C[n][n], int n) {
+    for (int i = 0; i < n; i++) {              // Line 1
+        for (int j = 0; j < n; j++) {          // Line 2
+            C[i][j] = 0;                       // Line 3
+            for (int k = 0; k < n; k++) {      // Line 4
+                C[i][j] += A[i][k] * B[k][j];  // Line 5
+            }
+        }
+    }
+}
 ```
 
-#### Analysis
+#### Step-Count Table (Tabular Method)
 
-- The innermost statement executes once for every combination of $(i, j, k)$: $n \times n \times n = n^3$ times.
-- The statement `C[i][j] = 0` executes $n^2$ times.
-- Loop overhead is proportional to $n^3$ as well.
+In the step-count method, we evaluate the cost per execution ($s/e$) and the frequency of execution for every statement:
 
-$$
-T(n) = c_1 \cdot n^3 + c_2 \cdot n^2 + c_3 \cdot n + c_4
-$$
+| Line | Statement | Steps / Execution ($s/e$) | Execution Frequency | Total Step Count |
+| :---: | :--- | :---: | :---: | :--- |
+| **1** | `for (int i = 0; i < n; i++)` | 1 | $n + 1$ | $n + 1$ |
+| **2** | `for (int j = 0; j < n; j++)` | 1 | $n \times (n + 1)$ | $n^2 + n$ |
+| **3** | `C[i][j] = 0;` | 1 | $n \times n$ | $n^2$ |
+| **4** | `for (int k = 0; k < n; k++)` | 1 | $n \times n \times (n + 1)$ | $n^3 + n^2$ |
+| **5** | `C[i][j] += A[i][k] * B[k][j];` | 1 | $n \times n \times n$ | $n^3$ |
+| **Total** | **Total Step Count $T(n)$** | — | — | **$2n^3 + 3n^2 + 2n + 1$** |
 
-#### Justification
+#### Step-by-Step Justification & Dominant Term Analysis
 
-- **Upper bound:** $T(n) \le c \cdot n^3$ for large $n$, so $T(n) = O(n^3)$.
-- **Lower bound:** $T(n) \ge c' \cdot n^3$ (at least $n^3$ multiplications are performed in every case), so $T(n) = \Omega(n^3)$.
-- Therefore $T(n) = \Theta(n^3)$ in best, average and worst case (the running time does not depend on the values in the matrices).
-- **Space complexity:** $\Theta(n^2)$ for the result matrix. (Strassen's method reduces the time to $O(n^{2.81})$.)
+1. **Total Step Count Equation:**
+   $$T(n) = 2n^3 + 3n^2 + 2n + 1$$
+2. **Dominant Term:**
+   - As $n \to \infty$, the term $2n^3$ dominates all lower-order terms ($3n^2$, $2n$, and $1$).
+3. **Asymptotic Upper Bound ($O$):**
+   - For all $n \ge 1$:
+     $$2n^3 + 3n^2 + 2n + 1 \le 2n^3 + 3n^3 + 2n^3 + n^3 = 8n^3$$
+   - Thus, with $c = 8$ and $n_0 = 1$, $T(n) \le 8n^3 \implies T(n) = O(n^3)$.
+4. **Asymptotic Lower Bound ($\Omega$):**
+   - For all $n \ge 1$, $T(n) = 2n^3 + 3n^2 + 2n + 1 \ge 2n^3$.
+   - Thus, with $c = 2$ and $n_0 = 1$, $T(n) \ge 2n^3 \implies T(n) = \Omega(n^3)$.
+5. **Tight Bound ($\Theta$):**
+   - Since $T(n) = O(n^3)$ and $T(n) = \Omega(n^3)$, **$T(n) = \Theta(n^3)$**.
+- **Space Complexity:** $\Theta(n^2)$ to store the $n \times n$ matrices in memory.
 
 ---
 
@@ -202,58 +242,85 @@ $$
 
 **Q4. Explain the concept of hashing. Discuss different hash functions with suitable examples.**
 
-Hashing is a technique to store and retrieve data in nearly $O(1)$ time. A hash function $h(k)$ maps a key $k$ to an index (address) in a hash table of size $m$. Insert, search and delete use this index directly.
+Hashing is a technique that transforms a search key of arbitrary size into a fixed-size index within a hash table of size $m$, enabling direct $O(1)$ average-time search, insertion, and deletion.
 
 ```text
-key ---> h(key) ---> index in hash table T[0 .. m-1]
+Key (k)  ───►  [ Hash Function h(k) ]  ───►  Index ∈ [0, m - 1] in Hash Table
 ```
 
-**Characteristics of a good hash function:** easy and fast to compute; distributes keys uniformly; minimises collisions; uses all parts of the key.
+#### Properties of a Good Hash Function
+1. **Uniform Distribution:** Distributes keys evenly across all table slots to prevent clustering.
+2. **Deterministic:** For any key $k$, $h(k)$ must always return the exact same index.
+3. **Fast Computation:** Computes index in $O(1)$ time with minimal arithmetic operations.
+4. **Minimizes Collisions:** Avoids assigning multiple keys to the same index.
 
-#### Common hash functions
+#### The 6 Major Hash Functions (with Examples)
 
-1. **Division method:** $h(k) = k \bmod m$ ($m$ is preferably a prime).
-   - *Example:* $m = 10, k = 237$, so $h = 237 \bmod 10 = 7$.
-2. **Multiplication method:** $h(k) = \lfloor m \cdot (k \cdot A \bmod 1) \rfloor$, where $0 < A < 1$ (e.g. $A \approx 0.618$).
-   - *Example:* $k = 123, m = 100, A = 0.618$: $k \cdot A = 76.014$, fractional part $0.014$, so $h = \lfloor 100 \times 0.014 \rfloor = 1$.
-3. **Mid-square method:** Square the key and take the middle digits.
-   - *Example:* $k = 123, k^2 = 15129$, middle digits `"12"` gives $h = 12$.
-4. **Folding method:** Divide the key into equal parts and add them (shift or boundary folding).
-   - *Example:* $k = 123456$, parts $12 + 34 + 56 = 102$, so $h = 102 \bmod 100 = 2$.
-5. **Digit analysis:** Choose the digits of the key that are most uniformly distributed (used when all keys are known in advance).
+1. **Division (Remainder) Method:**
+   - **Formula:** $h(k) = k \bmod m$ (where $m$ is chosen as a prime number not close to a power of 2).
+   - **Example:** $k = 127, m = 11 \implies h(127) = 127 \bmod 11 = 6$.
+2. **Multiplication Method:**
+   - **Formula:** $h(k) = \lfloor m \cdot (k \cdot A \bmod 1) \rfloor$ (Knuth recommends $A \approx \frac{\sqrt{5}-1}{2} \approx 0.618033$).
+   - **Example:** $k = 123, m = 100, A = 0.618033 \implies k \cdot A = 76.018 \implies \text{fractional part } 0.018 \implies h(k) = \lfloor 100 \times 0.018 \rfloor = 1$.
+3. **Mid-Square Method:**
+   - **Steps:** (1) Square the key $k^2$, (2) Extract the middle $r$ digits as the index.
+   - **Example:** $k = 45 \implies k^2 = 2025$. Middle two digits are `02` $\implies h(45) = 2$.
+4. **Folding Method:**
+   - **Steps:** Split the key into equal-sized parts matching table index width, sum the parts, and take modulo $m$.
+   - **Example:** $k = 123456$, parts = $12, 34, 56$. Sum $= 12 + 34 + 56 = 102 \implies h(k) = 102 \bmod 100 = 2$.
+5. **Digit Extraction Method:**
+   - **Steps:** Pre-selected digit positions from keys known to be uniformly distributed are extracted to form the address.
+   - **Example:** Employee ID `98234567`. Extract 3rd, 5th, and 7th digits $\to `2, 4, 6` \implies \text{Index} = 246$.
+6. **String Hash Functions (ASCII Sum Method):**
+   - **Steps:** Sum the ASCII values of all characters in the string and take modulo $m$.
+   - **Example:** `"CAT"`: $\text{ASCII}(C)=67, \text{ASCII}(A)=65, \text{ASCII}(T)=84$. Sum $= 67 + 65 + 84 = 216$. For $m = 10$, $h(\text{"CAT"}) = 216 \bmod 10 = 6$.
 
 ---
 
 ### 5. Collision Resolution Techniques
 
-**Q5. Explain the collision resolution techniques: Linear Probing, Quadratic Probing, Double Hashing and Separate Chaining.**
+**Q5. Explain the collision resolution techniques: Linear Probing, Quadratic Probing, Double Hashing, and Separate Chaining.**
 
-A collision occurs when $h(k_1) = h(k_2)$ for two different keys. Techniques are of two kinds: open addressing (probing) and chaining.
+A collision occurs when two distinct keys produce the same hash index: $h(k_1) = h(k_2)$ for $k_1 \neq k_2$.
 
-**Example data:** table size $m = 10$, keys `23, 43, 13, 27`, $h(k) = k \bmod 10$. Keys `23, 43, 13` all hash to index `3`.
+![Collision Resolution Techniques](figures/unit1_q5_collision_resolution.png)
 
-1. **Linear Probing:** $h(k, i) = (h(k) + i) \bmod m$. Try the next free slot sequentially.
-   - `23` goes to `3`; `43` to `3` (occupied), try `4`, so `4`; `13` to `3`, `4` occupied, so `5`; `27` goes to `7`.
-   - **Table:** `3:23, 4:43, 5:13, 7:27`.
-   - **Drawback:** primary clustering.
-2. **Quadratic Probing:** $h(k, i) = (h(k) + i^2) \bmod m$.
-   - `23` to `3`; `43` to `3` (occupied), $3+1 = 4$, so `4`; `13` to `3`, `4` occupied, $3+4 = 7$, so `7`; `27` to `7` (occupied), $7+1 = 8$, so `8`.
-   - **Table:** `3:23, 4:43, 7:13, 8:27`.
-   - Reduces primary clustering but causes secondary clustering.
-3. **Double Hashing:** $h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m$, with $h_2(k) = 7 - (k \bmod 7)$.
-   - `23` to `3`; `43`: $h_2 = 7 - 1 = 6$, $(3+6) \bmod 10 = 9$, so `9`; `13`: $h_2 = 7 - 6 = 1$, $(3+1) = 4$, so `4`; `27` goes to `7`.
-   - **Table:** `3:23, 4:13, 7:27, 9:43`.
-   - Best distribution; avoids both primary and secondary clustering.
-4. **Separate Chaining:** Each table slot holds a linked list of all keys that hash to it.
-   - Slot `3`: `23 → 43 → 13`; slot `7`: `27`.
-   - Table never overflows; load factor can exceed 1; needs extra memory for pointers.
+#### 1. Separate Chaining (Open Hashing)
+Each slot in the hash table points to a linked list of elements that hash to that same index.
+- **Example:** $m = 10$, keys: `10, 70, 32, 52, 12, 23` with $h(k) = k \bmod 10$.
+  - Slot `0`: `10 → 70 → NULL`
+  - Slot `2`: `32 → 52 → 12 → NULL`
+  - Slot `3`: `23 → NULL`
+- **Advantages:** Never overflows (load factor $\alpha$ can exceed 1); simple deletion.
+- **Disadvantages:** Pointer overhead; cache-unfriendly linked lists.
 
-| Method | Clustering | Extra memory | Table can overflow |
-|---|---|---|---|
-| Linear probing | Primary | No | Yes |
-| Quadratic probing | Secondary | No | Yes |
-| Double hashing | Minimal | No | Yes |
-| Separate chaining | None | Yes (pointers) | No |
+#### 2. Open Addressing (Closed Hashing)
+All keys reside directly within the array table. If a slot is occupied, probe for the next available slot.
+
+1. **Linear Probing:**
+   - **Probe Sequence:** $h(k, i) = (h(k) + i) \bmod m$ for $i = 0, 1, 2, \dots$
+   - **Example ($m = 10$, keys `23, 43, 13, 27` with $h(k) = k \bmod 10$):**
+     - `Insert 23`: $h(23, 0) = 3$ (Empty $\to$ placed at `3`).
+     - `Insert 43`: $h(43, 0) = 3$ (Collision! Probe $i=1 \to 4$, empty $\to$ placed at `4`).
+     - `Insert 13`: $h(13, 0) = 3$ (Collision!), $i=1 \to 4$ (Collision!), $i=2 \to 5$ (placed at `5`).
+     - `Insert 27`: $h(27, 0) = 7$ (Empty $\to$ placed at `7`).
+     - **Final Table:** `3: 23, 4: 43, 5: 13, 7: 27`.
+   - **Limitation:** Suffers from **Primary Clustering** (long contiguous blocks of occupied slots build up, degrading lookup time).
+2. **Quadratic Probing:**
+   - **Probe Sequence:** $h(k, i) = (h(k) + c_1 i + c_2 i^2) \bmod m$ (Standard: $i^2$).
+   - **Advantage:** Eliminates primary clustering by making increasingly larger quadratic jumps ($1, 4, 9, 16\dots$).
+   - **Limitation:** Can cause **Secondary Clustering** (keys hashing to the same initial slot follow identical probe paths).
+3. **Double Hashing:**
+   - **Probe Sequence:** $h(k, i) = (h_1(k) + i \cdot h_2(k)) \bmod m$.
+   - Here $h_2(k)$ computes an individualized step size (e.g. $h_2(k) = 7 - (k \bmod 7)$).
+   - **Advantage:** Completely avoids both primary and secondary clustering; yields optimal uniform distribution in open addressing.
+
+| Feature | Separate Chaining | Linear Probing | Quadratic Probing | Double Hashing |
+|---|---|---|---|---|
+| **Storage Strategy** | Linked list per slot | Contiguous array | Contiguous array | Contiguous array |
+| **Clustering** | None | Severe (Primary) | Mild (Secondary) | None |
+| **Can Table Overflow?** | No (limited by RAM) | Yes (when full) | Yes | Yes |
+| **Cache Performance** | Poor (pointer chasing) | Excellent (linear) | Good | Moderate |
 
 ---
 

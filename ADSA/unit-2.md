@@ -204,13 +204,18 @@ Right rotation at $y$, then left rotation at $z$.
 | LR | Left-Right | Left then right (double) |
 | RL | Right-Left | Right then left (double) |
 
+![The Four AVL Tree Rotations](figures/unit2_q2_avl_rotations.png)
+
 #### Applications of AVL trees
 
-- Databases and indexing where lookups dominate insertions.
-- In-memory dictionaries and sets requiring guaranteed $O(\log n)$ search.
-- Lookup tables and routing tables; memory management.
-- Applications that need ordered data with fast search (e.g. spell-checkers, file systems directories).
-- Search, insert and delete are all $O(\log n)$ worst case.
+- **Database Indexing:** Used in database systems to speed up search, insert, and delete operations where lookups dominate.
+- **File Systems:** AVL trees maintain directory structures and symbol tables for fast file access.
+- **Compilers & Interpreters:** Used in compiler symbol tables to store identifiers (variables, function names) in sorted order.
+- **Memory Management:** Used by operating systems to allocate and deallocate free memory blocks efficiently.
+- **Network Routing:** IP address lookup tables and network prefix matching.
+- **Dictionaries & Spell Checkers:** Rapid word lookup and autocomplete.
+- **Range Queries:** Efficient retrieval of all keys between $K_1$ and $K_2$.
+- **Real-Time Systems:** Guarantees strict $O(\log n)$ worst-case execution time, essential for mission-critical predictability.
 
 ---
 
@@ -218,49 +223,55 @@ Right rotation at $y$, then left rotation at $z$.
 
 **Q3. Explain the deletion procedure in an AVL tree. Show the balancing operations after deletion of `15` from the given AVL tree.**
 
-#### Deletion procedure
+#### Deletion Procedure (Step-by-Step)
 
-1. Delete the node as in a BST (leaf: remove; one child: replace by child; two children: replace by inorder successor/predecessor and delete that node).
-2. Walk back up to the root, updating heights and balance factors.
-3. At the first unbalanced node, perform the suitable rotation (LL, RR, LR, RL). For deletion, the rotation type is chosen by the balance factor of the taller child (if it is $0$, a single rotation is used).
-4. Continue upward, because a rotation may reduce the height and cause further imbalance (unlike insertion, more than one rotation may be needed).
+1. **BST Deletion:** Perform standard BST deletion:
+   - If node is a **leaf**, remove it directly.
+   - If node has **one child**, replace node with its child.
+   - If node has **two children**, replace node with its inorder successor (smallest in right subtree) or inorder predecessor, and delete that successor/predecessor node.
+2. **Update Heights & Balance Factors:** Trace upward from the parent of the physically deleted node toward the root, updating each ancestor's height and balance factor:
+   $$BF(\text{node}) = \text{height}(\text{left}) - \text{height}(\text{right})$$
+3. **Check Balance:** If $BF \in \{-1, 0, +1\}$, the node is balanced. Move to its parent.
+4. **Rebalance via Rotations:** If $BF = \pm 2$, an imbalance is detected:
+   - Identify the rotation case ($LL, RR, LR, RL$) based on the balance factor of the taller child.
+   - Apply rotation to restore balance.
+5. **Propagate Upward:** Unlike insertion (which needs at most one rotation), deletion can decrease subtree height and cause further imbalances up to the root. Continue until root is balanced.
 
-#### Given tree
+---
 
-Root `50`: `50 (25 (15, 40 (35, –)), 75 (60 (55, 65 (62, –)), 80 (–, 90)))`.
+#### Worked Example: Deleting Node 15 from Given AVL Tree
 
-```text
-              50
-            /    \
-          25      75
-         /  \    /  \
-       15   40  60   80
-           /   /  \    \
-         35   55  65    90
-                 /
-               62
-```
+![AVL Tree Deletion of 15](figures/unit2_q3_avl_deletion.png)
 
-#### Delete 15 (a leaf)
+##### Step 1: Remove Leaf Node 15
+- Node `15` is a leaf child of `25`. Remove `15` directly.
 
-1. Remove `15`. Node `25` now has no left child and right child `40` (height 2): balance factor $= -2$.
-2. The right child `40` is left-heavy (it has left child `35`), so this is the RL case. Right rotate at `40`, then left rotate at `25`. Result: `35 (25, 40)`.
-3. Moving up, the subtree at `35` now has height 2 while the right subtree of `50` (rooted at `75`) has height 4: node `50` has balance factor $= -2$.
-4. The right child `75` is left-heavy (`60` side is taller), so again an RL case: right rotate at `75`, then left rotate at `50`. Node `60` becomes the new root.
+##### Step 2: Trace Ancestor Balance Factors
+Trace upwards starting from parent `25`:
 
-#### Final tree after deletion of 15
+| Node | Height (Left) | Height (Right) | Balance Factor ($BF = L - R$) | Status |
+| :---: | :---: | :---: | :---: | :---: |
+| **25** | 0 | 2 | **$-2$** | **Unbalanced (Needs Rotation)** |
+| **40** | 1 | 0 | $+1$ | Balanced |
+| **50** | 3 | 3 | 0 | Balanced |
+| **75** | 3 | 2 | $+1$ | Balanced |
+| **60** | 1 | 2 | $-1$ | Balanced |
+| **80** | 0 | 1 | $-1$ | Balanced |
+| **65** | 0 | 1 | $-1$ | Balanced |
+| **35, 55, 62, 90** | 0 | 0 | 0 | Balanced (Leaves) |
 
-```text
-          60
-        /    \
-      50      75
-     /  \    /  \
-   35   55  65   80
-  /  \     /       \
- 25  40   62       90
-```
+##### Step 3: Identify Imbalance & Apply RL Rotation
+- At node `25`: $BF(25) = -2$ (Right heavy).
+- Right child `40`: $BF(40) = +1$ (Left heavy).
+- **Condition:** Right-Left (RL) Case $\implies$ Requires **Double RL Rotation** at node `25`:
+  - **Sub-step 3.1 (Right Rotation at 40):** Right-rotate at node `40`. Node `35` moves up and becomes right child of `25`, with `40` as right child of `35`.
+  - **Sub-step 3.2 (Left Rotation at 25):** Left-rotate at node `25`. Node `35` rises to become the new root of the subtree, with `25` as its left child and `40` as its right child!
 
-All balance factors are within $\{-1, 0, +1\}$. Two double (RL) rotations were required.
+##### Step 4: Final Verification
+- The restructured subtree rooted at `35 (25, 40)` has height 2.
+- At root `50`: left subtree height = 3 (via path `50 → 35 → 25` is height 3), right subtree height = 3 (via `50 → 75 → 60 → 65 → 62`).
+- Balance factor at root $50 = 3 - 3 = 0$.
+- **All nodes satisfy $BF \in \{-1, 0, +1\}$.** Tree is a valid balanced AVL tree.
 
 ---
 
@@ -400,33 +411,52 @@ Sift up while smaller than the parent.
 
 ### 7. Deletion Operation on Given Max Heap
 
-**Q7. Perform one deletion operation on the given Max Heap and show the step-by-step process for the final Max Heap.**
+**Q7. Perform one deletion operation on given Max Heap and show the step-by-step process for final Max Heap.**
 
-**Given Max Heap (array form):** `[90, 60, 75, 50, 40, 30, 20, 10, 5, 8]`
+![Binary Max Heap Deletion](figures/unit2_q7_max_heap_deletion.png)
 
-The standard deletion is **delete-max** (remove the root `90`):
+#### Given Max Heap
+- **Tree Structure:** Complete binary tree with root `90`.
+- **Level-Order Array Representation (1-based / 0-based):**
+  - Indices 0 to 9: `[ 90, 60, 75, 50, 40, 30, 20, 10, 5, 8 ]`
 
-1. Remove the root `90` and replace it with the last element `8`; reduce the size by 1.
-   - Array: `[8, 60, 75, 50, 40, 30, 20, 10, 5]`
-2. **Heapify down (sift down):** compare `8` with its children `60` and `75`. The larger is `75`, so swap.
-   - Array: `[75, 60, 8, 50, 40, 30, 20, 10, 5]`
-3. `8` is now at index 2 with children `30` and `20`. The larger is `30`, so swap.
-   - Array: `[75, 60, 30, 50, 40, 8, 20, 10, 5]`
-4. `8` has no children now; stop.
+#### Deletion Procedure (Step-by-Step Tracing)
 
-#### Final Max Heap
+1. **Step 1: Extract Maximum Element (Root):**
+   - The root element `90` is removed (saved as the output of `deleteMax()`).
+   - The **last leaf element in level-order**, which is `8` (at index 9), is moved to replace the root.
+   - Array size shrinks to 9:
+     ```text
+     Array: [ 8, 60, 75, 50, 40, 30, 20, 10, 5 ]
+     ```
+2. **Step 2: Sift-Down (Heapify at Root Index 0):**
+   - Compare node `8` with its left child `60` (index 1) and right child `75` (index 2).
+   - Find the maximum among parent and children: $\max(8, 60, 75) = 75$.
+   - Since child `75 > 8`, swap `8` with `75`:
+     ```text
+     Array: [ 75, 60, 8, 50, 40, 30, 20, 10, 5 ]
+     ```
+3. **Step 3: Continue Sift-Down (Heapify at Index 2):**
+   - Node `8` is now at index 2.
+   - Its left child is at index $2(2) + 1 = 5$ (value `30`) and right child at index $2(2) + 2 = 6$ (value `20`).
+   - Find maximum among parent and children: $\max(8, 30, 20) = 30$.
+   - Since child `30 > 8`, swap `8` with `30`:
+     ```text
+     Array: [ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]
+     ```
+4. **Step 4: Termination:**
+   - Node `8` is now at index 5. Its left child would be at $2(5) + 1 = 11$, which exceeds array bounds (length 9).
+   - Node `8` is now a leaf. The heapify process terminates.
 
-```text
-          75
-        /    \
-      60      30
-     /  \    /  \
-   50   40  8   20
-  /  \
-10    5
-```
-
-Every parent is greater than or equal to its children. Deleted element: `90`. Time $= O(\log n)$.
+#### Final Verification & Time Complexity
+- **Final Level-Order Array:** `[ 75, 60, 30, 50, 40, 8, 20, 10, 5 ]`
+- **Heap Property Check:**
+  - `75 ≥ 60, 30` (holds)
+  - `60 ≥ 50, 40` (holds)
+  - `30 ≥ 8, 20` (holds)
+  - `50 ≥ 10, 5` (holds)
+- **Time Complexity:** $O(\log n)$ (traverses down the tree height $h = \lfloor \log_2 10 \rfloor = 3$).
+- **Space Complexity:** $O(1)$ auxiliary space (in-place array swaps).
 
 ---
 

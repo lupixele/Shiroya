@@ -164,13 +164,17 @@ Example:
 
 ```python
 import json
-d = json.loads('{"name": "Asha", "marks": [85, 90], "active": true}')
-print(d["marks"][0])        # 85
-s = json.dumps(d, indent=2) # dict to JSON string
+
+d = json.loads('{"name":"Asha","marks":[85,90]}')
+print(d["marks"][0])  # 85
+
+s = json.dumps(d, indent=2)
+
 with open("s.json", "w") as f:
-    json.dump(d, f)         # dict to JSON file
-with open("s.json") as f:
-    d2 = json.load(f)       # JSON file to dict
+    json.dump(d, f)
+
+with open("s.json", "r") as f:
+    d2 = json.load(f)
 ```
 
 `loads` and `dumps` work on strings. `load` and `dump` work on files.
@@ -324,31 +328,27 @@ Create:
 
 ```python
 from pymongo import MongoClient
-col = MongoClient("mongodb://localhost:27017/")["college"]["students"]
+
+col = MongoClient()["college"]["students"]
+
+# Create
 col.insert_one({"name": "Asha", "age": 20})
-col.insert_many([{"name": "Ravi", "age": 21}, {"name": "Meena", "age": 19}])
-```
 
-Read:
-
-```python
+# Read
 print(col.find_one({"name": "Asha"}))
-for d in col.find({"age": {"$gt": 19}}):
-    print(d)   # Asha and Ravi
-```
 
-Update:
-
-```python
+# Update
 col.update_one({"name": "Asha"}, {"$set": {"age": 21}})
+
+# Delete
+col.delete_one({"name": "Asha"})
 ```
 
-Delete:
+##### Output
 
-```python
-col.delete_one({"name": "Ravi"})
+```output
+'name': 'Asha', 'age': 20}
 ```
-
 #### 3. Key MongoDB Points & Rules
 Points:
 

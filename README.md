@@ -8,6 +8,19 @@ Shiroya is a student-focused knowledge hub where members share clean, exam-orien
 
 This repo contains notes and study materials for multiple courses, mainly focused on exam preparation and semester revision. It is intended to help students revise concepts quickly, review solved examples, and access academic resources in one place.
 
+## Examination Timetable (B.Tech III Sem — Nov 2026 End-Sem)
+
+| S.No | Subject Code | Subject | Date | Day |
+| :---: | :---: | :--- | :---: | :--- |
+| 1 | `2501CS10` | **ADSA** — Advanced Data Structures & Algorithm Analysis | 02-11-2026 | Monday |
+| 2 | `2501CS08` | **C++** — Object Oriented Programming through C++ | 04-11-2026 | Wednesday |
+| 3 | `2501IT05` | **DBMS** — Database Management Systems | 06-11-2026 | Friday |
+| 4 | `2501MA09` | **P&S** — Probability & Statistics | 09-11-2026 | Monday |
+| 5 | `2501IT07` | **ASE** — Agile Software Engineering | 11-11-2026 | Wednesday |
+| 6 | `2501CS34` | **FDS** — Fundamentals of Data Science | 16-11-2026 | Monday |
+
+> Detailed internal exam breakdown and full circulars: [`exam-schedule.md`](exam-schedule.md) & [`exam-timetable.md`](exam-timetable.md)
+
 ## Repository structure
 
 ```text

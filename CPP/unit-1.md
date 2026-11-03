@@ -167,26 +167,12 @@ int main() {               // main function
 }
 ```
 
-#### 2. Stream I/O
-- **Stream** = sequence of bytes flowing between program and device.
-- **`cout`** (object of `ostream`) uses **insertion operator `<<`**.
-- **`cin`** (object of `istream`) uses **extraction operator `>>`**.
-- `cin`/`cout` are **type-safe** and cascade: `cout << a << b;`.
-
-```cpp
-cin >> var;
-cout << expr1 << expr2;
-```
-
-#### 3. Stream Manipulators (`<iomanip>`)
-
-| Manipulator | Purpose |
-|---|---|
-| `endl` | Newline **and flushes** buffer |
-| `setw(n)` | Sets **field width** of next output to *n* |
-| `setprecision(n)` | Sets number of significant digits (decimals with `fixed`) |
-| `fixed` | Fixed-point notation |
-| `setfill(c)` | Pads field with character *c* |
+#### 2. Stream I/O & Manipulators (`<iomanip>`)
+- **`cin`** (object of `istream`): Reads data using extraction operator `>>`.
+- **`cout`** (object of `ostream`): Writes data using insertion operator `<<`.
+- **`endl`**: Inserts a newline and flushes the output stream buffer.
+- **`setw(n)`**: Sets the field width of the next output value to *n*.
+- **`setprecision(n)`**: Sets floating-point decimal precision to *n* digits.
 
 #### Code Example
 ```cpp
@@ -195,9 +181,12 @@ cout << expr1 << expr2;
 using namespace std;
 
 int main() {
-    double pi = 3.14159265;
-    cout << setw(10) << "ID" << setw(10) << "Value" << endl;
-    cout << setw(10) << 1 << setw(10) << fixed << setprecision(2) << pi << endl;
+    int id = 101;
+    double marks = 89.456;
+    cout << "Student Details:" << endl;
+    cout << setw(8) << "ID:" << id << endl;
+    cout << setw(8) << "Marks:" << setprecision(4) << marks << endl;
+    return 0;
 }
 ```
 

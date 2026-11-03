@@ -6,6 +6,10 @@
 
 ## Question 1 — Evolution of C++ & Paradigm Shift
 
+> **Question:** Explain the evolution of C++ from C and state the disadvantages of conventional procedural programming paradigms.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Evolution of C++ from C
@@ -47,6 +51,10 @@ int main() {
 
 ## Question 2 — C vs C++ Comparison
 
+> **Question:** Differentiate between C and C++ across key dimensions: programming paradigms, data security, memory management, and function extensions.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Comparison Table
@@ -87,6 +95,10 @@ int main() {
 ---
 
 ## Question 3 — OOP Principles & Advantages
+
+> **Question:** Explain the fundamental principles of Object-Oriented Programming (encapsulation, abstraction, inheritance, polymorphism) and detail the advantages OOP offers over procedural models.
+
+---
 
 ### Step-by-Step Solution
 
@@ -130,6 +142,10 @@ int main() { Shape *s = new Circle(5); s->draw(); delete s; }
 ---
 
 ## Question 4 — Program Structure & Stream I/O
+
+> **Question:** Describe the standard structure of a C++ program and explain how input and output operations are handled using streams and stream manipulators.
+
+---
 
 ### Step-by-Step Solution
 
@@ -189,6 +205,10 @@ int main() {
 
 ## Question 5 — Scope Resolution Operator
 
+> **Question:** Illustrate the different use-cases of the Scope Resolution Operator (::): accessing global variables shadowed by local variables, defining member functions outside classes, and qualifying namespace entities.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Scope Resolution Operator `::`
@@ -230,6 +250,10 @@ int main() {
 ---
 
 ## Question 6 — Namespaces
+
+> **Question:** What is a namespace in C++? Explain how to define nested namespaces, use the using directive/declaration, and resolve identifier naming collisions.
+
+---
 
 ### Step-by-Step Solution
 
@@ -286,6 +310,10 @@ int main() {
 
 ## Question 7 — Default Arguments & Access Specifiers
 
+> **Question:** Compare default arguments with function overloading, and analyze the scoping rules of access specifiers (private, public, protected).
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Default Arguments vs Function Overloading
@@ -337,6 +365,10 @@ int main() {
 ---
 
 ## Question 8 — Core Programs
+
+> **Question:** Write complete C++ programs for: (a) Computing real and imaginary roots of a quadratic equation, and (b) Calculating the factorial of a given number using recursion.
+
+---
 
 ### Step-by-Step Solution
 

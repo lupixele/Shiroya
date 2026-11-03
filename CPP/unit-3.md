@@ -6,6 +6,10 @@
 
 ## Question 1 — Operator Overloading Rules
 
+> **Question:** Explain the rules for operator overloading, identify the non-overloadable operators in C++, and write a program to overload unary prefix and postfix increment (++) operators.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Operator Overloading
@@ -70,6 +74,10 @@ int main() {
 
 ## Question 2 — Binary Operator Overloading
 
+> **Question:** Demonstrate binary operator overloading for arithmetic (+) and relational (==) operators on a user-defined class using: (a) a member function, and (b) a friend function.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Binary Operator as Member Function
@@ -114,6 +122,10 @@ int main() {
 ---
 
 ## Question 3 — Inheritance Types
+
+> **Question:** Explain all types of inheritance (Single, Multiple, Multilevel, Hierarchical, and Hybrid) supported in C++ along with visibility mode effects (public, private, protected).
+
+---
 
 ### Step-by-Step Solution
 
@@ -173,6 +185,10 @@ int main() {
 
 ## Question 4 — Diamond Problem & Virtual Base Classes
 
+> **Question:** What is multipath inheritance (the diamond problem), and how does a virtual base class resolve ambiguity?
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Diamond Problem
@@ -217,6 +233,10 @@ int main() {
 
 ## Question 5 — Constructor/Destructor Order
 
+> **Question:** Trace the exact order of execution of constructors and destructors in multiple and multilevel inheritance hierarchies, and compare inheritance ("is-a") with object composition ("has-a").
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Rules
@@ -254,6 +274,10 @@ int main() {
 ---
 
 ## Question 6 — Pointers to Objects & Base-Derived Compatibility
+
+> **Question:** Explain pointers to objects, pointers to base and derived classes, and detail the mechanics and utility of the implicit this pointer in method chaining.
+
+---
 
 ### Step-by-Step Solution
 
@@ -303,6 +327,10 @@ int main() {
 ---
 
 ## Question 7 — Virtual Functions & vtable/vptr Internals
+
+> **Question:** Differentiate between compile-time binding and run-time binding, state the rules for virtual functions, and explain the internal working of vptr and vtable.
+
+---
 
 ### Step-by-Step Solution
 
@@ -358,6 +386,10 @@ int main() {
 ---
 
 ## Question 8 — Abstract Classes & Virtual Destructors
+
+> **Question:** What is a pure virtual function and an abstract class? Explain why a base class destructor must be declared virtual when deleting derived objects through base pointers.
+
+---
 
 ### Step-by-Step Solution
 

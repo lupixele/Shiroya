@@ -6,6 +6,10 @@
 
 ## Question 1 — Stream Class Hierarchy
 
+> **Question:** Explain the principles and structured flow of exception handling in C++ using the try, throw, and catch keywords.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Hierarchy
@@ -57,6 +61,10 @@ int main() {
 
 ## Question 2 — File Operations (Sequential)
 
+> **Question:** Write a program demonstrating multiple catch blocks for different exception types, and explain the utility of the catch-all handler (catch(...)).
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Steps
@@ -99,6 +107,10 @@ int main() {
 ---
 
 ## Question 3 — Open Modes & File Pointers
+
+> **Question:** Explain the C++ stream class hierarchy (ios, istream, ostream, ifstream, ofstream, fstream) and describe file opening modes (ios::in, ios::out, ios::app).
+
+---
 
 ### Step-by-Step Solution
 
@@ -153,6 +165,10 @@ int main() {
 
 ## Question 4 — Binary File I/O
 
+> **Question:** Write a C++ program that reads data from an existing text file and writes/appends formatted output to a target file.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Binary I/O Functions
@@ -202,6 +218,10 @@ int main() {
 
 ## Question 5 — STL Overview
 
+> **Question:** Describe the Standard Template Library (STL) programming model and explain the roles of Containers, Algorithms, Iterators, and Functors.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Standard Template Library (STL)
@@ -242,6 +262,10 @@ int main() {
 
 ## Question 6 — Container Taxonomy
 
+> **Question:** Compare std::vector and std::list in terms of memory layout, random access, dynamic resizing overhead, and insertion/deletion time complexity.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Classification
@@ -281,6 +305,10 @@ int main() {
 ---
 
 ## Question 7 — Iterator Categories
+
+> **Question:** Explain std::deque operations, contrast sequence containers with associative containers, and demonstrate key-value storage and retrieval using std::map.
+
+---
 
 ### Step-by-Step Solution
 
@@ -327,6 +355,10 @@ int main() {
 ---
 
 ## Question 8 — Practical STL Integration
+
+> **Question:** Demonstrate how STL algorithms (std::sort, std::find, std::count, std::reverse) operate on container elements through iterator interfaces.
+
+---
 
 ### Step-by-Step Solution
 

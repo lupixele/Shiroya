@@ -6,6 +6,10 @@
 
 ## Question 1 — Generic Programming & Function Templates
 
+> **Question:** Define generic programming and discuss the motivation and need for templates in modern C++.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Generic Programming
@@ -45,6 +49,10 @@ int main() {
 ---
 
 ## Question 2 — Class Templates and Generic Stack
+
+> **Question:** Compare and contrast C++ templates with C preprocessor (#define) macros with respect to type-safety, error handling, and debugging.
+
+---
 
 ### Step-by-Step Solution
 
@@ -93,6 +101,10 @@ int main() {
 ---
 
 ## Question 3 — Multiple Arguments & Non-Type Parameters
+
+> **Question:** Explain the definition, syntax, and working of a normal function template with an illustrative program.
+
+---
 
 ### Step-by-Step Solution
 
@@ -145,6 +157,10 @@ int main() {
 
 ## Question 4 — Templates vs Macros
 
+> **Question:** Demonstrate how function templates can be overloaded with other template functions or standard non-template functions.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Comparison Table
@@ -185,6 +201,10 @@ int main() {
 
 ## Question 5 — Template Bubble Sort
 
+> **Question:** Explain how class templates are defined and instantiated, and implement a generic Stack<T> class template with basic operations.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Algorithm
@@ -222,6 +242,10 @@ int main() {
 ---
 
 ## Question 6 — Generic Singly Linked List
+
+> **Question:** Demonstrate how class templates support multiple generic type arguments and non-type template parameters.
+
+---
 
 ### Step-by-Step Solution
 
@@ -274,6 +298,10 @@ int main() {
 
 ## Question 7 — Exception Handling Principles
 
+> **Question:** Write a generic C++ function template to sort an array of arbitrary data types using the Bubble Sort algorithm.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Principles
@@ -320,6 +348,10 @@ int main() {
 ---
 
 ## Question 8 — Multiple Catch & Re-throwing
+
+> **Question:** Design and construct a generic singly linked list data structure (LinkedList<T>) using class templates that supports dynamic node insertion and forward traversal.
+
+---
 
 ### Step-by-Step Solution
 

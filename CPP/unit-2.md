@@ -6,6 +6,10 @@
 
 ## Question 1 — Class Declaration & Member Function Scope
 
+> **Question:** Explain how classes and objects are declared, and distinguish between defining member functions inside a class versus outside the class using the scope resolution operator.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Class and Object
@@ -59,6 +63,10 @@ int main() {
 
 ## Question 2 — Inline Functions
 
+> **Question:** Define inline functions, explain their advantages over macros, and discuss the specific conditions where the compiler disregards an inline request.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Inline Function
@@ -104,6 +112,10 @@ int main() {
 
 ## Question 3 — Static Members & Live Counter
 
+> **Question:** Explain static data members and static member functions with a program demonstrating how they track class-wide states and count active live objects.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Static Data Members
@@ -148,6 +160,10 @@ int main() {
 ---
 
 ## Question 4 — Friend Functions
+
+> **Question:** What is a friend function? Analyze how friend functions bridge data sharing between two unrelated classes without violating encapsulation.
+
+---
 
 ### Step-by-Step Solution
 
@@ -199,6 +215,10 @@ int main() { cout << sum(A(10), B(20)); }  // 30
 
 ## Question 5 — Object Argument Passing & Return
 
+> **Question:** Demonstrate how objects can be passed as arguments (pass-by-value vs. pass-by-reference) and returned from member functions.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Passing Objects as Arguments
@@ -241,6 +261,10 @@ int main() {
 ---
 
 ## Question 6 — Array of Objects & Pointers to Members
+
+> **Question:** Explain the creation and usage of an array of objects, and describe the syntax and visibility scope of nested classes.
+
+---
 
 ### Step-by-Step Solution
 
@@ -293,6 +317,10 @@ int main() {
 
 ## Question 7 — Constructors & Destructors Basics
 
+> **Question:** Define constructors and destructors, detail their essential characteristics, and explain why constructors cannot be declared static or virtual.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Constructor
@@ -341,6 +369,10 @@ int main() {
 
 ## Question 8 — Constructor Overloading & Defaults
 
+> **Question:** Illustrate default constructors, parameterized constructors, constructor overloading, and constructors with default arguments with an application.
+
+---
+
 ### Step-by-Step Solution
 
 #### 1. Types
@@ -388,6 +420,10 @@ int main() {
 ---
 
 ## Question 9 — Copy Constructor & Dynamic Initialization
+
+> **Question:** Explain the role and syntax of a copy constructor, distinguish deep copy from shallow copy, and explain the creation and lifespan of anonymous (temporary) objects.
+
+---
 
 ### Step-by-Step Solution
 

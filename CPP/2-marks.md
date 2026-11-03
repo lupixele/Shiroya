@@ -1,401 +1,347 @@
 # Object Oriented Programming through C++ — 2-Marks Short Answers (All Units)
 
+> **Source:** Aditya University Official 2-Marks Question Bank (`2501CS08`)  
+> **Exam Coverage:** Section A (Compulsory 10 × 2M = 20 Marks)  
+> **Format:** Simple, direct 2-sentence answers matching the faculty evaluation key.
+
+---
+
 ## Unit I — C++ Fundamentals & Paradigms
 
-### Q1. Differences between C and C++
-- **C** is a **procedural** language (function-driven); **C++** is **multi-paradigm** (procedural + object-oriented + generic).
-- C++ supports **classes, objects, inheritance, polymorphism, encapsulation**; C does not.
-- C++ provides **function/operator overloading, references, templates, exceptions, namespaces**; C has none of these.
-- I/O: C uses `printf/scanf`; C++ uses `cin/cout` (streams).
+### Q1. State any two major differences between C and C++.
+- **Paradigm:** C is a **procedural language** based on functions and algorithms, whereas C++ is a **multi-paradigm language** supporting Object-Oriented Programming (classes, objects).
+- **Data Security:** C lacks encapsulation and data hiding, while C++ provides **access specifiers** (`private`, `protected`, `public`) and **polymorphism**.
 
-### Q2. Disadvantages of Procedural Programming
-- Focus is on **functions**, not data; data is **global and unprotected** (no **data hiding**).
-- Poor **code reusability**; changing a data structure forces changes in all functions using it.
-- Does not model **real-world entities** well; **maintenance** is difficult in large programs.
-- No support for **inheritance** or **polymorphism**.
+### Q2. What are the major disadvantages of conventional (procedural) programming?
+- In conventional programming, **data moves globally and openly** between functions without security or data hiding, making systems error-prone.
+- It lacks **reusability**, **inheritance**, and real-world modeling capabilities, making large programs difficult to maintain.
 
-### Q3. Evolution of C++
-- Developed by **Bjarne Stroustrup** at **AT&T Bell Laboratories** in the early **1979–1980s**.
-- First named **"C with Classes"** (adding classes to C, influenced by **Simula67**).
-- Renamed **C++** in **1983** (`++` = increment operator, i.e., "next step beyond C").
-- Standardized by **ISO** (C++98, C++11, C++14, C++17, C++20).
+### Q3. Trace the evolution of C++ in brief.
+- Developed by **Bjarne Stroustrup in 1979** at Bell Laboratories as an enhancement to the C language, initially named **"C with Classes"**.
+- In **1983**, it was renamed **C++** (symbolizing the increment operator `++`), adding OOP features, virtual functions, and operator overloading.
 
-### Q4. Key OOP Concepts
-The four foundational pillars of OOP are:
-- **Encapsulation** – binding data and functions together in a class (data hiding).
-- **Abstraction** – exposing only essential features, hiding implementation details.
-- **Inheritance** – acquiring properties of an existing class (code reuse).
-- **Polymorphism** – one name, many forms (compile-time and run-time).
+### Q4. List the key concepts of Object-Oriented Programming (OOP).
+1. **Objects** (runtime entities)
+2. **Classes** (user-defined blueprints)
+3. **Data Abstraction & Encapsulation** (data hiding)
+4. **Inheritance** (code reusability)
+5. **Polymorphism** (one interface, multiple implementations)
+6. **Dynamic Binding & Message Passing**
 
-### Q5. C++ Program Structure
-A C++ program has these major sections:
-1. **Documentation / Comments** (`//`, `/* */`)
-2. **Header files** – `#include <iostream>`
-3. **Namespace / Global declarations** – `using namespace std;`
-4. **Class definitions** (declarations + member functions)
-5. **`main()` function** – program entry point
+### Q5. Explain the general structure of a C++ program.
+A standard C++ program consists of:
+1. **Include Header Files:** `#include <iostream>`
+2. **Namespace Declaration:** `using namespace std;`
+3. **Class / Function Declarations**
+4. **Main Function:** `int main() { ... return 0; }`
 
+### Q6. State any four advantages of Object-Oriented Programming.
+1. **Reusability:** Existing code can be reused through inheritance.
+2. **Data Security:** Data hiding prevents unauthorized external modification.
+3. **Easy Maintenance:** Modular structure makes debugging and upgrading easy.
+4. **Real-World Modeling:** Real-world problems are mapped naturally into objects.
+
+### Q7. Explain the use and syntax of the Scope Resolution Operator (::).
+The **Scope Resolution Operator `::`** is used to:
+1. **Access a global variable** when shadowed by a local variable with the same name (`::varName`).
+2. **Define member functions outside a class:** `ReturnType ClassName::funcName() { ... }`.
+3. **Qualify namespace entities:** `std::cout`.
+
+### Q8. Define a Namespace and explain the purpose of the 'using' directive.
+- **Namespace:** A declarative region that groups related identifiers to **prevent naming collisions** in large projects.
+- **`using` Directive:** Imports names from a namespace so they can be used directly without prefixing (`using namespace std;`).
+
+### Q9. What are default arguments in C++? Give an example.
+- **Default arguments** are values assigned to function parameters in the function prototype that are automatically used if the caller omits those arguments.
+- Parameters must be assigned from **right to left**:
 ```cpp
-#include <iostream>
-using namespace std;
-int main() { cout << "Hello"; return 0; }
-```
-
-### Q6. Advantages of OOP
-- **Reusability** through inheritance (write once, reuse many times).
-- **Data hiding / security** via encapsulation and access specifiers.
-- **Easy maintenance and extensibility**; modular design with classes.
-- Models **real-world problems** naturally; supports **polymorphism** and **abstraction**.
-
-### Q7. Scope Resolution Operator (`::`)
-The **scope resolution operator `::`** identifies the scope to which a name belongs. Uses:
-- **Access global variable** hidden by a local one: `::x`
-- **Define member function outside class:** `void A::show() { }`
-- **Namespace qualification:** `std::cout`
-
-```cpp
-int x = 10;
-int main() { int x = 5; cout << ::x; }   // prints 10
-```
-
-### Q8. Namespaces & `using` Directive
-A **namespace** is a named declarative region that groups identifiers (variables, functions, classes) to **avoid name collisions**.
-- Defined using `namespace Name { ... }`.
-- The **`using namespace`** directive makes all names of a namespace accessible **without the `::` prefix**.
-
-```cpp
-namespace A { int x = 1; }
-using namespace A;    // now x can be used directly
-```
-
-### Q9. Default Arguments
-**Default arguments** are values specified in a function declaration that are used automatically when the caller **omits** the corresponding arguments.
-- Must be given **right to left** (trailing parameters only).
-- Specified once, in the declaration/prototype.
-
-```cpp
-int add(int a, int b = 10);   // add(5) -> a=5, b=10
+void show(int a, int b = 10);  // show(5) -> a=5, b=10
 ```
 
 ---
 
 ## Unit II — Classes, Objects, Functions & Constructors
 
-### Q1. Class and Object Declaration
-A **class** is a user-defined data type (blueprint) that binds **data members** and **member functions**; an **object** is an **instance** of a class.
-
+### Q1. How do you declare a class and an object in C++?
+- **Class Declaration:**
 ```cpp
-class Student { int id; public: void show(); };   // class
-Student s1;                                       // object
+class Student {
+private:
+    int roll;
+public:
+    void set(int r) { roll = r; }
+};
 ```
-- Memory is allocated when the **object** is created, not the class.
+- **Object Declaration:** `Student s1, s2;` (allocates memory for class instances).
 
-### Q2. Access Specifiers
-- **`private`** – accessible only inside the **same class** (default for class).
-- **`protected`** – accessible inside the class and its **derived classes**.
-- **`public`** – accessible from **anywhere** (outside via object).
-- They enforce **data hiding** and **encapsulation**.
+### Q2. Differentiate between private, protected, and public access specifiers.
+- **`private`:** Accessible **only within the same class** and friend functions (default in C++ classes).
+- **`protected`:** Accessible within the **same class, friends, and derived classes**.
+- **`public`:** Accessible from **anywhere** in the program via class objects.
 
-### Q3. Member Function Definition
-- **Inside class:** defined in the body; treated as **inline** by default.
-- **Outside class:** declared inside, defined outside using **scope resolution `::`**.
-
+### Q3. How can a member function be defined inside vs outside a class?
+- **Inside the class:** Defined directly in the class body; automatically treated as **inline** by default.
+- **Outside the class:** Declared inside the class prototype and defined outside using the scope resolution operator:
 ```cpp
-class A { public: void f(); };
-void A::f() { cout << "out"; }   // outside definition
-```
-
-### Q4. Inline Functions
-An **inline function** is one whose body is **substituted at the call site** by the compiler (keyword `inline`), reducing function-call overhead.
-- Compiler **may ignore** inlining if the function contains **loops / `switch` / `goto`**, is **recursive**, or contains **`static` variables**.
-```cpp
-inline int sq(int x) { return x * x; }
+ReturnType ClassName::funcName(parameters) { ... }
 ```
 
-### Q5. Static Members
-- **Static data member:** one copy **shared by all objects**; declared `static`, defined outside the class.
-- **Static member function:** accesses **only static members**; called via `Class::fn()` (no `this` pointer).
-- **Lifecycle:** created before `main()` (at program start), exists for the **entire program**; independent of objects.
+### Q4. What is an inline function? List any two rules/limitations for inlining.
+- An **inline function** is expanded inline at each function call point by the compiler to eliminate function-call overhead.
+- **Rules / Limitations:** Inlining is ignored if the function contains **loops**, **switch statements**, **recursion**, or **static variables**.
 
-### Q6. Friend Function
-A **friend function** is a **non-member** function declared with the keyword `friend` inside a class, allowing access to its **private and protected** members.
-- Not in the scope of the class; **called without object** (like a normal function).
-- Has **no `this` pointer**; accesses members via an object passed as argument.
+### Q5. What are static member variables and static member functions?
+- **Static Data Member:** A single variable **shared by all objects** of a class; initialized outside the class in global scope.
+- **Static Member Function:** Can access **only static members**; called using the class name without an object: `ClassName::func();`.
 
-### Q7. Member Function Overloading
-**Member function overloading** means defining **multiple member functions with the same name** in a class but with **different parameter lists** (number/type/order).
-- Resolved at **compile time** (static polymorphism).
-- Return type alone cannot differentiate overloads.
+### Q6. What is a friend function? State its key characteristics.
+A **friend function** is a non-member function granted access to the **private and protected members** of a class.
+1. Declared inside the class using the `friend` keyword, but defined outside without class scope.
+2. Not called using an object and has **no `this` pointer**; accepts objects as explicit arguments.
 
-### Q8. Array of Objects
-An **array of objects** stores multiple objects of the same class in **contiguous memory**.
+### Q7. What is member function overloading in C++?
+- **Member function overloading** means having multiple member functions with the **same name but different parameter lists** (number, types, or order of arguments) within the same class scope.
+- It is resolved at compile time (**static polymorphism**).
+
+### Q8. Explain the concept of 'Array of Objects' with an example.
+- An **array of objects** stores multiple instances of a class contiguously in memory, where each element represents an individual object.
 ```cpp
-Student s[3];        // 3 objects
-s[0].show();         // access via index and dot
-```
-- Memory = `3 × sizeof(Student)`; each element has its own copy of **non-static** data members.
-
-### Q9. Passing & Returning Objects
-- **Pass by value:** a **copy** of the object is made (copy constructor called); original unchanged.
-- **Pass by reference/pointer:** the **original** is accessed; efficient, changes reflect.
-- **Return:** a function can return an object **by value** (temporary copy) or by reference.
-```cpp
-Complex add(Complex a, Complex b);   // by value, returns object
+Student s[3];       // array of 3 Student objects
+s[0].set(101);      // accessing member of first object
 ```
 
-### Q10. Nested Classes
-A **nested class** is a class **declared inside another class** (the enclosing class).
-- Its **scope is limited** to the enclosing class; accessed as `Outer::Inner`.
-- Nested class has **no special access** to enclosing members (and vice versa) unless granted by `friend`/public access.
+### Q9. Explain how objects are passed as parameters and returned from functions.
+- **Pass-by-Value:** A copy of the object is passed (invokes copy constructor); changes inside do not affect the caller.
+- **Pass-by-Reference:** A reference (`&`) is passed; faster, avoids copies, and modifies the original object.
+- **Returning Objects:** Functions can return an object by value (`Student get();`) or by reference.
 
-### Q11. Constructor & Destructor Basics
-- **Constructor:** special member function that **initializes** an object automatically at creation; same name as class, **no return type**.
-- **Destructor:** releases resources when object is destroyed; named `~ClassName()`.
-- Constructor can be **overloaded**; destructor **cannot** (no arguments, no return type, only one per class).
+### Q10. What is a Nested Class in C++?
+- A **nested class** is a class declared inside the scope of another enclosing class.
+- It is scoped within the enclosing class (`Outer::Inner`), but has no special access to the enclosing class's non-static private members unless declared as a `friend`.
 
-### Q12. Parameterized Constructor & Overloading
-- **Parameterized constructor:** takes arguments to initialize data members with **specific values**: `Box(int l) { len = l; }`
-- **Constructor overloading:** multiple constructors in a class with **different parameter lists**; compiler picks by arguments.
+### Q11. Define Constructor and Destructor. State their key characteristics.
+- **Constructor:** A special member function with the **same name as the class** that automatically initializes objects at creation. Has no return type.
+- **Destructor:** A special member function preceded by a tilde (`~ClassName()`) that cleans up resources when an object is destroyed. Cannot be overloaded and takes no parameters.
+
+### Q12. What is a Parameterized Constructor and Constructor Overloading?
+- **Parameterized Constructor:** A constructor that accepts arguments to initialize data members with specific user values.
+- **Constructor Overloading:** Having multiple constructors in the same class with different parameter lists, allowing objects to be initialized in different ways.
+
+### Q13. What is a Copy Constructor? Give its syntax.
+- A **copy constructor** initializes a new object by copying data from an existing object of the same class.
+- **Syntax:**
 ```cpp
-Box b1; Box b2(5);     // default and parameterized
+ClassName(const ClassName &obj);
 ```
+- Invoked when passing objects by value, returning objects by value, or initializing via `A obj2 = obj1;`.
 
-### Q13. Copy Constructor
-A **copy constructor** initializes a new object from an **existing object** of the same class.
-- **Syntax:** `ClassName(const ClassName &obj);`
-- **Invoked when:** (1) object initialized from another (`A b = a;`), (2) object **passed by value**, (3) object **returned by value**.
-- Argument must be passed by **reference** to avoid infinite recursion.
-
-### Q14. Anonymous (Unnamed) Objects
-An **anonymous object** is a **temporary object without a name**, created for immediate use and **destroyed at the end of the statement**.
-```cpp
-Box(5).show();     // temporary object, destroyed after this line
-```
-- Constructor and destructor are both invoked automatically.
+### Q14. What is an Anonymous Object (Unnamed Temporary Object)?
+- An **anonymous object** is a temporary object created on-the-fly during an expression evaluation without assigning it a variable name (e.g., `Point(10, 20).show();`).
+- It is automatically destroyed at the end of the full statement.
 
 ---
 
 ## Unit III — Operator Overloading, Inheritance & Polymorphism
 
-### Q1. Operator Overloading Definition
-**Operator overloading** gives existing operators **additional meaning for user-defined types** (classes) without changing their original meaning.
-- The **`operator` keyword** declares the overloading function: `return_type operator op(args)`.
-- It is **compile-time polymorphism**.
-```cpp
-Complex operator+(Complex c);
+### Q1. What is Operator Overloading? What is the role of the 'operator' keyword?
+- **Operator Overloading:** Redefining existing C++ operators to work directly with user-defined types (classes).
+- The **`operator` keyword** is used to declare an operator function (e.g., `ReturnType operator+(const ClassName &obj);`).
+
+### Q2. List any four rules for Operator Overloading in C++.
+1. **Only existing operators** can be overloaded; new symbols cannot be created.
+2. The **arity (number of operands)** and **precedence** cannot be changed.
+3. At least one operand must be a **user-defined type**.
+4. Operators `::`, `.`, `.*`, `?:`, and `sizeof` **cannot be overloaded**.
+
+### Q3. How does unary operator overloading differ using a member function vs a friend function?
+- **Member Function:** Takes **0 explicit arguments** because it operates on the implicit invoking object (`this`).
+- **Friend Function:** Takes **1 explicit argument** (the object being operated on): `friend void operator++(Number &n);`.
+
+### Q4. How does binary operator overloading differ using a member function vs a friend function?
+- **Member Function:** Takes **1 explicit argument** (the right operand); the left operand is the calling object.
+- **Friend Function:** Takes **2 explicit arguments**; necessary when the left-hand operand is not a class object (e.g., `5 + obj`).
+
+### Q5. Explain the concept of Code Reusability in Inheritance.
+- **Inheritance** allows a derived class to inherit data members and member functions from an existing base class.
+- Existing tested code is **reused without rewriting**, saving development time, eliminating redundancy, and simplifying maintenance.
+
+### Q6. List the five types of Inheritance supported in C++.
+```
+1. Single:       2. Multilevel:    3. Multiple:     4. Hierarchical:    5. Hybrid:
+     A                A               A    B              A                 A
+     |                |                \  /              / \              / \
+     B                B                  C               B   C             B   C
+                      |                                                     \ /
+                      C                                                      D
+```
+- **Single:** 1 Base -> 1 Derived
+- **Multilevel:** Chain of derivation (A -> B -> C)
+- **Multiple:** Multiple Bases -> 1 Derived
+- **Hierarchical:** 1 Base -> Multiple Derived
+- **Hybrid:** Combination of two or more types
+
+### Q7. What is a Virtual Base Class and what problem does it solve?
+- Solves the **Diamond Problem** (multipath inheritance) where a derived class inherits duplicate copies of a common ancestor.
+- Declaring the base class as `virtual` (`class B : virtual public A`) ensures **only one shared copy** of the base class exists in the derived class.
+
+```
+       A (Virtual Base)
+      / \
+     B   C
+      \ /
+       D  (Only 1 shared copy of A)
 ```
 
-### Q2. Rules of Operator Overloading
-- **New operators cannot be created**; only existing ones can be overloaded.
-- These **cannot** be overloaded: `::`  `.`  `.*`  `?:`  `sizeof`.
-- **Precedence, associativity, and arity** of operators cannot be changed.
-- At least one operand must be a **user-defined type**; `= () [] ->` must be **member** functions.
+### Q8. What is meant by 'Object as a Class Member' (Containership / Composition)?
+- **Containership (Composition):** Creating an object of one class as a data member inside another class (a "has-a" relationship).
+- Example: An `Employee` class containing a `Date` object for `dateOfBirth`.
 
-### Q3. Unary Operator Overloading
-- **Member function:** takes **no argument** (operand is the invoking object): `void operator-();`
-- **Friend function:** takes **one argument** (the object): `friend void operator-(Box &b);`
-- Postfix form uses a dummy `int`: `operator++(int)`.
+### Q9. Define an Abstract Class and Pure Virtual Function.
+- **Pure Virtual Function:** A virtual function with no implementation in the base class, equated to zero: `virtual void display() = 0;`.
+- **Abstract Class:** Any class containing at least one pure virtual function. Objects of an abstract class **cannot be instantiated**.
 
-### Q4. Binary Operator Overloading
-- **Member function:** takes **one argument** (right operand); left operand is the invoking object: `C operator+(C b);`
-- **Friend function:** takes **two arguments**: `friend C operator+(C a, C b);`
-- Friend is needed when the **left operand is not an object** (e.g., `5 + obj`).
+### Q10. Explain the role of the 'this' pointer.
+- **`this`** is an implicit constant pointer passed to every non-static member function holding the **memory address of the calling object**.
+- Used to **resolve naming conflicts** (`this->x = x;`) and **return the current object** (`return *this;`).
 
-### Q5. Code Reusability in Inheritance
-**Inheritance** lets a **derived class** acquire data and functions of an existing **base class**, so existing code is **reused** instead of rewritten.
-- Derived class can **add new members** or **override** base behavior.
-- Reduces **redundancy, development time, and errors**.
-```cpp
-class Derived : public Base { };
-```
+### Q11. Explain pointer to base class pointing to derived class object.
+- A base class pointer can hold the address of any derived class object (**upcasting**).
+- Without `virtual` functions, the pointer can access **only members defined in the base class**.
 
-### Q6. Types of Inheritance
-```
-Single:        Multilevel:     Multiple:     Hierarchical:   Hybrid:
-  A              A               A   B            A              A
-  |              |                \ /           / | \          / \
-  B              B                 C           B  C  D        B   C
-                 |                                             \ /
-                 C                                              D
-```
-- **Single** (1 base→1 derived), **Multilevel** (chain), **Multiple** (many bases→1 derived), **Hierarchical** (1 base→many derived), **Hybrid** (combination).
+### Q12. Differentiate between Early (Static) Binding and Late (Dynamic) Binding.
+- **Early (Static) Binding:** Function call is linked to code at **compile time** (e.g., normal functions, function overloading).
+- **Late (Dynamic) Binding:** Function call is resolved at **run time** using virtual functions and `vtable` pointers.
 
-### Q7. Protected Access Specifier in Inheritance
-`protected` members are **inaccessible to outside code** (like private) but **accessible to derived classes**.
-- Allows derived classes to use base data while preserving **data hiding**.
-- In public inheritance, protected stays **protected** in the derived class.
+### Q13. What are Virtual Functions? State two rules for virtual functions.
+- A **virtual function** is a member function in a base class declared with `virtual` that is overridden in a derived class to achieve **run-time polymorphism**.
+- **Rules:**
+  1. Must be members of a class and accessed via **pointers or references**.
+  2. Cannot be **static** or **constructors** (though destructors can be virtual).
 
-### Q8. Modes of Inheritance
-| Base member | Public mode | Protected mode | Private mode |
-|---|---|---|---|
-| **public** | public | protected | private |
-| **protected** | protected | protected | private |
-| **private** | not accessible | not accessible | not accessible |
-
-### Q9. Base Class Initialization
-Base class parameterized constructors are called using the **member initializer list** of the derived constructor.
-```cpp
-Derived(int a, int b) : Base(a) { y = b; }
-```
-- Base constructor runs **before** the derived constructor body.
-- Without it, the base **default constructor** is invoked.
-
-### Q10. Order of Constructor/Destructor Execution
-- **Constructors:** executed from **base → derived**.
-  - **Multilevel:** A → B → C (grandparent first).
-  - **Multiple** (`class C : A, B`): in **order of declaration** of base classes (A, B), then C.
-- **Destructors:** executed in **reverse order** (derived → base).
-
-### Q11. Diamond Problem & Virtual Base Class
-The **Diamond Problem** occurs in hybrid inheritance when a derived class inherits the same base via **two paths**, giving **duplicate copies** and **ambiguity**.
-- Solved by declaring the base as **`virtual`**, so only **one shared copy** exists.
-```cpp
-class B : virtual public A { };
-class C : virtual public A { };
-class D : public B, public C { };
-```
-
-### Q12. Pointers to Objects
-A **pointer to an object** stores the **address of an object**; members are accessed using the **arrow operator `->`** (or `(*p).member`).
-```cpp
-Student s, *p = &s;
-p->show();       // same as (*p).show()
-```
-- Objects can also be created dynamically: `p = new Student;`.
-
-### Q13. `this` Pointer
-**`this`** is a **hidden constant pointer** holding the **address of the invoking object**.
-- **Implicitly passed** to every **non-static** member function.
-- Used to resolve name conflicts (`this->x = x;`) and **return the current object** (`return *this;`).
-- **Not available** in static and friend functions.
-
-### Q14. Virtual Functions & `vtable`
-A **virtual function** is a base class function declared with `virtual` and **overridden** in derived classes; call is resolved at **run time** via a base pointer (**run-time polymorphism**).
-- **vtable:** per-class table of **virtual function addresses**.
-- **vptr:** hidden pointer in each object pointing to its class's vtable; used to select the correct function at run time.
+### Q14. What is a Virtual Destructor and why is it essential?
+- A destructor declared with the `virtual` keyword in a base class (`virtual ~Base() { }`).
+- **Why essential:** When deleting a derived object through a base pointer (`delete basePtr;`), a virtual destructor ensures that the **derived destructor executes first**, preventing memory leaks.
 
 ---
 
 ## Unit IV — Generic Programming, Templates & Exceptions
 
-### Q1. Generic Programming & Templates
-**Generic programming** writes code **independent of data types**, using types as parameters.
-- **Templates** are needed to avoid **duplicate code** for each type (`int`, `float`, ...), giving **reusability and type safety**.
-- Types are substituted at **compile time**.
+### Q1. What is Generic Programming and why are Templates needed?
+- **Generic Programming:** An approach where functions and classes are written **independently of any specific data type**.
+- **Templates** allow writing a single generic algorithm that works for `int`, `float`, `char`, etc., eliminating code duplication and ensuring compile-time type safety.
 
-### Q2. Function Template
-A **function template** defines a **generic function** that works with any data type.
+### Q2. Define a Function Template with syntax.
+A **function template** is a blueprint for generating type-independent functions:
 ```cpp
 template <class T>
-T maxOf(T a, T b) { return (a > b) ? a : b; }
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
 ```
-- Call: `maxOf(3, 7);` or `maxOf<double>(2.5, 1.2);`.
 
-### Q3. Class Template
-A **class template** defines a **generic class** whose data members/functions use a type parameter.
+### Q3. Define a Class Template with syntax.
+A **class template** is a blueprint for creating classes that operate on generic data types:
 ```cpp
 template <class T>
-class Stack { T arr[10]; int top; public: void push(T x); };
+class Container {
+    T data;
+public:
+    Container(T d) : data(d) {}
+};
 ```
-- Member functions defined outside use `template <class T> void Stack<T>::push(T x) {...}`.
 
-### Q4. Class Template Instantiation
-A class template is instantiated by **specifying the actual type in angle brackets** `<>` when creating an object; the compiler generates a class for that type.
+### Q4. How is a Class Template instantiated for a specific data type?
+A class template is instantiated by specifying the desired data type inside angle brackets `<>` when declaring an object:
 ```cpp
-Stack<int> s1;        // class for int
-Stack<float> s2;      // class for float
+Container<int> intObj(10);        // instantiates Container for int
+Container<float> floatObj(5.5);   // instantiates Container for float
 ```
 
-### Q5. Overloading Template Functions
-- A template function can be overloaded with **other templates** or **non-template functions** of the same name.
-- **Resolution order:** an **exact-match non-template function** is preferred over the template; otherwise the template is instantiated.
-- Explicit `<>` call forces the **template** version.
+### Q5. Explain Overloading of Template Functions.
+- A template function can be overloaded by another template function with different parameters, or by a **normal (non-template) function** with the same name.
+- When an exact match exists, the compiler gives preference to the **normal function** over the template.
 
-### Q6. Templates vs Macros
-| Feature | Template | Macro |
+### Q6. Differentiate between Templates and Macros in C++.
+| Feature | Templates | Macros (`#define`) |
 |---|---|---|
-| **Type safety** | Type-checked by compiler | **No** type checking |
-| **Debugging** | Easy (real compiler errors) | Hard (text substitution by preprocessor) |
-| **Code expansion** | Compiler-generated per type; scoped | Blind text replacement; side-effects (`SQ(x++)`) |
+| **Type Safety** | Strictly type-checked by compiler | No type checking (blind text substitution) |
+| **Debugging** | Easy to trace with clear compiler errors | Difficult to debug |
+| **Scope** | Obey class and namespace scoping rules | Global preprocessor directives |
 
-### Q7. Non-Type Template Parameters
-A **non-type parameter** is a template parameter that is a **constant value** (e.g., `int`) instead of a type.
+### Q7. Explain the concept of Linked List implementation with Templates.
+- Using templates, a single linked list structure handles nodes of any data type (`int`, `string`, `float`):
 ```cpp
-template <class T, int N>
-class Array { T a[N]; };
-Array<int, 5> arr;      // fixed-size array of 5 ints
+template <class T>
+struct Node {
+    T data;
+    Node* next;
+};
 ```
-- Value must be a **compile-time constant**.
+- Memory is dynamically allocated and type safety is maintained without rewriting insertion and traversal logic.
 
 ---
 
 ## Unit V — File Streams & Standard Template Library
 
-### Q1. Exception Handling
-**Exception handling** is a mechanism to detect and handle **run-time errors** (e.g., divide by zero) so the program does not terminate abnormally.
-- **Principle:** **separate error-handling code** from normal code; an error is **thrown** at the point of detection and **caught** by a handler.
-- Keywords: `try`, `throw`, `catch`.
+### Q1. What is Exception Handling? State its fundamental principle.
+- **Exception Handling:** A mechanism to detect, transfer, and handle **runtime errors** without crashing the program.
+- **Principle:** Separates error-detection code from error-handling code using three keywords: `try`, `throw`, and `catch`.
 
-### Q2. Roles of `try`, `catch`, and `throw`
-- **`try`** – block enclosing code that **may generate** an exception.
-- **`throw`** – **raises** (signals) the exception with a value/object.
-- **`catch`** – **handler** that receives and processes the thrown exception.
+### Q2. Explain the roles of 'try', 'catch', and 'throw' keywords.
+- **`try`:** Encloses code that may throw an exception.
+- **`throw`:** Signals (raises) the exception when an error occurs (`throw "Divide by zero";`).
+- **`catch`:** Catches and processes the thrown exception.
+
+### Q3. What are Multiple Catch Statements and the 'catch-all' handler?
+- **Multiple Catch Statements:** Multiple `catch` blocks associated with a single `try` block to handle different exception types (`catch(int e)`, `catch(char e)`).
+- **Catch-All Handler (`catch(...)`):** A universal catch block that catches **any** exception type; must always be placed as the last handler.
+
+### Q4. Explain Stream I/O in C++.
+- A **stream** is a sequence of bytes moving between the program and I/O devices.
+- **Input Stream (`cin`):** Reads data from input devices using the extraction operator (`>>`).
+- **Output Stream (`cout`):** Writes data to output devices using the insertion operator (`<<`).
+
+### Q5. What are ifstream, ofstream, and fstream classes?
+- **`ifstream`:** Input file stream used exclusively for **reading** from files.
+- **`ofstream`:** Output file stream used exclusively for **writing** to files.
+- **`fstream`:** Input/Output file stream supporting **both reading and writing**.
+
+### Q6. How do you open and close a file in C++?
+- **Opening a file:**
 ```cpp
-try { if (b == 0) throw 0; }
-catch (int e) { cout << "Divide by zero"; }
+ofstream outFile("data.txt", ios::out);  // via constructor
+// or: outFile.open("data.txt");
+```
+- **Closing a file:** Releases file buffers and closes the file stream:
+```cpp
+outFile.close();
 ```
 
-### Q3. Multiple Catch & Catch-All
-- **Multiple catch:** several `catch` blocks after one `try`, each handling a **different exception type**; the matching one runs.
-- **Catch-all:** `catch(...)` handles **any** exception type; must be placed **last**.
-```cpp
-try { ... } catch (int e) { } catch (...) { cout << "Unknown"; }
-```
+### Q7. What is the Standard Template Library (STL) and its Programming Model?
+The **STL** is a software library containing generic, reusable data structures and algorithms.
+- **Programming Model (Triad):**
+  1. **Containers:** Store objects and data collections (e.g., `vector`, `list`).
+  2. **Iterators:** Act as smart pointers to navigate through container elements.
+  3. **Algorithms:** Functions that process container data via iterators (e.g., `sort`, `find`).
 
-### Q4. Stream Classes
-A **stream** is a **sequence of bytes** flowing between the program and an I/O device.
-- **Input stream (`cin`):** object of `istream`; reads data from keyboard using **extraction `>>`**.
-- **Output stream (`cout`):** object of `ostream`; writes data to screen using **insertion `<<`**.
+### Q8. Differentiate between Sequence Containers and Associative Containers with examples.
+- **Sequence Containers:** Store elements in linear sequential order; elements are accessed by their **position** (e.g., `vector`, `list`, `deque`).
+- **Associative Containers:** Store elements in sorted order (usually balanced binary trees) designed for fast search; elements are accessed by **key** (e.g., `set`, `map`, `multiset`).
 
-### Q5. File Stream Classes
-Defined in `<fstream>`:
-- **`ifstream`** – **input** file stream; used to **read** from files.
-- **`ofstream`** – **output** file stream; used to **write** to files.
-- **`fstream`** – **both** read and write.
+### Q9. What are Iterators in STL? List any two types.
+- An **iterator** is an object that points to an element in a container and allows sequential traversal of elements like a pointer.
+- **Types:**
+  1. **Random-Access Iterator** (supports `[]`, pointer arithmetic; e.g., in `vector`)
+  2. **Bidirectional Iterator** (supports `++` and `--`; e.g., in `list`)
+  3. *Other types:* Input, Output, Forward iterators.
 
-### Q6. File Open Modes
-- **`ios::in`** – open file for **reading**.
-- **`ios::out`** – open for **writing** (truncates existing contents).
-- **`ios::app`** – **append**; writes at the end of file.
-- **`ios::binary`** – open in **binary** mode (not text).
-```cpp
-ofstream f("a.txt", ios::out | ios::app);
-```
+### Q10. Differentiate between std::vector and std::list in STL.
+| Feature | `std::vector` | `std::list` |
+|---|---|---|
+| **Underlying Structure** | Dynamic contiguous array | Doubly linked list |
+| **Random Access** | Fast O(1) via index `[]` | Not supported (sequential traversal O(n)) |
+| **Insertion / Deletion** | Slow in middle O(n) due to shifting | Fast anywhere O(1) once iterator is found |
 
-### Q7. File Pointers (`seekg`, `seekp`, `tellg`, `tellp`)
-- **`seekg(pos)`** / **`seekp(pos)`** – **move** the get (read) / put (write) pointer to a position.
-- **`tellg()`** / **`tellp()`** – **return the current** position of the get / put pointer.
-- `g` = **get** (input), `p` = **put** (output). Offsets use `ios::beg`, `ios::cur`, `ios::end`.
-
-### Q8. Standard Template Library (STL)
-**STL** is a library of **generic, reusable template classes and functions** for data structures and algorithms.
-- Three core components: **Containers**, **Algorithms**, **Iterators**.
-
-### Q9. STL Containers
-- **Sequence containers:** store elements in **linear order** by position; e.g., **`vector`, `list`, `deque`**.
-- **Associative containers:** store elements as **sorted keys** for fast lookup; e.g., **`set`, `map`, `multiset`, `multimap`**.
-- Sequence: access by **position**; Associative: access by **key**.
-
-### Q10. STL Iterators
-An **iterator** is an **object that behaves like a pointer**, used to traverse and access elements of a container.
-- Five categories: **Input, Output, Forward, Bidirectional, Random Access**.
-```cpp
-vector<int>::iterator it = v.begin();
-```
-
-### Q11. STL Algorithms
-**STL algorithms** are **generic functions** in `<algorithm>` that operate on container elements via **iterators** (e.g., searching, sorting).
-- Examples: **`sort()`**, **`find()`**, **`reverse()`**, **`count()`** (also `max_element`, `binary_search`).
-```cpp
-sort(v.begin(), v.end());
-```
+### Q11. What is std::map in STL and how does it store data?
+- **`std::map`** is an associative container that stores elements as **key-value pairs** (`pair<const Key, Value>`).
+- Keys are unique and stored in **automatically sorted order** (typically implemented as a Red-Black Tree), offering logarithmic O(log n) search, insertion, and deletion time.\n

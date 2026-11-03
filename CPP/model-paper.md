@@ -18,16 +18,16 @@
 
 | Q.No | Sub | Question Statement | Unit | Marks | Direct Answer Link |
 | :---: | :---: | :--- | :---: | :---: | :--- |
-| **1** | **a** | State any two major differences between C and C++. | **I** | `[2M]` | [→ View Answer](2-marks.md#q1-differences-between-c-and-c) |
-|  | **b** | Explain the use and syntax of the Scope Resolution Operator (`::`). | **I** | `[2M]` | [→ View Answer](2-marks.md#q7-scope-resolution-operator) |
-|  | **c** | Differentiate between `private`, `protected`, and `public` access specifiers. | **II** | `[2M]` | [→ View Answer](2-marks.md#q2-access-specifiers) |
-|  | **d** | What is an inline function? State any two conditions where compiler ignores inlining. | **II** | `[2M]` | [→ View Answer](2-marks.md#q4-inline-functions) |
-|  | **e** | List any four non-overloadable operators in C++. | **III** | `[2M]` | [→ View Answer](2-marks.md#q2-rules-of-operator-overloading) |
-|  | **f** | What is the Diamond Problem in inheritance and how is it resolved? | **III** | `[2M]` | [→ View Answer](2-marks.md#q11-diamond-problem-virtual-base-class) |
-|  | **g** | What is generic programming and why are templates needed in C++? | **IV** | `[2M]` | [→ View Answer](2-marks.md#q1-generic-programming-templates) |
-|  | **h** | State any three differences between C++ templates and C preprocessor macros. | **IV** | `[2M]` | [→ View Answer](2-marks.md#q6-templates-vs-macros) |
-|  | **i** | Differentiate between `seekg()`/`seekp()` and `tellg()`/`tellp()` in file handling. | **V** | `[2M]` | [→ View Answer](2-marks.md#q7-file-pointers-seekg-seekp-tellg-tellp) |
-|  | **j** | Name the three fundamental components of the Standard Template Library (STL). | **V** | `[2M]` | [→ View Answer](2-marks.md#q8-standard-template-library-stl) |
+| **1** | **a** | State any two major differences between C and C++. | **I** | `[2M]` | [→ View Answer](2-marks.md#q1-state-any-two-major-differences-between-c-and-c) |
+|  | **b** | Explain the use and syntax of the Scope Resolution Operator (`::`). | **I** | `[2M]` | [→ View Answer](2-marks.md#q7-explain-the-use-and-syntax-of-the-scope-resolution-operator) |
+|  | **c** | Differentiate between `private`, `protected`, and `public` access specifiers. | **II** | `[2M]` | [→ View Answer](2-marks.md#q2-differentiate-between-private-protected-and-public-access-specifiers) |
+|  | **d** | What is an inline function? State any two conditions where compiler ignores inlining. | **II** | `[2M]` | [→ View Answer](2-marks.md#q4-what-is-an-inline-function-list-any-two-ruleslimitations-for-inlining) |
+|  | **e** | List any four non-overloadable operators in C++. | **III** | `[2M]` | [→ View Answer](2-marks.md#q2-list-any-four-rules-for-operator-overloading-in-c) |
+|  | **f** | What is the Diamond Problem in inheritance and how is it resolved? | **III** | `[2M]` | [→ View Answer](2-marks.md#q7-what-is-a-virtual-base-class-and-what-problem-does-it-solve) |
+|  | **g** | What is generic programming and why are templates needed in C++? | **IV** | `[2M]` | [→ View Answer](2-marks.md#q1-what-is-generic-programming-and-why-are-templates-needed) |
+|  | **h** | State any three differences between C++ templates and C preprocessor macros. | **IV** | `[2M]` | [→ View Answer](2-marks.md#q6-differentiate-between-templates-and-macros-in-c) |
+|  | **i** | What are `ifstream`, `ofstream`, and `fstream` file stream classes? | **V** | `[2M]` | [→ View Answer](2-marks.md#q5-what-are-ifstream-ofstream-and-fstream-classes) |
+|  | **j** | Name the three fundamental components of the Standard Template Library (STL). | **V** | `[2M]` | [→ View Answer](2-marks.md#q7-what-is-the-standard-template-library-stl-and-its-programming-model) |
 
 ---
 

@@ -1,13 +1,13 @@
 # Object Oriented Programming through C++ — Questions Index (2501CS08)
 
-> **Navigation:** [`model-paper.md` — 100M Exam Blueprint](model-paper.md) · [`2-marks-answers.md` — 55 Short Q&As](2-marks-answers.md)  
+> **Navigation:** [`model-paper.md` — 100M Exam Blueprint](model-paper.md) · [`2-marks.md` — 55 Short Q&As](2-marks.md)  
 > **Worked Answer Files:** [`unit-1.md`](unit-1.md) · [`unit-2.md`](unit-2.md) · [`unit-3.md`](unit-3.md) · [`unit-4.md`](unit-4.md) · [`unit-5.md`](unit-5.md)
 
 ---
 
 ## Unit 1
 **C++ Fundamentals & Paradigms**  
-> *Section A Short Answers:* [→ Unit I (2M Q&As)](2-marks-answers.md#unit-i-c-fundamentals-paradigms)
+> *Section A Short Answers:* [→ Unit I (2M Q&As)](2-marks.md#unit-i-c-fundamentals-paradigms)
 
 1. [Evolution & Paradigm Shift](unit-1.md#question-1-evolution-of-c-paradigm-shift) — Evolution of C++ from C; disadvantages of procedural programming.
 2. [C vs C++ Comparison](unit-1.md#question-2-c-vs-c-comparison) — Paradigms, data security, memory management, function extensions.
@@ -22,7 +22,7 @@
 
 ## Unit 2
 **Classes, Objects, Functions & Constructors**  
-> *Section A Short Answers:* [→ Unit II (2M Q&As)](2-marks-answers.md#unit-ii-classes-objects-functions-constructors)
+> *Section A Short Answers:* [→ Unit II (2M Q&As)](2-marks.md#unit-ii-classes-objects-functions-constructors)
 
 1. [Class Declaration & Member Function Scope](unit-2.md#question-1-class-declaration-member-function-scope) — Declaration, syntax, inside vs outside class definitions using `::`.
 2. [Inline Functions](unit-2.md#question-2-inline-functions) — Advantages over macros, execution mechanics, conditions where compiler disregards inlining.
@@ -38,7 +38,7 @@
 
 ## Unit 3
 **Operator Overloading, Inheritance & Polymorphism**  
-> *Section A Short Answers:* [→ Unit III (2M Q&As)](2-marks-answers.md#unit-iii-operator-overloading-inheritance-polymorphism)
+> *Section A Short Answers:* [→ Unit III (2M Q&As)](2-marks.md#unit-iii-operator-overloading-inheritance-polymorphism)
 
 1. [Operator Overloading Rules](unit-3.md#question-1-operator-overloading-rules) — Operator overloading syntax, restrictions, and member vs friend function comparison.
 2. [Binary Operator Overloading](unit-3.md#question-2-binary-operator-overloading) — Overloading binary arithmetic (`+`) and relational (`==`) operators.
@@ -53,7 +53,7 @@
 
 ## Unit 4
 **Generic Programming, Templates & Exceptions**  
-> *Section A Short Answers:* [→ Unit IV (2M Q&As)](2-marks-answers.md#unit-iv-generic-programming-templates-exceptions)
+> *Section A Short Answers:* [→ Unit IV (2M Q&As)](2-marks.md#unit-iv-generic-programming-templates-exceptions)
 
 1. [Generic Programming & Function Templates](unit-4.md#question-1-generic-programming-function-templates) — Type parameterization, template instantiation, and function template overloading.
 2. [Class Templates and Generic Stack](unit-4.md#question-2-class-templates-and-generic-stack) — Generic class syntax and implementing a `Stack<T>` template with push/pop/display.
@@ -68,7 +68,7 @@
 
 ## Unit 5
 **File I/O Streams & Standard Template Library**  
-> *Section A Short Answers:* [→ Unit V (2M Q&As)](2-marks-answers.md#unit-v-file-streams-standard-template-library)
+> *Section A Short Answers:* [→ Unit V (2M Q&As)](2-marks.md#unit-v-file-streams-standard-template-library)
 
 1. [Stream Class Hierarchy](unit-5.md#question-1-stream-class-hierarchy) — `ios`, `istream`, `ostream`, `ifstream`, `ofstream`, `fstream` class hierarchy.
 2. [File Operations (Sequential)](unit-5.md#question-2-file-operations-sequential) — Sequential text file operations: open, write, read, and close with error validation.

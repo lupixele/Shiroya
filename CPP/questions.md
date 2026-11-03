@@ -29,7 +29,7 @@
 3. [Static Members & Live Counter](unit-2.md#question-3-static-members-live-counter) — Static data members, static member functions, and tracking active live objects.
 4. [Friend Functions](unit-2.md#question-4-friend-functions) — Non-member friend functions bridging private data between two independent classes.
 5. [Object Argument Passing & Return](unit-2.md#question-5-object-argument-passing-return) — Pass-by-value vs pass-by-reference and returning objects from member functions.
-6. [Array of Objects & Pointers to Members](unit-2.md#question-6-array-of-objects-pointers-to-members) — Memory organization, pointer-to-member syntax (`.*`, `->*`).
+6. [Array of Objects & Nested Classes](unit-2.md#question-6-array-of-objects-nested-classes) — Memory organization, declaration, and nested class syntax & visibility scope.
 7. [Constructors & Destructors Basics](unit-2.md#question-7-constructors-destructors-basics) — Characteristics, memory management, why destructors cannot be overloaded.
 8. [Constructor Overloading & Defaults](unit-2.md#question-8-constructor-overloading-defaults) — Default, parameterized, and constructor overloading with default arguments.
 9. [Copy Constructor & Dynamic Initialization](unit-2.md#question-9-copy-constructor-dynamic-initialization) — Copy constructor, shallow vs deep copy, dynamic allocation using `new`.

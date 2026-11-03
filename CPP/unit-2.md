@@ -260,7 +260,7 @@ int main() {
 
 ---
 
-## Question 6 — Array of Objects & Pointers to Members
+## Question 6 — Array of Objects & Nested Classes
 
 > **Question:** Explain the creation and usage of an array of objects, and describe the syntax and visibility scope of nested classes.
 
@@ -269,47 +269,71 @@ int main() {
 ### Step-by-Step Solution
 
 #### 1. Array of Objects
-- Collection of **objects of same class** stored contiguously.
-- **Syntax:** `ClassName arr[size];` → needs a **default constructor** (or initializer list for parameterized).
-- Access: `arr[i].member`.
+- **Definition:** An array whose elements are instances (objects) of a class, stored contiguously in memory.
+- **Creation & Syntax:**
+  ```cpp
+  Student s[3];                                 // calls default constructor for each object
+  Student t[2] = { Student(101), Student(102) }; // parameterized constructors
+  ```
+- **Usage:** Elements are accessed using the index operator `[]` and member access operator `.`:
+  ```cpp
+  s[0].setData(101, "Alice");
+  s[0].display();
+  ```
 
-```cpp
-Student s[3];                         // default ctor for each
-Student t[2] = { Student(1), Student(2) };   // parameterized
-```
-
-#### 2. Pointers to Members
-- Point to a **class member**, not to a specific object's member.
+#### 2. Nested Classes (Syntax & Visibility Scope)
+- **Definition:** A class declared **inside the scope of another class** (called the enclosing or outer class).
 - **Syntax:**
-```cpp
-int ClassName::*ptr = &ClassName::data;      // pointer to data member
-obj.*ptr        // with object
-objPtr->*ptr    // with object pointer
-void (ClassName::*fp)() = &ClassName::func;  // pointer to member function
-(obj.*fp)();
-```
-- **Visibility constraint:** Address of a member can be taken **only where the member is accessible** — **`private` members cannot be pointed to from outside** the class (only `public` ones, or inside class/friend).
+  ```cpp
+  class Outer {
+  private:
+      int x;
+  public:
+      class Inner {                             // Nested Class
+      public:
+          void show() { cout << "Inside Inner Class" << endl; }
+      };
+  };
+  ```
+- **Visibility & Scoping Rules:**
+  - **Public Nested Class:** Can be instantiated from outside using the scope resolution operator:
+    ```cpp
+    Outer::Inner inObj;
+    inObj.show();
+    ```
+  - **Private / Protected Nested Class:** Can only be instantiated and used **inside the enclosing class**; hidden from the outside world.
+  - **Member Access:** A nested class does not automatically inherit or access private non-static members of the enclosing class unless granted via friend or pointer/reference.
 
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Illustrative snippet for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Item {
+class Student {
+    int id;
 public:
-    int qty;
-    void show() { cout << "Qty: " << qty << endl; }
-};
-int main() {
-    Item arr[2];                              // array of objects
-    arr[0].qty = 5; arr[1].qty = 9;
+    void set(int i) { id = i; }
+    void show() { cout << "ID: " << id << endl; }
 
-    int Item::*p = &Item::qty;                // pointer to data member
-    void (Item::*f)() = &Item::show;          // pointer to member function
-    for (int i = 0; i < 2; i++) {
-        cout << arr[i].*p << " ";
-        (arr[i].*f)();
-    }
+    // Nested Class
+    class Address {
+    public:
+        void printCity() { cout << "City: Kakinada" << endl; }
+    };
+};
+
+int main() {
+    // 1. Array of Objects
+    Student batch[2];
+    batch[0].set(101);
+    batch[1].set(102);
+    for (int i = 0; i < 2; i++) batch[i].show();
+
+    // 2. Using Nested Class
+    Student::Address addr;
+    addr.printCity();
+
+    return 0;
 }
 ```
 

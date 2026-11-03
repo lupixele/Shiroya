@@ -28,7 +28,7 @@ T func(T a, T b) { /* body */ }
 - A template can be **overloaded** by (i) **another template with a different parameter count/shape**, or (ii) a **non-template (ordinary) function**.
 - **Resolution order:** **Exact-match ordinary function** is preferred over template; then the most specialized template.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -69,7 +69,7 @@ ClassName<int> obj;
 - **LIFO** structure with **`push`** (insert at top), **`pop`** (remove from top), **`display`**.
 - Check **overflow** (`top == size-1`) and **underflow** (`top == -1`).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -130,7 +130,7 @@ Array<int, 5> x;      // N = 5 must be a constant expression
 | **Type** | `class T` | A data type (`int`) |
 | **Non-type** | `int N` | A constant (`5`) |
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -181,7 +181,7 @@ int main() {
 - **Templates** = type-safe, scoped, part of the language.
 - **Macros** = blind text replacement, error-prone (`SQ(a++)` increments twice).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -215,7 +215,7 @@ int main() {
 #### 2. Template Use
 - One `bubbleSort<T>` works for **`int` and `float`** (any type supporting `>`).
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -260,7 +260,7 @@ int main() {
 head → [10|•] → [20|•] → [30|NULL]
 ```
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -325,7 +325,7 @@ catch (Type e) { /* handle */ }
 4. If **found** → handler runs, execution continues **after the catch block**.
 5. If **not found** → **`terminate()`** called → program aborts.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -379,7 +379,7 @@ int main() {
 | Re-throw | `throw;` |
 | No-throw guarantee | `noexcept` |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;

@@ -33,7 +33,7 @@
 - **No code reusability:** Reuse only by copy-paste; **no inheritance**.
 - **Does not model the real world:** Real entities (object = data + behavior) are not represented naturally.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -77,7 +77,7 @@ int main() {
 - C++ adds **classes, inheritance, polymorphism, operator overloading**.
 - C++ provides **bool, reference, `new/delete`, STL**.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -121,7 +121,7 @@ int main() {
 
 - Other advantages: **faster development, reduced redundancy, easy debugging, scalability**.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -174,7 +174,7 @@ int main() {               // main function
 - **`setw(n)`**: Sets the field width of the next output value to *n*.
 - **`setprecision(n)`**: Sets floating-point decimal precision to *n* digits.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <iomanip>
@@ -215,7 +215,7 @@ NamespaceName::entity   // namespace scope
 - **Qualify namespace members:** `std::cout`, `A::value`.
 - **Access static members / base-class members** (e.g., `Base::show()`).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -277,7 +277,7 @@ namespace Outer {
 - Use **fully qualified names** (`A::show()`, `B::show()`).
 - Prefer **`using` declaration** over directive.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -330,7 +330,7 @@ int area(int l, int b = 1);     // default: only rightmost params
 - Default access: **`private`** in `class`, **`public`** in `struct`.
 - Accessed outside only via **public member functions** → encapsulation.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -408,5 +408,5 @@ int main() {
 }
 ```
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 Sample run (factorial): input `5` → output `5! = 120`; (quadratic) `1 -3 2` → `Real roots: 2, 1`.

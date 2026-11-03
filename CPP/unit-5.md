@@ -40,7 +40,7 @@
 - They **inherit** `<<`, `>>`, `get`, `put`, `read`, `write`, `seekg`, `seekp`, plus add **`open()`**, **`close()`**, **`is_open()`**.
 - `cin` is object of `istream`; `cout` is object of `ostream`.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <fstream>
@@ -83,7 +83,7 @@ int main() {
 | Operator | `<<` | `>>` |
 | File missing | **Created** | **Fails** (`is_open()` false) |
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 #include <fstream>
@@ -140,7 +140,7 @@ stream.open("file", mode1 | mode2);
 
 - **Direction:** `ios::beg` (start), `ios::cur` (current), `ios::end` (end).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <fstream>
@@ -189,7 +189,7 @@ in.read(reinterpret_cast<char*>(&obj), sizeof(obj));
 | Format | Human-readable | Raw bytes |
 | Size | Larger | **Compact** |
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 #include <fstream>
@@ -243,7 +243,7 @@ int main() {
  (stores)       (bridge)      (processes)
 ```
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <vector>
@@ -282,7 +282,7 @@ int main() {
 | **`set`** | Associative | – | **O(log n)** | **O(log n)** | **Unique, sorted** elements |
 | **`map`** | Associative | **O(log n)** by key | **O(log n)** | **O(log n)** | **Key → value dictionary** |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <vector>
@@ -333,7 +333,7 @@ Input / Output  →  Forward  →  Bidirectional  →  Random-Access
 - **`std::sort` needs random-access** iterators (so **not** usable on `list`; use `list::sort()`).
 - Algorithms **choose efficient implementation** based on iterator category.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <vector>
@@ -369,7 +369,7 @@ int main() {
 - **`std::sort(begin, end)`:** sorts range (random-access iterators, **O(n log n)**).
 - **`std::find(begin, end, value)`:** returns **iterator to first match** or **`end()`** if absent.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <vector>

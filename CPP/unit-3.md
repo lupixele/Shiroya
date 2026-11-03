@@ -49,7 +49,7 @@ ReturnType operator<symbol>(parameters) { body }
 | Example | `a + b` → `a.operator+(b)` | `5 + a` → `operator+(5, a)` |
 | Must use for | `=`, `()`, `[]`, `->` | `<<`, `>>` (stream operators) |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -94,7 +94,7 @@ bool operator==(const Class &obj);        // relational → returns bool
 - Pass argument as **`const &`** for efficiency.
 - Mark function **`const`** if it doesn't modify the object.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -162,7 +162,7 @@ Single          Multiple        Multilevel      Hierarchical      Hybrid
 | `protected` | protected | protected | private |
 | `private` | Not accessible | Not accessible | Not accessible |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -213,7 +213,7 @@ class D : public B, public C { };
 - Ensures **only one shared copy** of `A` in `D` → **ambiguity resolved**.
 - The **most derived class (`D`)** directly constructs the virtual base `A`.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -252,7 +252,7 @@ int main() {
 | Multilevel `C : B : A` | A, B, C | C, B, A |
 | Multiple `C : A, B` | A, B, C | C, B, A |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -298,7 +298,7 @@ int main() {
 | `Derived*` | `Derived` | Yes |
 | `Derived*` | `Base` | **No** (needs cast) |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -362,7 +362,7 @@ class Base { public: virtual void f(); };
 | Holds | Function addresses | Address of vtable |
 | Created | Compile time | Set at object construction |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -415,7 +415,7 @@ virtual ReturnType func() = 0;
 - **Virtual destructor** ensures **derived destructor runs first, then base** (correct cleanup).
 - **Rule:** Any class with virtual functions meant to be a base → **declare `virtual ~Base()`**.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;

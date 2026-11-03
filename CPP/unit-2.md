@@ -39,7 +39,7 @@ obj.func();        // member access with dot operator
 ReturnType ClassName::funcName(params) { /* body */ }
 ```
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -95,7 +95,7 @@ inline ReturnType name(params) { body }
 - Function is **too large**.
 - Address of the function is taken / called via **function pointer** / **virtual** call.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -135,7 +135,7 @@ int A::count = 0;       // mandatory definition
 #### 3. Live Object Counter
 - **Constructor** → `count++`; **Destructor** → `count--` ⇒ tracks **active objects**.
 
-#### Code Example
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -188,7 +188,7 @@ class A { friend ReturnType func(A obj); };
 | Has `this` pointer | **No** |
 | Called using | Normal call, no `.` operator |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -237,7 +237,7 @@ int main() { cout << sum(A(10), B(20)); }  // 30
 - Member function can **return an object by value** (a copy/temporary is created) — commonly used for **adding objects**.
 - Avoid returning **reference to a local object** (dangling).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -290,7 +290,7 @@ void (ClassName::*fp)() = &ClassName::func;  // pointer to member function
 ```
 - **Visibility constraint:** Address of a member can be taken **only where the member is accessible** — **`private` members cannot be pointed to from outside** the class (only `public` ones, or inside class/friend).
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -349,7 +349,7 @@ int main() {
 | Overloading | Yes | **No** |
 | Call order | Declaration order | **Reverse** order |
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -390,7 +390,7 @@ Box(int a, int b = 1);    // default argument
 
 - **Caution:** `Box()` and `Box(int a = 0)` together cause **ambiguity** for `Box b;`.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
@@ -444,7 +444,7 @@ int main() {
 #### 3. Dynamic Initialization of Constructors
 - **Memory allocated at runtime with `new`** inside constructor; freed with **`delete`** in destructor.
 
-#### Code Example
+#### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 #include <cstring>

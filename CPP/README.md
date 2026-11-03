@@ -8,18 +8,23 @@ Academic exam preparation notes, unit-wise questions, and complete worked answer
 
 - **Subject:** Object Oriented Programming through C++ (`2501CS08`)
 - **Exam Date:** Wednesday, 04-11-2026 (End-Sem)
-- **Question Bank:** Aditya University Official 8-Marks Semester Question Bank (41 Questions across Units 1–5)
+- **Exam Format:** 100 Marks (3 Hours)
+  - **Section A (Compulsory):** 10 Qs × 2M = 20 Marks (2 Qs from each Unit) → [`2-marks-answers.md`](2-marks-answers.md)
+  - **Section B (Internal Choice):** 5 Units × 16M (two 8M Qs per unit) = 80 Marks → [`unit-1.md`](unit-1.md) to [`unit-5.md`](unit-5.md)
+- **Official Model Paper:** [`model-paper.md`](model-paper.md) (Complete 100M question paper blueprint matching ADSA standard)
 
 ---
 
 ## Repository Index & Unit Navigation
 
-| Unit | Title | Questions Count | Answers Document | Raw Material Source |
+| Section / Unit | Title | Questions Count | Answers Document | Syllabus / Source Coverage |
 | :---: | :--- | :---: | :--- | :--- |
-| **All** | **Master Questions Index** | 41 Qs | [`questions.md`](questions.md) | [`CPP/raw/OOPS_8 marks questions bank_all Units.pdf`](raw/OOPS_8%20marks%20questions%20bank_all%20Units.pdf) |
-| **Unit 1** | C++ Fundamentals & Paradigms | 8 Qs | [`unit-1.md`](unit-1.md) | `raw/Unit 1_CPP.pptx`, `raw/Reference Course Material_ OOP through C++.pdf` |
-| **Unit 2** | Classes, Objects, Functions & Constructors | 9 Qs | [`unit-2.md`](unit-2.md) | `raw/Unit 2_CPP.pptx`, `raw/Reference Course Material_ OOP through C++.pdf` |
-| **Unit 3** | Operator Overloading, Inheritance & Polymorphism | 8 Qs | [`unit-3.md`](unit-3.md) | `raw/Unit 3_CPP_1.pptx`, `raw/Unit 3_CPP_2.pptx`, `raw/cpp-3.pdf` |
+| **Model Paper** | **100M Exam Blueprint** | Full Paper | [`model-paper.md`](model-paper.md) | Standard Aditya University Model Paper |
+| **Section A** | **2-Marks Short Answers** | 55 Qs | [`2-marks-answers.md`](2-marks-answers.md) | Compulsory 20M Section A (All 5 Units) |
+| **Index** | **Master Questions Index** | 41 Qs (8M) | [`questions.md`](questions.md) | Official 8-Marks Semester Question Bank |
+| **Unit 1** | C++ Fundamentals & Paradigms | 8 Qs | [`unit-1.md`](unit-1.md) | `raw/Unit 1_CPP.pptx`, `Reference Course Material` |
+| **Unit 2** | Classes, Objects, Functions & Constructors | 9 Qs | [`unit-2.md`](unit-2.md) | `raw/Unit 2_CPP.pptx`, `Reference Course Material` |
+| **Unit 3** | Operator Overloading, Inheritance & Polymorphism | 8 Qs | [`unit-3.md`](unit-3.md) | `raw/Unit 3_CPP_1.pptx`, `raw/cpp-3.pdf` |
 | **Unit 4** | Generic Programming, Templates & Exceptions | 8 Qs | [`unit-4.md`](unit-4.md) | `raw/Unit 4.pptx`, `raw/UNIT 4(CPP).pdf` |
 | **Unit 5** | File Streams & Standard Template Library (STL) | 8 Qs | [`unit-5.md`](unit-5.md) | `raw/Unit 5.pptx`, `raw/cpp 5.pdf` |
 
@@ -35,7 +40,9 @@ CPP/
 ├── Lab/                    # C++ Lab programs & exercises
 ├── MICS/                   # Miscellaneous notes & questions
 ├── raw/                    # Raw PDFs, Question Banks & PPTs
-├── questions.md            # Master question index linking all 41 questions
+├── model-paper.md          # 100M Semester Exam Blueprint & Model Paper
+├── questions.md            # Master 8M question index linking all 41 questions
+├── 2-marks-answers.md      # Complete Section A 2-Marks Short Answers (55 Qs)
 ├── unit-1.md               # Unit 1 worked solutions (Q1–Q8)
 ├── unit-2.md               # Unit 2 worked solutions (Q1–Q9)
 ├── unit-3.md               # Unit 3 worked solutions (Q1–Q8)

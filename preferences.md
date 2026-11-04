@@ -145,14 +145,14 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ## 7. Answer Synthesis & Note Formatting Standards
 
-### Core Philosophy: True Preparation Notes (Full-Marks & Zero Complexity)
-- **Preparation Notes, Not Corporate Cheat-Sheets:** 
-  - ❌ **Anti-Pattern (Corporate Slide Syndrome):** Never compress complex concepts into cryptic 1–2 line robotic bullet points or corporate executive summaries. Stripping away the explanation makes notes harder to understand, unnatural to read, and impossible to reproduce in a university exam for full marks.
-  - ✅ **The Standard (Exam-Ready Preparation Guide):** Notes must read like the clearest, most intuitive explanation written by a top-scoring student. The student must understand *why* a concept exists, *how* it works in simple English, and have the exact depth needed to fill 1.5–3 pages on an answer booklet to secure full marks (4M / 8M / 10M).
-- **Simple Enough to Understand, Thorough Enough to Score:**
-  - Lead with plain-language intuition before dense formalisms.
-  - Every technical term must be explained in clear, natural prose before diving into rules.
-  - Retain hand-drawable diagrams, relatable database tables, and step-by-step walkthroughs.
+### Core Philosophy: True Preparation Notes (Intuitive, Comprehensive & High-Yield)
+- **Preparation Material First, Squeeze in Exam Later:**
+  - ❌ **Anti-Pattern (Paper-Choked / Corporate Skeletons):** Never artificially choke or truncate an answer just to fit an exact physical paper length or compress it into tiny 2-line corporate bullets. When notes try to be ultra-condensed "exam-ready" cheat-sheets, they drop the explanation, become cryptic, and ruin actual learning.
+  - ✅ **The Standard (Preparation Standard):** Notes are **authoritative study & preparation material**. They must explain concepts clearly, thoroughly, and intuitively in plain English with complete mechanics and relatable examples. The student will naturally squeeze, adapt, and summarize it on their exam sheet—the notes must provide the full understanding and foundational substance to do so with confidence.
+- **Crystal Clear & High-Scoring:**
+  - Lead with plain-language intuition (mental model) so anyone gets *why* it works immediately.
+  - Detail the formal concepts, mechanics, and standard definitions with key grading terminology.
+  - Include hand-drawable schemas/diagrams and concrete, memorable database examples (`STUDENT`, `COURSE`, `ORDERS`).
 
 ---
 

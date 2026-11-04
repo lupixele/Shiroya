@@ -4,7 +4,7 @@
 
 ---
 
-## Question 1 — Stream Class Hierarchy
+## Question 1 — Exception Handling Principles & Structured Flow
 
 > **Question:** Explain the principles and structured flow of exception handling in C++ using the try, throw, and catch keywords.
 
@@ -12,33 +12,163 @@
 
 ### Step-by-Step Solution
 
-#### 1. Hierarchy
-- **Stream** = flow of bytes; C++ provides **class hierarchy** for console and file I/O.
-- **`ios`** is the **base class**: stores **format flags, state flags** (`eofbit`, `failbit`, `badbit`).
-- **`istream`** (input, `>>`, `get()`, `getline()`) and **`ostream`** (output, `<<`, `put()`, `write()`) derive from `ios`.
-- **`iostream`** derives from both `istream` and `ostream`.
+#### 1. Principles of Exception Handling
+- **Exception:** A runtime error or anomalous condition (e.g., division by zero, out of memory, file not found) encountered during execution.
+- **Core Principle:** **Separates error-detection code from error-handling code**.
+  - Code that might cause an error is isolated in a `try` block.
+  - The error is detected and signaled using `throw`.
+  - The error is received and resolved in a `catch` block.
+
+#### 2. Structured Execution Flow
+1. **Try Block:** Encloses statements that may throw an exception.
+2. **Throw Expression:** When an error condition occurs, an exception object/value is thrown via `throw value;`.
+3. **Stack Unwinding:** Normal execution halts; the runtime searches up the call stack for an active, matching `catch` block. Local objects in scope are safely destroyed.
+4. **Catch Block:** Receives the thrown value by type matching and executes recovery code. Normal execution resumes after the `catch` block.
 
 ```
-                 ios
-                /   \
-          istream   ostream
-          /    \    /    \
-   ifstream   iostream   ofstream
-                 |
-              fstream
++------------+       Error occurs
+| try block  | ------------------------> throw exception;
++------------+                                  |
+      |                                         v
+Normal completion                      +-----------------+
+(skips catch)                          | Matching catch? |
+                                       +-----------------+
+                                         | Yes         | No
+                                         v             v
+                                   Execute catch   terminate()
 ```
 
-#### 2. File Stream Classes (`<fstream>`)
+#### Code Example *(Illustrative snippet for question)*
+```cpp
+#include <iostream>
+using namespace std;
 
-| Class | Derived from | Purpose |
+double divide(int a, int b) {
+    if (b == 0) throw "Error: Division by zero!"; // throw exception
+    return (double)a / b;
+}
+
+int main() {
+    int num = 10, den = 0;
+    try {
+        cout << "Attempting division..." << endl;
+        double result = divide(num, den);
+        cout << "Result: " << result << endl;
+    }
+    catch (const char* msg) { // catches thrown string literal
+        cout << "Caught Exception: " << msg << endl;
+    }
+    cout << "Program resumes normally." << endl;
+    return 0;
+}
+```
+
+---
+
+## Question 2 — Multiple Catch Blocks & Catch-All Handler
+
+> **Question:** Write a program demonstrating multiple catch blocks for different exception types, and explain the utility of the catch-all handler (catch(...)).
+
+---
+
+### Step-by-Step Solution
+
+#### 1. Multiple Catch Blocks
+- A single `try` block can be followed by **multiple `catch` handlers**, each tailored to catch a specific exception type (`int`, `char`, `double`, `exception`).
+- The compiler tests handlers in **top-to-bottom order**; the first handler with a matching type executes, while others are skipped.
+
+#### 2. Catch-All Handler (`catch(...)`)
+- **Syntax:** `catch (...) { // handle unknown error }`
+- **Utility:** A safety net that catches **any** exception of any data type not caught by preceding blocks.
+- **Rule:** Must **always be placed as the LAST catch block**, otherwise it masks all subsequent handlers and triggers a compiler error.
+
+#### Code Example *(Mandatory program for question)*
+```cpp
+#include <iostream>
+using namespace std;
+
+void testException(int choice) {
+    try {
+        if (choice == 1) throw 404;                     // int exception
+        else if (choice == 2) throw 'E';                // char exception
+        else if (choice == 3) throw 3.14;               // double exception
+        else throw "Unknown custom error!";             // string literal
+    }
+    catch (int e) {
+        cout << "Caught Integer Exception Code: " << e << endl;
+    }
+    catch (char c) {
+        cout << "Caught Character Exception: " << c << endl;
+    }
+    catch (double d) {
+        cout << "Caught Floating-Point Exception: " << d << endl;
+    }
+    catch (...) { // Catch-all default handler (must be last)
+        cout << "Caught Default/Unknown Exception!" << endl;
+    }
+}
+
+int main() {
+    testException(1); // Caught int
+    testException(2); // Caught char
+    testException(4); // Caught by catch(...)
+    return 0;
+}
+```
+
+---
+
+## Question 3 — Stream Class Hierarchy & File Opening Modes
+
+> **Question:** Explain the C++ stream class hierarchy (ios, istream, ostream, ifstream, ofstream, fstream) and describe file opening modes (ios::in, ios::out, ios::app).
+
+---
+
+### Step-by-Step Solution
+
+#### 1. C++ Stream Class Hierarchy
+- **Stream:** A sequence of bytes acting as an interface between programs and I/O devices/files.
+- **Hierarchy Tree:**
+```
+                     +---------------+
+                     |   ios_base    |
+                     +---------------+
+                             |
+                     +---------------+
+                     |      ios      |
+                     +---------------+
+                       /                                 v             v
+              +-------------+   +-------------+
+              |   istream   |   |   ostream   |
+              +-------------+   +-------------+
+                /    \                 /                   v      \               /      v
+         +----------+  \             /  +----------+
+         | ifstream |   v           v   | ofstream |
+         +----------+  +-------------+  +----------+
+                       |  iostream   |
+                       +-------------+
+                              |
+                              v
+                       +-------------+
+                       |   fstream   |
+                       +-------------+
+```
+- **`ios_base` & `ios`:** Top-level base classes; manage state flags, formatting flags, and stream buffers.
+- **`istream`:** Input stream class; provides extraction operator `>>` (e.g., `cin`).
+- **`ostream`:** Output stream class; provides insertion operator `<<` (e.g., `cout`, `cerr`).
+- **`ifstream`:** Derived from `istream`; used for **reading** from disk files.
+- **`ofstream`:** Derived from `ostream`; used for **writing** to disk files.
+- **`fstream`:** Derived from `iostream`; supports **both reading and writing**.
+
+#### 2. File Opening Modes (`ios::` flags)
+
+| Mode | Meaning | Behavior |
 |---|---|---|
-| **`ifstream`** | `istream` | **Read** from files |
-| **`ofstream`** | `ostream` | **Write** to files |
-| **`fstream`** | `iostream` | **Read and write** |
-| `filebuf` | `streambuf` | Low-level file buffer |
-
-- They **inherit** `<<`, `>>`, `get`, `put`, `read`, `write`, `seekg`, `seekp`, plus add **`open()`**, **`close()`**, **`is_open()`**.
-- `cin` is object of `istream`; `cout` is object of `ostream`.
+| **`ios::in`** | Input | Opens file for **reading** (default for `ifstream`). Fails if file does not exist. |
+| **`ios::out`** | Output | Opens file for **writing** (default for `ofstream`). Overwrites/truncates existing file. |
+| **`ios::app`** | Append | Opens file to **append** at the end. Preserves existing contents; all writes go to EOF. |
+| **`ios::binary`** | Binary | Opens file in raw **binary mode** (no newline conversion). |
+| **`ios::trunc`** | Truncate | Discards existing content if file exists (default with `ios::out`). |
 
 #### Code Example *(Reference only — not asked in question)*
 ```cpp
@@ -47,41 +177,35 @@
 using namespace std;
 
 int main() {
-    ofstream out("demo.txt");      // ofstream inherits ostream::operator<<
-    out << "Hello Streams";
-    out.close();
-    ifstream in("demo.txt");
-    string s;
-    in >> s;
-    cout << s << endl;             // Hello
+    // Open in write + append mode
+    fstream file;
+    file.open("sample.txt", ios::out | ios::app);
+    if (!file) {
+        cout << "File open error!" << endl;
+        return 1;
+    }
+    file << "Appending line into file.\n";
+    file.close();
+    return 0;
 }
 ```
 
 ---
 
-## Question 2 — File Operations (Sequential)
+## Question 4 — Sequential Text File Reading & Writing Program
 
-> **Question:** Write a program demonstrating multiple catch blocks for different exception types, and explain the utility of the catch-all handler (catch(...)).
+> **Question:** Write a C++ program that reads data from an existing text file and writes/appends formatted output to a target file.
 
 ---
 
 ### Step-by-Step Solution
 
-#### 1. Steps
-- **Step 1 — Include** `<fstream>`.
-- **Step 2 — Open:** `ofstream out("file.txt");` (write) / `ifstream in("file.txt");` (read) or `obj.open("file.txt");`.
-- **Step 3 — Check:** `if (!obj)` / `obj.is_open()` / `obj.fail()` → **error handling**.
-- **Step 4 — Write/Read:** `out << data;` / `in >> data;` or `getline(in, line)`.
-- **Step 5 — Close:** `obj.close();` (flushes buffer, releases file).
-
-#### 2. Reading until EOF
-- Use **`while (getline(in, line))`** or **`while (in >> x)`** — **not** `while(!in.eof())` (reads last value twice).
-
-| Operation | Write | Read |
-|---|---|---|
-| Class | `ofstream` | `ifstream` |
-| Operator | `<<` | `>>` |
-| File missing | **Created** | **Fails** (`is_open()` false) |
+#### 1. File Handling Steps
+1. **Include Header:** `<fstream>` for file stream classes.
+2. **Create Stream Objects:** `ifstream inFile; ofstream outFile;`.
+3. **Open Files & Error Check:** Check `if (!inFile.is_open())` before processing.
+4. **Read & Write Operations:** Use `getline()` or `>>` to read line-by-line; use `<<` to write formatted data to the target file.
+5. **Close Streams:** Invoke `.close()` to flush buffers and release operating system handles.
 
 #### Code Example *(Mandatory program for question)*
 ```cpp
@@ -91,132 +215,43 @@ int main() {
 using namespace std;
 
 int main() {
-    ofstream out("data.txt");
-    if (!out) { cerr << "Cannot open for writing\n"; return 1; }
-    out << "Line 1\nLine 2\n";
-    out.close();
+    // Step 1: Create sample source file
+    ofstream sourceFile("source.txt");
+    sourceFile << "101 Alice 85.5\n";
+    sourceFile << "102 Bob   92.0\n";
+    sourceFile.close();
 
-    ifstream in("data.txt");
-    if (!in.is_open()) { cerr << "Cannot open for reading\n"; return 1; }
-    string line;
-    while (getline(in, line)) cout << line << endl;
-    in.close();
+    // Step 2: Open source file for reading, target file for appending
+    ifstream inFile("source.txt");
+    ofstream targetFile("target.txt", ios::out | ios::app);
+
+    if (!inFile || !targetFile) {
+        cout << "Error opening files!" << endl;
+        return 1;
+    }
+
+    // Step 3: Read from source, write formatted data to target
+    int id;
+    string name;
+    double marks;
+
+    targetFile << "=== Formatted Student Records ===\n";
+    while (inFile >> id >> name >> marks) {
+        targetFile << "ID: " << id << " | Name: " << name << " | Marks: " << marks << "\n";
+    }
+
+    // Step 4: Close streams
+    inFile.close();
+    targetFile.close();
+    cout << "Data copied and formatted successfully into target.txt" << endl;
+
+    return 0;
 }
 ```
 
 ---
 
-## Question 3 — Open Modes & File Pointers
-
-> **Question:** Explain the C++ stream class hierarchy (ios, istream, ostream, ifstream, ofstream, fstream) and describe file opening modes (ios::in, ios::out, ios::app).
-
----
-
-### Step-by-Step Solution
-
-#### 1. File Open Modes
-```cpp
-stream.open("file", mode1 | mode2);
-```
-
-| Mode | Meaning |
-|---|---|
-| **`ios::in`** | Open for **reading** (default for `ifstream`) |
-| **`ios::out`** | Open for **writing**; **truncates** existing content (default for `ofstream`) |
-| **`ios::app`** | **Append**: all writes go to **end** |
-| **`ios::binary`** | **Binary** mode (no newline translation) |
-| **`ios::trunc`** | **Delete existing contents** on open |
-| **`ios::ate`** | Open and **seek to end** immediately (can still write anywhere) |
-
-#### 2. File Pointers
-- **Get pointer** (read position) & **put pointer** (write position).
-
-| Function | Purpose |
-|---|---|
-| **`seekg(pos)`** / `seekg(off, dir)` | **Move get pointer** |
-| **`seekp(pos)`** / `seekp(off, dir)` | **Move put pointer** |
-| **`tellg()`** | **Return current get position** |
-| **`tellp()`** | **Return current put position** |
-
-- **Direction:** `ios::beg` (start), `ios::cur` (current), `ios::end` (end).
-
-#### Code Example *(Reference only — not asked in question)*
-```cpp
-#include <iostream>
-#include <fstream>
-using namespace std;
-
-int main() {
-    fstream f("note.txt", ios::out | ios::trunc);
-    f << "ABCDEFGH";
-    f.close();
-
-    f.open("note.txt", ios::in | ios::ate);
-    cout << "Size: " << f.tellg() << endl;      // 8
-    f.seekg(2, ios::beg);
-    char c; f.get(c);
-    cout << c << endl;                           // C
-    f.seekg(-1, ios::end);
-    f.get(c); cout << c << endl;                 // H
-}
-```
-
----
-
-## Question 4 — Binary File I/O
-
-> **Question:** Write a C++ program that reads data from an existing text file and writes/appends formatted output to a target file.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Binary I/O Functions
-- Writes/reads **raw bytes** exactly as stored in memory (**faster, compact**, no formatting).
-```cpp
-out.write(reinterpret_cast<const char*>(&obj), sizeof(obj));
-in.read(reinterpret_cast<char*>(&obj), sizeof(obj));
-```
-- Open with **`ios::binary`** flag.
-- Use only **POD/fixed-size** records (e.g., `char name[20]`), **not `std::string`** or pointers.
-
-#### 2. Steps
-- Define **record structure** → open `ofstream` (`ios::binary`) → **`write()`** → close → open `ifstream` (`ios::binary`) → **`read()`** until fail → close.
-
-| Basis | Text I/O | Binary I/O |
-|---|---|---|
-| Functions | `<<`, `>>` | `write()`, `read()` |
-| Format | Human-readable | Raw bytes |
-| Size | Larger | **Compact** |
-
-#### Code Example *(Mandatory program for question)*
-```cpp
-#include <iostream>
-#include <fstream>
-using namespace std;
-
-struct Student {
-    int roll;
-    char name[20];
-};
-int main() {
-    Student s1 = {1, "Asha"}, s2 = {2, "Ravi"};
-    ofstream out("stud.dat", ios::binary);
-    out.write(reinterpret_cast<char*>(&s1), sizeof(Student));
-    out.write(reinterpret_cast<char*>(&s2), sizeof(Student));
-    out.close();
-
-    Student t;
-    ifstream in("stud.dat", ios::binary);
-    while (in.read(reinterpret_cast<char*>(&t), sizeof(Student)))
-        cout << t.roll << " " << t.name << endl;
-    in.close();
-}
-```
-
----
-
-## Question 5 — STL Overview
+## Question 5 — Standard Template Library (STL) Architecture & Functors
 
 > **Question:** Describe the Standard Template Library (STL) programming model and explain the roles of Containers, Algorithms, Iterators, and Functors.
 
@@ -224,24 +259,26 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Standard Template Library (STL)
-- **Collection of generic, reusable template classes and functions** providing **data structures and algorithms**; part of C++ standard library.
-- Benefits: **reusability, efficiency, type safety, less code**.
-
-#### 2. Three Fundamental Components
-- **Containers:** Objects that **store data** (`vector`, `list`, `set`, `map`).
-- **Iterators:** **Pointer-like objects** to **traverse/access** container elements.
-- **Algorithms:** **Generic functions** (`sort`, `find`, `reverse`) that **operate on ranges**.
-
-#### 3. Interaction Model
-- **Algorithms never touch containers directly** — they work through **iterators**.
-- `container.begin()` / `container.end()` give the **range** → algorithm processes `[begin, end)`.
-- This **decouples algorithms from containers**: **one algorithm works with many containers**.
+#### 1. STL Programming Model
+- The **STL** is a generic library of template classes and algorithms providing reusable, highly optimized data structures and algorithms.
+- **Decoupled Architecture:** Algorithms do **not** interact directly with containers. Instead, algorithms access container elements solely through **iterators**.
 
 ```
- Container  ←→  Iterator  ←→  Algorithm
- (stores)       (bridge)      (processes)
++------------+       iterators       +------------+
+| Containers | <-------------------> | Algorithms |
++------------+                       +------------+
+                                           ^
+                                           | calls
+                                     +------------+
+                                     |  Functors  |
+                                     +------------+
 ```
+
+#### 2. The Four STL Components
+1. **Containers:** Data structures that hold collections of objects in memory (e.g., `vector`, `list`, `map`).
+2. **Iterators:** Smart pointer-like objects that traverse container elements (`begin()`, `end()`, `++`, `*it`).
+3. **Algorithms:** Generic functions that execute operations on ranges of elements (e.g., `sort()`, `find()`, `count()`).
+4. **Functors (Function Objects):** Classes that overload `operator()` so objects act like functions; passed to algorithms to customize comparison/sorting criteria.
 
 #### Code Example *(Reference only — not asked in question)*
 ```cpp
@@ -250,17 +287,29 @@ int main() {
 #include <algorithm>
 using namespace std;
 
+// Functor (Function Object)
+struct GreaterThan {
+    bool operator()(int a, int b) const { return a > b; }
+};
+
 int main() {
-    vector<int> v = {4, 1, 3};                    // container
-    sort(v.begin(), v.end());                     // algorithm + iterators
-    for (vector<int>::iterator it = v.begin(); it != v.end(); ++it)
-        cout << *it << " ";                       // 1 3 4
+    vector<int> v = { 10, 40, 20, 50, 30 }; // Container
+
+    // Algorithm sort using Functor and Iterators
+    sort(v.begin(), v.end(), GreaterThan());
+
+    cout << "Sorted descending: ";
+    for (vector<int>::iterator it = v.begin(); it != v.end(); ++it) { // Iterator
+        cout << *it << " ";
+    }
+    cout << endl;
+    return 0;
 }
 ```
 
 ---
 
-## Question 6 — Container Taxonomy
+## Question 6 — std::vector vs std::list Comparison
 
 > **Question:** Compare std::vector and std::list in terms of memory layout, random access, dynamic resizing overhead, and insertion/deletion time complexity.
 
@@ -268,43 +317,47 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Classification
-- **Sequence containers:** Store elements in **linear order of insertion** — **`vector`, `list`, `deque`**.
-- **Associative containers:** Store elements **sorted by key** (balanced tree) — **`set`** (unique keys), **`map`** (key–value pairs); fast **search by key**.
+#### 1. Comparison Table
 
-#### 2. Comparison Table
+| Dimension | `std::vector` | `std::list` |
+|---|---|---|
+| **Underlying Data Structure** | **Dynamic Contiguous Array** | **Doubly Linked List** |
+| **Memory Layout** | Contiguous memory blocks in heap | Non-contiguous memory; nodes connected by pointers |
+| **Random Access** | **$O(1)$ constant time** via index `v[i]` or `at(i)` | **$O(n)$ linear time**; must traverse sequentially |
+| **Insertion / Deletion (Middle)** | **$O(n)$ slow**; requires shifting trailing elements | **$O(1)$ fast** once node position is reached |
+| **Insertion / Deletion (End)** | **$O(1)$ amortized** fast (`push_back`) | **$O(1)$ fast** (`push_back`, `push_front`) |
+| **Dynamic Resizing Overhead** | Reallocates larger array & copies all elements when full | No reallocation; nodes allocated individually |
+| **Memory Overhead** | Unused reserved capacity | Stores 2 pointers (`prev`, `next`) per node |
+| **Iterator Type** | Random-Access Iterator | Bidirectional Iterator |
 
-| Container | Type | Access | Insert/Erase | Search | Best use |
-|---|---|---|---|---|---|
-| **`vector`** | Sequence | **O(1)** random | End: **O(1)** amortized; middle: O(n) | O(n) | **Dynamic array**, frequent indexing |
-| **`list`** | Sequence (doubly linked) | O(n) | **O(1)** at known position | O(n) | **Frequent middle insert/delete** |
-| **`deque`** | Sequence | **O(1)** random | **O(1)** at both ends; middle: O(n) | O(n) | **Queue-like**, front/back operations |
-| **`set`** | Associative | – | **O(log n)** | **O(log n)** | **Unique, sorted** elements |
-| **`map`** | Associative | **O(log n)** by key | **O(log n)** | **O(log n)** | **Key → value dictionary** |
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Illustrative snippet for question)*
 ```cpp
 #include <iostream>
 #include <vector>
 #include <list>
-#include <deque>
-#include <set>
-#include <map>
 using namespace std;
 
 int main() {
-    vector<int> v = {1, 2};  v.push_back(3);
-    list<int>   l = {1, 2};  l.push_front(0);
-    deque<int>  d = {1, 2};  d.push_front(0); d.push_back(3);
-    set<int>    s = {3, 1, 3, 2};                   // {1,2,3} unique & sorted
-    map<string, int> m; m["A"] = 90;
-    cout << v[2] << " " << l.front() << " " << d.size() << " " << s.size() << " " << m["A"];
+    // std::vector: fast random access
+    vector<int> vec = { 10, 20, 30 };
+    cout << "Vector element at index 1: " << vec[1] << endl; // O(1)
+
+    // std::list: fast bidirectional insertion
+    list<int> lst = { 10, 30 };
+    auto it = lst.begin();
+    ++it; // point to 30
+    lst.insert(it, 20); // O(1) insertion in middle without shifting
+
+    cout << "List contents: ";
+    for (int x : lst) cout << x << " "; // 10 20 30
+    cout << endl;
+    return 0;
 }
 ```
 
 ---
 
-## Question 7 — Iterator Categories
+## Question 7 — Sequence vs Associative Containers & std::map
 
 > **Question:** Explain std::deque operations, contrast sequence containers with associative containers, and demonstrate key-value storage and retrieval using std::map.
 
@@ -312,49 +365,58 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Five Categories
-- Iterators form a **hierarchy** — each category **supports all operations of the weaker one**:
+#### 1. `std::deque` (Double-Ended Queue)
+- Indexed container supporting fast **$O(1)$ insertion and deletion at BOTH ends** (`push_front`, `push_back`, `pop_front`, `pop_back`).
+- Unlike `vector`, elements are stored across non-contiguous chunks; avoids full-array reallocation.
 
-```
-Input / Output  →  Forward  →  Bidirectional  →  Random-Access
-```
+#### 2. Sequence Containers vs Associative Containers
 
-#### 2. Operations Table
+| Feature | Sequence Containers (`vector`, `list`, `deque`) | Associative Containers (`map`, `set`, `multimap`) |
+|---|---|---|
+| **Element Organization** | Linear sequential order based on **insertion order** | Ordered automatically by **key value** |
+| **Access Method** | By numeric **position / index** | By lookup **key** |
+| **Underlying Structure** | Array / Linked List | Self-balancing binary tree (Red-Black Tree) |
+| **Search Time** | Linear $O(n)$ without sorting | Logarithmic **$O(\log n)$** fast search |
 
-| Category | Operations supported | Direction | Example containers/uses |
-|---|---|---|---|
-| **Input** | **Read** (`*it`), `++`, `==`, `!=`; **single pass** | Forward | `istream_iterator` |
-| **Output** | **Write** (`*it = x`), `++`; **single pass** | Forward | `ostream_iterator`, `back_inserter` |
-| **Forward** | Read/write, `++`; **multi-pass** | Forward | `forward_list`, `unordered_set` |
-| **Bidirectional** | Forward ops + **`--`** | Both | **`list`, `set`, `map`** |
-| **Random-Access** | Bidirectional + **`it + n`, `it - n`, `it[n]`, `<`, `>`, `it1 - it2`** | Both, jump | **`vector`, `deque`**, arrays |
+#### 3. `std::map` Key-Value Storage
+- Stores unique pairs of type `std::pair<const Key, Value>`.
+- Automatically keeps keys sorted; accessed via `map[key]`.
 
-#### 3. Key Points
-- **`std::sort` needs random-access** iterators (so **not** usable on `list`; use `list::sort()`).
-- Algorithms **choose efficient implementation** based on iterator category.
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
-#include <vector>
-#include <list>
+#include <deque>
+#include <map>
+#include <string>
 using namespace std;
 
 int main() {
-    vector<int> v = {10, 20, 30, 40};
-    auto r = v.begin();
-    cout << *(r + 2) << " " << r[3] << endl;       // random access: 30 40
+    // 1. std::deque operations
+    deque<int> dq;
+    dq.push_back(20);
+    dq.push_front(10); // O(1) at front
+    dq.push_back(30);  // 10, 20, 30
+    cout << "Deque Front: " << dq.front() << ", Back: " << dq.back() << endl;
 
-    list<int> l = {1, 2, 3};
-    auto b = l.end(); --b;                         // bidirectional: -- allowed
-    cout << *b << endl;                            // 3
-    // l.begin() + 2;                              // ERROR: no random access
+    // 2. std::map key-value storage and retrieval
+    map<int, string> students;
+    students[101] = "Alice";
+    students[102] = "Bob";
+    students[103] = "Charlie";
+
+    cout << "Student with Roll 102: " << students[102] << endl;
+
+    cout << "All Students (Sorted by Key):" << endl;
+    for (const auto &pair : students) {
+        cout << "  Roll: " << pair.first << " -> Name: " << pair.second << endl;
+    }
+    return 0;
 }
 ```
 
 ---
 
-## Question 8 — Practical STL Integration
+## Question 8 — STL Algorithms & Iterator Interfaces
 
 > **Question:** Demonstrate how STL algorithms (std::sort, std::find, std::count, std::reverse) operate on container elements through iterator interfaces.
 
@@ -362,39 +424,51 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Components Used
-- **`std::vector`:** dynamic array; **`push_back`**, indexing.
-- **`std::list`:** doubly linked list; **`push_front`**, `sort()` member.
-- **`std::map`:** sorted key–value pairs; `m[key] = value`.
-- **`std::sort(begin, end)`:** sorts range (random-access iterators, **O(n log n)**).
-- **`std::find(begin, end, value)`:** returns **iterator to first match** or **`end()`** if absent.
+#### 1. STL Algorithms Mechanism
+- Declared in `<algorithm>`.
+- Algorithms are **container-independent**: they operate on half-open iterator ranges `[begin, end)`.
+- Algorithms query or reorder elements via iterator operations (`*it`, `++it`, `it != end`).
 
-#### Code Example *(Reference only — not asked in question)*
+#### 2. The Four Common Algorithms
+1. **`std::sort(first, last)`:** Sorts elements in ascending order ($O(n \log n)$ introsort).
+2. **`std::find(first, last, val)`:** Linearly searches for `val`; returns iterator to element or `last` if not found.
+3. **`std::count(first, last, val)`:** Counts occurrences of `val` in the range.
+4. **`std::reverse(first, last)`:** Reverses the sequence in place.
+
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 #include <vector>
-#include <list>
-#include <map>
 #include <algorithm>
 using namespace std;
 
 int main() {
-    vector<int> v = {5, 2, 8, 1};
-    sort(v.begin(), v.end());                          // 1 2 5 8
-    for (int x : v) cout << x << " ";
+    vector<int> nums = { 40, 10, 20, 10, 50, 10, 30 };
+
+    // 1. std::count: count occurrences of 10
+    int c = count(nums.begin(), nums.end(), 10);
+    cout << "Count of 10: " << c << endl; // 3
+
+    // 2. std::sort: sort ascending
+    sort(nums.begin(), nums.end());
+    cout << "Sorted: ";
+    for (int x : nums) cout << x << " ";
     cout << endl;
 
-    auto it = find(v.begin(), v.end(), 5);             // search
-    if (it != v.end()) cout << "Found 5 at index " << it - v.begin() << endl;
+    // 3. std::reverse: reverse in place
+    reverse(nums.begin(), nums.end());
+    cout << "Reversed: ";
+    for (int x : nums) cout << x << " ";
+    cout << endl;
 
-    list<int> l = {30, 10, 20};
-    l.push_front(0);
-    l.sort();                                          // list's own sort
-    auto p = find(l.begin(), l.end(), 20);
-    cout << (p != l.end() ? "20 in list" : "not found") << endl;
+    // 4. std::find: search for 50
+    auto it = find(nums.begin(), nums.end(), 50);
+    if (it != nums.end()) {
+        cout << "Found value 50 at index: " << distance(nums.begin(), it) << endl;
+    } else {
+        cout << "Value 50 not found" << endl;
+    }
 
-    map<string, int> marks = {{"Ravi", 80}, {"Asha", 95}};
-    marks["Kiran"] = 70;
-    for (auto &kv : marks) cout << kv.first << ": " << kv.second << endl;   // sorted by key
+    return 0;
 }
 ```

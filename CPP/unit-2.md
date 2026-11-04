@@ -361,10 +361,14 @@ int main() {
 - **Syntax:** `~ClassName() { }`.
 - **Characteristics:** **name = `~Class`**, **no return type**, **no arguments**, **one per class**, called in **reverse order** of construction.
 
-#### 3. Why Destructor Cannot Be Overloaded
-- Overloading needs **different parameter lists**, but a destructor **takes no arguments**.
-- It is invoked **implicitly by the system**, which cannot supply arguments or choose among versions.
-- An object has **only one way to be destroyed** → **exactly one destructor**.
+#### 3. Why Constructors Cannot Be Static or Virtual
+- **Why NOT Static:**
+  - `static` functions belong to the class as a whole and have **no `this` pointer**.
+  - A constructor's sole purpose is to initialize a **specific object instance** (`this`). Calling a constructor without an object makes no sense.
+- **Why NOT Virtual:**
+  - `virtual` functions require a **vtable (virtual table)**, which is accessed via the object's hidden **`vptr` pointer**.
+  - The `vptr` is **initialized by the constructor** itself during object creation. Before the constructor runs, no `vptr` exists, so virtual dispatch is impossible.
+  - To construct an object, the compiler must know its **exact compile-time type**, not a polymorphic type.
 
 | Basis | Constructor | Destructor |
 |---|---|---|
@@ -443,7 +447,7 @@ int main() {
 
 ---
 
-## Question 9 — Copy Constructor & Dynamic Initialization
+## Question 9 — Copy Constructor & Anonymous Objects
 
 > **Question:** Explain the role and syntax of a copy constructor, distinguish deep copy from shallow copy, and explain the creation and lifespan of anonymous (temporary) objects.
 
@@ -465,32 +469,68 @@ int main() {
 | Default? | **Yes** (compiler-generated) | **User-defined** copy constructor |
 | Problem | **Dangling pointer / double delete** | Safe |
 
-#### 3. Dynamic Initialization of Constructors
-- **Memory allocated at runtime with `new`** inside constructor; freed with **`delete`** in destructor.
+#### 3.Anonymous Temporary Objects in C++
 
-#### Code Example *(Reference only — not asked in question)*
+An anonymous temporary object is an object created without giving it a name. It is generally created when a function returns an object or when an object is passed as an argument.
+
+It exists only for a short period and is automatically destroyed when its lifetime ends.
+
+### Example
+
 ```cpp
 #include <iostream>
-#include <cstring>
 using namespace std;
 
-class Str {
-    char *s;
+class Demo {
 public:
-    Str(const char *x) {                    // dynamic initialization
-        s = new char[strlen(x) + 1];
-        strcpy(s, x);
+    Demo() {
+        cout << "Object created\n";
     }
-    Str(const Str &o) {                     // deep copy constructor
-        s = new char[strlen(o.s) + 1];
-        strcpy(s, o.s);
+
+    ~Demo() {
+        cout << "Object destroyed\n";
     }
-    ~Str() { delete[] s; }
-    void show() { cout << s << endl; }
 };
+
 int main() {
-    Str a("Hello");
-    Str b = a;          // copy constructor
-    a.show(); b.show();
+    Demo();  // Anonymous temporary object
+
+    cout << "Inside main\n";
+
+    return 0;
+}
+```
+
+Output:
+
+```
+Object created
+Object destroyed
+Inside main
+```
+
+
+#### Code Example *(Illustrative snippet for question)*
+```cpp
+#include <iostream>
+using namespace std;
+
+class Demo {
+    int val;
+public:
+    Demo(int v) : val(v) { cout << "Constructed: " << val << endl; }
+    Demo(const Demo &d) : val(d.val) { cout << "Copied: " << val << endl; }
+    ~Demo() { cout << "Destroyed: " << val << endl; }
+    void show() { cout << "Value: " << val << endl; }
+};
+
+int main() {
+    Demo d1(10);
+    Demo d2 = d1;        // Copy Constructor invoked
+
+    // Anonymous Temporary Object: created and destroyed immediately
+    Demo(99).show();     // Constructed -> show() -> Destroyed right after ';'
+
+    return 0;
 }
 ```

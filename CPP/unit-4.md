@@ -4,7 +4,7 @@
 
 ---
 
-## Question 1 — Generic Programming & Function Templates
+## Question 1 — Generic Programming & Motivation for Templates
 
 > **Question:** Define generic programming and discuss the motivation and need for templates in modern C++.
 
@@ -13,42 +13,37 @@
 ### Step-by-Step Solution
 
 #### 1. Generic Programming
-- Writing code **independent of data type**; the **type is a parameter** supplied later.
-- C++ implements it using **templates** → **code reusability** with **compile-time type safety**.
+- **Definition:** A programming paradigm where algorithms and data structures are written **independently of any specific data type**.
+- Uses **type parameterization** (`template <class T>` or `template <typename T>`) so a single algorithm works for `int`, `float`, `char`, or user-defined objects.
 
-#### 2. Function Template
-- A **single function definition** that works for **many data types**; compiler **instantiates** the correct version when called.
-```cpp
-template <class T>            // or: template <typename T>
-T func(T a, T b) { /* body */ }
-```
-- **Type deduced from arguments**; or explicit: `func<int>(3, 4)`.
-
-#### 3. Overloading Template Functions
-- A template can be **overloaded** by (i) **another template with a different parameter count/shape**, or (ii) a **non-template (ordinary) function**.
-- **Resolution order:** **Exact-match ordinary function** is preferred over template; then the most specialized template.
+#### 2. Motivation & Need for Templates
+- **Eliminates Code Duplication:** In C, sorting 3 data types requires 3 separate functions (`sort_int`, `sort_float`, `sort_str`). Templates require **only one generic function**.
+- **Compile-Time Type Safety:** The compiler verifies data types during template instantiation at compile time, eliminating dangerous `void*` casts.
+- **High Performance:** No runtime overhead; the compiler generates specialized, optimized machine code for each concrete type used.
+- **Foundation of STL:** The Standard Template Library (vector, list, sort, find) is built entirely on generic templates.
 
 #### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-template <class T>
-T maxi(T a, T b) { return (a > b) ? a : b; }          // template 1
-
-template <class T>
-T maxi(T a, T b, T c) { return maxi(maxi(a, b), c); } // overloaded template (3 args)
-
-const char* maxi(const char *a, const char *b) { return a; }   // ordinary overload
+// Single generic template function for any type
+template <typename T>
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
 
 int main() {
-    cout << maxi(3, 7) << " " << maxi(2.5, 1.5) << " " << maxi(1, 9, 4);   // 7 2.5 9
+    cout << findMax(10, 20) << endl;       // int
+    cout << findMax(3.14, 2.71) << endl;   // double
+    cout << findMax('A', 'Z') << endl;       // char
+    return 0;
 }
 ```
 
 ---
 
-## Question 2 — Class Templates and Generic Stack
+## Question 2 — Templates vs C Preprocessor Macros
 
 > **Question:** Compare and contrast C++ templates with C preprocessor (#define) macros with respect to type-safety, error handling, and debugging.
 
@@ -56,51 +51,41 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Class Template
-- A **class blueprint parameterized by type**; objects are created by **specifying the type** in angle brackets.
-```cpp
-template <class T>
-class ClassName { T member; };
-ClassName<int> obj;
-```
-- **Member functions defined outside** need: `template <class T> ReturnType ClassName<T>::func() { }`.
+#### 1. Comparison Table
 
-#### 2. Generic Stack
-- **LIFO** structure with **`push`** (insert at top), **`pop`** (remove from top), **`display`**.
-- Check **overflow** (`top == size-1`) and **underflow** (`top == -1`).
+| Feature | C++ Templates | C Preprocessor Macros (`#define`) |
+|---|---|---|
+| **Nature** | Built-in language feature handled by **compiler** | Text-substitution mechanism handled by **preprocessor** |
+| **Type Safety** | **Strict type checking** at compile time | **No type checking**; dangerous type mismatches |
+| **Debugging** | **Easy to debug**; compiler gives precise file & line errors | **Extremely difficult**; macros do not appear in symbol tables |
+| **Side Effects** | Evaluated safely as real functions | Causes unintended side effects (e.g., `SQUARE(x++)` evaluates twice) |
+| **Scope Rules** | Obey **class and namespace scopes** | Ignore scoping; global text replacement throughout file |
+| **Code Bloat** | Generated once per unique type | Repeated text expansion everywhere macro is invoked |
 
 #### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-template <class T>
-class Stack {
-    T arr[50];
-    int top = -1;
-public:
-    void push(T x) {
-        if (top == 49) { cout << "Overflow\n"; return; }
-        arr[++top] = x;
-    }
-    void pop() {
-        if (top == -1) { cout << "Underflow\n"; return; }
-        cout << "Popped: " << arr[top--] << endl;
-    }
-    void display() {
-        for (int i = top; i >= 0; i--) cout << arr[i] << " ";
-        cout << endl;
-    }
-};
+#define SQUARE_MACRO(x) ((x) * (x))
+
+template <typename T>
+T squareTemplate(T x) { return x * x; }
+
 int main() {
-    Stack<int> s;    s.push(10); s.push(20); s.display(); s.pop();
-    Stack<string> t; t.push("a"); t.push("b"); t.display();
+    int a = 5;
+    // Macro bug: incremented twice!
+    // cout << SQUARE_MACRO(a++); // ((a++) * (a++)) -> undefined behavior
+
+    int b = 5;
+    cout << squareTemplate(b++) << endl; // Safe: 25, b becomes 6
+    return 0;
 }
 ```
 
 ---
 
-## Question 3 — Multiple Arguments & Non-Type Parameters
+## Question 3 — Function Templates Syntax & Working
 
 > **Question:** Explain the definition, syntax, and working of a normal function template with an illustrative program.
 
@@ -108,54 +93,51 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Class Template with Multiple Generic Arguments
-- Several type parameters separated by commas; **each can be a different type**.
-```cpp
-template <class T1, class T2>
-class Pair { T1 first; T2 second; };
-Pair<int, float> p;
-```
+#### 1. Function Template Definition & Syntax
+- **Definition:** A blueprint for creating functions where one or more types are specified as placeholders.
+- **Syntax:**
+  ```cpp
+  template <class T>
+  ReturnType functionName(T parameter1, T parameter2) {
+      // function body
+  }
+  ```
+- `template <class T>` tells the compiler that `T` is a generic type placeholder.
 
-#### 2. Non-Type Template Parameters
-- A **compile-time constant value** (integral, pointer, reference, `enum`) passed as a parameter.
-```cpp
-template <class T, int N>
-class Array { T a[N]; };
-Array<int, 5> x;      // N = 5 must be a constant expression
-```
-- **Used for:** fixed array sizes, buffer capacity. Value **must be known at compile time** (no variables).
-
-| Parameter type | Example | Supplied with |
-|---|---|---|
-| **Type** | `class T` | A data type (`int`) |
-| **Non-type** | `int N` | A constant (`5`) |
+#### 2. Working Mechanics (Instantiation)
+- When a function template is defined, **no machine code is generated initially**.
+- When called with specific types (e.g., `swapValues(a, b)` with `int`), the compiler creates an instance called a **template instantiation**.
+- Can be invoked **implicitly** (`swapValues(x, y)`) where the compiler deduces `T`, or **explicitly** (`swapValues<int>(x, y)`).
 
 #### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-template <class T1, class T2, int N>
-class Store {
-    T1 a[N];
-    T2 tag;
-public:
-    Store(T2 t) : tag(t) { for (int i = 0; i < N; i++) a[i] = i * 2; }
-    void show() {
-        cout << tag << ": ";
-        for (int i = 0; i < N; i++) cout << a[i] << " ";
-        cout << endl;
-    }
-};
+// Generic swap function template
+template <typename T>
+void swapValues(T &a, T &b) {
+    T temp = a;
+    a = b;
+    b = temp;
+}
+
 int main() {
-    Store<int, string, 4> s("Evens");
-    s.show();                       // Evens: 0 2 4 6
+    int x = 10, y = 20;
+    swapValues(x, y); // Instantiates swapValues for int
+    cout << "Integers: x=" << x << ", y=" << y << endl;
+
+    double p = 1.5, q = 9.8;
+    swapValues(p, q); // Instantiates swapValues for double
+    cout << "Doubles:  p=" << p << ", q=" << q << endl;
+
+    return 0;
 }
 ```
 
 ---
 
-## Question 4 — Templates vs Macros
+## Question 4 — Overloading Function Templates
 
 > **Question:** Demonstrate how function templates can be overloaded with other template functions or standard non-template functions.
 
@@ -163,43 +145,51 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Comparison Table
+#### 1. Overloading Rules for Templates
+A function template can be overloaded in two ways:
+1. **With another template:** Having a different number or combination of template parameters.
+2. **With a standard non-template function:** Having the exact same name with concrete data types.
 
-| Basis | Templates | Macros (`#define`) |
-|---|---|---|
-| **Processed by** | **Compiler** | **Preprocessor** (text substitution) |
-| **Type safety** | **Yes** (strict type checking) | **No** type checking |
-| **Debugging** | Easier (real symbols, compiler errors) | **Hard** (expanded text before compile) |
-| **Compilation overhead** | Higher (**instantiation** per type; longer compile time) | Low (simple text replace) |
-| **Code expansion** | **Instantiated per type used** (controlled by compiler) | **Textual expansion at every use** |
-| **Argument evaluation** | Once | **May evaluate multiple times** (side effects) |
-| **Scope** | Obeys scope/namespace rules | **Ignores scope** |
-| **Supports classes** | **Yes** (class templates) | No |
-| **Specialization** | Supported | Not supported |
+#### 2. Call Resolution Order
+- When resolving a function call, the compiler follows this priority:
+  1. **Exact-match non-template function** (always prioritized over template).
+  2. **Template specialization / function template** with exact match.
+  3. Compiler returns an ambiguity error if two templates match equally.
 
-#### 2. Key Points
-- **Templates** = type-safe, scoped, part of the language.
-- **Macros** = blind text replacement, error-prone (`SQ(a++)` increments twice).
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Illustrative snippet for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-#define SQ(x) ((x) * (x))
-template <class T> T sq(T x) { return x * x; }
+// 1. Generic template function
+template <typename T>
+void print(T a) {
+    cout << "Template: " << a << endl;
+}
+
+// 2. Overloaded template with two parameters
+template <typename T1, typename T2>
+void print(T1 a, T2 b) {
+    cout << "Overloaded 2-arg template: " << a << ", " << b << endl;
+}
+
+// 3. Exact-match non-template function for int
+void print(int a) {
+    cout << "Non-template function for int: " << a << endl;
+}
 
 int main() {
-    int a = 3;
-    cout << sq(a++) << " " << a << endl;   // 9 4   (a++ evaluated once)
-    a = 3;
-    cout << SQ(a++) << " " << a << endl;   // undefined/unsafe: a++ evaluated twice
+    print(100);             // Calls non-template int function
+    print(3.14);            // Calls 1-arg template (double)
+    print("Roll", 101);     // Calls 2-arg template
+    print<int>(100);        // Explicit <> forces template version
+    return 0;
 }
 ```
 
 ---
 
-## Question 5 — Template Bubble Sort
+## Question 5 — Class Templates & Generic Stack<T>
 
 > **Question:** Explain how class templates are defined and instantiated, and implement a generic Stack<T> class template with basic operations.
 
@@ -207,13 +197,29 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Algorithm
-- Repeatedly **compare adjacent elements** and **swap if out of order**.
-- After each pass the **largest element moves to the end**; **n−1 passes**.
-- **Time complexity:** **O(n²)** worst/average, **O(n)** best (with swapped-flag); **Space:** O(1).
+#### 1. Class Template Definition & Instantiation
+- **Definition:** A class blueprint parameterized with types, allowing a single class definition to create data structures for any type.
+- **Syntax:**
+  ```cpp
+  template <class T>
+  class ClassName {
+      T member;
+  public:
+      void method(T arg);
+  };
+  ```
+- **Instantiation:** Requires explicit type in angle brackets `<>`: `ClassName<int> obj;`.
+- **Out-of-class definition syntax:**
+  ```cpp
+  template <class T>
+  void ClassName<T>::method(T arg) { }
+  ```
 
-#### 2. Template Use
-- One `bubbleSort<T>` works for **`int` and `float`** (any type supporting `>`).
+#### 2. Generic Stack<T> Operations
+- Follows **LIFO** (Last In, First Out).
+- `push(T)`: Inserts element at top (checks overflow `top == capacity - 1`).
+- `pop()`: Removes and returns top element (checks underflow `top == -1`).
+- `display()`: Traverses from `top` down to `0`.
 
 #### Code Example *(Mandatory program for question)*
 ```cpp
@@ -221,27 +227,43 @@ int main() {
 using namespace std;
 
 template <class T>
-void bubbleSort(T a[], int n) {
-    for (int i = 0; i < n - 1; i++)
-        for (int j = 0; j < n - i - 1; j++)
-            if (a[j] > a[j + 1]) {
-                T t = a[j]; a[j] = a[j + 1]; a[j + 1] = t;
-            }
-}
-template <class T>
-void print(T a[], int n) { for (int i = 0; i < n; i++) cout << a[i] << " "; cout << endl; }
+class Stack {
+    T arr[50];
+    int top;
+public:
+    Stack() : top(-1) {}
+
+    void push(T val) {
+        if (top == 49) { cout << "Stack Overflow\n"; return; }
+        arr[++top] = val;
+    }
+    void pop() {
+        if (top == -1) { cout << "Stack Underflow\n"; return; }
+        cout << "Popped: " << arr[top--] << endl;
+    }
+    void display() {
+        if (top == -1) { cout << "Empty\n"; return; }
+        for (int i = top; i >= 0; i--) cout << arr[i] << " ";
+        cout << endl;
+    }
+};
 
 int main() {
-    int   x[] = {5, 2, 9, 1, 7};
-    float y[] = {3.5f, 1.2f, 9.9f, 0.5f};
-    bubbleSort(x, 5); print(x, 5);     // 1 2 5 7 9
-    bubbleSort(y, 4); print(y, 4);     // 0.5 1.2 3.5 9.9
+    Stack<int> sInt;
+    sInt.push(10); sInt.push(20);
+    sInt.display(); // 20 10
+    sInt.pop();
+
+    Stack<string> sStr;
+    sStr.push("Aditya"); sStr.push("Campus");
+    sStr.display(); // Campus Aditya
+    return 0;
 }
 ```
 
 ---
 
-## Question 6 — Generic Singly Linked List
+## Question 6 — Class Templates with Multiple & Non-Type Parameters
 
 > **Question:** Demonstrate how class templates support multiple generic type arguments and non-type template parameters.
 
@@ -249,54 +271,62 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Design
-- **Node<T>:** holds **`T data`** and **`Node<T>* next`**.
-- **List<T>:** holds **`head`** pointer; operations:
-  - **`insert`** (at end): traverse to last node, link new node.
-  - **`display`** (traversal): start at `head`, follow `next` until `nullptr`.
-- **Destructor** frees all nodes (no memory leak).
+#### 1. Multiple Generic Type Parameters
+- A class template can take more than one type parameter:
+  ```cpp
+  template <class T1, class T2>
+  class Pair { T1 first; T2 second; };
+  ```
+- Allows storing paired attributes of different types (e.g., `Pair<string, int>` for Student and Roll Number).
 
-```
-head → [10|•] → [20|•] → [30|NULL]
-```
+#### 2. Non-Type Template Parameters
+- In addition to types, a template parameter can be a **constant value** (integral, pointer, or reference):
+  ```cpp
+  template <class T, int SIZE>
+  class StaticArray { T data[SIZE]; };
+  ```
+- **Rules:** The non-type parameter must be a **compile-time constant**. It allows statically-sized data structures without heap allocation.
 
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Illustrative snippet for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-template <class T>
-struct Node {
-    T data;
-    Node *next;
-    Node(T d) : data(d), next(nullptr) {}
-};
-template <class T>
-class List {
-    Node<T> *head = nullptr;
+// Multiple generic types (K, V) + Non-type parameter (int MAX)
+template <class K, class V, int MAX>
+class KeyValueStore {
+    K keys[MAX];
+    V values[MAX];
+    int count;
 public:
-    void insert(T x) {                         // insert at end
-        Node<T> *n = new Node<T>(x);
-        if (!head) { head = n; return; }
-        Node<T> *t = head;
-        while (t->next) t = t->next;
-        t->next = n;
+    KeyValueStore() : count(0) {}
+
+    void insert(K k, V v) {
+        if (count < MAX) {
+            keys[count] = k;
+            values[count++] = v;
+        }
     }
-    void display() {                           // traversal
-        for (Node<T> *t = head; t; t = t->next) cout << t->data << " -> ";
-        cout << "NULL\n";
+    void show() {
+        for (int i = 0; i < count; i++)
+            cout << "[" << keys[i] << " -> " << values[i] << "] ";
+        cout << endl;
     }
-    ~List() { while (head) { Node<T> *t = head; head = head->next; delete t; } }
 };
+
 int main() {
-    List<int> a;    a.insert(10); a.insert(20); a.display();
-    List<char> b;   b.insert('x'); b.insert('y'); b.display();
+    // K = string, V = int, MAX = 5
+    KeyValueStore<string, int, 5> marks;
+    marks.insert("Math", 95);
+    marks.insert("CPP", 98);
+    marks.show();
+    return 0;
 }
 ```
 
 ---
 
-## Question 7 — Exception Handling Principles
+## Question 7 — Template Bubble Sort
 
 > **Question:** Write a generic C++ function template to sort an array of arbitrary data types using the Bubble Sort algorithm.
 
@@ -304,50 +334,56 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Principles
-- **Exception** = **run-time error/abnormal condition** (divide by zero, invalid input, allocation failure).
-- Exception handling **separates error-handling code from normal logic** and gives **controlled recovery**.
+#### 1. Generic Bubble Sort Algorithm
+- Compares adjacent elements and swaps them if they are in the wrong order:
+  $$\text{if } (arr[j] > arr[j+1]) \implies \text{swap}(arr[j], arr[j+1])$$
+- Outer loop runs $n-1$ passes; inner loop compares adjacent pairs up to $n - i - 1$.
+- By using `template <typename T>`, the same sorting logic works for `int`, `float`, `char`, or any user-defined object supporting the `>` operator.
 
-#### 2. Role of `try`, `throw`, `catch`
-- **`try`:** Block containing **code that may throw** an exception.
-- **`throw`:** **Raises** an exception (any type: `int`, `char*`, object).
-- **`catch`:** **Handler** that receives and handles the exception; **matches by type**.
+#### 2. Complexity
+- **Time Complexity:** $O(n^2)$ worst and average case, $O(n)$ best case with a swapped flag.
+- **Space Complexity:** $O(1)$ auxiliary memory.
 
-```cpp
-try { /* risky code */ if (error) throw value; }
-catch (Type e) { /* handle */ }
-```
-
-#### 3. Exception Propagation Flow
-1. Code in **`try`** throws → normal execution **stops immediately**.
-2. **Stack unwinding:** Local objects destroyed as control **leaves** each function.
-3. Runtime searches the **matching `catch`** in the current function, then **calling functions up the call stack**.
-4. If **found** → handler runs, execution continues **after the catch block**.
-5. If **not found** → **`terminate()`** called → program aborts.
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-double divide(int a, int b) {
-    if (b == 0) throw "Division by zero";     // throw
-    return (double)a / b;
-}
-int main() {
-    try {
-        cout << divide(10, 2) << endl;        // 5
-        cout << divide(5, 0) << endl;         // throws
-        cout << "Not executed\n";
+template <typename T>
+void bubbleSort(T arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                T temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
     }
-    catch (const char *msg) { cout << "Error: " << msg << endl; }
-    cout << "Program continues\n";
+}
+
+template <typename T>
+void printArray(T arr[], int n) {
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+
+int main() {
+    int iArr[] = { 64, 25, 12, 22, 11 };
+    bubbleSort(iArr, 5);
+    cout << "Sorted Integers: "; printArray(iArr, 5);
+
+    double dArr[] = { 4.5, 1.2, 9.8, 3.3 };
+    bubbleSort(dArr, 4);
+    cout << "Sorted Doubles:  "; printArray(dArr, 4);
+
+    return 0;
 }
 ```
 
 ---
 
-## Question 8 — Multiple Catch & Re-throwing
+## Question 8 — Generic Singly Linked List (LinkedList<T>)
 
 > **Question:** Design and construct a generic singly linked list data structure (LinkedList<T>) using class templates that supports dynamic node insertion and forward traversal.
 
@@ -355,48 +391,69 @@ int main() {
 
 ### Step-by-Step Solution
 
-#### 1. Multiple Catch Statements
-- **Several `catch` blocks** after one `try`, each handling a **different exception type**.
-- Checked **top to bottom**; **first matching type** executes.
-- **Derived-class handlers must appear before base-class handlers**.
+#### 1. Data Structure Design
+- **Generic Node (`Node<T>`):**
+  - Contains data of generic type `T`.
+  - A pointer to the next node: `Node<T>* next;`.
+- **Generic List (`LinkedList<T>`):**
+  - Contains a pointer to the first node: `Node<T>* head;`.
+  - Supports `insert(T val)` and `display()`.
 
-#### 2. Catch-All Handler
-- **`catch(...)`** catches **any exception type**; must be the **last** handler.
+#### 2. Operations
+- **Insertion at Head:** Allocate new node, set its data, point `new_node->next = head`, then update `head = new_node`.
+- **Traversal:** Start at `head`, loop while pointer is not `nullptr`, print data and advance `temp = temp->next`.
 
-#### 3. Re-throwing
-- **`throw;`** (no operand) inside a catch block **passes the same exception to an outer handler**.
-- Used when a handler **partially handles** (e.g., logs) and an outer block must complete handling.
-
-#### 4. Exception Specifications
-- Old syntax: `void f() throw(int, char);` lists allowed exception types — **deprecated in C++11, removed in C++17**.
-- **`throw()`** = throws nothing; modern replacement: **`noexcept`**.
-- Violating a specification calls **`unexpected()`** → **`terminate()`**.
-
-| Feature | Syntax |
-|---|---|
-| Specific handler | `catch (int e)` |
-| Catch-all | `catch (...)` |
-| Re-throw | `throw;` |
-| No-throw guarantee | `noexcept` |
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-void test(int x) {
-    try {
-        if (x == 1) throw 10;
-        if (x == 2) throw 'a';
-        if (x == 3) throw 2.5;
+template <class T>
+class Node {
+public:
+    T data;
+    Node<T>* next;
+    Node(T val) : data(val), next(nullptr) {}
+};
+
+template <class T>
+class LinkedList {
+    Node<T>* head;
+public:
+    LinkedList() : head(nullptr) {}
+
+    void insert(T val) {
+        Node<T>* newNode = new Node<T>(val);
+        newNode->next = head;
+        head = newNode;
     }
-    catch (int e)  { cout << "int: " << e << endl; if (x == 1) throw; }  // re-throw
-    catch (char e) { cout << "char: " << e << endl; }
-    catch (...)    { cout << "unknown exception\n"; }
-}
+
+    void display() {
+        Node<T>* temp = head;
+        while (temp != nullptr) {
+            cout << temp->data << " -> ";
+            temp = temp->next;
+        }
+        cout << "NULL\n";
+    }
+
+    ~LinkedList() {
+        while (head != nullptr) {
+            Node<T>* temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
+};
+
 int main() {
-    try { test(1); } catch (int) { cout << "Outer caught re-thrown int\n"; }
-    test(2);
-    test(3);
+    LinkedList<int> intList;
+    intList.insert(30); intList.insert(20); intList.insert(10);
+    cout << "Integer List: "; intList.display(); // 10 -> 20 -> 30 -> NULL
+
+    LinkedList<string> strList;
+    strList.insert("DS"); strList.insert("CSE");
+    cout << "String List:  "; strList.display();  // CSE -> DS -> NULL
+    return 0;
 }
 ```

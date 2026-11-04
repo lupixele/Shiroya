@@ -38,35 +38,44 @@ ReturnType operator<symbol>(parameters) { body }
 | `sizeof` | Size operator |
 | `typeid` | Type identification |
 
-#### 4. Member Function vs Friend Function
+#### 4. Unary Prefix vs Postfix Increment Overloading
+- **Prefix (`++obj`):** Takes **no arguments** in member function: `Number operator++()`. Increments value and returns the updated object.
+- **Postfix (`obj++`):** Takes a **dummy `int` parameter** by C++ convention to distinguish it from prefix: `Number operator++(int)`. Saves old state, increments value, and returns old state.
 
-| Basis | Member Function | Friend Function |
-|---|---|---|
-| Left operand | **Must be an object** of the class | **Can be any type** (e.g., `int`) |
-| Binary operator args | **One** (right operand) | **Two** |
-| Unary operator args | **Zero** | **One** |
-| `this` pointer | Available | **Not available** |
-| Example | `a + b` → `a.operator+(b)` | `5 + a` → `operator+(5, a)` |
-| Must use for | `=`, `()`, `[]`, `->` | `<<`, `>>` (stream operators) |
-
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Mandatory program for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Num {
-    int v;
+class Counter {
+    int count;
 public:
-    Num(int x = 0) : v(x) {}
-    Num operator-() { return Num(-v); }                  // member (unary)
-    friend Num operator+(int a, Num n);                  // friend (int on left)
-    friend ostream& operator<<(ostream &o, Num n) { return o << n.v; }
+    Counter(int c = 0) : count(c) {}
+
+    // Prefix increment: ++obj
+    Counter operator++() {
+        ++count;
+        return *this;
+    }
+
+    // Postfix increment: obj++ (dummy int parameter)
+    Counter operator++(int) {
+        Counter temp = *this;
+        count++;
+        return temp;
+    }
+
+    void display() { cout << "Count: " << count << endl; }
 };
-Num operator+(int a, Num n) { return Num(a + n.v); }
 
 int main() {
-    Num n(5);
-    cout << -n << " " << 10 + n;     // -5 15
+    Counter c(5);
+    ++c;       // Prefix: count becomes 6
+    c.display();
+
+    c++;       // Postfix: count becomes 7
+    c.display();
+    return 0;
 }
 ```
 
@@ -94,28 +103,93 @@ bool operator==(const Class &obj);        // relational → returns bool
 - Pass argument as **`const &`** for efficiency.
 - Mark function **`const`** if it doesn't modify the object.
 
+#### Member operator 
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Number {
+    int x;
+
+public:
+    Number(int a) {
+        x = a;
+    }
+
+    // Overload +
+    Number operator+(Number n) {
+        return Number(x + n.x);
+    }
+
+    // Overload ==
+    bool operator==(Number n) {
+        return x == n.x;
+    }
+
+    void display() {
+        cout << x << endl;
+    }
+};
+
+int main() {
+    Number a(10), b(20);
+
+    Number c = a + b;
+    c.display();
+
+    if (a == b)
+        cout << "Equal";
+    else
+        cout << "Not Equal";
+
+    return 0;
+}
+```
 #### Code Example *(Reference only — not asked in question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Complex {
-    float re, im;
+class Number {
+    int x;
+
 public:
-    Complex(float r = 0, float i = 0) : re(r), im(i) {}
-    Complex operator+(const Complex &c) const {        // arithmetic
-        return Complex(re + c.re, im + c.im);
+    Number(int a) {
+        x = a;
     }
-    bool operator==(const Complex &c) const {          // relational
-        return re == c.re && im == c.im;
+
+    // Friend function for +
+    friend Number operator+(Number a, Number b);
+
+    // Friend function for ==
+    friend bool operator==(Number a, Number b);
+
+    void display() {
+        cout << x << endl;
     }
-    void show() const { cout << re << " + " << im << "i\n"; }
 };
+
+Number operator+(Number a, Number b) {
+    return Number(a.x + b.x);
+}
+
+bool operator==(Number a, Number b) {
+    return a.x == b.x;
+}
+
 int main() {
-    Complex a(2, 3), b(4, 5);
-    Complex c = a + b;
-    c.show();                                          // 6 + 8i
-    cout << (a == b ? "Equal" : "Not equal");          // Not equal
+    Number a(10), b(20);
+
+    Number c = a + b;
+    c.display();
+
+    if (a == b)
+        cout << "Equal";
+    else
+        cout << "Not Equal";
+
+    return 0;
 }
 ```
 
@@ -237,39 +311,140 @@ int main() {
 
 ---
 
-### Step-by-Step Solution
+#### 1. Order of Constructors and Destructors in C++
 
-#### 1. Rules
-- **Constructors:** **Base → Derived** (top-down).
-- **Destructors:** **Derived → Base** (**exact reverse**).
-- **Multilevel:** `A → B → C` construct; `C → B → A` destruct.
-- **Multiple inheritance:** Base constructors run in the **order of declaration in the derived class's base list** (not the member-initializer order).
-- **Virtual bases** are constructed **first**, before non-virtual bases.
-- Base-class **parameterized constructor** invoked via **initializer list**: `Derived(int x) : Base(x) { }`.
+The important rule is:
 
-| Hierarchy | Constructor order | Destructor order |
-|---|---|---|
-| Multilevel `C : B : A` | A, B, C | C, B, A |
-| Multiple `C : A, B` | A, B, C | C, B, A |
+- Constructors: Parent class executes first, then child class.
+    
+- Destructors: Child class executes first, then parent class.
+    
 
-#### Code Example *(Reference only — not asked in question)*
+##### A. Multilevel Inheritance
+
+Example: `A → B → C`
+
 ```cpp
 #include <iostream>
 using namespace std;
 
-class A { public: A() { cout << "A() "; } ~A() { cout << "~A() "; } };
-class B : public A { public: B() { cout << "B() "; } ~B() { cout << "~B() "; } };
-class C : public B { public: C() { cout << "C() "; } ~C() { cout << "~C() "; } };
+class A {
+public:
+    A() {
+        cout << "A Constructor\n";
+    }
+    ~A() {
+        cout << "A Destructor\n";
+    }
+};
 
-class X { public: X() { cout << "X() "; } ~X() { cout << "~X() "; } };
-class Y { public: Y() { cout << "Y() "; } ~Y() { cout << "~Y() "; } };
-class Z : public X, public Y { public: Z() { cout << "Z() "; } ~Z() { cout << "~Z() "; } };
+class B : public A {
+public:
+    B() {
+        cout << "B Constructor\n";
+    }
+    ~B() {
+        cout << "B Destructor\n";
+    }
+};
+
+class C : public B {
+public:
+    C() {
+        cout << "C Constructor\n";
+    }
+    ~C() {
+        cout << "C Destructor\n";
+    }
+};
 
 int main() {
-    { C c; }  cout << endl;   // A() B() C() ~C() ~B() ~A()
-    { Z z; }  cout << endl;   // X() Y() Z() ~Z() ~Y() ~X()
+    C obj;
+    return 0;
 }
 ```
+
+Output:
+
+```cpp
+A Constructor
+B Constructor
+C Constructor
+C Destructor
+B Destructor
+A Destructor
+```
+
+##### B. Multiple Inheritance
+
+Example: `C` inherits from both `A` and `B`.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    A() { cout << "A Constructor\n"; }
+    ~A() { cout << "A Destructor\n"; }
+};
+
+class B {
+public:
+    B() { cout << "B Constructor\n"; }
+    ~B() { cout << "B Destructor\n"; }
+};
+
+class C : public A, public B {
+public:
+    C() { cout << "C Constructor\n"; }
+    ~C() { cout << "C Destructor\n"; }
+};
+
+int main() {
+    C obj;
+    return 0;
+}
+```
+
+Output:
+
+```cpp
+A Constructor
+B Constructor
+C Constructor
+C Destructor
+B Destructor
+A Destructor
+```
+
+Important: In multiple inheritance, constructors execute according to the order in which base classes are declared in the inheritance list.
+
+```cpp
+class C : public A, public B
+```
+
+Therefore:
+
+- A constructor executes first.
+    
+- B constructor executes second.
+    
+- C constructor executes last.
+    
+
+Destructors execute in reverse order.
+
+#### 2. Difference Between Inheritance and Composition
+
+|Inheritance (IS-A)|Composition (HAS-A)|
+|---|---|
+|One class inherits another|One class contains another object|
+|Uses `:` symbol|Uses an object as a data member|
+|Represents an IS-A relationship|Represents a HAS-A relationship|
+|Example: Dog is an Animal|Example: Car has an Engine|
+|Promotes code reuse through inheritance|Promotes code reuse through object composition|
+
 
 ---
 
@@ -287,40 +462,32 @@ int main() {
 - Dynamic objects: `Class *p = new Class; ... delete p;`
 
 #### 2. Base–Derived Pointer Compatibility
-- **Base pointer can point to a derived object** (implicit upcast; **"is-a"** relationship). ✔
-- **Derived pointer cannot point to a base object** without **explicit cast** (unsafe). ✘
-- Through a **base pointer**, only **base-class members** are visible (**derived-only members are inaccessible**).
-- Without **`virtual`**, the **base version** of an overridden function is called (**early binding**); with `virtual`, the **derived version** is called (**late binding**).
+- **Base pointer can point to a derived object** (implicit upcast; **"is-a"** relationship).
+- **Derived pointer cannot point to a base object** without explicit cast.
+- Through a **base pointer**, only **base-class members** are visible (unless virtual).
 
-| Pointer type | Object | Allowed? |
-|---|---|---|
-| `Base*` | `Base` / `Derived` | **Yes** |
-| `Derived*` | `Derived` | Yes |
-| `Derived*` | `Base` | **No** (needs cast) |
+#### 3. The `this` Pointer & Method Chaining
+- **`this` Pointer:** An implicit constant pointer automatically passed to every non-static member function holding the address of the invoking object (`*this`).
+- **Method Chaining:** Returning a reference to the invoking object (`return *this;`) allows cascading member function calls on a single line.
 
-#### Code Example *(Reference only — not asked in question)*
+#### Code Example *(Illustrative snippet for question)*
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Base {
+class Calc {
+    int val;
 public:
-    void show()    { cout << "Base show\n"; }
-    virtual void v() { cout << "Base v\n"; }
+    Calc(int v = 0) : val(v) {}
+    Calc& add(int x) { val += x; return *this; }        // returns *this for chaining
+    Calc& mul(int x) { val *= x; return *this; }        // returns *this for chaining
+    void show() { cout << "Value: " << val << endl; }
 };
-class Derived : public Base {
-public:
-    void show() { cout << "Derived show\n"; }
-    void v() override { cout << "Derived v\n"; }
-    void only() { cout << "Derived only\n"; }
-};
+
 int main() {
-    Derived d;
-    Base *bp = &d;       // base pointer → derived object
-    bp->show();          // Base show   (non-virtual → pointer type)
-    bp->v();             // Derived v   (virtual → object type)
-    // bp->only();       // ERROR: not a Base member
-    ((Derived*)bp)->only();   // explicit cast
+    Calc c(10);
+    c.add(5).mul(2).show();     // Method chaining: (10 + 5) * 2 = 30
+    return 0;
 }
 ```
 

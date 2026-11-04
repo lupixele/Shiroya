@@ -32,7 +32,7 @@
 6. [Array of Objects & Nested Classes](unit-2.md#question-6-array-of-objects-nested-classes) — Memory organization, declaration, and nested class syntax & visibility scope.
 7. [Constructors & Destructors Basics](unit-2.md#question-7-constructors-destructors-basics) — Characteristics, memory management, why destructors cannot be overloaded.
 8. [Constructor Overloading & Defaults](unit-2.md#question-8-constructor-overloading-defaults) — Default, parameterized, and constructor overloading with default arguments.
-9. [Copy Constructor & Dynamic Initialization](unit-2.md#question-9-copy-constructor-dynamic-initialization) — Copy constructor, shallow vs deep copy, dynamic allocation using `new`.
+9. [Copy Constructor & Anonymous Objects](unit-2.md#question-9-copy-constructor-anonymous-objects) — Copy constructor, shallow vs deep copy, and anonymous temporary objects lifespan.
 
 ---
 

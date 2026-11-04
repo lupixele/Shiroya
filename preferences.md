@@ -145,51 +145,52 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ## 7. Answer Synthesis & Note Formatting Standards
 
-### Core Philosophy: Exam-Ready & High-Retention
-- **Simple Enough to Remember:** Write answers optimized for what a student can realistically reproduce by hand on physical examination paper under timed constraints.
-- **Zero Academic Bloat:** Eliminate verbose academic introductions, philosophical filler, historical musings, and discursive paragraphs.
-- **Hierarchical Markdown Formatting:**
-  - Lead with bold definition / summary formula.
-  - Use structured comparison tables instead of rambling comparative prose.
-  - Use numbered step-by-step algorithms / procedures.
-  - Highlight key terms in **bold** to facilitate quick scanning.
-  - Use clean bullet points with maximum 2–3 lines per point.
+### Core Philosophy: True Preparation Notes (Full-Marks & Zero Complexity)
+- **Preparation Notes, Not Corporate Cheat-Sheets:** 
+  - ❌ **Anti-Pattern (Corporate Slide Syndrome):** Never compress complex concepts into cryptic 1–2 line robotic bullet points or corporate executive summaries. Stripping away the explanation makes notes harder to understand, unnatural to read, and impossible to reproduce in a university exam for full marks.
+  - ✅ **The Standard (Exam-Ready Preparation Guide):** Notes must read like the clearest, most intuitive explanation written by a top-scoring student. The student must understand *why* a concept exists, *how* it works in simple English, and have the exact depth needed to fill 1.5–3 pages on an answer booklet to secure full marks (4M / 8M / 10M).
+- **Simple Enough to Understand, Thorough Enough to Score:**
+  - Lead with plain-language intuition before dense formalisms.
+  - Every technical term must be explained in clear, natural prose before diving into rules.
+  - Retain hand-drawable diagrams, relatable database tables, and step-by-step walkthroughs.
 
-### Markdown Unit Notes Template (`unit<N>.md`)
+---
+
+### The 5-Part Exam Answer Blueprint (Standard Structure for Every Question)
+
+Every question answer in `unit<N>.md` must follow this 5-part blueprint:
+
 ```markdown
-# <Subject Name> — Unit <N>: <Unit Title>
+## <Q#>. <Question Statement> (Marks: 4M / 8M)
 
-> **Course Code:** `<CODE>` | **Exam Scope:** <Mid-1 / Mid-2 / Sem-End>  
-> **Source Materials:** [`raw/<filename>.pdf`](raw/<filename>.pdf) | [`raw/<slides>.pptx`](raw/<slides>.pptx)  
-> **Master Questions Index:** [`questions.md`](questions.md#unit-<roman>)
+### 1. Intuition & Core Definition
+- **Intuitive Explanation (In Plain English):** A 2–3 sentence plain-language explanation of what problem this concept solves and why we care. (e.g., "Without normalization, deleting a course might accidentally wipe out an entire student's record...").
+- **Formal Textbook Definition:** The standard, formal academic definition. Highlight **crucial keywords in bold** that evaluators look for when checking answer sheets.
 
----
+### 2. Hand-Drawable Diagram / Relational Schema
+- Provide a clean, hand-drawable diagram, schema box, or dark-mode visual (`figures/<subject>_q<n>_...png` or clean ASCII diagram).
+- Include a 2-line explanation of the diagram's components (what each box, arrow, or symbol represents) so the student knows what to draw on paper.
 
-## 8M-Q1: <Full Question Statement>
-> **Marks:** 8M (or 4M) | **Frequency:** Mid-2 (2024, 2025), Model Paper | **Source:** [`raw/<deck>.pptx`](raw/<deck>.pptx)
+### 3. Core Mechanics & Deep Breakdown (No Telegraphic Bullets)
+- Explain the key types, properties, algorithms, or rules in well-developed, clear paragraphs or explanatory bullet points.
+- **Rule:** Do NOT truncate explanations into cryptic one-liners. Give complete, easy-to-follow sentences that explain both the *rule* and the *reason* behind it.
+- Use comparison tables where contrasting two concepts (e.g., 3NF vs. BCNF, Primary vs. Secondary Index).
 
-### 1. Core Definition / Principle
-- **<Core Term>:** Single concise sentence explaining the concept.
+### 4. Concrete, Relatable Example (Tables / Query / Step-by-Step Trace)
+- Use standard, intuitive schemas that every student knows (`STUDENT`, `COURSE`, `EMPLOYEE`, `ORDERS`).
+- When explaining problems/solutions (like Normalization or Anomalies), show:
+  1. The **Before Table** (with sample data showing the flaw/anomaly).
+  2. The **Reason it fails** (explained simply).
+  3. The **After Decomposed Tables** (with sample data showing how it fixes the issue).
+- For SQL / Code: Provide valid, syntax-highlighted SQL queries with an explanation of what the query produces.
 
-### 2. Key Characteristics / Architecture
-| Parameter | Feature A | Feature B |
-| :--- | :--- | :--- |
-| **Basis** | Concise description | Concise description |
-
-### 3. Step-by-Step Mechanism / Working
-1. **Step 1 (<Name>):** Action description.
-2. **Step 2 (<Name>):** Action description.
-
-### 4. Code / Example (Minimal & Self-Contained)
-```<lang>
-// Minimal, runnable code snippet without redundant boilerplate
+### 5. Exam Strategy & Marks Breakdown
+- **If Asked for 4 Marks:** State precisely what to write (e.g., "Write Definition + Draw Box Diagram + Mention the 3 types with 1 line each").
+- **If Asked for 8 Marks:** State how to expand (e.g., "Include the full Before/After table breakdown, write the SQL query, and explain both rules").
+- **Key Scoring Points:** Bullet list of the 3–4 exact phrases/diagrams the university examiner awards marks for.
 ```
 
-### 5. Exam Tip / Key Takeaway
-> **Paper Writing Tip:** Draw the accompanying diagram in §2; examiners award 3 marks for the schematic.
-
 ---
-```
 
 ### Code Snippet Guidelines
 - **Minimal Boilerplate:** Strip out excessive header files, unnecessary helper functions (e.g. redundant `printArray` templates), and unrelated error checks unless explicitly asked.

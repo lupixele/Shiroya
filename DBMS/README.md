@@ -10,6 +10,7 @@ Detailed exam-ready questions, worked answers, SQL implementations, and dark-mod
 
 | File | Contents |
 |---|---|
+| [`questions.md`](questions.md) | **Master Question Bank & Exam Guide:** All 47 Section B questions & 30 Section A questions with direct links |
 | [`2-marks.md`](2-marks.md) | **Section A Notes:** Complete 30 Compulsory 2-Mark Questions & Answers across all 5 units |
 | [`unit-1.md`](unit-1.md) | **Section B Notes:** Unit I — Database System Concepts, Architectures, DBA, Models & Client-Server |
 | [`unit-2.md`](unit-2.md) | **Section B Notes:** Unit II — Relational Model, Keys, Relational Algebra, DDL/DML, SQL Functions & Aggregates |

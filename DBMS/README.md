@@ -2,106 +2,119 @@
 
 *(Common to CSE, IT, AIML & CSE (DS) — Aditya University)*
 
-Detailed exam-ready questions, worked answers, SQL implementations, and dark-mode diagrams organized by unit.
+Comprehensive, high-clarity exam preparation notes, unit-wise master question banks, and complete worked answers covering all 5 Units (47 Section B questions and 30 Section A compulsory questions).
 
 ---
 
-## Map / Contents
+## Examination Blueprint & Course Overview
 
-| File | Contents |
-|---|---|
-| [`questions.md`](questions.md) | **Master Question Bank & Exam Guide:** All 47 Section B questions & 30 Section A questions with direct links |
-| [`2-marks.md`](2-marks.md) | **Section A Notes:** Complete 30 Compulsory 2-Mark Questions & Answers across all 5 units |
-| [`unit-1.md`](unit-1.md) | **Section B Notes:** Unit I — Database System Concepts, Architectures, DBA, Models & Client-Server |
-| [`unit-2.md`](unit-2.md) | **Section B Notes:** Unit II — Relational Model, Keys, Relational Algebra, DDL/DML, SQL Functions & Aggregates |
-| [`unit-3.md`](unit-3.md) | **Section B Notes:** Unit III — ER Model, Attributes/Relationships, Constraints, Subqueries, Joins & Views |
-| [`unit-4.md`](unit-4.md) | **Section B Notes:** Unit IV — Normalization (1NF–5NF), Functional Dependencies, ACID, Serializability & Recovery |
-| [`unit-5.md`](unit-5.md) | **Section B Notes:** Unit V — $B^+$ Trees, Indexing (Primary/Secondary/Clustered/Hash), Tuning, CBO & Recovery |
-| [`LAB/`](LAB/) | Oracle 10g Lab Internal SQL queries, table setups, independent test suites, and answers |
-| [`raw/`](raw/) | Original question papers, handwritten lecture notes, and question banks |
+- **Subject:** Database Management Systems (`2501IT05`)
+- **Exam Date:** Friday, 06-11-2026 (End-Sem)
+- **Exam Format:** 100 Marks (3 Hours)
+  - **Section A (Compulsory):** 10 Qs × 2M = **20 Marks** (2 Qs from each Unit) → [`2-marks.md`](2-marks.md)
+  - **Section B (Internal Choice):** 5 Units × 16M (two 8M Qs per unit) = **80 Marks** → [`unit-1.md`](unit-1.md) to [`unit-5.md`](unit-5.md)
+- **Master Questions Index:** [`questions.md`](questions.md) (Complete index with direct links to all answers)
 
 ---
 
-## Question-to-Answer Mapping
+## Repository Index & Unit Navigation
 
-### UNIT-I (Reference Notes in [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf))
-
-| Q# | Topic | Reference Resource |
-| :---: | :--- | :--- |
-| **Q1** | Three-Schema Architecture & Data Independence | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q2** | DBMS Architecture & Component Functions | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q3** | Types of Database Users & DBA Responsibilities | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q4** | Comparison of Relational, ER, Object-Oriented, and Semi-Structured Models | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q5** | Steps Involved in Database Design | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q6** | Parallel Databases vs. Distributed Databases | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-| **Q7** | Client-Server Architecture in DBMS | [`raw/UNIT - 1.pdf`](raw/UNIT%20-%201.pdf) |
-
----
-
-### UNIT-II (Reference Notes in [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf))
-
-| Q# | Topic | Reference Resource |
-| :---: | :--- | :--- |
-| **Q1** | Relational Model & Components with Examples | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
-| **Q2** | Types of Keys in Relational Model (Super, Candidate, Primary, Alternate, Foreign) | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
-| **Q3** | DDL Commands with Syntax & Examples (`CREATE`, `ALTER`, `DROP`, `TRUNCATE`) | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
-| **Q4** | DML Commands with Syntax & Examples (`INSERT`, `UPDATE`, `DELETE`, `SELECT`) | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
-| **Q5** | SQL Built-in Functions (String, Numeric, Date/Time) | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
-| **Q6** | Aggregate Functions with `GROUP BY` and `HAVING` Clauses | [`raw/DBMS_Q4_Aggregate_Functions_Expanded.pdf`](raw/DBMS_Q4_Aggregate_Functions_Expanded.pdf) |
-| **Q7** | Importance and Handling of `NULL` Values in SQL | [`raw/UNIT 2.pdf`](raw/UNIT%202.pdf) |
+| Section / Unit | Title | Questions Count | Answers Document | Syllabus & Topics Covered |
+| :---: | :--- | :---: | :--- | :--- |
+| **Index** | **Master Questions Index** | 47 Qs (8M) + 30 Qs (2M) | [`questions.md`](questions.md) | Full semester question directory with direct answer anchors |
+| **Section A** | **2-Marks Short Answers** | 30 Qs | [`2-marks.md`](2-marks.md) | Compulsory 20M Section A (All 5 Units) |
+| **Unit 1** | Database Concepts & Architecture | 10 Qs | [`unit-1.md`](unit-1.md) | Three-Schema, DBMS Architecture, DBA, Models, Parallel/Distributed, NoSQL, Client-Server |
+| **Unit 2** | Relational Model, Algebra & SQL | 8 Qs | [`unit-2.md`](unit-2.md) | Relational Model, Keys, Relational Algebra, DDL, DML, SQL Functions, GROUP BY/HAVING, NULLs |
+| **Unit 3** | ER Model, Constraints, Joins & Views | 10 Qs | [`unit-3.md`](unit-3.md) | ER Diagrams, Attributes, EER (Spec/Gen/Agg), Constraints, Subqueries, Joins, Views, Set Ops |
+| **Unit 4** | Normalization & Transactions | 10 Qs | [`unit-4.md`](unit-4.md) | 1NF–5NF, Functional Dependencies, 3NF vs BCNF, Decompositions, ACID, States, Serializability, Recovery |
+| **Unit 5** | Indexing, Optimization & Recovery | 9 Qs | [`unit-5.md`](unit-5.md) | B+ Trees, Primary/Secondary/Clustered/Hash Indexing, Tuning, Query Optimization, CBO, Backup/Recovery |
+| **LAB** | Oracle 10g SQL Practicals | Lab Queries | [`LAB/`](LAB/) | Oracle 10g Lab Internal SQL queries, table schemas, and test suites |
+| **Raw** | Source Documents & Notes | Reference Archives | [`raw/`](raw/) | University question banks, syllabus circulars, and reference materials |
 
 ---
 
-### UNIT-III (Worked Answers in [`Unit 3.md`](Unit%203.md))
+## Unit-by-Unit Question Directory
 
-| Q# | Topic | Answer Section |
-| :---: | :--- | :--- |
-| **Q1** | ER Model: Components, Symbols, and Diagrams | [`Unit 3.md` — §1](Unit%203.md#1-explain-the-er-model-with-neat-diagrams) |
-| **Q2** | Types of Attributes & Relationships in ER Model | [`Unit 3.md` — §2](Unit%203.md#2-explain-different-types-of-attributes-and-relationships-in-the-er-model) |
-| **Q3** | Specialization, Generalization, Aggregation, and Inheritance | [`Unit 3.md` — §3](Unit%203.md#3-explain-specialization-generalization-aggregation-and-inheritance-with-examples) |
-| **Q4** | ER Diagram: Library, Hospital, and Banking Systems | [`Unit 3.md` — §4](Unit%203.md#4-draw-an-er-diagram-for-a-libraryhospitalbanking-system) |
-| **Q5** | SQL Constraints (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `NOT NULL`, `CHECK`) | [`Unit 3.md` — §5](Unit%203.md#5-explain-the-implementation-of-primary-key-foreign-key-unique-not-null-and-check-constraints-in-sql-with-suitable-examples) |
-| **Q6** | Integrity Constraints (Entity, Referential, Domain Integrity) | [`Unit 3.md` — §6](Unit%203.md#6-what-are-integrity-constraints-explain-entity-integrity-referential-integrity-and-domain-integrity-constraints-with-suitable-sql-examples) |
-| **Q7** | Nested vs. Correlated Subqueries with Execution Flow & SQL Examples | [`Unit 3.md` — §7](Unit%203.md#7-explain-nested-and-correlated-subqueries-with-examples) |
-| **Q8** | SQL Joins (`INNER`, `LEFT`, `RIGHT`, `FULL OUTER`, `CROSS`, `SELF JOIN`) | [`Unit 3.md` — §8](Unit%203.md#8-explain-different-types-of-sql-joins-with-suitable-examples) |
-| **Q9** | SQL Views: Updatable vs. Non-Updatable Views & Materialized Views | [`Unit 3.md` — §9](Unit%203.md#9-explain-sql-views-differentiate-updatable-and-non-updatable-views-with-examples) |
-| **Q10** | Relational Set Operations (`UNION`, `INTERSECT`, `MINUS`, `CROSS JOIN`, `COMPLEMENT`) | [`Unit 3.md` — §10](Unit%203.md#10-explain-relational-set-operations-with-suitable-examples) |
+### Unit 1 — Database System Concepts & Architecture
+*Worked Answers:* [`unit-1.md`](unit-1.md) · *Section A (2M):* [`2-marks.md`](2-marks.md#unit-i-database-system-concepts-architecture)
 
----
-
-### UNIT-IV (Worked Answers in [`Unit 4.md`](Unit%204.md))
-
-| Q# | Topic | Answer Section |
-| :---: | :--- | :--- |
-| **Q1** | Purpose of Normalization & 1NF, 2NF Decompositions | [`Unit 4.md` — §1](Unit%204.md#1-explain-the-purpose-of-normalization-and-discuss-1nf-2nf-with-suitable-examples) |
-| **Q2** | 4NF (Multi-Valued Dependencies) and 5NF (Join Dependencies) | [`Unit 4.md` — §2](Unit%204.md#2-explain-4nf-and-5nf-with-suitable-examples) |
-| **Q3** | Functional Dependencies & Types (Trivial, Non-Trivial, Full, Partial, Transitive) | [`Unit 4.md` — §3](Unit%204.md#3-explain-functional-dependency-and-different-types-of-dependencies-with-examples) |
-| **Q4** | Comparison of 3NF and BCNF with Worked Decomposition Traces | [`Unit 4.md` — §4](Unit%204.md#4-compare-3nf-and-bcnf-with-suitable-examples) |
-| **Q5** | Lossless Join and Dependency Preserving Decomposition | [`Unit 4.md` — §5](Unit%204.md#5-explain-lossless-join-and-dependency-preserving-decomposition) |
-| **Q6** | Transaction Management & ACID Properties with Bank Transfer Walkthrough | [`Unit 4.md` — §6](Unit%204.md#6-explain-transaction-management-and-acid-properties-with-examples) |
-| **Q7** | Transaction States with State Transition Diagram | [`Unit 4.md` — §7](Unit%204.md#7-explain-transaction-states-with-a-neat-state-transition-diagram) |
-| **Q8** | Conflict Serializability vs. View Serializability & Precedence Graphs | [`Unit 4.md` — §8](Unit%204.md#8-discuss-conflict-serializability-and-view-serializability-with-suitable-examples) |
-| **Q9** | Recoverability Types & Recovery Algorithms (WAL, Deferred/Immediate, Checkpoints) | [`Unit 4.md` — §9](Unit%204.md#9-explain-recoverability-and-recovery-algorithms-in-dbms) |
-| **Q10** | Concurrent Execution Benefits & Serializable Schedules | [`Unit 4.md` — §10](Unit%204.md#10-explain-concurrent-execution-and-serializability-with-examples) |
+1. [Three-Schema Architecture](unit-1.md#1-three-schema-architecture) — ANSI-SPARC architecture, external/conceptual/internal levels, data independence.
+2. [DBMS Architecture](unit-1.md#2-dbms-architecture) — Detailed architectural diagram, query processor, storage manager, buffer manager.
+3. [Database Users & Role of DBA](unit-1.md#3-database-users-and-the-role-of-the-dba) — Naive, application, sophisticated, specialized users; DBA roles & privileges.
+4. [Comparison of Data Models](unit-1.md#4-comparison-of-data-models) — Relational, ER, Object-Oriented, and Semi-Structured (XML/JSON) data models.
+5. [Steps in Database Design](unit-1.md#5-steps-in-database-design) — Requirements collection, conceptual design, logical design, physical design with University example.
+6. [Parallel & Distributed Databases](unit-1.md#6-parallel-and-distributed-databases) — Shared-memory/disk/nothing architectures vs distributed autonomy, fragmentation & replication.
+7. [NoSQL Databases](unit-1.md#7-nosql-databases) — Document, Key-Value, Columnar, Graph models; CAP theorem, comparison with RDBMS.
+8. [Database System Environment & Client-Server Architecture](unit-1.md#8-database-system-environment-and-client-server-architecture) — Centralized, 2-Tier, and 3-Tier architectures.
+9. [Levels of Data Abstraction & Data Independence](unit-1.md#9-levels-of-data-abstraction-and-data-independence) — Physical, Logical, View levels; Logical vs Physical data independence.
+10. [Applications, Need & Purpose of DBMS; DBMS vs File System](unit-1.md#10-applications-need-and-purpose-of-dbms-dbms-vs-file-system) — Limitations of file systems; 8 core advantages of DBMS.
 
 ---
 
-### UNIT-5 (Worked Answers in [`Unit 5.md`](Unit%205.md))
+### Unit 2 — Relational Model, Relational Algebra & SQL
+*Worked Answers:* [`unit-2.md`](unit-2.md) · *Section A (2M):* [`2-marks.md`](2-marks.md#unit-ii-relational-model-relational-algebra-sql)
 
-| Q# | Topic | Answer Section |
-| :---: | :--- | :--- |
-| **Q1** | $B^+$ Tree Structure & Search, Insertion, Deletion Algorithms | [`Unit 5.md` — §1](Unit%205.md#1-explain-b-tree-and-discuss-search-insertion-and-deletion-algorithms-with-neat-diagrams) |
-| **Q2** | Primary, Secondary, and Clustered Indexes Block Mapping | [`Unit 5.md` — §2](Unit%205.md#2-explain-primary-secondary-and-clustered-indexes-with-suitable-examples) |
-| **Q3** | Comparison of Tree-Based Indexing and Hash-Based Indexing | [`Unit 5.md` — §3](Unit%205.md#3-compare-tree-based-indexing-and-hash-based-indexing) |
-| **Q4** | Hash-Based Indexing: Working, Modulo Example & Collision Chaining | [`Unit 5.md` — §4](Unit%205.md#4-explain-hash-based-indexing) |
-| **Q5** | Query Optimization: Heuristic Tree Transformations, CBO, DP & Greedy Join | [`Unit 5.md` — §5](Unit%205.md#5-what-is-query-optimization-explain-the-various-query-optimization-algorithms-in-detail-with-suitable-examples) |
-| **Q6** | Database Backup (Full, Incremental, Differential) & Recovery Techniques | [`Unit 5.md` — §6](Unit%205.md#6-what-is-database-backup-and-recovery-explain-the-various-backup-and-recovery-techniques-in-detail-with-suitable-examples) |
+1. [The Relational Model & Components](unit-2.md#1-the-relational-model-and-its-components) — Relations, attributes, tuples, domains, schemas, instances, degree, and cardinality.
+2. [Types of Keys](unit-2.md#2-types-of-keys) — Super key, Candidate key, Primary key, Alternate key, Foreign key, Composite key, Surrogate key.
+3. [Relational Algebra](unit-2.md#3-relational-algebra) — Fundamental operations (Select $\sigma$, Project $\pi$, Union $\cup$, Set Difference $-$, Cartesian Product $\times$, Rename $\rho$).
+4. [DDL Commands](unit-2.md#4-ddl-commands) — `CREATE`, `ALTER`, `DROP`, `TRUNCATE`, `RENAME` with syntax and examples.
+5. [DML Commands](unit-2.md#5-dml-commands) — `INSERT`, `UPDATE`, `DELETE`, `SELECT` with syntax and examples.
+6. [SQL Functions](unit-2.md#6-sql-functions) — Scalar functions (String, Numeric, Date) and Aggregate functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`).
+7. [GROUP BY & HAVING Clauses](unit-2.md#7-group-by-and-having-clauses) — Grouping rows, filtering groups, syntax, order of execution, `WHERE` vs `HAVING`.
+8. [NULL Values & Handling NULLs](unit-2.md#8-null-values-and-handling-nulls) — Three-valued logic (3VL), `IS NULL`, `IS NOT NULL`, `NVL()`, `COALESCE()`.
 
 ---
 
-## Figures Directory
+### Unit 3 — ER Model, Constraints, Joins, Subqueries & Views
+*Worked Answers:* [`unit-3.md`](unit-3.md) · *Section A (2M):* [`2-marks.md`](2-marks.md#unit-iii-er-model-constraints-joins-subqueries-views)
 
-All diagrams are rendered in **dark mode** (`#0d1117` background) to match dark theme study environments:
+1. [The ER Model](unit-3.md#1-the-er-model) — Conceptual modeling, entities (strong/weak), attributes, relationships, standard ER notations table.
+2. [Attributes & Relationships in ER Model](unit-3.md#2-attributes-and-relationships-in-the-er-model) — Simple/Composite, Single/Multivalued, Stored/Derived; Cardinality ratios ($1:1, 1:N, M:N$).
+3. [Specialization, Generalization, Aggregation & Inheritance](unit-3.md#3-specialization-generalization-aggregation-and-inheritance) — Enhanced ER (EER) concepts, attribute/relationship inheritance.
+4. [ER Diagrams: Library, Hospital & Banking Systems](unit-3.md#4-er-diagrams-library-hospital-and-banking-systems) — Detailed entity, relationship, and cardinality diagrams for all three systems.
+5. [SQL Constraints (PK, FK, UNIQUE, NOT NULL, CHECK)](unit-3.md#5-sql-constraints-pk-fk-unique-not-null-check) — Table-level and column-level definitions with sample DDL.
+6. [Integrity Constraints](unit-3.md#6-integrity-constraints) — Domain integrity, Entity integrity, Referential integrity with foreign key cascade options.
+7. [Nested & Correlated Subqueries](unit-3.md#7-nested-and-correlated-subqueries) — Single-row, multi-row (`IN`, `ANY`, `ALL`), correlated subqueries with `EXISTS` and execution comparison.
+8. [SQL Joins](unit-3.md#8-sql-joins) — `INNER JOIN`, `LEFT OUTER JOIN`, `RIGHT OUTER JOIN`, `FULL OUTER JOIN`, `CROSS JOIN`, `SELF JOIN`.
+9. [SQL Views](unit-3.md#9-sql-views) — Creation, benefits, Updatable vs Non-Updatable views, `WITH CHECK OPTION`.
+10. [Relational Set Operations](unit-3.md#10-relational-set-operations) — `UNION`, `UNION ALL`, `INTERSECT`, `MINUS` / `EXCEPT` with union compatibility rules.
+
+---
+
+### Unit 4 — Normalization, Transactions & Concurrency
+*Worked Answers:* [`unit-4.md`](unit-4.md) · *Section A (2M):* [`2-marks.md`](2-marks.md#unit-iv-normalization-transactions-concurrency)
+
+1. [Normalization, 1NF & 2NF](unit-4.md#1-normalization-1nf-2nf) — Insertion, Deletion, Update anomalies; First Normal Form (atomicity); Second Normal Form (partial dependency removal).
+2. [4NF & 5NF](unit-4.md#2-4nf-5nf) — Multi-valued dependencies ($X \twoheadrightarrow Y$) and Fourth Normal Form; Join dependencies and Fifth Normal Form (PJNF).
+3. [Functional Dependency & Types](unit-4.md#3-functional-dependency-types-of-dependencies) — Trivial, Non-trivial, Full, Partial, Transitive dependencies; Armstrong axioms.
+4. [3NF vs BCNF](unit-4.md#4-3nf-vs-bcnf) — Third Normal Form (transitive dependency removal), Boyce-Codd Normal Form, detailed comparison table.
+5. [Lossless Join & Dependency Preserving Decomposition](unit-4.md#5-lossless-join-dependency-preserving-decomposition) — Testing lossless join ($R_1 \cap R_2 \rightarrow R_1 \text{ or } R_2$), dependency preservation check.
+6. [Transaction Management & ACID Properties](unit-4.md#6-transaction-management-acid-properties) — Atomicity, Consistency, Isolation, Durability with banking transfer examples.
+7. [Transaction States](unit-4.md#7-transaction-states) — Active, Partially Committed, Committed, Failed, Aborted state transition diagram.
+8. [Concurrent Execution & Serializability](unit-4.md#8-concurrent-execution-serializability) — Concurrency advantages; Dirty Read, Lost Update, Unrepeatable Read anomalies.
+9. [Conflict & View Serializability](unit-4.md#9-conflict-view-serializability) — Conflicting operations, Precedence (Serialization) Graph, topological sort, View equivalence.
+10. [Recoverability & Recovery Algorithms](unit-4.md#10-recoverability-recovery-algorithms) — Recoverable vs Cascadeless schedules; Write-Ahead Logging (WAL), Checkpoints, Deferred vs Immediate database modification.
+
+---
+
+### Unit 5 — Indexing, Query Optimization & Backup/Recovery
+*Worked Answers:* [`unit-5.md`](unit-5.md) · *Section A (2M):* [`2-marks.md`](2-marks.md#unit-v-indexing-query-optimization-backuprecovery)
+
+1. [B+ Tree](unit-5.md#1-b-tree) — Multi-level balanced index tree structure, search, insertion with leaf/internal split traces, deletion algorithm.
+2. [Primary, Secondary & Clustered Indexes](unit-5.md#2-primary-secondary-clustered-indexes) — Ordered indexing, sparse vs dense index records, comparison table.
+3. [Tree-Based vs Hash-Based Indexing](unit-5.md#3-tree-based-vs-hash-based-indexing) — Range queries vs exact-match lookups, space complexity, operational trade-offs.
+4. [File Organization & Indexing](unit-5.md#4-file-organization-indexing) — Heap files, Sequential files, Hashed files; single-level vs multi-level indexing.
+5. [Hash-Based Indexing](unit-5.md#5-hash-based-indexing) — Hash functions, bucket allocation, collision resolution via chaining, Static vs Dynamic (Extendible) hashing.
+6. [Database Tuning Techniques](unit-5.md#6-database-tuning-techniques) — Schema tuning (denormalization), index tuning, query rewriting, buffer pool optimization.
+7. [Query Optimization](unit-5.md#7-query-optimization) — Query processing pipeline, relational algebra equivalence rules, heuristic query optimization trees.
+8. [Cost-Based Query Optimization](unit-5.md#8-cost-based-query-optimization) — Cost components (Disk I/O, CPU, memory), catalog statistics, selectivity estimation, execution plan evaluation.
+9. [Database Backup & Recovery](unit-5.md#9-database-backup-recovery) — Full, Incremental, Differential backups; ARIES recovery algorithm (Analysis, Redo, Undo phases).
+
+---
+
+## Dark-Mode Visual Assets
+
+Key conceptual diagrams located in [`figures/`](figures/):
 
 - [`figures/unit3_q1_er_model.png`](figures/unit3_q1_er_model.png) — ER Model: Student–Enrolls–Course diagram & notations
 - [`figures/unit3_q3_eer_concepts.png`](figures/unit3_q3_eer_concepts.png) — Specialization, Generalization, Inheritance, and Aggregation
@@ -113,5 +126,3 @@ All diagrams are rendered in **dark mode** (`#0d1117` background) to match dark 
 - [`figures/unit5_q2_indexing_types.png`](figures/unit5_q2_indexing_types.png) — Primary (Sparse), Secondary (Dense), and Clustered indexing block mappings
 - [`figures/unit5_q4_hash_indexing.png`](figures/unit5_q4_hash_indexing.png) — Hash-based indexing bucket mapping and overflow chaining
 - [`figures/unit5_q5_query_optimization.png`](figures/unit5_q5_query_optimization.png) — Query optimization heuristic relational algebra tree transformation
-- [`figures/ddc_university_er_dark.png`](figures/ddc_university_er_dark.png) — University Academic Management System ER model
-- [`figures/ddc_mobile_service_er.png`](figures/ddc_mobile_service_er.png) — Mobile Service Center System ER model

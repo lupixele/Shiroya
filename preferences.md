@@ -184,6 +184,10 @@ Commit messages must be concise, descriptive, and prefixed with the subject scop
 - `refactor(<SUBJECT>): standardize files to unit1.md-unit5.md format`
 - `chore(repo): archive sem-3 branch and initialize sem-4`
 
+When commits are authored with agent assistance, include the relevant trailer:
+- Claude: `Co-authored-by: Claude <claude@anthropic.com>`
+- Animus: `Co-authored-by: Animus <animus@lupixele.online>`
+
 ### Source-First Authoring Workflow
 Whenever new notes or questions are prepared:
 1. **Collect & Archive:** First place all provided PPTs, PDFs, and assignment questions into `<SUBJECT>/raw/`.

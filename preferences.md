@@ -143,52 +143,16 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ---
 
-## 7. Answer Synthesis & Note Formatting Standards
+## 7. Answer Synthesis & Formatting Standards
 
-### Core Philosophy: True Preparation Notes (Intuitive, Comprehensive & High-Yield)
-- **Preparation Material First, Squeeze in Exam Later:**
-  - ❌ **Anti-Pattern (Paper-Choked / Corporate Skeletons):** Never artificially choke or truncate an answer just to fit an exact physical paper length or compress it into tiny 2-line corporate bullets. When notes try to be ultra-condensed "exam-ready" cheat-sheets, they drop the explanation, become cryptic, and ruin actual learning.
-  - ✅ **The Standard (Preparation Standard):** Notes are **authoritative study & preparation material**. They must explain concepts clearly, thoroughly, and intuitively in plain English with complete mechanics and relatable examples. The student will naturally squeeze, adapt, and summarize it on their exam sheet—the notes must provide the full understanding and foundational substance to do so with confidence.
-- **Crystal Clear & High-Scoring:**
-  - Lead with plain-language intuition (mental model) so anyone gets *why* it works immediately.
-  - Detail the formal concepts, mechanics, and standard definitions with key grading terminology.
-  - Include hand-drawable schemas/diagrams and concrete, memorable database examples (`STUDENT`, `COURSE`, `ORDERS`).
-
----
-
-### The 5-Part Exam Answer Blueprint (Standard Structure for Every Question)
-
-Every question answer in `unit<N>.md` must follow this 5-part blueprint:
-
-```markdown
-## <Q#>. <Question Statement> (Marks: 4M / 8M)
-
-### 1. Intuition & Core Definition
-- **Intuitive Explanation (In Plain English):** A 2–3 sentence plain-language explanation of what problem this concept solves and why we care. (e.g., "Without normalization, deleting a course might accidentally wipe out an entire student's record...").
-- **Formal Textbook Definition:** The standard, formal academic definition. Highlight **crucial keywords in bold** that evaluators look for when checking answer sheets.
-
-### 2. Hand-Drawable Diagram / Relational Schema
-- Provide a clean, hand-drawable diagram, schema box, or dark-mode visual (`figures/<subject>_q<n>_...png` or clean ASCII diagram).
-- Include a 2-line explanation of the diagram's components (what each box, arrow, or symbol represents) so the student knows what to draw on paper.
-
-### 3. Core Mechanics & Deep Breakdown (No Telegraphic Bullets)
-- Explain the key types, properties, algorithms, or rules in well-developed, clear paragraphs or explanatory bullet points.
-- **Rule:** Do NOT truncate explanations into cryptic one-liners. Give complete, easy-to-follow sentences that explain both the *rule* and the *reason* behind it.
-- Use comparison tables where contrasting two concepts (e.g., 3NF vs. BCNF, Primary vs. Secondary Index).
-
-### 4. Concrete, Relatable Example (Tables / Query / Step-by-Step Trace)
-- Use standard, intuitive schemas that every student knows (`STUDENT`, `COURSE`, `EMPLOYEE`, `ORDERS`).
-- When explaining problems/solutions (like Normalization or Anomalies), show:
-  1. The **Before Table** (with sample data showing the flaw/anomaly).
-  2. The **Reason it fails** (explained simply).
-  3. The **After Decomposed Tables** (with sample data showing how it fixes the issue).
-- For SQL / Code: Provide valid, syntax-highlighted SQL queries with an explanation of what the query produces.
-
-### 5. Exam Strategy & Marks Breakdown
-- **If Asked for 4 Marks:** State precisely what to write (e.g., "Write Definition + Draw Box Diagram + Mention the 3 types with 1 line each").
-- **If Asked for 8 Marks:** State how to expand (e.g., "Include the full Before/After table breakdown, write the SQL query, and explain both rules").
-- **Key Scoring Points:** Bullet list of the 3–4 exact phrases/diagrams the university examiner awards marks for.
-```
+### Core Style: Straight, Explanatory Academic Answers
+- **Natural Answers, Zero AI Meta-Bloat:**
+  - Write direct, authoritative textbook/exam answers. No meta-commentary, no conversational filler, and no artificial coaching sections (e.g., no "Mental Model", "Intuition", or "Exam Paper Squeeze" headers).
+  - Explanatory and comprehensive without turning into giant wall-of-text paragraphs.
+  - Use clean structure: definition, core components / rules, diagrams / ASCII notation, structured comparison tables, and concrete examples (tables/queries).
+- **Format Baseline:** Follow the structure of canonical unit answers (e.g., `DBMS/archive/Unit 3.md`, `Unit 4.md`):
+  - Heading 2: Question number and title.
+  - Clear sectioning: Definition, Properties/Rules, Syntax/Notation, Relatable Example (with sample data or valid code).
 
 ---
 

@@ -17,9 +17,8 @@ Detailed exam-ready questions, worked answers, SQL implementations, and dark-mod
 | [`unit-3.md`](unit-3.md) | **Section B Notes:** Unit III — ER Model, Attributes/Relationships, Constraints, Subqueries, Joins & Views |
 | [`unit-4.md`](unit-4.md) | **Section B Notes:** Unit IV — Normalization (1NF–5NF), Functional Dependencies, ACID, Serializability & Recovery |
 | [`unit-5.md`](unit-5.md) | **Section B Notes:** Unit V — $B^+$ Trees, Indexing (Primary/Secondary/Clustered/Hash), Tuning, CBO & Recovery |
-| [`Database Design Challenge.md`](Database%20Design%20Challenge.md) | 20 Challenge Domains, 5-Mark Assessment Rubric, and 2 Complete Worked Case Studies with Dark-Mode ER Diagrams |
 | [`LAB/`](LAB/) | Oracle 10g Lab Internal SQL queries, table setups, independent test suites, and answers |
-| [`raw/`](raw/) | Original question papers, handwritten lecture notes, design challenge docx, and question banks |
+| [`raw/`](raw/) | Original question papers, handwritten lecture notes, and question banks |
 
 ---
 

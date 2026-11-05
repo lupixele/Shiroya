@@ -57,8 +57,8 @@ Shiroya/
 
 - ADSA — Design and Analysis of Algorithms
 - ASE — Agile Software Engineering notes and exam answers (Units 3, 4, 5)
-- CPP — Object Oriented Programming through C++ notes and worked answers (Units 3, 4, 5)
-- DBMS — Database Management Systems
+- CPP — Object Oriented Programming through C++ notes and worked answers (Units 1 to 5, 2-marks & model paper)
+- DBMS — Database Management Systems complete exam notes (Units 1 to 5 & 2-marks)
 - EMP — Quantitative aptitude and reasoning study materials
 - FDS — Fundamentals of Data Science notes and worked answers (Units 3, 4, 5)
 - P&S — Probability and Statistics notes and worked solutions (Units 3, 4, 5)

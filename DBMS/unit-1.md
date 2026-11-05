@@ -14,7 +14,7 @@
 
 ### Definition
 
-The **Three-Schema Architecture** (also called the **ANSI-SPARC architecture**) is a framework that separates a database into three levels of description so that user applications are isolated from the physical details of storage. Its goal is to support multiple user views, a single integrated logical design, and **data independence**.
+The **Three-Schema Architecture** is a framework that separates a database into three levels of description so that user applications are isolated from the physical details of storage. Its goal is to support multiple user views, a single integrated logical design, and **data independence**.
 
 ### The Three Levels
 

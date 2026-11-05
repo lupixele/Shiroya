@@ -178,35 +178,34 @@ STUDENT                         ENROLL
 
 ### Derived (Additional) Operations
 
-- **Intersection (∩):** Tuples common to both. `R ∩ S = R − (R − S)`.
-- **Join (⋈):** A Cartesian product followed by selection on a condition.
-  - *Theta join:* `R ⋈θ S` with any condition.
-  - *Equi-join:* condition uses only equality.
-  - *Natural join:* equi-join on all common attributes, with duplicate columns removed.
-  `STUDENT ⋈ ENROLL` → (101, Ravi, CSE, DBMS), (102, Sita, ECE, OS), (103, Arjun, CSE, DBMS).
-- **Division (÷):** Finds tuples in R associated with *all* tuples of S. Example: students who are enrolled in **all** courses listed in a relation `COURSES`.
-- **Assignment (←):** Stores a result in a temporary relation: `CSE_STUD ← σ dept='CSE' (STUDENT)`.
-- **Aggregate (𝒢):** Applies functions such as SUM and AVG: `𝒢 count(roll) (STUDENT)`.
+These operations can be expressed using combinations of fundamental operations, but are defined for convenience:
 
-### Composite Query Example
+- **Natural Join (⋈):** Performs an equi-join on all common attributes and removes duplicate columns.
+  - Example: `STUDENT ⋈ ENROLL` matches on `roll`.
+- **Conditional / Theta Join (⋈_θ):** Cartesian product followed by a condition (`R ⋈_θ S = σ_θ (R × S)`).
+- **Set Intersection (∩):** Returns tuples common to both relations (`R ∩ S = R − (R − S)`).
+- **Division (÷):** Retrieves tuples in $R$ associated with *all* tuples in $S$ (useful for "all" queries, like students who enrolled in *all* courses).
 
-Names of students enrolled in DBMS:
+### Query Example
 
-```
-π name ( σ course='DBMS' ( STUDENT ⋈ ENROLL ) )
-```
+**Query:** Find the names of CSE students enrolled in the 'DBMS' course:
+
+$$\pi_{\text{name}} \Big( \sigma_{\text{dept}='CSE' \;\wedge\; \text{course}='DBMS'} (\text{STUDENT} \bowtie \text{ENROLL}) \Big)$$
+
+- **Result:** Ravi (Roll 101).
 
 ### Summary Table
 
-| Operation | Symbol | Type |
-|---|---|---|
-| Selection | σ | Unary |
-| Projection | π | Unary |
-| Rename | ρ | Unary |
-| Union | ∪ | Binary |
-| Set difference | − | Binary |
-| Cartesian product | × | Binary |
-| Intersection, Join, Division | ∩, ⋈, ÷ | Binary (derived) |
+| Operation | Symbol | Type | Arity | Union-Compatible Required? |
+|---|---|---|---|---|
+| **Selection** | $\sigma$ | Fundamental | Unary (1 relation) | No |
+| **Projection** | $\pi$ | Fundamental | Unary (1 relation) | No |
+| **Union** | $\cup$ | Fundamental | Binary (2 relations) | **Yes** |
+| **Set Difference** | $-$ | Fundamental | Binary (2 relations) | **Yes** |
+| **Cartesian Product** | $\times$ | Fundamental | Binary (2 relations) | No |
+| **Rename** | $\rho$ | Fundamental | Unary (1 relation) | No |
+| **Natural Join** | $\bowtie$ | Derived | Binary (2 relations) | No |
+| **Intersection** | $\cap$ | Derived | Binary (2 relations) | **Yes** |
 
 ---
 

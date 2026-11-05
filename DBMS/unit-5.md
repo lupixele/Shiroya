@@ -396,43 +396,51 @@ Query -> Plan Generator (P1, P2, P3 ...)
 5. Choose the cheapest complete plan, using **dynamic programming** to avoid exponential search.
 6. Execute the plan (and optionally cache it).
 
-### Catalog Statistics
-- **n_r** — number of tuples in r; **b_r** — number of blocks; **f_r** — tuples per block (blocking factor).
-- **V(A, r)** — number of distinct values of attribute A in r.
-- Index height, minimum/maximum values and **histograms** for skewed data.
+### Cost Factors in CBO
 
-### Cost Estimation Techniques
-- **Selection:** linear scan = b_r; binary search on a sorted file = ⌈log₂ b_r⌉; B+ tree equality = height + 1; range via index = height + blocks holding matches.
-- **Selectivity:** equality `A = v` returns about n_r / V(A, r) tuples; conjunctions multiply selectivities (independence assumption); disjunctions use inclusion–exclusion.
-- **Join cost:**
-  - Nested loop = n_r × b_s + b_r
-  - Block nested loop = b_r + b_r × b_s
-  - Index nested loop = b_r + n_r × c (c = cost of one index probe)
-  - Sort-merge = b_r + b_s (plus sorting cost)
-  - Hash join ≈ 3(b_r + b_s)
-- **Join size estimate:** n_r × n_s / max(V(A, r), V(A, s)).
+The total cost of an execution plan is computed based on:
+1. **Disk I/O Cost (Primary Factor):** Number of disk blocks transferred to and from secondary storage.
+2. **CPU Cost:** Processing cycles spent evaluating predicates, sorting, and hashing records in memory.
+3. **Memory / Buffer Cost:** Amount of RAM required for hash tables, sorting runs, or intermediate buffers.
 
-### Execution Plan Selection
-Candidate plans (usually **left-deep trees**) are costed using dynamic programming over subsets of relations; only the cheapest plan for each subset (and each "interesting" sort order) is kept. Cost is measured mainly in **block transfers and seeks**.
+### Catalog Statistics Used
 
-### Example
-`SELECT * FROM EMP E, DEPT D WHERE E.DNo = D.DNo AND D.Loc = 'Hyderabad';`
+The DBMS catalog (data dictionary) maintains statistical metadata used by the cost estimator:
+- $n_r$: Total number of tuples (records) in relation $r$.
+- $b_r$: Total number of disk blocks occupied by relation $r$.
+- $V(A, r)$: Number of distinct values for attribute $A$ in relation $r$ (used to estimate selectivity).
+- **Index Metadata:** Heights of B+ trees, clustering status, and value histograms.
 
-Assumed statistics: EMP has n = 10,000 and b = 1,000 with an index on `DNo`; DEPT has n = 100 and b = 10; V(Loc) = 10.
-- **Plan A** — block nested loop with EMP as outer: 1000 + 1000 × 10 = **11,000** block reads.
-- **Plan B** — select `Loc = 'Hyderabad'` on DEPT first (about 100/10 = 10 tuples, scan cost 10 blocks), then index nested-loop probing EMP.DNo for each (about 3 reads per probe): 10 + 10 × 3 ≈ **40** block reads.
-- **Plan C** — hash join of the full tables: 3 × (1000 + 10) = **3,030** block reads.
+### Plan Evaluation & Access Paths
 
-The optimizer selects **Plan B**, the cheapest. The figures are illustrative, but they show how statistics lead to a far better plan than a naive one.
+For any query, the optimizer compares physical evaluation alternatives:
+- **Table Access:** Choosing between a **Full Table Scan** (efficient when retrieving a large fraction of rows) vs an **Index Scan** (efficient when selecting few specific records).
+- **Join Algorithm:** Selecting between **Nested-Loop Join** (ideal for small inputs or with an index), **Sort-Merge Join** (ideal when tables are already sorted on the join key), and **Hash Join** (efficient for large, unindexed relations).
+- **Join Ordering:** Arranging joins so the most selective tables are evaluated first, minimizing the size of intermediate results.
 
-### Heuristic vs Cost-Based
-| Aspect | Heuristic | Cost-Based |
+### Practical Example
+
+Consider the query:
+```sql
+SELECT * FROM EMP E, DEPT D 
+WHERE E.DNo = D.DNo AND D.Loc = 'Hyderabad';
+```
+
+- **Candidate Plan A (Naive Plan):** Performs a full table scan on both `EMP` and `DEPT`, computes a full Cartesian product, and checks conditions row-by-row. Extremely slow with massive disk I/O.
+- **Candidate Plan B (Optimized Cost Plan):**
+  1. Filters `DEPT` on `Loc = 'Hyderabad'` first (reduces search to only matching department records).
+  2. Uses an index on `EMP.DNo` to look up only relevant employees directly, avoiding a full table scan of `EMP`.
+- **Optimizer Decision:** The CBO calculates the estimated block transfers for both plans and automatically dispatches **Plan B**.
+
+### Heuristic vs Cost-Based Optimization
+
+| Feature | Heuristic (Rule-Based) Optimization | Cost-Based Optimization (CBO) |
 |---|---|---|
-| Decision basis | Fixed rules | Estimated cost |
-| Needs statistics | No | Yes |
-| Plan quality | Good | Usually best |
-| Optimization time | Low | Higher |
-| Main risk | Misses the best plan | Stale statistics mislead the optimizer |
+| **Decision Basis** | Fixed transformation rules (e.g., push $\sigma$ down) | Mathematical cost estimation using catalog statistics |
+| **Catalog Reliance** | Does not require statistics | Heavily relies on accurate catalog statistics |
+| **Optimization Time** | Very fast (constant rule checks) | Higher (evaluates multiple candidate plans) |
+| **Plan Quality** | Reasonable, but may miss the optimal execution path | Selects the most optimal physical access plan |
+| **System Adoption** | Early relational systems | All modern DBMS engines (Oracle, PostgreSQL, MySQL) |
 
 ---
 

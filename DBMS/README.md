@@ -10,13 +10,15 @@ Detailed exam-ready questions, worked answers, SQL implementations, and dark-mod
 
 | File | Contents |
 |---|---|
-| [`Important Questions.md`](Important%20Questions.md) | Complete Unit-I to Unit-V Important Questions (IE-1 & IE-2) with direct section mapping |
-| [`Unit 3.md`](Unit%203.md) | **Worked Exam Answers:** ER Model, Attributes & Relationships, Specialization/Generalization/Aggregation/Inheritance, Library ER Diagram, SQL Constraints (`PK`, `FK`, `UNIQUE`, `NOT NULL`, `CHECK`), Integrity Constraints, Nested & Correlated Subqueries, SQL Joins, Views (Updatable & Non-Updatable), and Relational Set Operations |
-| [`Unit 4.md`](Unit%204.md) | **Worked Exam Answers:** Purpose of Normalization, 1NF & 2NF, 4NF & 5NF, Functional Dependencies & Types, 3NF vs. BCNF, Lossless Join & Dependency Preservation, Transaction Management & ACID Properties, Transaction States Diagram, Conflict vs. View Serializability, Precedence Graphs, Recoverability & Recovery Algorithms, and Concurrent Execution |
-| [`Unit 5.md`](Unit%205.md) | **Worked Exam Answers:** $B^+$ Tree Search/Insertion/Deletion Algorithms & Split Traces, Primary/Secondary/Clustered Indexes, Tree vs. Hash Indexing, Hash-Based Indexing & Collision Chaining, Query Optimization Algorithms & Heuristic Tree Transformations, and Database Backup & Recovery Techniques |
-| [`Database Design Challenge.md`](Database%20Design%20Challenge.md) | 20 Challenge Domains, 5-Mark Assessment Rubric, and 2 Complete Worked Case Studies with Dark-Mode ER Diagrams (University Academic Management & Mobile Service Center System) |
+| [`2-marks.md`](2-marks.md) | **Section A Notes:** Complete 30 Compulsory 2-Mark Questions & Answers across all 5 units |
+| [`unit-1.md`](unit-1.md) | **Section B Notes:** Unit I — Database System Concepts, Architectures, DBA, Models & Client-Server |
+| [`unit-2.md`](unit-2.md) | **Section B Notes:** Unit II — Relational Model, Keys, Relational Algebra, DDL/DML, SQL Functions & Aggregates |
+| [`unit-3.md`](unit-3.md) | **Section B Notes:** Unit III — ER Model, Attributes/Relationships, Constraints, Subqueries, Joins & Views |
+| [`unit-4.md`](unit-4.md) | **Section B Notes:** Unit IV — Normalization (1NF–5NF), Functional Dependencies, ACID, Serializability & Recovery |
+| [`unit-5.md`](unit-5.md) | **Section B Notes:** Unit V — $B^+$ Trees, Indexing (Primary/Secondary/Clustered/Hash), Tuning, CBO & Recovery |
+| [`Database Design Challenge.md`](Database%20Design%20Challenge.md) | 20 Challenge Domains, 5-Mark Assessment Rubric, and 2 Complete Worked Case Studies with Dark-Mode ER Diagrams |
 | [`LAB/`](LAB/) | Oracle 10g Lab Internal SQL queries, table setups, independent test suites, and answers |
-| [`raw/`](raw/) | Original question papers, handwritten lecture notes, design challenge docx, and student presentation PPT |
+| [`raw/`](raw/) | Original question papers, handwritten lecture notes, design challenge docx, and question banks |
 
 ---
 

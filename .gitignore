@@ -17,6 +17,13 @@ PPTS/
 **/PPTS/
 **/PPT_S/
 
+# Internal prompts & authoring templates
+*prompt*.md
+
+# Local archives (kept locally on disk)
+DBMS/archive/
+
+
 # Past semester archive (kept locally on disk)
 SEM-2/
 

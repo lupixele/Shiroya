@@ -144,7 +144,7 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ### 2-Mark Short Questions Rules (`2-marks.md`)
 - **No `2M-` or `2m-` Heading Prefixes:** Never prefix individual question headings or anchor slugs with `2M-` or `2m-` (e.g., do not use `### 2M-1. ...` or `#2m-1-...`).
-- **Heading Scoping:** The top-level document heading (`# <Subject> — 2-Marks Short Answers`) and the section heading (`### 2-Mark Short Questions`) already establish the 2-mark context. Question headings in `2-marks.md` must simply use standard question numbering: `### 1. <Question Title>` (or `### Q1. <Question Title>`).
+- **Single Question Heading with `Q` Prefix:** Question headings in `2-marks.md` must state the question number once prefixed with `Q` and include the full question statement: `### Q<N>. <Full Question Statement>`. Do not repeat the question number in an extra bold line beneath the heading.
 - **Dedicated File:** All Section A 2-mark questions are collected into `2-marks.md`, leaving `unit-1.md` through `unit-5.md` dedicated exclusively to Section B 8-mark questions.
 
 ---
@@ -157,6 +157,14 @@ The `questions.md` file serves as the master map for all questions across all 5 
   - Prohibit AI-generated filler, artificial coaching sections, and forced generic structures.
   - Preserve the student's authentic notes, simple examples, and memory tricks exactly as provided in the raw files.
 
+### Question Headings & Numbering Standard
+- **Single Question Heading with `Q` Prefix (No Redundant Repetition):**
+  - Never repeat the question number twice (e.g., do not create a separate heading like `## 1. Title` and then repeat `**Q1. Prompt**` below it).
+  - Write the question number **once** directly in the heading, prefixed with `Q` and followed by the full question statement:
+    - **8-Mark Questions (`unit-1.md`–`unit-5.md`):** `## Q<N>. <Full Question Statement>`
+    - **2-Mark Questions (`2-marks.md`):** `### Q<N>. <Full Question Statement>`
+  - Sub-sections within an answer use `###` (for 8M) or `####` (for 2M) to provide clean, scannable outline navigation in Obsidian and GitHub.
+
 ### Markdown Formatting Principles (Obsidian & GitHub Compatibility)
 - **GFM Pipe Tables for Comparisons & Differences:**
   - All comparisons, differences, and structured summaries must strictly use GitHub Flavored Markdown (GFM) pipe tables (`| Col 1 | Col 2 |` followed by `|---|---|`).
@@ -164,9 +172,22 @@ The `questions.md` file serves as the master map for all questions across all 5 
 - **Clean Multi-Line Bullet Lists:**
   - Every bullet item must begin on a new line with `- `.
   - **Prohibited:** Never place multiple bullet points on a single line (e.g. `- Item 1 - Item 2`). Unwrap broken pandoc line breaks so each bullet is a coherent, continuous item.
-- **Heading Hierarchy for Outline Navigation:**
-  - Question headings must use `## <Number>. <Title>` and subheadings must use `###` to support clean outline navigation in GitHub and Obsidian.
-  - Bold question prompts (`**Q<N>. <Prompt> (8M)**`) must be placed directly beneath the question heading.
+  - In memory tricks, format items cleanly on their own lines (e.g. `- **C** — Communication`).
+- **Code Snippet Guidelines:**
+  - **Minimal Boilerplate:** Strip excessive header files and unnecessary helper functions unless explicitly requested.
+  - **Syntactically Correct:** Code must be valid and standard (C++17, Python 3.10+, Java 17+, SQL:2016).
+  - **Handwriting-Friendly:** Keep code concise enough to write comfortably in ~15–20 lines under examination conditions.
+- **Algorithmic & Mathematical Standards:**
+  - Use the **2-Step Paper Method** for manual tracing problems:
+    - **Step 1:** Initial configuration table/matrix with index notation.
+    - **Step 2:** Iteration passes showing formula applied, pivot selection, and updated state.
+  - **LaTeX Math Formatting:**
+    - Inline equations: `$O(V \cdot E)$`, `$\sum_{i=1}^n i$`.
+    - Display equations: On separate lines wrapped in `$$...$$`.
+    - Always escape literal dollar signs (`\$`) in prose to prevent rendering corruption.
+- **Figures & Visual Assets:**
+  - All custom or extracted figures should be saved in `<SUBJECT>/figures/`.
+  - Figures must be **frameless and dark-mode friendly** (transparent or deep dark background), avoiding harsh white boxed borders.
 
 ---
 

@@ -4,9 +4,7 @@
 
 ---
 
-## 1. Agile Design Practices for Maintainable and Scalable Software
-
-**Q1. Describe Agile Design Practices and discuss their contribution to maintainable and scalable software. (8M)**
+## Q1. Describe Agile Design Practices and discuss their contribution to maintainable and scalable software.
 
 ### 1. Introduction
 
@@ -92,9 +90,7 @@ Agile design practices such as simple design, refactoring, TDD, continuous integ
 
 ---
 
-## 2. Single Responsibility Principle (SRP) and Open Closed Principle (OCP)
-
-**Q2. Illustrate the Single Responsibility Principle (SRP) and Open Closed Principle (OCP) with suitable examples. (8M)**
+## Q2. Illustrate the Single Responsibility Principle (SRP) and Open Closed Principle (OCP) with suitable examples.
 
 ### 1. Introduction
 
@@ -180,9 +176,7 @@ Closed to Modification.**
 
 ---
 
-## 3. Liskov Substitution Principle (LSP) and Interface Segregation Principle (ISP)
-
-**Q3. Demonstrate the Liskov Substitution Principle (LSP) and Interface Segregation Principle (ISP) using suitable examples. (8M)**
+## Q3. Demonstrate the Liskov Substitution Principle (LSP) and Interface Segregation Principle (ISP) using suitable examples.
 
 ### 1. Introduction
 
@@ -265,9 +259,7 @@ Interfaces Should be Particular / Small.**
 
 ---
 
-## 4. Dependency Inversion Principle (DIP) in Agile Design
-
-**Q4. Discuss the Dependency Inversion Principle (DIP) and its significance in Agile software design. (8M)**
+## Q4. Discuss the Dependency Inversion Principle (DIP) and its significance in Agile software design.
 
 ### 1. Introduction
 
@@ -337,11 +329,8 @@ DIP reduces direct dependencies between high-level and low-level modules by usin
 - Abstraction connects them.
 
 Remember: **Depend on interfaces, not concrete details.**
-- --
-
-## 5. Five SOLID Principles: Synthesis and Analysis
-
-**Q5. Analyze the five SOLID principles and their contribution to maintainable and scalable software systems. (8M)**
+---
+## Q5. Analyze the five SOLID principles and their contribution to maintainable and scalable software systems.
 
 ### 1. Introduction
 
@@ -412,9 +401,7 @@ One-line recall: **One job, extend safely, substitute correctly, small interface
 
 ---
 
-## 6. Need and Significance of Refactoring and Techniques
-
-**Q6. Examine the need and significance of Refactoring and illustrate suitable refactoring techniques. (8M)**
+## Q6. Examine the need and significance of Refactoring and illustrate suitable refactoring techniques.
 
 ### 1. Introduction
 
@@ -499,9 +486,7 @@ Magic number, Simplify."**
 
 ---
 
-## 7. Continuous Integration, Automated Build Tools, and Version Control
-
-**Q7. Evaluate the role of Continuous Integration, Automated Build Tools, and Version Control in Agile software development. (8M)**
+## Q7. Evaluate the role of Continuous Integration, Automated Build Tools, and Version Control in Agile software development.
 
 ### 1. Introduction
 
@@ -593,9 +578,7 @@ test code.
 
 ---
 
-## 8. Refactoring Strategy for E-Commerce Backend
-
-**Q8. Develop a refactoring strategy for an E-Commerce backend using Agile design principles, SOLID principles, Continuous Integration, and Version Control. (8M)**
+## Q8. Develop a refactoring strategy for an E-Commerce backend using Agile design principles, SOLID principles, Continuous Integration, and Version Control.
 
 ### 1. Introduction
 
@@ -710,8 +693,7 @@ small steps.
 - Run Continuous Integration.
 - Measure improvements.
 
-------------------------------------------------------------------------
-
+---
 ## Quick Revision — Unit 5
 
 ### Eight questions in one line

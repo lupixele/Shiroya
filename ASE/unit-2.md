@@ -4,9 +4,7 @@
 
 ---
 
-## 1. Theories of Agile Management
-
-**Q1. Describe the major theories of Agile Management and their relevance to Agile Software Development. (8M)**
+## Q1. Describe the major theories of Agile Management and their relevance to Agile Software Development.
 
 ### 1. Introduction
 
@@ -61,22 +59,15 @@ A team developing an online shopping application reviews its work at the end of 
 Agile Management uses ideas such as empirical control, Lean thinking, systems thinking, self-organization and continuous improvement. These ideas help teams deliver customer value while adapting to change.
 
 **Memory trick: E--L--S--S--C = "Every Learner Studies, Shares, Corrects."**
-- **E**
-- - Empirical control
-- **L**
-- - Lean thinking
-- **S**
-- - Systems thinking
-- **S**
-- - Self-organizing teams
-- **C**
-- - Continuous improvement
+- **E** — Empirical control
+- **L** — Lean thinking
+- **S** — Systems thinking
+- **S** — Self-organizing teams
+- **C** — Continuous improvement
 
 ---
 
-## 2. Traditional vs. Agile Software Development Models
-
-**Q2. Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery. (8M)**
+## Q2. Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery.
 
 ### 1. Introduction
 
@@ -134,9 +125,7 @@ Remember: **Traditional = Plan first, deliver later. Agile = Plan repeatedly, de
 
 ---
 
-## 3. Four Values of the Agile Manifesto
-
-**Q3. Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example. (8M)**
+## Q3. Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example.
 
 ### 1. Introduction
 
@@ -178,20 +167,14 @@ It contains four important values.
 The four Agile Manifesto values emphasize people, working software, customer collaboration and responding to change. They guide teams toward flexible and customer-focused development.
 
 **Memory trick: I--W--C--R = "I Work, Collaborate, Respond."**
-- **I**
-- - Individuals and interactions
-- **W**
-- - Working software
-- **C**
-- - Customer collaboration
-- **R**
-- - Responding to change
+- **I** — Individuals and interactions
+- **W** — Working software
+- **C** — Customer collaboration
+- **R** — Responding to change
 
 ---
 
-## 4. Principles of the Agile Manifesto
-
-**Q4. Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development. (8M)**
+## Q4. Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development.
 
 ### 1. Introduction
 
@@ -275,11 +258,8 @@ The 12 Agile principles support iterative development by encouraging frequent re
 - **Improvement:** Simplicity, Self-organization, Regular reflection.
 
 Short recall code: **C--T--P--I.**
-- --
-
-## 5. Classification of Major Agile Methods
-
-**Q5. Classify the major Agile methods and compare their key characteristics. (8M)**
+---
+## Q5. Classify the major Agile methods and compare their key characteristics.
 
 ### 1. Introduction
 
@@ -319,8 +299,7 @@ Agile methods are approaches used to develop software iteratively and incrementa
 
 ### 3. Comparison of Agile methods
 
------------------------------------------------------------------------
-
+---
 | Method | Main Focus | Key Characteristics |
 |---|---|---|
 | **Scrum** | Project management | Sprints, roles, backlog and meetings |
@@ -340,22 +319,15 @@ Agile methods are approaches used to develop software iteratively and incrementa
 Scrum, XP, Crystal, FDD and ASD are important Agile methods. Each has a different focus, but all support flexible development, teamwork and delivery of useful software.
 
 **Memory trick: S--X--C--F--A = "Smart Xperts Choose Features Adaptively."**
-- **S**
-- - Scrum
-- **X**
-- - XP
-- **C**
-- - Crystal
-- **F**
-- - FDD
-- **A**
-- - ASD
+- **S** — Scrum
+- **X** — XP
+- **C** — Crystal
+- **F** — FDD
+- **A** — ASD
 
 ---
 
-## 6. Agile Project Management: Team Interactions, Roles, Responsibilities
-
-**Q6. Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities. (8M)**
+## Q6. Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities.
 
 ### 1. Introduction
 
@@ -427,22 +399,16 @@ In a college management software project, the Product Owner prioritizes attendan
 Agile Project Management supports effective teamwork by defining responsibilities, encouraging regular interaction and involving stakeholders. It helps the team deliver useful software through continuous collaboration.
 
 **Memory trick: P--S--D--C = "Plan, Support, Develop, Collaborate."**
-- **P**
-- - Product Owner
-- **S**
-- - Scrum Master
-- **D**
-- - Development Team
-- **C**
-- - Customer / Stakeholders
+- **P** — Product Owner
+- **S** — Scrum Master
+- **D** — Development Team
+- **C** — Customer / Stakeholders
 
 For team interactions remember **P--D--R--R**: Planning, Daily communication, Review, Retrospective.
 
 ---
 
-## 7. Ethics, Agility in Design, Testing, and Agile Documentation
-
-**Q7. Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team. (8M)**
+## Q7. Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team.
 
 ### 1. Introduction
 
@@ -528,11 +494,8 @@ Remember:
 - Testing =
 **Continuously**
 - Documentation = **Useful and simple**
-- --
-
-## 8. Agile Implementation Plan for Retail Software Migration
-
-**Q8. Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation. (8M)**
+---
+## Q8. Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation.
 
 ### 1. Introduction
 
@@ -607,21 +570,15 @@ At the end of each Sprint, the company demonstrates the working features, collec
 The retail company can migrate from Waterfall to Agile by adopting Agile values, introducing iterative project management, improving team interaction, testing continuously and maintaining useful documentation. A gradual migration through a pilot project reduces disruption and helps the organization learn Agile practices.
 
 **Memory trick: V--P--T--T--D = "Values, Project Management, Team, Testing, Documentation."**
-- **V**
-- - Agile Values
-- **P**
-- - Project Management
-- **T**
-- - Team Interaction
-- **T**
-- - Testing
-- **D**
-- - Documentation
+- **V** — Agile Values
+- **P** — Project Management
+- **T** — Team Interaction
+- **T** — Testing
+- **D** — Documentation
 
 For the example, remember the retail flow: **Login → Catalogue → Cart → Payment → Tracking.**
 
-------------------------------------------------------------------------
-
+---
 ## Quick Revision — Unit 2
 
 ### Eight questions in one line

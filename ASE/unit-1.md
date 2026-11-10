@@ -4,9 +4,7 @@
 
 ---
 
-## 1. Software Process and Software Engineering Practice
-
-**Q1. Describe the Software Process and Software Engineering Practice. Discuss the major activities involved in a software process. (8M)**
+## Q1. Describe the Software Process and Software Engineering Practice. Discuss the major activities involved in a software process.
 
 ### 1. Introduction
 
@@ -78,23 +76,15 @@ Important practice activities include:
 A software process gives a clear structure for software development. Software engineering practice applies suitable methods at every stage to produce useful, reliable and maintainable software.
 
 **Memory trick: C--P--M--C--D = "Cool People Make Code Daily"**
-- **C**
-- - Communication
-- **P**
-- - Planning
-- **M**
-- - Modeling
-- **C**
-- - Construction
-- **D**
-- - Deployment
+- **C** — Communication
+- **P** — Planning
+- **M** — Modeling
+- **C** — Construction
+- **D** — Deployment
 
 Remember the flow: **Ask → Plan → Design → Build → Deliver.**
-- --
-
-## 2. Phased Development Life Cycle
-
-**Q2. Illustrate the Phased Development Life Cycle with its major phases and suitable examples. (8M)**
+---
+## Q2. Illustrate the Phased Development Life Cycle with its major phases and suitable examples.
 
 ### 1. Introduction
 
@@ -178,9 +168,7 @@ For the example, remember **Library = Login → Search → Issue/Return → Fine
 
 ---
 
-## 3. Waterfall Model: Phases, Advantages, Limitations
-
-**Q3. Analyze the Waterfall Model with respect to its phases, advantages, limitations, and suitable applications. (8M)**
+## Q3. Analyze the Waterfall Model with respect to its phases, advantages, limitations, and suitable applications.
 
 ### 1. Introduction
 
@@ -267,9 +255,7 @@ For the exam, remember the four parts of analysis: **Phases + Advantages + Limit
 
 ---
 
-## 4. Spiral Model and Risk Analysis
-
-**Q4. Examine the Spiral Model and discuss how risk analysis influences its different iterations. (8M)**
+## Q4. Examine the Spiral Model and discuss how risk analysis influences its different iterations.
 
 ### 1. Introduction
 
@@ -335,21 +321,14 @@ Each iteration is planned according to the risks discovered in the previous cycl
 The Spiral Model develops software through repeated cycles, with risk analysis guiding every iteration. It is useful when the project has high uncertainty, complex requirements or major risks.
 
 **Memory trick: O--R--D--P = "Our Risks Decide Progress."**
-- **O**
-- - Objectives
-- **R**
-- - Risk analysis
-- **D**
-- - Development and verification
-- **P**
-- - Planning the next iteration
+- **O** — Objectives
+- **R** — Risk analysis
+- **D** — Development and verification
+- **P** — Planning the next iteration
 
 Key phrase to remember: **Spiral = Iteration + Risk Analysis.**
-- --
-
-## 5. Evolutionary Model vs. Waterfall Model
-
-**Q5. Compare the Evolutionary Model with the Waterfall Model with respect to handling changing requirements and software delivery. (8M)**
+---
+## Q5. Compare the Evolutionary Model with the Waterfall Model with respect to handling changing requirements and software delivery.
 
 ### 1. Introduction
 
@@ -363,8 +342,7 @@ The **Waterfall Model** follows a sequential process in which one phase is compl
 
 ### 3. Comparison
 
------------------------------------------------------------------------
-
+---
 | Basis | Waterfall Model | Evolutionary Model |
 |---|---|---|
 | **Development** | Sequential phases | Repeated versions or iterations |
@@ -413,9 +391,7 @@ Remember these five comparison words: **Development, Requirements, Feedback, Del
 
 ---
 
-## 6. Software Project Management: Planning and Estimation
-
-**Q6. Demonstrate the major activities involved in Software Project Management, including project planning and estimation. (8M)**
+## Q6. Demonstrate the major activities involved in Software Project Management, including project planning and estimation.
 
 ### 1. Introduction
 
@@ -503,11 +479,8 @@ Software Project Management ensures that software development is properly planne
 - Quality and communication
 
 For estimation, remember **E--T--C--R: Effort, Time, Cost, Resources.**
-- --
-
-## 7. Relationship Among Requirements, Design, Testing, Quality, and Reliability
-
-**Q7. Analyze the relationship among requirements gathering, software design, software testing, software quality, and reliability. (8M)**
+---
+## Q7. Analyze the relationship among requirements gathering, software design, software testing, software quality, and reliability.
 
 ### 1. Introduction
 
@@ -597,9 +570,7 @@ Remember the connection: **Know what is needed → Plan how to build it → Chec
 
 ---
 
-## 8. Lifecycle Model for Student Management System
-
-**Q8. Design a suitable software life-cycle model for a Student Management System (SMS). Justify the selected model and specify the major development activities. (8M)**
+## Q8. Design a suitable software life-cycle model for a Student Management System (SMS). Justify the selected model and specify the major development activities.
 
 ### 1. Introduction
 
@@ -704,31 +675,20 @@ Each increment should be designed, developed and tested before or as it is integ
 The Phased Development Life Cycle is a suitable choice for a Student Management System because it supports modular development, early delivery, regular feedback and gradual improvement. It helps the institution receive useful features while the remaining modules are being developed.
 
 **Memory trick: SMS = L--S--A--M--F--R**
-- **L**
-- - Login
-- **S**
-- - Student details
-- **A**
-- - Attendance
-- **M**
-- - Marks
-- **F**
-- - Fees
-- **R**
-- - Reports
+- **L** — Login
+- **S** — Student details
+- **A** — Attendance
+- **M** — Marks
+- **F** — Fees
+- **R** — Reports
 
 For the model justification, remember **M--F--E--T**:
-- **M**
-- - Modular system
-- **F**
-- - Feedback after increments
-- **E**
-- - Early delivery
-- **T**
-- - Testing in stages
+- **M** — Modular system
+- **F** — Feedback after increments
+- **E** — Early delivery
+- **T** — Testing in stages
 
-------------------------------------------------------------------------
-
+---
 ## Quick Revision — Unit 1
 
 ### Eight questions in one line

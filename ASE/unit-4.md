@@ -4,9 +4,7 @@
 
 ---
 
-## 1. Agile Software Development Lifecycle and Testing Impact
-
-**Q1. Explain the Agile Software Development lifecycle and its impact on software testing activities. (8M)**
+## Q1. Explain the Agile Software Development lifecycle and its impact on software testing activities.
 
 ### 1. Introduction
 
@@ -75,9 +73,7 @@ For the impact remember **E--C--F--A--R--T**: Early testing, Continuous testing,
 
 ---
 
-## 2. Test-Driven Development (TDD) Cycle and Example
-
-**Q2. Describe the Test-Driven Development (TDD) cycle using a suitable example. (8M)**
+## Q2. Describe the Test-Driven Development (TDD) cycle using a suitable example.
 
 ### 1. Introduction
 
@@ -145,11 +141,8 @@ TDD follows the Red--Green--Refactor cycle. Writing tests before code helps deve
 - Refactor = Improve code.
 
 Remember: **Test first → Make it pass → Clean it.**
-- --
-
-## 3. xUnit Framework and TDD Tools in Agile
-
-**Q3. Discuss the role of the xUnit framework and TDD tools in Agile software development. (8M)**
+---
+## Q3. Discuss the role of the xUnit framework and TDD tools in Agile software development.
 
 ### 1. Introduction
 
@@ -217,9 +210,7 @@ Tools recall: **J--N--P--G--T** = JUnit, NUnit, pytest, GoogleTest, TestNG.
 
 ---
 
-## 4. Testing User Stories Using Acceptance Tests and Scenarios
-
-**Q4. Illustrate the process of testing user stories using acceptance tests and scenarios with a suitable example. (8M)**
+## Q4. Illustrate the process of testing user stories using acceptance tests and scenarios with a suitable example.
 
 ### 1. Introduction
 
@@ -299,9 +290,7 @@ User stories are tested by defining acceptance criteria, creating scenarios, pre
 
 ---
 
-## 5. Managing Testing Cycle Plan in Agile
-
-**Q5. Develop a plan for managing the testing cycle in an Agile software project. (8M)**
+## Q5. Develop a plan for managing the testing cycle in an Agile software project.
 
 ### 1. Introduction
 
@@ -374,9 +363,7 @@ An Agile testing plan includes requirement analysis, planning, test design, envi
 
 ---
 
-## 6. Exploratory Testing vs. Risk-Based Testing
-
-**Q6. Differentiate Exploratory Testing and Risk-Based Testing with respect to objectives, approach, and application. (8M)**
+## Q6. Differentiate Exploratory Testing and Risk-Based Testing with respect to objectives, approach, and application.
 
 ### 1. Introduction
 
@@ -425,9 +412,7 @@ Remember comparison headings: **Objective -- Approach -- Focus -- Application.**
 
 ---
 
-## 7. Regression Testing and Test Automation in Agile
-
-**Q7. Analyze the role of Regression Testing and Test Automation in maintaining software quality during Agile iterations. (8M)**
+## Q7. Analyze the role of Regression Testing and Test Automation in maintaining software quality during Agile iterations.
 
 ### 1. Introduction
 
@@ -500,9 +485,7 @@ Regression Testing checks whether existing features still work after changes. Te
 
 ---
 
-## 8. TDD-Based Testing Strategy for Healthcare Application
-
-**Q8. Design a TDD-based testing strategy for a healthcare application covering user stories, acceptance tests, regression testing, automation, and testing tools. (8M)**
+## Q8. Design a TDD-based testing strategy for a healthcare application covering user stories, acceptance tests, regression testing, automation, and testing tools.
 
 ### 1. Introduction
 
@@ -591,8 +574,7 @@ A TDD-based healthcare testing strategy combines user stories, acceptance criter
 
 **Memory trick: U--A--T--A--R--A--T--S = "User stories, Acceptance, TDD, Acceptance tests, Regression, Automation, Tools, Security."**
 
-------------------------------------------------------------------------
-
+---
 ## Quick Revision — Unit 4
 
 ### Eight questions in one line

@@ -58,11 +58,12 @@ Every subject in this repository must strictly adhere to this uniform layout:
 <SUBJECT_CODE>/
 ├── README.md               # Subject overview, syllabus mapping, exam weightage, navigation index
 ├── questions.md            # Master question index mapping all 5 units (Mid-1 + Mid-2 + Sem-End)
-├── unit1.md                # Unit 1 worked exam answers (Mid-1 scope)
-├── unit2.md                # Unit 2 worked exam answers (Mid-1 scope)
-├── unit3.md                # Unit 3 worked exam answers (Mid-2 scope)
-├── unit4.md                # Unit 4 worked exam answers (Mid-2 scope)
-├── unit5.md                # Unit 5 worked exam answers (Mid-2 scope)
+├── 2-marks.md              # Section A 2-Marks Short Answers (All 5 Units)
+├── unit-1.md               # Unit 1 worked exam answers (8M questions)
+├── unit-2.md               # Unit 2 worked exam answers (8M questions)
+├── unit-3.md               # Unit 3 worked exam answers (8M questions)
+├── unit-4.md               # Unit 4 worked exam answers (8M questions)
+├── unit-5.md               # Unit 5 worked exam answers (8M questions)
 ├── raw/                    # ALL raw PDFs, PPTs, DOCX, model papers, handwritten notes
 └── figures/                # (Optional) Frameless dark-mode SVG/PNG diagrams and charts
 ```
@@ -135,11 +136,16 @@ The `questions.md` file serves as the master map for all questions across all 5 
 2. Question statement text here. (8M) — [→ Answer](unit1.md#anchor-2)
 
 ### 2-Mark Short Questions
-1. Define <term>. (2M) — [→ Answer](unit1.md#2m-q1)
-2. State the difference between X and Y. (2M) — [→ Answer](unit1.md#2m-q2)
+1. Define <term>. (2M) — [→ Answer](2-marks.md#1-define-term)
+2. State the difference between X and Y. (2M) — [→ Answer](2-marks.md#2-state-the-difference-between-x-and-y)
 
 ---
 ```
+
+### 2-Mark Short Questions Rules (`2-marks.md`)
+- **No `2M-` or `2m-` Heading Prefixes:** Never prefix individual question headings or anchor slugs with `2M-` or `2m-` (e.g., do not use `### 2M-1. ...` or `#2m-1-...`).
+- **Heading Scoping:** The top-level document heading (`# <Subject> — 2-Marks Short Answers`) and the section heading (`### 2-Mark Short Questions`) already establish the 2-mark context. Question headings in `2-marks.md` must simply use standard question numbering: `### 1. <Question Title>` (or `### Q1. <Question Title>`).
+- **Dedicated File:** All Section A 2-mark questions are collected into `2-marks.md`, leaving `unit-1.md` through `unit-5.md` dedicated exclusively to Section B 8-mark questions.
 
 ---
 

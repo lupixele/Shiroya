@@ -149,36 +149,14 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ---
 
-## 7. Answer Synthesis & Formatting Standards
+## 7. Answer Standards (Strict Raw-Material Transcoding)
 
-### Core Style: Straight, Explanatory Academic Answers
-- **Natural Answers, Zero AI Meta-Bloat:**
-  - Write direct, authoritative textbook/exam answers. No meta-commentary, no conversational filler, and no artificial coaching sections (e.g., no "Mental Model", "Intuition", or "Exam Paper Squeeze" headers).
-  - Explanatory and comprehensive without turning into giant wall-of-text paragraphs.
-  - Use clean structure: definition, core components / rules, diagrams / ASCII notation, structured comparison tables, and concrete examples (tables/queries).
-- **Format Baseline:** Follow the structure of canonical unit answers (e.g., `DBMS/archive/Unit 3.md`, `Unit 4.md`):
-  - Heading 2: Question number and title.
-  - Clear sectioning: Definition, Properties/Rules, Syntax/Notation, Relatable Example (with sample data or valid code).
-
----
-
-### Code Snippet Guidelines
-- **Minimal Boilerplate:** Strip out excessive header files, unnecessary helper functions (e.g. redundant `printArray` templates), and unrelated error checks unless explicitly asked.
-- **Syntactically Correct:** Code must be valid and standard (C++17, Python 3.10+, Java 17+, SQL:2016).
-- **Handwriting-Friendly:** If an exam answer requires code, keep the logic concise enough to write comfortably in ~15–20 lines.
-
-### Algorithmic & Mathematical Standards
-- Use the **2-Step Paper Method** for manual tracing problems (e.g., Floyd-Warshall, Quick Sort, Knapsack, Dijkstra):
-  - **Step 1:** Initial configuration table/matrix with index notation.
-  - **Step 2:** Iteration passes showing formula applied, pivot selection, and updated state.
-- **LaTeX Math Formatting:**
-  - Inline equations: `$O(V \cdot E)$`, `$\sum_{i=1}^n i$`.
-  - Display equations: On separate lines wrapped in `$$...$$`.
-  - Always escape literal dollar signs (`\$`) in prose to prevent rendering corruption.
-
-### Figures & Visual Assets
-- All custom or extracted figures should be saved in `<SUBJECT>/figures/`.
-- Figures should be **frameless, dark-mode friendly** (transparent or deep dark background), avoiding harsh white boxed borders.
+- **Strictly Raw-Sourced, Zero AI Meta-Bloat:**
+  - Unit answers must directly use the exact text, bullet points, explanations, and examples provided in the raw study materials (`raw/`).
+  - Prohibit AI-generated filler, artificial coaching sections, and forced generic structures.
+  - Preserve the student's authentic notes, simple examples, and memory tricks exactly as provided in the raw files.
+- **Headings & Outline Compatibility:**
+  - Question headings must use `## <Number>. <Title>` and subheadings must use `###` to support clean outline navigation in GitHub and Obsidian.
 
 ---
 
@@ -194,11 +172,11 @@ When commits are authored with agent assistance, include the relevant trailer:
 - Claude: `Co-authored-by: Claude <claude@anthropic.com>`
 - Animus: `Co-authored-by: Animus <animus@lupixele.online>`
 
-### Source-First Authoring Workflow
+### Raw-First Authoring Workflow
 Whenever new notes or questions are prepared:
-1. **Collect & Archive:** First place all provided PPTs, PDFs, and assignment questions into `<SUBJECT>/raw/`.
-2. **Index in `questions.md`:** List all questions with exam weightage (8M/4M/2M) and source links.
-3. **Synthesize into `unit<N>.md`:** Write answers referencing the exact raw slides/documents first. Only query external references if the faculty materials lack coverage.
+1. **Collect & Archive:** Place all provided PPTs, PDFs, and assignment questions into `<SUBJECT>/raw/`.
+2. **Index in `questions.md`:** List all questions with exam weightage (8M/4M/2M) and clean source links.
+3. **Direct Transcoding:** Transcode answers directly from the raw files into `unit-<N>.md` and `2-marks.md` without synthesizing external textbook filler.
 
 ### Standardization Checklist for Existing Subjects
 Existing folders in the repository should be migrated to match this standard:

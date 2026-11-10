@@ -8,37 +8,83 @@
 
 **Q1. Describe Agile Design Practices and discuss their contribution to maintainable and scalable software. (8M)**
 
-### 1. Agile Design Overview
-Traditional software engineering favored **Big Design Up Front (BDUF)**, producing massive architectural documents before writing code. In contrast, **Agile Software Design** advocates **Evolutionary Architecture**: designing just enough to satisfy current requirements, backed by rigorous engineering practices that keep the codebase easy to change.
+### 1. Introduction
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      CORE AGILE DESIGN PRACTICES                       │
-├────────────────────┬────────────────────┬──────────────────────────────┤
-│ 1. Simple Design   │ 2. Continuous      │ 3. SOLID & Clean Code        │
-│    (YAGNI & KISS)  │    Refactoring     │    Principles                │
-├────────────────────┼────────────────────┼──────────────────────────────┤
-│ 4. Test-Driven     │ 5. Continuous      │ Outcome: Highly Maintainable │
-│    Design (TDD)    │    Integration     │ & Scalable Architecture      │
-└────────────────────┴────────────────────┴──────────────────────────────┘
-```
+**Agile Software Design** is an approach to designing software in a
+flexible and iterative way. The design is improved continuously as
+requirements change and new information becomes available.
 
-### 2. Key Agile Design Practices
-1. **Simple Design (Kent Beck's 4 Rules):**
-   - Runs all tests.
-   - Contains no duplicate code (DRY - Don't Repeat Yourself).
-   - Expresses the intent of the programmer (clean naming and structure).
-   - Minimizes the number of classes and methods (KISS & YAGNI - You Aren't Gonna Need It).
-2. **Continuous Refactoring:**
-   - Regularly reviewing and improving internal structure without altering external behavior. Eliminates code smells before they degrade into crippling technical debt.
-3. **Encapsulation & Low Coupling, High Cohesion:**
-   - Modules perform a single well-defined task and interact across narrow, abstract interfaces.
-4. **Pattern-Oriented Emergence:**
-   - Design patterns (Strategy, Factory, Observer) are not forced upfront; they are introduced through refactoring when complexity justifies them.
+Agile design aims to keep software simple, understandable, testable and
+easy to modify.
 
-### 3. Contribution to Maintainability and Scalability
-- **Maintainability:** Modular, self-documenting code with isolated responsibilities makes bug fixing and feature enhancement rapid and low-risk.
-- **Scalability:** Loose coupling and stateless component design allow services to be scaled horizontally across cloud instances without architectural rewrites.
+### 2. Important Agile Design Practices
+
+**1. Simple Design** - Build the simplest design that satisfies the
+current requirements. - Avoid unnecessary features and complexity. -
+Simple designs are easier to understand and maintain.
+
+**2. Refactoring** - Improve the internal structure of existing code
+without changing its external behavior. - Remove duplication and improve
+readability. - Refactoring helps the software remain clean as it
+evolves.
+
+**3. Continuous Integration** - Integrate code changes frequently into a
+shared project. - Run automated builds and tests to identify problems
+early. - This reduces integration difficulties.
+
+**4. Test-Driven Development (TDD)** - Write a test before implementing
+the required behavior. - Write code to pass the test and then
+refactor. - TDD helps developers create testable and reliable code.
+
+**5. Pair Programming** - Two developers work together on the same
+task. - One writes code while the other reviews and thinks ahead. - It
+encourages knowledge sharing and can identify mistakes early.
+
+**6. Collective Code Ownership** - Team members can improve any part of
+the code. - Knowledge is shared rather than limited to one developer. -
+It helps the team maintain the complete system.
+
+**7. Coding Standards** - Team members follow common coding rules. -
+Consistent code is easier to read and maintain. - It improves
+collaboration.
+
+### 3. Contribution to maintainability
+
+Maintainability means how easily software can be corrected, improved or
+modified.
+
+Agile design supports maintainability by: - Keeping code simple and
+understandable. - Reducing duplication through refactoring. - Using
+coding standards for consistency. - Using automated tests to make
+changes safer. - Sharing code knowledge across the team.
+
+### 4. Contribution to scalability
+
+Scalability means the ability of a system to handle increased users,
+data or workload by adding or improving resources.
+
+Agile design can support scalability by: - Keeping modules clearly
+organized. - Reducing unnecessary dependencies. - Using simple and
+flexible architecture. - Testing changes frequently. - Improving the
+design as system needs grow.
+
+### 5. Example
+
+In an online shopping application, separate modules can be used for
+users, products, cart and payments. When the number of users grows, the
+team can improve the relevant modules without redesigning the entire
+application.
+
+### 6. Conclusion
+
+Agile design practices such as simple design, refactoring, TDD,
+continuous integration and coding standards help create software that is
+easier to maintain and extend as requirements and workload grow.
+
+**Memory trick: S--R--C--T--P--C--C = "Simple Refactoring Creates
+Testable, Pair-Coded, Consistent Code."** - Simple Design -
+Refactoring - Continuous Integration - TDD - Pair Programming -
+Collective Code Ownership - Coding Standards
 
 ---
 
@@ -46,81 +92,95 @@ Traditional software engineering favored **Big Design Up Front (BDUF)**, produci
 
 **Q2. Illustrate the Single Responsibility Principle (SRP) and Open Closed Principle (OCP) with suitable examples. (8M)**
 
-### 1. Single Responsibility Principle (SRP)
-- **Definition:** *A class should have one, and only one, reason to change.* A class must represent a single, cohesive business concept.
+### 1. Introduction
 
-#### Code Example: Violating SRP (Bad Design)
-```java
-public class Invoice {
-    public double calculateTotal() { /* calculate bill */ return 100.0; }
-    public void printInvoice() { /* printing layout logic */ }
-    public void saveToDatabase() { /* SQL persistence logic */ }
-}
-```
-*Problem:* `Invoice` changes if tax calculation changes, if printing format changes, or if database schema changes (3 separate reasons to change).
+The **SOLID principles** are five object-oriented design principles that
+help create understandable, flexible and maintainable software. Two
+important principles are Single Responsibility Principle (SRP) and Open
+Closed Principle (OCP).
 
-#### Code Example: Adhering to SRP (Good Design)
-```java
-public class Invoice {
-    public double calculateTotal() { return 100.0; } // Core domain logic only
-}
-public class InvoicePrinter {
-    public void print(Invoice invoice) { /* Presentation logic */ }
-}
-public class InvoiceRepository {
-    public void save(Invoice invoice) { /* Database persistence logic */ }
-}
-```
+### 2. Single Responsibility Principle (SRP)
 
----
+**Definition:** A class should have only one responsibility or one
+reason to change.
 
-### 2. Open-Closed Principle (OCP)
-- **Definition:** *Software entities should be open for extension, but closed for modification.* Add new behavior by writing new code, not modifying existing, tested code.
+**Explanation:** - A class should focus on one main task. - Different
+responsibilities should be placed in separate classes. - This reduces
+complexity and makes code easier to maintain. - Changes in one
+responsibility are less likely to affect unrelated functionality.
 
-#### Code Example: Violating OCP (Bad Design)
-```java
-public class AreaCalculator {
-    public double calculateArea(Object shape) {
-        if (shape instanceof Circle) {
-            Circle c = (Circle) shape;
-            return Math.PI * c.radius * c.radius;
-        } else if (shape instanceof Rectangle) {
-            Rectangle r = (Rectangle) shape;
-            return r.width * r.height;
-        }
-        // Adding Triangle forces us to MODIFY this tested method!
-        return 0;
-    }
-}
-```
+**Example:** Consider a student management application.
 
-#### Code Example: Adhering to OCP (Good Design)
-```java
-public interface Shape {
-    double calculateArea();
-}
+A poorly designed `Student` class may: - Store student details. -
+Calculate fees. - Generate reports. - Send email notifications.
 
-public class Circle implements Shape {
-    private double radius;
-    public double calculateArea() { return Math.PI * radius * radius; }
-}
+This class has too many responsibilities.
 
-public class Rectangle implements Shape {
-    private double width, height;
-    public double calculateArea() { return width * height; }
-}
+A better design separates them: - `Student`: stores student
+information. - `FeeCalculator`: calculates fees. - `ReportGenerator`:
+generates reports. - `EmailService`: sends email notifications.
 
-public class Triangle implements Shape { // Added without touching existing classes!
-    private double base, height;
-    public double calculateArea() { return 0.5 * base * height; }
-}
+Each class now has a focused responsibility.
 
-public class AreaCalculator {
-    public double calculateArea(Shape shape) {
-        return shape.calculateArea(); // Completely closed for modification!
-    }
-}
-```
+### 3. Open Closed Principle (OCP)
+
+**Definition:** Software entities such as classes and modules should be
+open for extension but closed for modification.
+
+**Explanation:** - New functionality should be added without repeatedly
+changing existing tested code. - Use suitable abstractions, interfaces
+or polymorphism. - This reduces the risk of breaking existing
+features. - It makes the system easier to extend.
+
+**Example:** Consider a payment system that supports different payment
+methods.
+
+Instead of modifying one large payment class whenever a new method is
+added: - Define a common `Payment` interface. - Create `UPIPayment` and
+`CardPayment` classes implementing it. - Add `WalletPayment` as another
+implementation when needed.
+
+The new payment type extends the system without changing the existing
+payment implementations.
+
+### 4. Difference between SRP and OCP
+
+  -----------------------------------------------------------------------
+  Basis                   SRP                     OCP
+  ----------------------- ----------------------- -----------------------
+  Full form               Single Responsibility   Open Closed Principle
+                          Principle               
+
+  Main idea               One responsibility per  Extend behavior without
+                          class                   modifying existing code
+
+  Focus                   Separation of           Safe extension
+                          responsibilities        
+
+  Benefit                 Easier maintenance      Easier addition of
+                                                  features
+
+  Example                 Separate fee            Add a new payment class
+                          calculation from        through a common
+                          student details         interface
+  -----------------------------------------------------------------------
+
+### 5. Advantages
+
+-   Reduces code complexity.
+-   Improves readability and maintainability.
+-   Makes testing easier.
+-   Reduces the effect of changes.
+-   Supports future extension.
+
+### 6. Conclusion
+
+SRP ensures that each class has one clear responsibility. OCP allows new
+behavior to be added with minimal changes to existing code. Both
+principles improve software design and maintainability.
+
+**Memory trick:** - **SRP = Single Job.** - **OCP = Open to Extension,
+Closed to Modification.**
 
 ---
 
@@ -128,70 +188,88 @@ public class AreaCalculator {
 
 **Q3. Demonstrate the Liskov Substitution Principle (LSP) and Interface Segregation Principle (ISP) using suitable examples. (8M)**
 
-### 1. Liskov Substitution Principle (LSP)
-- **Definition (Barbara Liskov):** *Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.*
+### 1. Introduction
 
-#### Classic Violation: The Rectangle and Square Problem
-```java
-public class Rectangle {
-    protected int width, height;
-    public void setWidth(int w) { this.width = w; }
-    public void setHeight(int h) { this.height = h; }
-    public int getArea() { return width * height; }
-}
+Liskov Substitution Principle (LSP) and Interface Segregation Principle
+(ISP) are two of the five SOLID principles. They help create flexible
+object-oriented software and reduce unexpected behavior.
 
-public class Square extends Rectangle {
-    @Override
-    public void setWidth(int w) { this.width = w; this.height = w; }
-    @Override
-    public void setHeight(int h) { this.width = h; this.height = h; }
-}
-```
-*The Flaw:* A client writing `rect.setWidth(5); rect.setHeight(4);` expects area = 20. If a `Square` instance is passed, area becomes 16! `Square` violates the expected behavioral invariants of `Rectangle`.
+### 2. Liskov Substitution Principle (LSP)
 
-#### Solution Adhering to LSP
-Do not use inheritance where behavioral invariants differ. Have both implement a common `Shape` interface:
-```java
-public interface Shape { int getArea(); }
-public class Rectangle implements Shape { /* independent width/height */ }
-public class Square implements Shape { /* single side */ }
-```
+**Definition:** Objects of a child class should be usable wherever
+objects of the parent class are expected without changing the
+correctness of the program.
 
----
+**Explanation:** - A child class should correctly follow the behavior
+promised by its parent class. - It should not unexpectedly break
+operations that work with the parent class. - Inheritance should
+represent a valid behavioral relationship.
 
-### 2. Interface Segregation Principle (ISP)
-- **Definition:** *Clients should not be forced to depend on interfaces they do not use.* Break fat interfaces into cohesive, client-specific interfaces.
+**Example:** Suppose a system has a `Bird` class with a `fly()`
+operation. A `Sparrow` can fly, but a `Penguin` cannot. Making `Penguin`
+inherit from a class that requires every bird to fly may violate LSP.
 
-#### Code Example: Violating ISP (Fat Interface)
-```java
-public interface Worker {
-    void code();
-    void test();
-    void manageProject();
-}
+A better design can use a general `Bird` type and a separate `Flyable`
+capability for birds that can fly. Then a Sparrow can implement
+`Flyable`, while a Penguin does not have to.
 
-public class Developer implements Worker {
-    public void code() { /* coding */ }
-    public void test() { /* testing */ }
-    public void manageProject() { throw new UnsupportedOperationException(); } // Forced!
-}
-```
+### 3. Interface Segregation Principle (ISP)
 
-#### Code Example: Adhering to ISP (Segregated Interfaces)
-```java
-public interface Codeable { void code(); }
-public interface Testable { void test(); }
-public interface Manageable { void manageProject(); }
+**Definition:** Clients should not be forced to depend on methods they
+do not use.
 
-public class Developer implements Codeable, Testable {
-    public void code() { /* write code */ }
-    public void test() { /* write unit tests */ }
-}
+**Explanation:** - Avoid creating one large interface with unrelated
+methods. - Divide large interfaces into smaller, focused interfaces. -
+Classes should implement only the operations they need. - This reduces
+unnecessary dependencies.
 
-public class ProjectManager implements Manageable {
-    public void manageProject() { /* track milestones */ }
-}
-```
+**Example:** Suppose a college system has one large `Worker` interface
+with: - `teach()` - `manageFees()` - `maintainLibrary()`
+
+A teacher may not manage fees or maintain the library. Instead, create
+separate interfaces: - `Teacher` with `teach()` - `FeeManager` with
+`manageFees()` - `Librarian` with `maintainLibrary()`
+
+Each class implements only the relevant interface.
+
+### 4. Difference between LSP and ISP
+
+  -----------------------------------------------------------------------
+  Basis                   LSP                     ISP
+  ----------------------- ----------------------- -----------------------
+  Full form               Liskov Substitution     Interface Segregation
+                          Principle               Principle
+
+  Main idea               Child objects should    Clients should not
+                          safely replace parent   depend on unused
+                          objects                 methods
+
+  Focus                   Correct inheritance     Small, focused
+                          behavior                interfaces
+
+  Benefit                 Prevents unexpected     Reduces unnecessary
+                          behavior                dependencies
+
+  Example                 Penguin should not be   Separate Teacher and
+                          forced to fly           Librarian interfaces
+  -----------------------------------------------------------------------
+
+### 5. Advantages
+
+-   Improves flexibility.
+-   Reduces unnecessary dependencies.
+-   Makes code easier to test.
+-   Avoids incorrect inheritance behavior.
+-   Supports maintainable software.
+
+### 6. Conclusion
+
+LSP ensures that child classes behave correctly when substituted for
+parent classes. ISP encourages smaller and focused interfaces. Both
+principles help create reliable and flexible software.
+
+**Memory trick:** - **LSP = Legitimate Substitution.** - **ISP =
+Interfaces Should be Particular / Small.**
 
 ---
 
@@ -199,69 +277,80 @@ public class ProjectManager implements Manageable {
 
 **Q4. Discuss the Dependency Inversion Principle (DIP) and its significance in Agile software design. (8M)**
 
-### 1. Concept & Formal Definition
-Formulated by Robert C. Martin, **DIP** inverts traditional top-down procedural architecture:
-1. **High-level modules should not depend on low-level modules. Both should depend on abstractions.**
-2. **Abstractions should not depend on details. Details (concrete implementations) should depend on abstractions.**
+### 1. Introduction
 
-```
-TRADITIONAL COUPLING (Rigid):
-[ High-Level Business Logic ] ─────────► [ Low-Level MySQL Database ]
+The **Dependency Inversion Principle (DIP)** is one of the five SOLID
+principles. It states that high-level modules should not depend directly
+on low-level modules. Both should depend on abstractions.
 
-DEPENDENCY INVERSION (Agile & Decoupled):
-[ High-Level Business Logic ] ─────────► [ <<Interface>> NotificationService ]
-                                                          ▲
-                                                          │ (implements)
-[ EmailService / SMSService ] ────────────────────────────┘
-```
+Abstractions should not depend on details; details should depend on
+abstractions.
 
-### 2. Code Walkthrough: Notification System
+### 2. Explanation
 
-#### Bad Design (Direct Coupling)
-```java
-public class EmailService {
-    public void sendEmail(String msg) { /* SMTP sending */ }
-}
-public class OrderNotification {
-    private EmailService emailer = new EmailService(); // Direct hardcoded dependency!
-    public void notifyCustomer(String msg) {
-        emailer.sendEmail(msg); // Cannot switch to SMS or WhatsApp without editing!
-    }
-}
-```
+-   High-level modules contain important business logic.
+-   Low-level modules perform specific technical tasks such as database
+    access or sending notifications.
+-   Direct dependency makes the high-level code difficult to change.
+-   DIP introduces an interface or abstraction between them.
+-   Both modules depend on that abstraction instead of depending
+    directly on each other.
 
-#### Good Design (Dependency Inversion with Injection)
-```java
-// 1. Abstraction
-public interface MessageService {
-    void sendMessage(String message);
-}
+### 3. Example: Notification system
 
-// 2. Low-level concrete implementations
-public class EmailService implements MessageService {
-    public void sendMessage(String msg) { /* SMTP email */ }
-}
-public class SMSService implements MessageService {
-    public void sendMessage(String msg) { /* SMS gateway */ }
-}
+**Without DIP:** - An `OrderService` directly creates and uses an
+`EmailService`. - If the company wants to use SMS instead, the order
+service must be modified. - This creates tight coupling.
 
-// 3. High-level module depends ONLY on abstraction
-public class OrderNotification {
-    private final MessageService messageService;
+**With DIP:** - Create a common `Notification` interface. -
+`EmailNotification` implements the interface. - `SMSNotification` also
+implements the interface. - `OrderService` depends on the `Notification`
+abstraction. - The required notification implementation can be supplied
+without changing the business logic.
 
-    // Dependency is injected via constructor
-    public OrderNotification(MessageService messageService) {
-        this.messageService = messageService;
-    }
-    public void notifyCustomer(String msg) {
-        messageService.sendMessage(msg);
-    }
-}
+### 4. Simple diagram
+
+``` text
+Without DIP:
+
+OrderService ───────→ EmailService
+                 Direct dependency
+
+
+With DIP:
+
+OrderService ───────→ Notification Interface
+                              ↑
+                    ┌─────────┴─────────┐
+                    ↓                   ↓
+              Email Service       SMS Service
 ```
 
-### 3. Significance in Agile Design
-- **Mocking and TDD Isolation:** High-level business classes can be unit-tested in complete isolation by injecting mock interfaces without hitting live databases or network APIs.
-- **Pluggable Architecture:** Changing third-party payment gateways (Stripe $\to$ PayPal) requires zero edits to core order processing logic.
+### 5. Significance in Agile Software Design
+
+-   **Flexibility:** Implementations can be changed more easily.
+-   **Maintainability:** Business logic is separated from technical
+    details.
+-   **Testability:** Mock or substitute implementations can be used
+    during testing.
+-   **Extensibility:** New services can be added through the same
+    abstraction.
+-   **Reduced coupling:** Changes in a low-level component have less
+    effect on high-level code.
+-   **Supports changing requirements:** Teams can adapt the system
+    without rewriting major business logic.
+
+### 6. Conclusion
+
+DIP reduces direct dependencies between high-level and low-level modules
+by using abstractions. It supports flexible, testable and maintainable
+software, which is valuable in Agile projects where requirements may
+change.
+
+**Memory trick: H--L--A = "High and Low depend on Abstraction."** -
+High-level modules. - Low-level modules. - Abstraction connects them.
+
+Remember: **Depend on interfaces, not concrete details.**
 
 ---
 
@@ -269,33 +358,84 @@ public class OrderNotification {
 
 **Q5. Analyze the five SOLID principles and their contribution to maintainable and scalable software systems. (8M)**
 
-### 1. Synthesis of the SOLID Principles
-The **SOLID** principles, compiled by Robert C. Martin (Uncle Bob), provide the foundational design rules for building robust, maintainable, and agile object-oriented architectures.
+### 1. Introduction
 
-```
-┌───┬───────────────────────────────────┬────────────────────────────────────────────────────────┐
-│   │ Principle                         │ Core Architectural Rule                                │
-├───┼───────────────────────────────────┼────────────────────────────────────────────────────────┤
-│ S │ Single Responsibility (SRP)       │ One class, one clear job, one reason to change.        │
-│ O │ Open-Closed (OCP)                 │ Open for extension, closed for modification.           │
-│ L │ Liskov Substitution (LSP)         │ Subtypes must be seamlessly substitutable for base.    │
-│ I │ Interface Segregation (ISP)       │ Many small, role-specific interfaces over one fat.     │
-│ D │ Dependency Inversion (DIP)        │ Depend on abstractions (interfaces), not concretions.  │
-└───┴───────────────────────────────────┴────────────────────────────────────────────────────────┘
-```
+**SOLID** is a set of five object-oriented design principles. They help
+developers create software that is easier to understand, test, maintain
+and extend.
 
-### 2. Comprehensive Impact Analysis on Software Engineering
+### 2. Five SOLID principles
 
-1. **Combating Architectural Smells:**
-   - *Rigidity:* Code is hard to change because a single edit cascades across dozens of modules (eliminated by **DIP** and **SRP**).
-   - *Fragility:* Code breaks in unexpected places when an edit is made (eliminated by **OCP** and **LSP**).
-   - *Viscosity:* Doing the wrong thing is easier than doing the right thing (combated by **ISP** and clean abstractions).
-2. **Contribution to Maintainability:**
-   - Reduces the cost of bug fixing. When classes follow SRP and DIP, defects are confined to a single class and do not pollute the system.
-   - Makes code readable and self-documenting; new developers navigate small, single-purpose classes effortlessly.
-3. **Contribution to Scalability:**
-   - Decoupled interfaces enable modular development across distributed engineering teams.
-   - Microservice decomposition: SOLID classes map directly to clean, independent microservice boundaries that scale horizontally across cloud clusters.
+**1. S -- Single Responsibility Principle (SRP)** - A class should have
+one responsibility or one reason to change. - Separate unrelated tasks
+into different classes. - Example: Keep student details and fee
+calculation in separate classes.
+
+**2. O -- Open Closed Principle (OCP)** - Software entities should be
+open for extension but closed for modification. - Add new behavior
+without repeatedly changing existing tested code. - Example: Add a new
+payment method through a common payment interface.
+
+**3. L -- Liskov Substitution Principle (LSP)** - Child objects should
+be usable wherever parent objects are expected without breaking
+correctness. - Child classes must respect the behavior promised by the
+parent. - Example: Do not require a Penguin object to perform a flying
+operation.
+
+**4. I -- Interface Segregation Principle (ISP)** - Clients should not
+be forced to depend on methods they do not use. - Create smaller and
+focused interfaces. - Example: Separate teaching and library-maintenance
+interfaces.
+
+**5. D -- Dependency Inversion Principle (DIP)** - High-level and
+low-level modules should depend on abstractions. - Avoid direct
+dependence on specific implementations. - Example: An order service
+depends on a notification interface rather than directly on email.
+
+### 3. Contribution to maintainability
+
+-   SRP reduces class complexity.
+-   OCP makes new features safer to add.
+-   LSP prevents incorrect behavior in inheritance.
+-   ISP avoids unnecessary dependencies.
+-   DIP separates business logic from implementation details.
+
+### 4. Contribution to scalability and extensibility
+
+-   Modular code is easier to extend.
+-   New features can be added with fewer changes.
+-   Independent components can be improved separately.
+-   Better separation of responsibilities supports growing systems.
+-   Testing and maintenance become more manageable.
+
+*Note: SOLID supports extensible and maintainable design; it does not
+automatically guarantee that a system can handle increased traffic or
+workload. Runtime scalability also depends on architecture,
+infrastructure and performance design.*
+
+### 5. Example: E-commerce application
+
+-   SRP: Separate product, order and payment responsibilities.
+-   OCP: Add new payment methods through an abstraction.
+-   LSP: Ensure specialized payment implementations follow the expected
+    payment behavior.
+-   ISP: Keep customer, seller and delivery interfaces focused.
+-   DIP: Make order processing depend on payment and notification
+    abstractions.
+
+### 6. Conclusion
+
+The five SOLID principles provide guidelines for building modular,
+flexible and maintainable object-oriented software. They reduce the
+impact of changes and make it easier to extend systems as requirements
+grow.
+
+**Memory trick: SOLID = S--O--L--I--D.** - S = Single Responsibility - O
+= Open Closed - L = Liskov Substitution - I = Interface Segregation - D
+= Dependency Inversion
+
+One-line recall: **One job, extend safely, substitute correctly, small
+interfaces, depend on abstractions.**
 
 ---
 
@@ -303,55 +443,79 @@ The **SOLID** principles, compiled by Robert C. Martin (Uncle Bob), provide the 
 
 **Q6. Examine the need and significance of Refactoring and illustrate suitable refactoring techniques. (8M)**
 
-### 1. Definition & Core Need for Refactoring
-**Refactoring** is the systematic process of improving the internal design and quality of existing code without modifying its external behavior. As software evolves across agile iterations, new features and rapid deadlines inevitably introduce code smells, design rot, and technical debt. Refactoring continuously repays this debt.
+### 1. Introduction
 
-### 2. Significance in Agile Development (6 Core Points from Raw Notes)
-1. **Removes Code Smells:** Eliminates duplicated code, long bloated methods, and oversized \"God classes\".
-2. **Reduces Technical Debt:** Repays architectural debt accumulated due to rushed sprint deadlines.
-3. **Improves Maintainability & Comprehension:** Makes code clean, logical, and easy for new team members to understand.
-4. **Supports Changing Requirements:** Prepares the codebase so new sprint stories can be added with minimal friction.
-5. **Enforces Design Principles:** Applies principles like SOLID, DRY, and KISS continuously.
-6. **Makes Future Changes Safe:** Paired with unit tests, refactoring ensures future enhancements do not introduce silent regression bugs.
+**Refactoring** is the process of improving the internal structure of
+existing code without changing its external behavior. It makes code
+cleaner, simpler and easier to maintain.
 
-### 3. Four Core Refactoring Techniques with Code Walkthroughs
+### 2. Need for Refactoring
 
-#### 1. Extract Method
-- *Problem:* A single 80-line method performs calculation, logging, and database operations.
-- *Solution:* Extract cohesive chunks into small, well-named helper methods.
-```java
-// BEFORE:
-public void printOwing() {
-    printBanner();
-    // print details
-    System.out.println("name: " + name);
-    System.out.println("amount: " + getOutstanding());
-}
+-   Removes duplicated code.
+-   Improves code readability.
+-   Reduces unnecessary complexity.
+-   Makes future changes easier.
+-   Improves the structure of classes and methods.
+-   Helps developers understand and maintain the system.
+-   Makes code easier to test.
 
-// AFTER:
-public void printOwing() {
-    printBanner();
-    printDetails(getOutstanding());
-}
-private void printDetails(double outstanding) {
-    System.out.println("name: " + name);
-    System.out.println("amount: " + outstanding);
-}
-```
+### 3. Significance of Refactoring
 
-#### 2. Replace Magic Number with Named Constant
-```java
-// BEFORE: double total = price + (price * 0.18);
-// AFTER:
-public static final double GST_TAX_RATE = 0.18;
-double total = price + (price * GST_TAX_RATE);
-```
+-   **Maintainability:** Clean code is easier to correct and update.
+-   **Readability:** Clear names and smaller methods help developers
+    understand the code.
+-   **Reduced duplication:** Common logic can be reused.
+-   **Safer changes:** Good structure makes modifications easier to
+    manage.
+-   **Better design:** Refactoring gradually improves the internal
+    architecture.
 
-#### 3. Rename Method / Variable
-- Changing cryptic identifiers (`int d;`, `void proc()`) to self-explanatory names (`int daysSinceLastLogin;`, `void processOrderPayment()`).
+### 4. Refactoring techniques
 
-#### 4. Move Method / Field
-- Moving a method or attribute to the class that uses it most frequently to eliminate *Feature Envy* and reduce coupling.
+**1. Extract Method** - Move a group of statements into a separate
+method. - Gives the method a meaningful name. - Example: Move repeated
+fee calculation statements into `calculateFee()`.
+
+**2. Rename Variable / Method** - Replace unclear names with meaningful
+names. - Example: Rename `x` to `totalMarks`.
+
+**3. Extract Class** - Move related data and behavior into a new
+class. - Example: Move payment-related code out of an order class into
+`PaymentService`.
+
+**4. Remove Duplicate Code** - Identify repeated code and place common
+logic in one method or module. - This avoids maintaining the same logic
+in multiple places.
+
+**5. Replace Magic Number with Constant** - Replace unexplained numeric
+values with named constants. - Example: Replace `0.18` with `GST_RATE`.
+
+**6. Simplify Conditional Expressions** - Make complicated conditions
+easier to read. - Use clear methods or simpler logical expressions.
+
+### 5. Example
+
+Suppose an application contains the same tax calculation in three
+different methods. During refactoring, the developer extracts the
+calculation into one `calculateTax()` method. All three places use the
+common method. The output remains the same, but the code becomes easier
+to maintain.
+
+### 6. Important point
+
+Refactoring should be supported by tests. Run relevant tests before and
+after refactoring to confirm that external behavior remains unchanged.
+
+### 7. Conclusion
+
+Refactoring improves the internal structure of software without changing
+its behavior. Techniques such as Extract Method, Rename, Extract Class
+and removing duplicate code help improve readability and
+maintainability.
+
+**Memory trick: E--R--C--D--M--S = "Extract, Rename, Class, Duplicate,
+Magic number, Simplify."** - Extract Method - Rename - Extract Class -
+Remove Duplicate Code - Replace Magic Number - Simplify Conditions
 
 ---
 
@@ -359,45 +523,84 @@ double total = price + (price * GST_TAX_RATE);
 
 **Q7. Evaluate the role of Continuous Integration, Automated Build Tools, and Version Control in Agile software development. (8M)**
 
-### 1. The Agile DevOps Triad
-Modern Agile engineering relies on the seamless convergence of **Version Control**, **Automated Build Tools**, and **Continuous Integration** to enable rapid, defect-free software delivery.
+### 1. Introduction
 
+Agile teams make frequent changes to software. **Continuous Integration
+(CI)**, automated build tools and version control help developers
+combine code safely, build the application and track changes.
+
+### 2. Continuous Integration (CI)
+
+Continuous Integration is the practice of frequently integrating code
+changes into a shared repository and automatically building and testing
+the application.
+
+**Role of CI:** - Integrates code changes frequently. - Runs automated
+builds and tests. - Detects integration problems early. - Gives quick
+feedback to developers. - Reduces the risk of large integration problems
+near release time.
+
+### 3. Automated Build Tools
+
+Automated build tools perform tasks such as compiling source code,
+managing dependencies, running tests and packaging the application.
+
+**Examples:** - **Maven:** Build and dependency management tool commonly
+used with Java. - **Gradle:** Build automation tool used for Java,
+Android and other projects. - **Ant:** Java build automation tool. -
+**MSBuild:** Build platform used in Microsoft development environments.
+
+**Role:** - Automates repeated build tasks. - Reduces manual errors. -
+Makes builds more consistent. - Supports automated testing and
+packaging.
+
+### 4. Version Control
+
+Version Control is a system that records changes to source code and
+allows developers to manage different versions of a project.
+
+**Examples:** - Git. - Subversion (SVN).
+
+**Role:** - Tracks changes made to code. - Allows developers to
+collaborate. - Supports branches for separate features or fixes. - Helps
+merge changes. - Allows earlier versions to be recovered when needed.
+
+### 5. How they work together
+
+``` text
+Developer writes code
+        ↓
+Code is committed to Version Control
+        ↓
+Continuous Integration detects changes
+        ↓
+Automated Build Tool builds the project
+        ↓
+Automated Tests are executed
+        ↓
+Results are reported to the team
 ```
-┌─────────────────┐       ┌─────────────────┐       ┌─────────────────┐
-│ Version Control │ ────► │ Build Automation│ ────► │ Continuous      │ ────► Automated Build Report
-│ (Git Branches)  │ Push  │ (Maven / Gradle)│ Trigs │ Integration     │       & Deployable Artifact
-└─────────────────┘       └─────────────────┘       │ (CI Server)     │
-                                                    └─────────────────┘
-```
 
-### 2. Detailed Role of Each Component
-1. **Version Control System (Git):**
-   - *Role:* Manages code history and distributed collaboration.
-   - *Agile Practices:* Feature branching (`feature/user-auth`), Pull Requests with peer code review, atomic commits, and release tagging (`v1.4-sprint-3`).
-2. **Automated Build Tools (Maven, Gradle, npm):**
-   - *Role:* Automates mechanical development tasks into repeatable, headless commands.
-   - *Activities:* Compiles source files, resolves transitive library dependencies, runs unit test suites, and packages compiled code into executable JARs/containers.
-3. **Continuous Integration Server (Jenkins, GitHub Actions, GitLab CI):**
-   - *Role:* Orchestrates the automated pipeline triggered on every `git push`.
-   - *Workflow:* Pulls latest branch $\to$ Executes build tool $\to$ Runs unit/integration tests $\to$ Runs code quality scanners (SonarQube) $\to$ Reports build status to developers.
+### 6. Benefits in Agile development
 
-### 3. Seven Steps in a Typical CI Pipeline (From Raw Notes)
-1. **Code Commit:** Developer commits small changes and pushes to the shared Git repository.
-2. **Automated Build:** CI server triggers immediately and compiles the source code into binary form.
-3. **Automated Testing:** Unit, integration, and regression test suites execute automatically.
-4. **Static Code Analysis:** Linters and scanners (SonarQube) check code quality and potential security flaws.
-5. **Package Creation:** A deployable, versioned software artifact (JAR, Docker container) is created.
-6. **Deploy to Staging:** Artifact is automatically deployed to a test/staging environment for verification.
-7. **Production Release:** Validated, signed-off software is ready for continuous delivery to end users.
+-   Supports frequent integration.
+-   Finds defects earlier.
+-   Reduces manual work.
+-   Improves team collaboration.
+-   Provides consistent builds.
+-   Helps deliver working software frequently.
+-   Makes changes easier to track and manage.
 
-### 4. Seven Major Benefits of Continuous Integration (From Raw Notes)
-1. **Detects integration problems early:** Identifies merge conflicts within minutes instead of weeks.
-2. **Finds defects and regressions quickly:** Tests immediately flag broken code before it spreads.
-3. **Provides fast feedback to developers:** Engineers know within minutes if their push was successful.
-4. **Reduces integration conflicts:** Frequent, small merges eliminate agonizing \"merge day\" marathons.
-5. **Keeps the software continuously releasable:** The `main` branch remains permanently stable and releasable.
-6. **Supports frequent and low-risk delivery:** Small batches reduce the operational hazard of production deployments.
-7. **Makes software quality transparent:** Build dashboards give the entire team visibility into test coverage and build health.
+### 7. Conclusion
+
+Continuous Integration, automated build tools and version control work
+together to support reliable and frequent software delivery. They help
+Agile teams manage code changes, automate builds and tests, and identify
+problems early.
+
+**Memory trick: C--B--V = "Code, Build, Version."** - CI = Integrate and
+test code. - Build tools = Build and package software. - Version control
+= Track and manage changes.
 
 ---
 
@@ -405,43 +608,155 @@ Modern Agile engineering relies on the seamless convergence of **Version Control
 
 **Q8. Develop a refactoring strategy for an E-Commerce backend using Agile design principles, SOLID principles, Continuous Integration, and Version Control. (8M)**
 
-### 1. Context & Legacy Architecture Smells
-An online retail platform experiences severe slowdowns and bugs. The backend has a massive 2,000-line \"God Class\" `OrderProcessor` containing order validation, tax calculations, inventory updates, MySQL database calls, and credit card processing.
+### 1. Introduction
 
-### 2. Refactoring Strategy Blueprint
+An **E-Commerce backend** manages important functions such as customer
+accounts, product information, shopping carts, orders, payments and
+notifications.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│               E-COMMERCE BACKEND REFACTORING ROADMAP                   │
-├────────────────────┬────────────────────┬──────────────────────────────┤
-│ 1. Git Safety Net  │ 2. Characterization│ 3. SOLID & Pattern           │
-│    Branching       │    Unit Tests      │    Decomposition             │
-├────────────────────┼────────────────────┼──────────────────────────────┤
-│ 4. CI Automated    │ 5. Safe Canary     │ Expected Outcome:            │
-│    Verification    │    Pull Request    │ Highly Cohesive, Decoupled   │
-│    (Zero Downtime) │    Merge to Main   │ Microservice Architecture    │
-└────────────────────┴────────────────────┴──────────────────────────────┘
-```
+As the application grows, its code may become duplicated, complex and
+difficult to maintain. A refactoring strategy improves the internal
+structure without changing the existing external behavior.
 
-### 3. Step-by-Step Refactoring Execution
+### 2. Step 1: Analyze the existing backend
 
-1. **Step 1: Version Control Isolation:**
-   - Create a dedicated Git branch: `git checkout -b refactor/order-processor-decoupling`.
-   - Ensure the current baseline is tagged and reproducible.
-2. **Step 2: Establish a Characterization Testing Safety Net:**
-   - *Rule:* Never refactor without automated tests!
-   - Write comprehensive integration tests (JUnit 5 + Mockito) capturing current inputs and expected outputs of `OrderProcessor`. Confirm all tests pass green.
-3. **Step 3: Decompose the God Class using SRP and OCP:**
-   - **Extract Validation:** Move input checks to `OrderValidator`.
-   - **Extract Pricing & Tax:** Move pricing logic to `PricingCalculator`.
-   - **Extract Payment (DIP & OCP):**
-     - Define abstraction `PaymentGateway` with `processPayment(double amount)`.
-     - Implement concrete adapters `StripeGateway` and `PayPalGateway`.
-   - **Extract Persistence:** Move SQL queries to `OrderRepository`.
-4. **Step 4: Continuous Integration Pipeline Verification:**
-   - Push small, atomic commits to Git.
-   - GitHub Actions runs the automated test suite on every push.
-   - SonarQube measures reduced cyclomatic complexity and zero duplicate code.
-5. **Step 5: Code Review & Production Merge:**
-   - Open a Pull Request demonstrating identical behavior and 92% test coverage.
-   - Merge into `main` and deploy via CI/CD with zero customer downtime.
+-   Review the current code and architecture.
+-   Identify duplicated code and large classes.
+-   Find tightly coupled modules.
+-   Identify areas with frequent defects or difficult changes.
+-   Record the current behavior using tests before making changes.
+
+### 3. Step 2: Apply Agile design practices
+
+-   Use simple design and avoid unnecessary complexity.
+-   Refactor code in small, manageable steps.
+-   Use TDD or automated tests where suitable.
+-   Integrate changes frequently.
+-   Review code with team members.
+-   Improve the design continuously based on feedback.
+
+### 4. Step 3: Apply SOLID principles
+
+**SRP -- Single Responsibility Principle** - Separate product, cart,
+order and payment responsibilities into focused classes or modules.
+
+**OCP -- Open Closed Principle** - Add new payment methods through a
+common payment abstraction instead of repeatedly modifying existing
+payment logic.
+
+**LSP -- Liskov Substitution Principle** - Ensure specialized
+implementations can replace their parent abstraction without breaking
+expected behavior.
+
+**ISP -- Interface Segregation Principle** - Create focused interfaces
+for payment, notification and inventory operations rather than one large
+interface.
+
+**DIP -- Dependency Inversion Principle** - Make high-level order logic
+depend on abstractions for payment, inventory and notifications.
+
+### 5. Step 4: Use refactoring techniques
+
+-   Extract large methods into smaller methods.
+-   Rename unclear variables and methods.
+-   Extract separate classes for payment and order logic.
+-   Remove duplicated code.
+-   Simplify complex conditional statements.
+-   Replace magic numbers with named constants.
+
+### 6. Step 5: Use Version Control
+
+-   Store the project in a Git repository.
+-   Create a separate branch for each refactoring task.
+-   Commit small and meaningful changes.
+-   Review changes before merging.
+-   Keep the main branch in a stable condition.
+-   Use version history to identify or reverse problematic changes.
+
+### 7. Step 6: Implement Continuous Integration
+
+-   Configure an automated build process.
+-   Run unit and integration tests after changes.
+-   Run relevant regression tests.
+-   Report build or test failures to developers.
+-   Fix failures before merging or releasing changes.
+
+### 8. Step 7: Review and measure improvement
+
+-   Compare code duplication and complexity before and after
+    refactoring.
+-   Check whether tests pass.
+-   Review maintainability and defect reports.
+-   Collect team feedback.
+-   Plan the next small improvement.
+
+### 9. Example
+
+Suppose the E-Commerce backend has one large class that handles orders,
+payments and email notifications. - Separate these responsibilities into
+focused modules. - Introduce payment and notification interfaces. -
+Write tests to verify existing behavior. - Refactor in a separate Git
+branch. - Use CI to build the project and run tests. - Merge the change
+after successful review.
+
+### 10. Conclusion
+
+A successful E-Commerce backend refactoring strategy uses small
+improvements, Agile design practices, SOLID principles, version control
+and Continuous Integration. These practices improve code structure,
+reduce unnecessary dependencies and make the backend easier to maintain
+and extend.
+
+**Memory trick: A--S--R--V--C--M = "Analyze, SOLID, Refactor, Version,
+CI, Measure."** - Analyze existing code. - Apply SOLID. - Refactor in
+small steps. - Use Version Control. - Run Continuous Integration. -
+Measure improvements.
+
+------------------------------------------------------------------------
+
+# Quick Revision -- Unit 5
+
+## Eight questions in one line
+
+  Q.No.   Main topic                                Memory trick
+  ------- ----------------------------------------- ----------------------------------------
+  1       Agile Design Practices                    S--R--C--T--P--C--C
+  2       SRP and OCP                               Single Job; Extend safely
+  3       LSP and ISP                               Substitute correctly; Small interfaces
+  4       Dependency Inversion Principle            H--L--A
+  5       Five SOLID principles                     S--O--L--I--D
+  6       Refactoring                               E--R--C--D--M--S
+  7       CI, Build Tools and Version Control       C--B--V
+  8       E-Commerce backend refactoring strategy   A--S--R--V--C--M
+
+## Important diagrams / tables to practise
+
+1.  Five SOLID principles and their meanings.
+2.  SRP example: separate Student, FeeCalculator, ReportGenerator and
+    EmailService.
+3.  OCP payment example using a common interface.
+4.  LSP example: Bird and Flyable capability.
+5.  DIP diagram: high-level and low-level modules depending on an
+    abstraction.
+6.  Refactoring techniques with examples.
+7.  CI workflow: Commit → Build → Test → Report.
+8.  E-Commerce refactoring strategy steps.
+
+## Exam-writing strategy for 8 marks
+
+-   Begin with the definition of the principle or concept.
+-   Explain each principle separately and give a small example.
+-   For comparison questions, use a table.
+-   For refactoring questions, explain the need, significance and
+    techniques.
+-   For CI questions, explain the role of all three: CI, build tools and
+    version control.
+-   For the E-Commerce scenario, show the strategy step by step and
+    connect it to SOLID and CI.
+-   End with a short conclusion.
+
+**Revision tip:** Learn Q2, Q3 and Q5 together because they cover all
+five SOLID principles. Then study Q4 and Q6, followed by Q7 and Q8.
+Practise the DIP and CI diagrams.
+
+---

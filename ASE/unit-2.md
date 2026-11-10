@@ -8,35 +8,71 @@
 
 **Q1. Describe the major theories of Agile Management and their relevance to Agile Software Development. (8M)**
 
-### 1. Overview of Agile Management Theories
-Agile Management transitions organizations from mechanistic, bureaucratic command-and-control hierarchies to organic, adaptive ecosystems. It draws heavily upon modern organizational science, sociology, and complexity theory.
+### 1. Introduction
 
-### 2. Four Foundational Management Theories
+**Agile Management** is an approach to managing software projects
+through flexibility, teamwork, continuous feedback and frequent
+delivery. It helps teams respond to changing customer needs instead of
+following a rigid plan throughout the project.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│                      THEORIES OF AGILE MANAGEMENT                      │
-├────────────────────┬────────────────────┬──────────────────────────────┤
-│ 1. Complex         │ 2. Empirical       │ 3. Theory Y & Servant        │
-│    Adaptive        │    Process Control │    Leadership (Human         │
-│    Systems (CAS)   │    (Inspection &   │    Relations School)         │
-│                    │     Adaptation)    │                              │
-└────────────────────┴────────────────────┴──────────────────────────────┘
-```
+Agile management draws on ideas that emphasize people, collaboration,
+adaptation and continuous improvement.
 
-1. **Complex Adaptive Systems (CAS) Theory:**
-   - *Core Premise:* Software development is not a predictable assembly line; it is a complex adaptive system composed of independent, interacting agents (developers, users, systems).
-   - *Relevance to Agile:* Instead of rigid central planning, managers establish lightweight governing boundaries (simple rules) and allow self-organization and emergent design to solve technical challenges.
-2. **Empirical Process Control Theory:**
-   - *Core Premise:* Traditional management relies on *defined* processes (assuming identical inputs yield identical outputs). In contrast, empirical process control acknowledges uncertainty and relies on three pillars:
-     - **Transparency:** All work, progress, and blockers are visible to all stakeholders (e.g., Kanban boards, burn-down charts).
-     - **Inspection:** Frequent reviews of artifacts and processes (e.g., Sprint Reviews, Retrospectives).
-     - **Adaptation:** Immediate correction if an inspection reveals deviation outside acceptable limits.
-3. **Human Relations School & Theory Y (Douglas McGregor):**
-   - *Core Premise:* Theory X assumes workers are lazy and need coercion; Theory Y assumes workers are intrinsically motivated, creative, and seek responsibility.
-   - *Relevance to Agile:* Agile managers reject micro-management. They empower cross-functional teams, trust their technical judgment, and provide required environments and resources.
-4. **Lean Management & Flow Theory (Womack & Jones):**
-   - *Core Premise:* Focuses on eliminating non-value-adding waste (*Muda*), such as partially done work, handoffs, task switching, and defects, while optimizing flow efficiency.
+### 2. Major theories / ideas relevant to Agile Management
+
+**1. Empirical Process Control** - Decisions are made using observation,
+experience and feedback. - Work is inspected regularly to understand the
+current situation. - Plans are adapted based on actual results. -
+Relevance: Agile teams review progress during iterations and change
+their approach when necessary.
+
+**2. Lean Thinking** - Focuses on delivering value to the customer. -
+Reduces waste, unnecessary work and delays. - Encourages continuous
+improvement. - Relevance: Agile teams prioritize useful features and
+avoid spending time on work that does not add value.
+
+**3. Systems Thinking** - Views the project as a connected system of
+people, processes and technology. - A change in one part may affect
+other parts. - Encourages teams to understand the complete workflow. -
+Relevance: Agile teams coordinate development, testing, design and
+customer feedback rather than treating them as isolated activities.
+
+**4. Self-Organization and Team Empowerment** - Teams are given
+responsibility to organize their work. - Members collaborate and decide
+how to complete tasks. - This encourages ownership and faster
+decisions. - Relevance: Agile teams plan and manage their work together.
+
+**5. Continuous Improvement** - Teams regularly examine what is working
+and what needs improvement. - They make small changes to their
+process. - Relevance: Retrospectives help Agile teams improve
+communication, quality and productivity after each iteration.
+
+### 3. Relevance to Agile Software Development
+
+-   Helps teams adapt to changing requirements.
+-   Encourages customer collaboration.
+-   Improves communication and teamwork.
+-   Supports frequent delivery of working software.
+-   Helps identify problems early and improve the process continuously.
+
+### 4. Example
+
+A team developing an online shopping application reviews its work at the
+end of each iteration. Customer feedback shows that product search is
+difficult. The team changes its next iteration plan and improves the
+search feature. This demonstrates feedback-based management and
+continuous improvement.
+
+### 5. Conclusion
+
+Agile Management uses ideas such as empirical control, Lean thinking,
+systems thinking, self-organization and continuous improvement. These
+ideas help teams deliver customer value while adapting to change.
+
+**Memory trick: E--L--S--S--C = "Every Learner Studies, Shares,
+Corrects."** - **E** -- Empirical control - **L** -- Lean thinking -
+**S** -- Systems thinking - **S** -- Self-organizing teams - **C** --
+Continuous improvement
 
 ---
 
@@ -44,23 +80,88 @@ Agile Management transitions organizations from mechanistic, bureaucratic comman
 
 **Q2. Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery. (8M)**
 
-### 1. Core Paradigm Shift
-- **Traditional (Plan-Driven / Predictive):** Assumes the problem domain and solution can be completely analyzed, documented, and frozen before execution starts.
-- **Agile (Value-Driven / Adaptive):** Assumes requirements change unpredictably; software evolves through iterative learning and frequent stakeholder feedback.
+### 1. Introduction
 
-### 2. Detailed Dimension-by-Dimension Comparison
+Traditional software development generally follows a plan-driven and
+sequential approach. Agile software development follows an iterative and
+incremental approach in which teams deliver software frequently and
+respond to feedback.
 
-| Dimension | Traditional Model (e.g., Waterfall) | Agile Model (e.g., Scrum / XP) |
-|---|---|---|
-| **1. Planning** | **Upfront & Comprehensive:** Detailed Gantt charts, resource plans, and budgets fixed for the entire multi-month project lifecycle. | **Adaptive & Rolling-Wave:** High-level release roadmap; detailed task planning happens only for the upcoming 1–4 week iteration. |
-| **2. Requirements** | **Static & Document-Centric:** Captured exhaustively in a formal SRS document; signed off early; modifications require formal Change Control Boards. | **Dynamic & User-Centric:** Expressed as concise user stories prioritized in a living Product Backlog; details elaborated just-in-time. |
-| **3. Development** | **Sequential & Siloed:** Distinct phases separated by handoffs (Analysts $\to$ Architects $\to$ Coders $\to$ Testers). | **Concurrent & Cross-Functional:** One multi-disciplinary team designs, codes, tests, and refactors together in continuous cycles. |
-| **4. Testing** | **Late Phase Activity:** Testing occurs in a dedicated phase after all coding is finished. High risk of discovering critical architectural defects late. | **Continuous & Integrated:** Testing begins on day one (TDD, automated regression, daily builds). Whole team owns quality. |
-| **5. Delivery** | **Monolithic \"Big Bang\":** Single deployment at project conclusion. Customer sees and verifies software after months/years. | **Iterative & Incremental:** Production-ready, working software increments delivered at the end of every 2–4 week iteration. |
+### 2. Differences
 
-### 3. Summary Workflow Comparison
-- **Traditional:** `Plan ──► Specify (SRS) ──► Design ──► Code ──► Test ──► Deploy (Single End Delivery)`
-- **Agile:** `[Plan ──► Build ──► Test ──► Deploy Increment 1] ──► [Repeat for Increments 2, 3, ... N]`
+  -----------------------------------------------------------------------
+  Basis                   Traditional Model       Agile Model
+  ----------------------- ----------------------- -----------------------
+  Planning                Detailed planning is    Planning is repeated
+                          usually done at the     during each iteration
+                          beginning               
+
+  Requirements            Requirements are        Requirements can evolve
+                          expected to be defined  with feedback
+                          early                   
+
+  Development             Work generally moves    Work is completed in
+                          through planned phases  short iterations
+
+  Testing                 Testing is often        Testing is continuous
+                          performed after         throughout development
+                          development             
+
+  Customer involvement    Customer involvement    Customer collaboration
+                          may be concentrated at  is frequent
+                          the beginning and end   
+
+  Changes                 Changes can be          Changes can be included
+                          difficult and costly    in future iterations
+
+  Delivery                Often one major         Frequent delivery of
+                          delivery at the end     working software
+
+  Documentation           Usually more detailed,  Documentation is useful
+                          plan-driven             and sufficient for the
+                          documentation           work
+  -----------------------------------------------------------------------
+
+### 3. Explanation
+
+**Traditional model** - The project scope and requirements are defined
+early. - A detailed plan is prepared. - Design and coding follow the
+plan. - Testing is generally performed after implementation. - The final
+product is delivered after the planned stages.
+
+**Agile model** - The project is divided into small iterations. - The
+team plans a limited amount of work for each iteration. - Design, coding
+and testing happen repeatedly. - Customers review working software and
+provide feedback. - New or changed requirements can be prioritized in
+later iterations.
+
+### 4. Example
+
+For an online shopping application: - **Traditional:** Login, product
+search, cart, payment and reports may all be planned before development,
+with the main release at the end. - **Agile:** Login and product
+browsing may be delivered first, followed by cart, payment and order
+tracking in later iterations.
+
+### 5. Advantages of Agile over a rigid traditional approach
+
+-   Better response to changing requirements.
+-   Earlier delivery of useful features.
+-   Frequent customer feedback.
+-   Continuous testing and improvement.
+-   Greater visibility of project progress.
+
+### 6. Conclusion
+
+Traditional models are useful when requirements are stable and
+predictable. Agile is useful when requirements may change and regular
+customer feedback and frequent delivery are important.
+
+**Memory trick: P--R--D--T--D = Planning, Requirements, Development,
+Testing, Delivery.**
+
+Remember: **Traditional = Plan first, deliver later. Agile = Plan
+repeatedly, deliver frequently.**
 
 ---
 
@@ -68,35 +169,58 @@ Agile Management transitions organizations from mechanistic, bureaucratic comman
 
 **Q3. Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example. (8M)**
 
-### 1. Background
-In February 2001, 17 software practitioners authored the **Agile Manifesto** to restore agility, human teamwork, and engineering pragmatism to software development:
-> *"While there is value in the items on the right, we value the items on the left more."*
+### 1. Introduction
 
-```
-   ┌───────────────────────────────────────────┬───────────────────────────────────────────┐
-   │          WE VALUE MORE (LEFT)             │         OVER ITEMS ON RIGHT               │
-   ├───────────────────────────────────────────┼───────────────────────────────────────────┤
-   │ 1. Individuals and Interactions           │ Processes and Tools                       │
-   │ 2. Working Software                       │ Comprehensive Documentation               │
-   │ 3. Customer Collaboration                 │ Contract Negotiation                      │
-   │ 4. Responding to Change                   │ Following a Plan                          │
-   └───────────────────────────────────────────┴───────────────────────────────────────────┘
-```
+The **Agile Manifesto** is a statement of values and principles that
+guides Agile software development. It was created to encourage flexible
+development, customer collaboration and frequent delivery of working
+software.
 
-### 2. Detailed Explanation & Real-World Examples
+It contains four important values.
 
-1. **Individuals and Interactions over Processes and Tools:**
-   - *Meaning:* People and communication solve complex engineering problems, not fancy project management software or rigid standard operating procedures.
-   - *Example:* Instead of filing a Jira ticket and waiting days for an email reply across functional silos, a developer and tester hold a 5-minute whiteboarding session to resolve an API contract ambiguity immediately.
-2. **Working Software over Comprehensive Documentation:**
-   - *Meaning:* A working, executable program is the only true measure of progress. Hundreds of pages of unverified specifications do not provide user value.
-   - *Example:* Instead of spending 3 months drafting a 300-page SRS for an online banking checkout, the team builds a working, secured payment gateway prototype in 2 weeks and demos it live to stakeholders.
-3. **Customer Collaboration over Contract Negotiation:**
-   - *Meaning:* Building great software requires a collaborative partnership where the customer actively steers development, rather than an adversarial legal relationship based on static contracts.
-   - *Example:* When market research reveals users prefer OTP authentication over passwords, the Product Owner and developers collaborate to modify the feature immediately, without invoking penalty clauses or renegotiating contracts.
-4. **Responding to Change over Following a Plan:**
-   - *Meaning:* Plans must adapt as new information, technologies, and market requirements emerge. Blindly adhering to an obsolete initial plan leads to project failure.
-   - *Example:* When government tax laws change mid-sprint, the team re-prioritizes the Product Backlog and adjusts the current sprint increment to comply with legal regulations.
+### 2. Four values of the Agile Manifesto
+
+**1. Individuals and interactions over processes and tools** - People
+and communication are more important than depending only on procedures
+or tools. - Team members should discuss problems and work together. -
+Example: Developers directly discuss a coding issue with the tester
+instead of depending only on lengthy email exchanges.
+
+**2. Working software over comprehensive documentation** - A working
+product is more valuable than producing excessive documentation. -
+Documentation is still useful, but it should support development. -
+Example: A team demonstrates a working login feature to the customer
+rather than only presenting a long design document.
+
+**3. Customer collaboration over contract negotiation** - Customers
+should participate throughout development. - Their feedback helps the
+team understand changing needs. - Example: A customer reviews a shopping
+application's cart feature and requests a quantity update option. The
+team considers it for the next iteration.
+
+**4. Responding to change over following a plan** - Teams should be
+ready to adapt when requirements change. - A plan is useful, but it
+should not prevent necessary improvements. - Example: A college requests
+an additional attendance report. The Agile team prioritizes and
+schedules the feature in a later iteration.
+
+### 3. Importance of the four values
+
+-   Improves communication and teamwork.
+-   Focuses on useful working software.
+-   Increases customer satisfaction.
+-   Supports changing requirements.
+-   Encourages flexible and continuous development.
+
+### 4. Conclusion
+
+The four Agile Manifesto values emphasize people, working software,
+customer collaboration and responding to change. They guide teams toward
+flexible and customer-focused development.
+
+**Memory trick: I--W--C--R = "I Work, Collaborate, Respond."** - **I**
+-- Individuals and interactions - **W** -- Working software - **C** --
+Customer collaboration - **R** -- Responding to change
 
 ---
 
@@ -104,38 +228,96 @@ In February 2001, 17 software practitioners authored the **Agile Manifesto** to 
 
 **Q4. Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development. (8M)**
 
-### 1. Overview
-The Agile Manifesto defines **12 fundamental principles** that translate its four core values into actionable operational practices.
+### 1. Introduction
 
-### 2. Categorization & Analysis of the 12 Principles
+The Agile Manifesto contains **12 principles** that guide teams in
+applying Agile values. These principles encourage frequent delivery,
+customer satisfaction, teamwork, technical excellence and continuous
+improvement.
 
-```
-                              12 AGILE PRINCIPLES
-        ┌──────────────────────────────┼──────────────────────────────┐
-        │                              │                              │
-Customer Focus & Delivery      Teamwork & Culture           Engineering Excellence
- (P1, P2, P3, P7)               (P4, P5, P6, P11, P12)       (P8, P9, P10)
-```
+### 2. Twelve principles of the Agile Manifesto
 
-1. **Customer Focus & Value Delivery:**
-   - *Principle 1 (Customer Satisfaction):* Highest priority is to satisfy the customer through early and continuous delivery of valuable software.
-   - *Principle 2 (Welcome Change):* Welcome changing requirements, even late in development. Agile harnesses change for the customer's competitive advantage.
-   - *Principle 3 (Frequent Delivery):* Deliver working software frequently (weeks rather than months).
-   - *Principle 7 (Primary Metric):* Working software is the primary measure of project progress.
-2. **Human Collaboration & Team Dynamics:**
-   - *Principle 4 (Daily Collaboration):* Business people and developers must work together daily throughout the project.
-   - *Principle 5 (Motivated Individuals):* Build projects around motivated individuals. Give them the environment, support, and trust to get the job done.
-   - *Principle 6 (Face-to-Face Conversation):* The most efficient and effective method of conveying information is face-to-face conversation.
-   - *Principle 11 (Self-Organizing Teams):* The best architectures, requirements, and designs emerge from self-organizing teams.
-   - *Principle 12 (Reflect & Adjust):* At regular intervals, the team reflects on how to become more effective, then tunes and adjusts its behavior accordingly.
-3. **Engineering Rigor & Sustainable Flow:**
-   - *Principle 8 (Sustainable Pace):* Agile processes promote sustainable development. Sponsors, developers, and users should maintain a constant pace indefinitely.
-   - *Principle 9 (Technical Excellence):* Continuous attention to technical excellence and good design enhances agility.
-   - *Principle 10 (Simplicity):* Simplicity—the art of maximizing the amount of work not done—is essential.
+**1. Customer satisfaction through early and continuous delivery** -
+Deliver useful software early and regularly. - This allows customers to
+receive value sooner.
 
-### 3. Contribution to Iterative & Customer-Focused Development
-- Short delivery loops eliminate the risk of building unneeded features.
-- Daily business interaction ensures that developed features directly solve live business problems.
+**2. Welcome changing requirements** - Accept changes even during later
+development. - This helps the product remain useful to customers.
+
+**3. Deliver working software frequently** - Release working software in
+short periods. - This provides regular progress and feedback.
+
+**4. Business people and developers work together** - Maintain regular
+communication between business representatives and developers. - This
+reduces misunderstandings.
+
+**5. Build projects around motivated individuals** - Provide support and
+trust to team members. - Give them the environment and resources needed
+to work.
+
+**6. Face-to-face conversation is effective** - Direct communication
+helps explain problems quickly. - It reduces confusion and delays.
+
+**7. Working software is the primary measure of progress** - Progress is
+judged by completed, functioning features. - It is not measured only by
+documents or plans.
+
+**8. Maintain a sustainable development pace** - Teams should work at a
+pace they can maintain. - Avoid continuous overwork and burnout.
+
+**9. Continuous attention to technical excellence and good design** -
+Good coding and design improve quality. - They make future changes
+easier.
+
+**10. Simplicity is essential** - Avoid unnecessary work and complicated
+solutions. - Build only what provides value.
+
+**11. Self-organizing teams produce good designs** - Teams organize
+tasks and make technical decisions. - This encourages ownership and
+creativity.
+
+**12. Regular reflection and adjustment** - Teams review their
+performance regularly. - They improve their working methods.
+
+### 3. Contribution to iterative development
+
+-   Software is delivered in small, frequent increments.
+-   Feedback from each increment guides the next one.
+-   Testing and improvement happen continuously.
+-   Teams can adjust plans based on actual results.
+
+### 4. Contribution to customer-focused development
+
+-   Customers receive useful software early.
+-   Customers can give feedback regularly.
+-   Changing requirements are accepted.
+-   Business people and developers collaborate.
+-   The team focuses on customer value.
+
+### 5. Example
+
+In a college attendance application, the team first delivers student
+login and attendance entry. Faculty members review it and request a
+monthly attendance report. The team adds this feature in a later
+iteration. This demonstrates early delivery, customer feedback and
+responding to change.
+
+### 6. Conclusion
+
+The 12 Agile principles support iterative development by encouraging
+frequent releases and continuous improvement. They support
+customer-focused development through collaboration, feedback and
+flexibility.
+
+**Memory trick:** Remember the 12 principles in four groups of three:
+
+-   **Customer:** Satisfaction, Change, Frequent delivery.
+-   **Team:** Collaboration, Motivation, Direct communication.
+-   **Product:** Working software, Sustainable pace, Technical
+    excellence.
+-   **Improvement:** Simplicity, Self-organization, Regular reflection.
+
+Short recall code: **C--T--P--I.**
 
 ---
 
@@ -143,27 +325,78 @@ Customer Focus & Delivery      Teamwork & Culture           Engineering Excellen
 
 **Q5. Classify the major Agile methods and compare their key characteristics. (8M)**
 
-### 1. Classification Taxonomy
-Agile methods can be classified into two complementary categories:
-1. **Management / Workflow Frameworks:** Focus on team cadence, backlog organization, ceremonies, and flow (e.g., Scrum, Kanban, Lean).
-2. **Technical / Engineering Methodologies:** Focus on code design, automated verification, programming practices, and refactoring (e.g., Extreme Programming, TDD, FDD).
+### 1. Introduction
 
-### 2. Overview of the 5 Major Methods
-1. **Scrum:** Lightweight framework structured around 3 roles (Product Owner, Scrum Master, Developers), 3 artifacts (Product Backlog, Sprint Backlog, Increment), and 5 events (Sprint, Planning, Daily Standup, Review, Retrospective).
-2. **Extreme Programming (XP):** Engineering-focused method created by Kent Beck. Prescribes technical practices: Test-Driven Development (TDD), Pair Programming, Continuous Integration, Refactoring, and Small Releases.
-3. **Crystal Methodologies (Alistair Cockburn):** People-centric family of methods color-coded by team size and system criticality (Crystal Clear, Yellow, Orange, Red). Emphasizes human communication over technical constraints.
-4. **Feature Driven Development (FDD):** Client-centric method developed by Jeff De Luca. Focuses on short, feature-based iterations across 5 core steps (Develop model $\to$ Build feature list $\to$ Plan by feature $\to$ Design by feature $\to$ Build by feature).
-5. **Adaptive Software Development (ASD):** Jim Highsmith's method for complex, unpredictable systems. Replaces plan-build with the learning cycle: **Speculate $\to$ Collaborate $\to$ Learn**.
+Agile methods are approaches used to develop software iteratively and
+incrementally. They emphasize collaboration, customer feedback, working
+software and the ability to respond to change.
 
-### 3. Cross-Method Comparison Table
+### 2. Major Agile methods
 
-| Method | Primary Focus | Iteration Length | Key Practices / Artifacts | Ideal Context |
-|---|---|---|---|---|
-| **Scrum** | Project & Sprint management | 1–4 weeks (fixed) | Backlogs, Sprints, Daily Scrum, Reviews | General product development with evolving needs |
-| **XP** | Software engineering craft | 1–2 weeks | Pair Programming, TDD, CI, Refactoring | High technical risk, changing specs, quality-critical code |
-| **Crystal** | Human communication & safety | 2–6 weeks | Co-location, frequent delivery, reflective improvement | Tailored by team size (Clear for 1–6 people, Orange for 40+) |
-| **FDD** | Feature-by-feature progress | 2 days to 2 weeks | Object modeling, feature lists, chief programmer teams | Larger teams building domain-driven, corporate applications |
-| **ASD** | Continuous learning under change | Time-boxed cycles | Speculate $\to$ Collaborate $\to$ Learn, customer focus groups | Highly volatile, exploratory research and development |
+**1. Scrum** - Organizes work into fixed-length iterations called
+Sprints. - Uses roles such as Product Owner, Scrum Master and
+Developers. - Uses Product Backlog and Sprint Backlog. - Includes Sprint
+Planning, Daily Scrum, Sprint Review and Retrospective.
+
+**2. Extreme Programming (XP)** - Focuses strongly on software quality
+and technical practices. - Uses pair programming and continuous
+integration. - Encourages Test-Driven Development (TDD). - Uses small
+releases and frequent customer feedback.
+
+**3. Crystal** - A family of Agile methods that can be adapted to
+project size and team needs. - Emphasizes people, communication and
+teamwork. - Encourages frequent delivery and reflection. - Uses an
+approach suited to the project context.
+
+**4. Feature Driven Development (FDD)** - Organizes development around
+small, client-valued features. - Uses feature lists and a feature-based
+development plan. - Progress is tracked through completed features. -
+Uses domain modeling and regular builds.
+
+**5. Adaptive Software Development (ASD)** - Designed for changing and
+uncertain environments. - Uses the cycle: Speculate, Collaborate and
+Learn. - Encourages adaptation and learning. - Supports continuous
+feedback and improvement.
+
+### 3. Comparison of Agile methods
+
+  -----------------------------------------------------------------------
+  Method                  Main focus              Key characteristics
+  ----------------------- ----------------------- -----------------------
+  Scrum                   Project management      Sprints, roles, backlog
+                                                  and meetings
+
+  XP                      Technical excellence    Pair programming, TDD
+                                                  and continuous
+                                                  integration
+
+  Crystal                 People and              Adaptable methods and
+                          communication           teamwork
+
+  FDD                     Feature-based           Domain model and
+                          development             feature lists
+
+  ASD                     Adaptability and        Speculate, Collaborate,
+                          learning                Learn
+  -----------------------------------------------------------------------
+
+### 4. Importance
+
+-   Different methods suit different project needs.
+-   Teams can select a method based on project size, complexity and
+    requirements.
+-   These methods encourage customer involvement.
+-   They support incremental delivery and continuous improvement.
+
+### 5. Conclusion
+
+Scrum, XP, Crystal, FDD and ASD are important Agile methods. Each has a
+different focus, but all support flexible development, teamwork and
+delivery of useful software.
+
+**Memory trick: S--X--C--F--A = "Smart Xperts Choose Features
+Adaptively."** - **S** -- Scrum - **X** -- XP - **C** -- Crystal - **F**
+-- FDD - **A** -- ASD
 
 ---
 
@@ -171,38 +404,79 @@ Agile methods can be classified into two complementary categories:
 
 **Q6. Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities. (8M)**
 
-### 1. The Agile Project Management Paradigm
-Agile Project Management (APM) replaces hierarchical management with a collaborative, servant-leadership model that maximizes team autonomy, transparency, and fast decision-making.
+### 1. Introduction
 
-```
-       STAKEHOLDERS / CUSTOMERS
-                  │
-                  ▼
-         [ Product Owner ]  ◄── (Prioritizes Value & Backlog)
-                  │
-                  ▼
-         [ Development Team ] ◄── (Cross-Functional, Self-Organizing: Builds Increment)
-                  ▲
-                  │
-         [ Scrum Master / Coach ] ◄── (Servant Leader: Protects Team, Clears Obstacles)
-```
+**Agile Project Management** is the process of managing software
+projects through short iterations, collaboration, regular feedback and
+continuous improvement. It supports communication among team members and
+helps them deliver working software frequently.
 
-### 2. Core Roles & Clear Responsibilities
-1. **Product Owner (PO):**
-   - *Role:* Voice of the customer and business value maximizer.
-   - *Responsibilities:* Manages and grooms the Product Backlog, prioritizes user stories by business value, sets acceptance criteria, and accepts/rejects completed work increments.
-2. **Scrum Master / Agile Coach:**
-   - *Role:* Servant-leader and process champion.
-   - *Responsibilities:* Shields developers from external interruptions, eliminates workflow blockers (impediments), coaches the team on Agile values, and facilitates ceremonies without acting as a commanding boss.
-3. **Cross-Functional Development Team:**
-   - *Role:* Self-organizing execution unit (developers, QA testers, UI/UX designers, database engineers).
-   - *Responsibilities:* Collaboratively estimates effort (story points), commits to sprint scope, decides *how* to implement technical features, and delivers a potentially shippable increment.
+### 2. Important roles and responsibilities
 
-### 3. Agile Team Interaction Mechanisms
-- **Daily Stand-Up (15 mins):** Synchronizes activities, promotes peer accountability, and uncovers dependencies.
-- **Sprint Planning:** PO and Developers collaboratively negotiate the sprint goal and scope.
-- **Sprint Review:** Developers showcase live, working software to stakeholders to capture real user feedback.
-- **Sprint Retrospective:** Dedicated team meeting analyzing process bottlenecks and committing to continuous self-improvement.
+**1. Product Owner** - Represents customer and business needs. -
+Maintains and prioritizes the Product Backlog. - Explains requirements
+to the team. - Ensures that development focuses on customer value.
+
+**2. Scrum Master / Agile Facilitator** - Helps the team follow Agile
+practices. - Removes or helps resolve obstacles. - Supports
+communication and collaboration. - Helps the team improve its process.
+
+**3. Development Team** - Designs, codes and tests the software. - Plans
+and completes the work in each iteration. - Shares responsibility for
+delivering a working product. - Communicates progress and problems.
+
+**4. Customers and Stakeholders** - Explain needs and expectations. -
+Review working software. - Give feedback and suggest changes. - Help
+confirm whether the product provides value.
+
+### 3. Team interaction practices
+
+**1. Daily communication** - Team members share progress and discuss
+obstacles. - Problems can be identified quickly.
+
+**2. Iteration planning** - The team selects work for the next
+iteration. - Tasks and responsibilities are understood.
+
+**3. Review meetings** - Completed software is demonstrated to
+stakeholders. - Feedback is collected.
+
+**4. Retrospective meetings** - The team discusses what went well and
+what needs improvement. - Action points are selected for the next
+iteration.
+
+**5. Collaboration** - Developers, testers and other team members work
+together. - Knowledge is shared and issues are solved collectively.
+
+### 4. How Agile Project Management supports the team
+
+-   Creates clear responsibilities.
+-   Improves communication.
+-   Encourages shared ownership.
+-   Helps remove obstacles.
+-   Provides regular visibility of progress.
+-   Supports quick decisions and adaptation.
+-   Encourages continuous improvement.
+
+### 5. Example
+
+In a college management software project, the Product Owner prioritizes
+attendance and marks features. The facilitator helps remove obstacles.
+Developers build and test the modules. Faculty members review the
+working features and provide feedback.
+
+### 6. Conclusion
+
+Agile Project Management supports effective teamwork by defining
+responsibilities, encouraging regular interaction and involving
+stakeholders. It helps the team deliver useful software through
+continuous collaboration.
+
+**Memory trick: P--S--D--C = "Plan, Support, Develop, Collaborate."** -
+**P** -- Product Owner - **S** -- Scrum Master - **D** -- Development
+Team - **C** -- Customer / Stakeholders
+
+For team interactions remember **P--D--R--R**: Planning, Daily
+communication, Review, Retrospective.
 
 ---
 
@@ -210,24 +484,93 @@ Agile Project Management (APM) replaces hierarchical management with a collabora
 
 **Q7. Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team. (8M)**
 
-### 1. Ethics in Agile Teams
-Because Agile relies heavily on self-organization, autonomy, and transparency rather than micromanagement, high ethical standards are vital:
-- **Intellectual Honesty:** Truthfully disclosing technical debt, security flaws, and missed estimates early instead of hiding them under pressure.
-- **Mutual Respect & Psychological Safety:** Encouraging blameless retrospectives where team members can discuss failures openly without fear of reprisal.
-- **Customer Data Privacy:** Upholding ethical data protection standards when handling sensitive user records during development and testing.
+### 1. Introduction
 
-### 2. Agility in Software Design
-- **Evolutionary Architecture:** Eliminates Big Design Up Front (BDUF). Teams build simple, clean designs that satisfy current user stories, relying on automated test suites and refactoring to evolve the architecture gracefully.
-- **Adherence to Clean Code & SOLID:** Ensures classes and modules exhibit low coupling and high cohesion, making code modification rapid and safe.
+An Agile team must follow ethical practices, maintain flexible design
+and testing, and prepare useful documentation. These activities help the
+team build quality software while responding to customer needs and
+changes.
 
-### 3. Agility in Software Testing
-- **Continuous & Integrated:** Testing is not an afterthought phase; testers collaborate with developers from day one.
-- **Shift-Left Testing & Automation:** Utilizing Test-Driven Development (TDD) and Behavior-Driven Development (BDD) to validate specifications before and during coding.
-- **Whole-Team Quality Ownership:** Quality is the collective responsibility of the entire team, not solely the QA department.
+### 2. Ethics in an Agile team
 
-### 4. Agile Documentation
-- **\"Just-Enough, Just-In-Time\":** Documentation is treated as a supporting asset, not the final goal. Teams write concise architectural blueprints and API specs only when necessary.
-- **Living Documentation:** Automated acceptance tests (e.g., Cucumber scenarios) and clean, self-documenting code serve as verified, permanently up-to-date documentation.
+Ethics means following professional values and behaving honestly and
+responsibly.
+
+Important ethical practices include:
+
+**1. Honesty and transparency** - Report progress, problems and risks
+honestly. - Do not hide defects or provide false status reports.
+
+**2. Respect and teamwork** - Respect the opinions and skills of other
+team members. - Avoid discrimination and unfair treatment.
+
+**3. Customer confidentiality** - Protect customer information and
+private data. - Do not share confidential information without
+permission.
+
+**4. Responsibility and quality** - Take responsibility for assigned
+work. - Report defects and avoid knowingly delivering unsafe or
+poor-quality software.
+
+### 3. Agility in Design
+
+Agility in design means keeping software design flexible so that it can
+be improved when requirements change.
+
+Important practices: - Use simple and understandable designs. - Apply
+suitable design principles such as SOLID. - Avoid unnecessary
+complexity. - Refactor code when needed. - Design modules so that
+changes in one area have limited effect on others.
+
+**Example:** A payment application uses separate payment modules so that
+another payment method can be added without rewriting the entire
+application.
+
+### 4. Agility in Testing
+
+Agility in testing means testing continuously during development rather
+than waiting until the end.
+
+Important practices: - Test each feature during the iteration. - Use
+automated tests where suitable. - Apply Test-Driven Development when
+appropriate. - Perform regression testing after changes. - Use customer
+acceptance tests to check requirements.
+
+**Example:** Whenever a shopping cart feature changes, automated tests
+check that adding, removing and updating products still work.
+
+### 5. Agile Documentation
+
+Agile documentation means preparing documentation that is useful, clear
+and sufficient for development and maintenance.
+
+Characteristics: - Simple and easy to understand. - Focused on important
+information. - Updated when important changes occur. - Supports
+communication among team members. - Avoids unnecessary documentation
+that does not add value.
+
+Examples include user stories, acceptance criteria, architecture notes,
+API documentation and test cases.
+
+### 6. Importance
+
+-   Ethics builds trust and professional responsibility.
+-   Agile design makes software easier to change and maintain.
+-   Continuous testing helps detect defects early.
+-   Useful documentation supports teamwork and future maintenance.
+-   Together, these practices improve software quality and customer
+    satisfaction.
+
+### 7. Conclusion
+
+Ethics, flexible design, continuous testing and useful documentation are
+important for a successful Agile team. They help the team work
+responsibly, adapt to changes and deliver quality software.
+
+**Memory trick: E--D--T--D = "Ethics, Design, Testing, Documentation."**
+
+Remember: - Ethics = **Honesty** - Design = **Flexibility** - Testing =
+**Continuously** - Documentation = **Useful and simple**
 
 ---
 
@@ -235,43 +578,147 @@ Because Agile relies heavily on self-organization, autonomy, and transparency ra
 
 **Q8. Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation. (8M)**
 
-### 1. Organizational Context & Problem Statement
-*RetailCorp* operates a legacy point-of-sale (POS) and inventory system built using the Waterfall model. Releases take 9–12 months, customer feature requests stall in change control queues, and late testing uncovers severe defects. Management seeks to transition to an Agile Scrum framework.
+### 1. Introduction
 
-### 2. Five-Pillar Migration Plan
+A retail software company may use the Waterfall Model to develop
+software through sequential phases. When customer needs and business
+requirements change frequently, the company may migrate to Agile to
+improve flexibility, collaboration and delivery speed.
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│               RETAILCORP AGILE TRANSITION BLUEPRINT                    │
-├────────────────────┬────────────────────┬──────────────────────────────┤
-│ 1. Agile Values &  │ 2. Project         │ 3. Team Interaction          │
-│    Cultural Shift  │    Management      │    & Cadence                 │
-├────────────────────┼────────────────────┼──────────────────────────────┤
-│ 4. Agile Testing & │ 5. Agile           │ Expected Outcome:            │
-│    Engineering     │    Documentation   │ 2-Week Bi-Weekly Releases    │
-└────────────────────┴────────────────────┴──────────────────────────────┘
-```
+An Agile implementation plan explains how the company can gradually
+introduce Agile practices.
 
-### 3. Detailed Execution Blueprint
+### 2. Step 1: Adopt Agile values
 
-1. **Pillar 1: Cultural Alignment & Agile Values:**
-   - Conduct workshop training on the 4 Agile Manifesto values.
-   - Shift organizational mindset from *\"following rigid contracts\"* to *\"delivering frequent retail customer value\"*.
-2. **Pillar 2: Project Management Transformation:**
-   - Form cross-functional teams of 7–8 members (frontend, backend, QA, retail domain analyst), breaking functional silos.
-   - Appoint senior retail business analysts as **Product Owners** to manage a prioritized Product Backlog.
-   - Appoint experienced coaches as **Scrum Masters** to remove blockers and protect team focus.
-3. **Pillar 3: Team Interaction & Cadence Setup:**
-   - Establish standard **2-week Sprint cycles**.
-   - Enforce mandatory ceremonies:
-     - *Sprint Planning:* Every second Monday (commit to retail stories, e.g., \"Scan barcode & apply discount\").
-     - *Daily Scrum:* 15-minute morning standup.
-     - *Sprint Review:* Live demo to retail store managers every alternate Friday.
-     - *Retrospective:* Team process improvement sessions.
-4. **Pillar 4: Testing & Automation Strategy:**
-   - Introduce **Continuous Integration (CI)** using GitHub Actions/Jenkins.
-   - Implement **Test-Driven Development (TDD)** for critical pricing and discount logic.
-   - Build an automated regression test suite using Selenium/Playwright to verify POS checkout flows on every build.
-5. **Pillar 5: Lean Documentation Strategy:**
-   - Replace 400-page SRS documents with living Jira backlogs and user stories with clear Given-When-Then acceptance criteria.
-   - Auto-generate API documentation using Swagger/OpenAPI.
+The company should follow the four values of the Agile Manifesto:
+
+-   **Individuals and interactions:** Encourage direct communication
+    among developers, testers, managers and business teams.
+-   **Working software:** Focus on delivering useful retail features
+    instead of only producing documents.
+-   **Customer collaboration:** Involve retail users and business
+    representatives regularly.
+-   **Responding to change:** Accept changing requirements and
+    prioritize them in future iterations.
+
+### 3. Step 2: Introduce Agile Project Management
+
+-   Select a pilot project, such as an online retail application.
+-   Create and prioritize a Product Backlog.
+-   Divide the work into short Sprints.
+-   Assign clear responsibilities.
+-   Conduct Sprint Planning, Daily Scrum, Sprint Review and
+    Retrospective.
+-   Track completed work and remove obstacles.
+
+### 4. Step 3: Improve team interaction
+
+-   Create a cross-functional team with developers, testers and
+    designers.
+-   Encourage daily communication.
+-   Involve business representatives and customers.
+-   Share progress and problems openly.
+-   Conduct regular review and retrospective meetings.
+-   Encourage shared responsibility for the product.
+
+### 5. Step 4: Adopt Agile testing
+
+-   Perform testing during every Sprint.
+-   Write acceptance criteria for user stories.
+-   Use unit and integration tests.
+-   Apply TDD where suitable.
+-   Automate repeated tests.
+-   Perform regression testing after changes.
+-   Conduct acceptance testing with retail users.
+
+### 6. Step 5: Maintain Agile documentation
+
+-   Write clear user stories.
+-   Define acceptance criteria for features.
+-   Maintain a Product Backlog and Sprint Backlog.
+-   Prepare necessary design and architecture notes.
+-   Maintain test cases and technical documentation.
+-   Update important documents when the product changes.
+-   Avoid unnecessary paperwork.
+
+### 7. Example: Retail Software Migration Plan
+
+  Sprint     Main work
+  ---------- ---------------------------------
+  Sprint 1   Customer login and registration
+  Sprint 2   Product catalogue and search
+  Sprint 3   Shopping cart
+  Sprint 4   Payment integration
+  Sprint 5   Order tracking and reports
+
+At the end of each Sprint, the company demonstrates the working
+features, collects feedback and adjusts the backlog.
+
+### 8. Benefits of migration
+
+-   Faster delivery of useful features.
+-   Better response to changing customer needs.
+-   Improved team communication.
+-   Earlier identification of defects.
+-   Better customer involvement.
+-   Continuous improvement in software quality.
+
+### 9. Conclusion
+
+The retail company can migrate from Waterfall to Agile by adopting Agile
+values, introducing iterative project management, improving team
+interaction, testing continuously and maintaining useful documentation.
+A gradual migration through a pilot project reduces disruption and helps
+the organization learn Agile practices.
+
+**Memory trick: V--P--T--T--D = "Values, Project Management, Team,
+Testing, Documentation."** - **V** -- Agile Values - **P** -- Project
+Management - **T** -- Team Interaction - **T** -- Testing - **D** --
+Documentation
+
+For the example, remember the retail flow: **Login → Catalogue → Cart →
+Payment → Tracking.**
+
+------------------------------------------------------------------------
+
+# Quick Revision -- Unit 2
+
+## Eight questions in one line
+
+  Q.No.   Main topic                               Memory trick
+  ------- ---------------------------------------- ---------------
+  1       Theories of Agile Management             E--L--S--S--C
+  2       Traditional vs Agile                     P--R--D--T--D
+  3       Four Agile Manifesto Values              I--W--C--R
+  4       Twelve Agile Principles                  C--T--P--I
+  5       Major Agile Methods                      S--X--C--F--A
+  6       Agile Project Management                 P--S--D--C
+  7       Ethics, Design, Testing, Documentation   E--D--T--D
+  8       Agile Migration Plan                     V--P--T--T--D
+
+## Important diagrams / tables to practise
+
+1.  Traditional vs Agile comparison table.
+2.  Four values of the Agile Manifesto.
+3.  Four groups of the 12 Agile principles.
+4.  Agile methods comparison: Scrum, XP, Crystal, FDD and ASD.
+5.  Agile team roles and interactions.
+6.  Retail migration Sprint table.
+
+## Exam-writing strategy for 8 marks
+
+-   Begin with a definition and a short introduction.
+-   Use numbered headings and explain each point in simple sentences.
+-   For comparison questions, draw a table.
+-   For values and principles, list each item and add a short
+    explanation or example.
+-   For scenario questions, connect every concept to the given company
+    or application.
+-   End with a short conclusion.
+-   Use the memory tricks to recall headings; do not write only the
+    abbreviations in the examination.
+
+**Revision tip:** Practise Q2 and Q3 together because both concern the
+foundations of Agile. Then learn Q4 and Q5, followed by Q6--Q8.
+
+---

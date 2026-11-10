@@ -149,14 +149,24 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ---
 
-## 7. Answer Standards (Strict Raw-Material Transcoding)
+## 7. Answer Standards & Markdown Formatting Principles
 
+### Core Principles
 - **Strictly Raw-Sourced, Zero AI Meta-Bloat:**
   - Unit answers must directly use the exact text, bullet points, explanations, and examples provided in the raw study materials (`raw/`).
   - Prohibit AI-generated filler, artificial coaching sections, and forced generic structures.
   - Preserve the student's authentic notes, simple examples, and memory tricks exactly as provided in the raw files.
-- **Headings & Outline Compatibility:**
+
+### Markdown Formatting Principles (Obsidian & GitHub Compatibility)
+- **GFM Pipe Tables for Comparisons & Differences:**
+  - All comparisons, differences, and structured summaries must strictly use GitHub Flavored Markdown (GFM) pipe tables (`| Col 1 | Col 2 |` followed by `|---|---|`).
+  - **Prohibited:** Never use pandoc multiline or grid tables (dashed underlines without pipe delimiters). GitHub and Obsidian fail to parse them, resulting in mashed, overlapping column text.
+- **Clean Multi-Line Bullet Lists:**
+  - Every bullet item must begin on a new line with `- `.
+  - **Prohibited:** Never place multiple bullet points on a single line (e.g. `- Item 1 - Item 2`). Unwrap broken pandoc line breaks so each bullet is a coherent, continuous item.
+- **Heading Hierarchy for Outline Navigation:**
   - Question headings must use `## <Number>. <Title>` and subheadings must use `###` to support clean outline navigation in GitHub and Obsidian.
+  - Bold question prompts (`**Q<N>. <Prompt> (8M)**`) must be placed directly beneath the question heading.
 
 ---
 

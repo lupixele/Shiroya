@@ -4,7 +4,9 @@
 
 ---
 
-## Q1. Explain the Agile Software Development lifecycle and its impact on software testing activities.
+## 1. Agile Software Development Lifecycle and Testing Impact
+
+> **Question:** Explain the Agile Software Development lifecycle and its impact on software testing activities.
 
 ### 1. Introduction
 
@@ -55,25 +57,11 @@
 - **Regression testing:** Existing features are retested after changes.
 - **Team responsibility:** Developers, testers and stakeholders work together for quality.
 
-### 4. Example
-
-For a student attendance application:
-- In one iteration, the team develops student login and attendance entry.
-- Testers check login, attendance saving and invalid inputs during the same iteration.
-- Faculty review the working feature and suggest changes.
-- The team updates the feature and reruns relevant regression tests.
-
-### 5. Conclusion
-
-The Agile lifecycle makes testing a continuous activity. Early testing, collaboration, automation and repeated feedback help the team identify defects sooner and maintain software quality during every iteration.
-
-**Memory trick: R--P--D--D--T--F--R = "Requirements, Plan, Design, Develop, Test, Feedback, Release."**
-
-For the impact remember **E--C--F--A--R--T**: Early testing, Continuous testing, Feedback, Automation, Regression, Team responsibility.
-
 ---
 
-## Q2. Describe the Test-Driven Development (TDD) cycle using a suitable example.
+## 2. Test-Driven Development (TDD) Cycle and Example
+
+> **Question:** Describe the Test-Driven Development (TDD) cycle using a suitable example.
 
 ### 1. Introduction
 
@@ -113,17 +101,7 @@ The cycle repeats for each small requirement.
    Repeat the cycle
 ```
 
-### 4. Example: Addition function
-
-Suppose a developer needs a function that adds two numbers.
-
-**Step 1 -- Red:** Write a test expecting `add(2, 3)` to return `5`. Run it; it fails because the function is not implemented.
-
-**Step 2 -- Green:** Write a simple function that returns the sum of the two numbers. Run the test; it passes.
-
-**Step 3 -- Refactor:** Improve the code's naming or structure if necessary, then run the test again to confirm it still passes.
-
-### 5. Advantages of TDD
+### 4. Advantages of TDD
 - Finds defects early.
 - Clarifies expected behavior before coding.
 - Encourages small and simple code changes.
@@ -131,18 +109,10 @@ Suppose a developer needs a function that adds two numbers.
 - Makes refactoring safer.
 - Improves confidence in the code.
 
-### 6. Conclusion
-
-TDD follows the Red--Green--Refactor cycle. Writing tests before code helps developers understand the expected behavior, detect errors early and maintain code quality.
-
-**Memory trick: R--G--R = "Red, Green, Refactor."**
-- Red = Test fails.
-- Green = Code passes.
-- Refactor = Improve code.
-
-Remember: **Test first → Make it pass → Clean it.**
 ---
-## Q3. Discuss the role of the xUnit framework and TDD tools in Agile software development.
+## 3. xUnit Framework and TDD Tools in Agile
+
+> **Question:** Discuss the role of the xUnit framework and TDD tools in Agile software development.
 
 ### 1. Introduction
 
@@ -210,7 +180,9 @@ Tools recall: **J--N--P--G--T** = JUnit, NUnit, pytest, GoogleTest, TestNG.
 
 ---
 
-## Q4. Illustrate the process of testing user stories using acceptance tests and scenarios with a suitable example.
+## 4. Testing User Stories Using Acceptance Tests and Scenarios
+
+> **Question:** Illustrate the process of testing user stories using acceptance tests and scenarios with a suitable example.
 
 ### 1. Introduction
 
@@ -290,7 +262,9 @@ User stories are tested by defining acceptance criteria, creating scenarios, pre
 
 ---
 
-## Q5. Develop a plan for managing the testing cycle in an Agile software project.
+## 5. Managing Testing Cycle Plan in Agile
+
+> **Question:** Develop a plan for managing the testing cycle in an Agile software project.
 
 ### 1. Introduction
 
@@ -363,7 +337,9 @@ An Agile testing plan includes requirement analysis, planning, test design, envi
 
 ---
 
-## Q6. Differentiate Exploratory Testing and Risk-Based Testing with respect to objectives, approach, and application.
+## 6. Exploratory Testing vs. Risk-Based Testing
+
+> **Question:** Differentiate Exploratory Testing and Risk-Based Testing with respect to objectives, approach, and application.
 
 ### 1. Introduction
 
@@ -412,7 +388,9 @@ Remember comparison headings: **Objective -- Approach -- Focus -- Application.**
 
 ---
 
-## Q7. Analyze the role of Regression Testing and Test Automation in maintaining software quality during Agile iterations.
+## 7. Regression Testing and Test Automation in Agile
+
+> **Question:** Analyze the role of Regression Testing and Test Automation in maintaining software quality during Agile iterations.
 
 ### 1. Introduction
 
@@ -485,7 +463,9 @@ Regression Testing checks whether existing features still work after changes. Te
 
 ---
 
-## Q8. Design a TDD-based testing strategy for a healthcare application covering user stories, acceptance tests, regression testing, automation, and testing tools.
+## 8. TDD-Based Testing Strategy for Healthcare Application
+
+> **Question:** Design a TDD-based testing strategy for a healthcare application covering user stories, acceptance tests, regression testing, automation, and testing tools.
 
 ### 1. Introduction
 

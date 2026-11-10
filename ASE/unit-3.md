@@ -4,7 +4,9 @@
 
 ---
 
-## Q1. Explain the Scrum framework with reference to its lifecycle, roles, work products, and practices.
+## 1. Scrum Framework: Lifecycle, Roles, Artifacts, Practices
+
+> **Question:** Explain the Scrum framework with reference to its lifecycle, roles, work products, and practices.
 
 ### 1. Introduction
 
@@ -100,7 +102,9 @@ Scrum provides a structured but flexible way to develop software through Sprints
 
 ---
 
-## Q2. Demonstrate the lifecycle, roles, work products, and practices of Extreme Programming (XP).
+## 2. Extreme Programming (XP): Lifecycle, Roles, Artifacts, Practices
+
+> **Question:** Demonstrate the lifecycle, roles, work products, and practices of Extreme Programming (XP).
 
 ### 1. Introduction
 
@@ -196,7 +200,9 @@ For practices remember **P--T--C--R--S**:
 
 ---
 
-## Q3. Differentiate Crystal and Feature Driven Development (FDD) based on their major characteristics and development practices.
+## 3. Crystal vs. Feature Driven Development (FDD)
+
+> **Question:** Differentiate Crystal and Feature Driven Development (FDD) based on their major characteristics and development practices.
 
 ### 1. Introduction
 
@@ -265,7 +271,9 @@ For FDD's five activities remember **M--L--P--D--B = "Model, List, Plan, Design,
 
 ---
 
-## Q4. Illustrate the lifecycle and major principles of Adaptive Software Development (ASD).
+## 4. Adaptive Software Development (ASD): Lifecycle and Principles
+
+> **Question:** Illustrate the lifecycle and major principles of Adaptive Software Development (ASD).
 
 ### 1. Introduction
 
@@ -357,7 +365,9 @@ Remember the meaning:
 **Work together**
 - Learn = **Review and improve**
 ---
-## Q5. Compare Scrum, Crystal, FDD, ASD, and XP with respect to lifecycle, roles, work products, and practices.
+## 5. Comparison of Scrum, Crystal, FDD, ASD, and XP
+
+> **Question:** Compare Scrum, Crystal, FDD, ASD, and XP with respect to lifecycle, roles, work products, and practices.
 
 ### 1. Introduction
 
@@ -428,7 +438,9 @@ For the comparison headings remember **L--R--W--P = Lifecycle, Roles, Work produ
 
 ---
 
-## Q6. Analyze the impact of Agile processes on Requirements Engineering and identify important Agile RE practices.
+## 6. Impact of Agile on Requirements Engineering and Practices
+
+> **Question:** Analyze the impact of Agile processes on Requirements Engineering and identify important Agile RE practices.
 
 ### 1. Introduction
 
@@ -524,7 +536,9 @@ For practices remember **S--B--C--P--A--R--P**:
 
 ---
 
-## Q7. Demonstrate suitable Requirements Elicitation techniques for an Agile development environment.
+## 7. Requirements Elicitation Techniques in Agile
+
+> **Question:** Demonstrate suitable Requirements Elicitation techniques for an Agile development environment.
 
 ### 1. Introduction
 
@@ -594,7 +608,9 @@ Short recall: **Ask → Discuss → Observe → Survey → Create → Show → W
 
 ---
 
-## Q8. Develop an Agile Requirements Engineering approach for a healthcare software project with frequently changing requirements.
+## 8. Agile Requirements Engineering for Healthcare Project
+
+> **Question:** Develop an Agile Requirements Engineering approach for a healthcare software project with frequently changing requirements.
 
 ### 1. Introduction
 

@@ -4,7 +4,9 @@
 
 ---
 
-## Q1. Describe the major theories of Agile Management and their relevance to Agile Software Development.
+## 1. Theories of Agile Management
+
+> **Question:** Describe the major theories of Agile Management and their relevance to Agile Software Development.
 
 ### 1. Introduction
 
@@ -67,7 +69,9 @@ Agile Management uses ideas such as empirical control, Lean thinking, systems th
 
 ---
 
-## Q2. Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery.
+## 2. Traditional vs. Agile Software Development Models
+
+> **Question:** Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery.
 
 ### 1. Introduction
 
@@ -125,7 +129,9 @@ Remember: **Traditional = Plan first, deliver later. Agile = Plan repeatedly, de
 
 ---
 
-## Q3. Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example.
+## 3. Four Values of the Agile Manifesto
+
+> **Question:** Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example.
 
 ### 1. Introduction
 
@@ -174,7 +180,9 @@ The four Agile Manifesto values emphasize people, working software, customer col
 
 ---
 
-## Q4. Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development.
+## 4. Principles of the Agile Manifesto
+
+> **Question:** Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development.
 
 ### 1. Introduction
 
@@ -259,7 +267,9 @@ The 12 Agile principles support iterative development by encouraging frequent re
 
 Short recall code: **C--T--P--I.**
 ---
-## Q5. Classify the major Agile methods and compare their key characteristics.
+## 5. Classification of Major Agile Methods
+
+> **Question:** Classify the major Agile methods and compare their key characteristics.
 
 ### 1. Introduction
 
@@ -327,7 +337,9 @@ Scrum, XP, Crystal, FDD and ASD are important Agile methods. Each has a differen
 
 ---
 
-## Q6. Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities.
+## 6. Agile Project Management: Team Interactions, Roles, Responsibilities
+
+> **Question:** Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities.
 
 ### 1. Introduction
 
@@ -408,7 +420,9 @@ For team interactions remember **P--D--R--R**: Planning, Daily communication, Re
 
 ---
 
-## Q7. Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team.
+## 7. Ethics, Agility in Design, Testing, and Agile Documentation
+
+> **Question:** Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team.
 
 ### 1. Introduction
 
@@ -495,7 +509,9 @@ Remember:
 **Continuously**
 - Documentation = **Useful and simple**
 ---
-## Q8. Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation.
+## 8. Agile Implementation Plan for Retail Software Migration
+
+> **Question:** Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation.
 
 ### 1. Introduction
 

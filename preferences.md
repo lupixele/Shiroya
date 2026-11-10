@@ -144,7 +144,8 @@ The `questions.md` file serves as the master map for all questions across all 5 
 
 ### 2-Mark Short Questions Rules (`2-marks.md`)
 - **No `2M-` or `2m-` Heading Prefixes:** Never prefix individual question headings or anchor slugs with `2M-` or `2m-` (e.g., do not use `### 2M-1. ...` or `#2m-1-...`).
-- **Single Question Heading with `Q` Prefix:** Question headings in `2-marks.md` must state the question number once prefixed with `Q` and include the full question statement: `### Q<N>. <Full Question Statement>`. Do not repeat the question number in an extra bold line beneath the heading.
+- **Short Heading with Number Only:** Question headings in `2-marks.md` use the concise topic title prefixed with only the question number (no `Q`): `### <N>. <Short Topic Title>`.
+- **Full Question in Blockquote:** Directly below the heading, state the full question inside an Obsidian blockquote with just `Question:`: `> **Question:** <Full Question Statement>`.
 - **Dedicated File:** All Section A 2-mark questions are collected into `2-marks.md`, leaving `unit-1.md` through `unit-5.md` dedicated exclusively to Section B 8-mark questions.
 
 ---
@@ -157,13 +158,21 @@ The `questions.md` file serves as the master map for all questions across all 5 
   - Prohibit AI-generated filler, artificial coaching sections, and forced generic structures.
   - Preserve the student's authentic notes, simple examples, and memory tricks exactly as provided in the raw files.
 
-### Question Headings & Numbering Standard
-- **Single Question Heading with `Q` Prefix (No Redundant Repetition):**
-  - Never repeat the question number twice (e.g., do not create a separate heading like `## 1. Title` and then repeat `**Q1. Prompt**` below it).
-  - Write the question number **once** directly in the heading, prefixed with `Q` and followed by the full question statement:
-    - **8-Mark Questions (`unit-1.md`–`unit-5.md`):** `## Q<N>. <Full Question Statement>`
-    - **2-Mark Questions (`2-marks.md`):** `### Q<N>. <Full Question Statement>`
-  - Sub-sections within an answer use `###` (for 8M) or `####` (for 2M) to provide clean, scannable outline navigation in Obsidian and GitHub.
+### Question Headings & Outlining Standard
+- **Short-Form Heading for Outline Navigation (Only Number, No Q):**
+  - Question headings in the outline must use the concise, scannable short topic title prefixed only with the question number (no `Q`):
+    - **8-Mark Questions (`unit-1.md`–`unit-5.md`):** `## <N>. <Short Topic Title>`
+    - **2-Mark Questions (`2-marks.md`):** `### <N>. <Short Topic Title>`
+  - This ensures that the Obsidian outline pane and GitHub Table of Contents remain compact, clean, and easily navigable.
+- **Full Question Prompt in Blockquote for Reading (With Just `Question:`, No Number):**
+  - Directly beneath the heading, place the full, unabridged question statement inside an Obsidian-compatible blockquote:
+    ```markdown
+    ## 1. Software Process and Software Engineering Practice
+
+    > **Question:** Describe the Software Process and Software Engineering Practice. Discuss the major activities involved in a software process.
+    ```
+  - Use `> **Question:** ` without repeating the question number (do not write `Q1.` or `Question 1.`), completely eliminating redundant double-numbering.
+- **Sub-sections:** Sub-sections within an answer use `###` (for 8M) or `####` (for 2M) to provide structured hierarchy without cluttering the outline.
 
 ### Markdown Formatting Principles (Obsidian & GitHub Compatibility)
 - **GFM Pipe Tables for Comparisons & Differences:**

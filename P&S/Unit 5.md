@@ -330,30 +330,115 @@ $$r = +\sqrt{b_{yx} \cdot b_{xy}} = \sqrt{\frac{35}{64}} = \frac{\sqrt{35}}{8} =
 
 ---
 
-### Step-by-Step Solution
+# Spearman's Rank Correlation Coefficient
 
-#### 1. Assign Ranks (Highest Score = Rank 1)
-Ranking the scores for each judge from highest to lowest:
+## Given Data
 
-| Person | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
-|:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **J-1 Score** | 65 | 70 | 72 | 76 | 77 | 79 | 72 | 80 | 77 | 72 |
-| **Rank $R_1$** | 10 | 7 | 6 | 5 | 4 | 1 | 6 | 2 | 4 | 6 |
-| **J-2 Score** | 59 | 71 | 77 | 71 | 69 | 79 | 69 | 65 | 67 | 80 |
-| **Rank $R_2$** | 10 | 5 | 2 | 5 | 7 | 1 | 7 | 9 | 8 | 3 |
-| **$d = R_1 - R_2$** | 0 | 2 | 4 | 0 | $-3$ | 0 | $-1$ | $-7$ | $-4$ | 3 |
-| **$d^2$** | 0 | 4 | 16 | 0 | 9 | 0 | 1 | 49 | 16 | 9 |
+Ten persons are assessed by two judges in a beauty contest. Determine the closeness between the opinions of the judges using Spearman's Rank Correlation Coefficient.
 
-$$\sum d^2 = 0 + 4 + 16 + 0 + 9 + 0 + 1 + 49 + 16 + 9 = \mathbf{104}$$
+|Person|1|2|3|4|5|6|7|8|9|10|
+|---|---|---|---|---|---|---|---|---|---|---|
+|Judge 1|65|70|72|76|77|79|72|80|77|72|
+|Judge 2|59|71|77|71|69|79|69|65|67|80|
 
-#### 2. Spearman's Rank Correlation Formula
+## Step 1: Assign Ranks
 
-$$r_s = 1 - \frac{6 \sum d^2}{n(n^2 - 1)}$$
+Arrange scores in ascending order (lowest score gets rank 1).
 
-For $n = 10$:
+Judge 1 (R₁):
 
-$$r_s = 1 - \frac{6 \times 104}{10(10^2 - 1)} = 1 - \frac{624}{10(99)} = 1 - \frac{624}{990}$$
+- 65 = 1
+    
+- 70 = 2
+    
+- 72 appears 3 times: (3 + 4 + 5) / 3 = 4
+    
+- 76 = 6
+    
+- 77 appears 2 times: (7 + 8) / 2 = 7.5
+    
+- 79 = 9
+    
+- 80 = 10
+    
 
-$$r_s = 1 - 0.6303 \approx \mathbf{0.37}$$
+Judge 2 (R₂):
 
-**Conclusion:** The rank correlation coefficient between the two judges is $r_s \approx \mathbf{+0.37}$, indicating a **moderate positive agreement** between the two judges.
+- 59 = 1
+    
+- 65 = 2
+    
+- 67 = 3
+    
+- 69 appears 2 times: (4 + 5) / 2 = 4.5
+    
+- 71 appears 2 times: (6 + 7) / 2 = 6.5
+    
+- 77 = 8
+    
+- 79 = 9
+    
+- 80 = 10
+    
+
+## Step 2: Prepare the Table
+
+Formula:
+
+\[ d = R_1 - R_2 \]
+
+\[ d^2 = (R_1-R_2)^2 \]
+
+|Person|R₁|R₂|d|d²|
+|---|---|---|---|---|
+|1|1|1|0|0|
+|2|2|6.5|-4.5|20.25|
+|3|4|8|-4|16|
+|4|6|6.5|-0.5|0.25|
+|5|7.5|4.5|3|9|
+|6|9|9|0|0|
+|7|4|4.5|-0.5|0.25|
+|8|10|2|8|64|
+|9|7.5|3|4.5|20.25|
+|10|4|10|-6|36|
+|Total|55|55||166|
+
+\[ \sum d^2 = 166 \]
+
+## Step 3: Apply the Formula
+
+Since repeated scores (ties) are present, use Pearson correlation on the assigned ranks.
+
+\[ r_s = \frac{n\sum R_1R_2-\sum R_1\sum R_2} {\sqrt{[n\sum R_1^2-(\sum R_1)^2][n\sum R_2^2-(\sum R_2)^2]}} \]
+
+Given:
+
+\[ n=10 \]
+
+\[ \sum R_1=55,\quad \sum R_2=55 \]
+
+\[ \sum R_1R_2=300.25 \]
+
+\[ \sum R_1^2=382.5,\quad \sum R_2^2=384 \]
+
+Substitute:
+
+\[ r_s = \frac{10(300.25)-(55)(55)} {\sqrt{[10(382.5)-55^2][10(384)-55^2]}} \]
+
+\[ =\frac{3002.5-3025}{\sqrt{(800)(815)}} \]
+
+\[ =\frac{-22.5}{807.465} \]
+
+## Final Answer
+
+\[ \boxed{r_s=-0.028} \]
+
+Conclusion: There is almost no correlation between the opinions of the two judges.
+
+## Important Exam Note
+
+- No repeated values (ties): Use the standard Spearman formula.
+
+\[ r_s=1-\frac{6\sum d^2}{n(n^2-1)} \]
+
+- Repeated values (ties): Assign average ranks and use Pearson correlation on the ranks for an accurate result.

@@ -167,7 +167,7 @@ $$\bar{d} = \frac{\sum d}{n} = \frac{50}{10} = \mathbf{5}$$
 
 ##### 3. Sample Variance ($s^2$) and Standard Deviation ($s$)
 Using the standard computational shortcut formula for sample variance:
-$$s^2 = \frac{1}{n - 1} \left[\sum d^2 - n(\bar{d})^2\right]$$
+$$ s_d^2=\frac{\sum(d-\bar d)^2}{n-1} $$
 
 Breaking down each term:
 - $n - 1 = 10 - 1 = 9$ (degrees of freedom for sample variance)

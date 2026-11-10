@@ -212,7 +212,7 @@ In statistics, data represents observed facts, figures, and measurements collect
        By Nature of Values                 By Source of Collection
        /                 \                 /                     \
   Quantitative       Qualitative       Primary Data          Secondary Data
-  (Numerical)       (Categorical)     (Direct Firsthand)    (Pre-existing/Published)
+  (Numerical)       (Categorical)     (Direct Firsthand) (Preexisting/Published)
    /        \        /         \
 Discrete Continuous Nominal  Ordinal
 ```

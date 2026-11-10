@@ -4,176 +4,14 @@
 
 ---
 
-## Part A: 2-Mark Short Questions
-
-### 2M-1. Meaning of Agile Software Development
-
-#### Definition
-**Agile Software Development** is an iterative, incremental, and people-centric software engineering approach. It focuses on delivering working software in short, time-boxed cycles (1–4 weeks), collaborating closely with customers, and rapidly adapting to changing requirements.
-
----
-
-### 2M-2. Principles of Agile Management
-
-#### Two Core Principles
-1. **Self-Organizing & Empowered Teams:** Decision-making authority is delegated to the cross-functional team rather than being micro-managed top-down.
-2. **Empirical Process Control:** Decisions are grounded in real-time observation, transparency, continuous inspection, and immediate adaptation.
-
----
-
-### 2M-3. Characteristics of Traditional Software Model
-
-#### Two Key Characteristics
-1. **Plan-Driven & Linear:** Comprehensive requirements and detailed project schedules are frozen upfront before design and coding commence.
-2. **Heavy Documentation & Stage Gates:** Progress is measured via extensive written deliverables (SRS, design docs) with formal sign-off gates.
-
----
-
-### 2M-4. Characteristics of Agile Model
-
-#### Two Key Characteristics
-1. **Iterative Increments & Continuous Delivery:** Working, tested software increments are released to users at the end of every short iteration.
-2. **Welcome Changing Requirements:** Changes are embraced at any stage of development to harness competitive advantage for the customer.
-
----
-
-### 2M-5. Four Values of the Agile Manifesto
-
-#### The 4 Core Values
-1. **Individuals and interactions** over processes and tools.
-2. **Working software** over comprehensive documentation.
-3. **Customer collaboration** over contract negotiation.
-4. **Responding to change** over following a plan.
-
----
-
-### 2M-6. Purpose of the Agile Manifesto
-
-#### Purpose
-Created in 2001 by 17 software leaders in Snowbird, Utah, the **Agile Manifesto** was formulated to challenge bureaucratic, heavyweight, plan-driven methodologies. It establishes a shared philosophy emphasizing human collaboration, rapid feedback, and high responsiveness to change.
-
----
-
-### 2M-7. Principles of the Agile Manifesto
-
-#### Two Key Principles
-1. **Highest Priority:** Satisfy the customer through early and continuous delivery of valuable software.
-2. **Frequent Delivery:** Deliver working software frequently, from a couple of weeks to a couple of months, with a preference for shorter timescales.
-
----
-
-### 2M-8. Purpose of Agile Project Management
-
-#### Purpose
-**Agile Project Management (APM)** provides a flexible, value-driven framework to coordinate cross-functional teams, facilitate rapid delivery cycles, eliminate workflow impediments, and ensure alignment between stakeholder goals and developer output.
-
----
-
-### 2M-9. Agile Team Interaction
-
-#### Two Important Aspects
-1. **Daily Face-to-Face Standups:** A brief daily check-in (15 mins) where members share completed work, daily plans, and blockers.
-2. **Co-located / Osmotic Communication:** Team members work in close physical or virtual proximity, enabling passive learning and rapid problem resolution.
-
----
-
-### 2M-10. Ethical Practices in Agile Teams
-
-#### Two Ethical Practices
-1. **Honesty & Transparency in Reporting:** Truthfully reporting task progress, technical debt, and estimates without hiding delays or defects.
-2. **Respect & Psychological Safety:** Respecting diverse viewpoints during retrospectives and constructive code reviews without personal blame.
-
----
-
-### 2M-11. Agility in Design
-
-#### Summary
-**Agility in Design** rejects heavy upfront over-engineering in favor of simple, evolutionary architecture. Systems are designed to satisfy only current user stories (YAGNI/KISS), utilizing continuous refactoring and design patterns to keep the code malleable for future changes.
-
----
-
-### 2M-12. Agility in Testing
-
-#### Summary
-**Agility in Testing** integrates testing as a continuous, collaborative activity performed alongside development from day one (e.g., TDD, automated unit/regression suites), ensuring the entire team shares responsibility for quality.
-
----
-
-### 2M-13. Characteristics of Agile Documentation
-
-#### Two Key Characteristics
-1. **\"Just-Enough\" & Lean:** Documentation is created only when it delivers tangible business or maintenance value, avoiding speculative manuals.
-2. **Living & Executable:** Automated test suites, acceptance scenarios (BDD), and clean code serve as living, verified system documentation.
-
----
-
-### 2M-14. Agile Drivers
-
-#### Two Major Drivers
-1. **Rapid Market Volatility & Competitor Pressure:** Business conditions shift quickly, demanding accelerated time-to-market.
-2. **Evolving & Uncertain User Requirements:** Modern digital users cannot fully articulate needs until they interact with working prototypes.
-
----
-
-### 2M-15. Agile Capabilities
-
-#### Two Core Capabilities
-1. **Responsiveness (Flexibility):** The organizational capacity to pivot architectural or functional priorities without destabilizing operations.
-2. **Fast Cycle Time (Speed):** The technical ability to build, test, and deploy production-grade software increments within weeks.
-
----
-
-### 2M-16. Agile Values
-
-#### Two Practical Values
-1. **Simplicity:** Maximizing the amount of work *not* done to focus strictly on delivering immediate business value.
-2. **Direct Collaboration:** Prioritizing rich, verbal dialogue between engineers and business stakeholders over written memos.
-
----
-
-### 2M-17. Traditional vs. Agile Models
-
-#### Comparison Table
-| Feature | Traditional Model | Agile Model |
-|---|---|---|
-| **Delivery Model** | Monolithic release at the end | Frequent working increments (every 1–4 weeks) |
-| **Change Tolerance** | Rigid, changes resisted via Change Request Forms | Welcomes change at any stage for customer advantage |
-
----
-
-### 2M-18. Classification of Agile Methods
-
-#### Two Broad Categories
-1. **Management & Workflow Focused:** Provide project management, cadence, and ceremonies (e.g., Scrum, Kanban, Lean).
-2. **Engineering & Technical Practice Focused:** Prescribe coding standards, testing, and architecture discipline (e.g., Extreme Programming (XP), TDD).
-
----
-
-### 2M-19. Benefits of Agile Software Development
-
-#### Two Key Benefits
-1. **Accelerated Time-to-Market:** High-priority features are deployed to end-users in weeks rather than months or years.
-2. **Higher Software Quality & Lower Defect Cost:** Continuous testing and automated integration identify errors immediately.
-
----
-
-### 2M-20. Importance of Customer Collaboration
-
-#### Importance
-Continuous customer collaboration ensures the engineering team builds the *right* product. Direct feedback prevents costly architectural misunderstandings and aligns feature development with genuine business ROI.
-
----
-
-## Part B: 8-Mark Questions
-
-### 1. Theories of Agile Management
+## 1. Theories of Agile Management
 
 **Q1. Describe the major theories of Agile Management and their relevance to Agile Software Development. (8M)**
 
-#### 1. Overview of Agile Management Theories
+### 1. Overview of Agile Management Theories
 Agile Management transitions organizations from mechanistic, bureaucratic command-and-control hierarchies to organic, adaptive ecosystems. It draws heavily upon modern organizational science, sociology, and complexity theory.
 
-#### 2. Four Foundational Management Theories
+### 2. Four Foundational Management Theories
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -202,15 +40,15 @@ Agile Management transitions organizations from mechanistic, bureaucratic comman
 
 ---
 
-### 2. Traditional vs. Agile Software Development Models
+## 2. Traditional vs. Agile Software Development Models
 
 **Q2. Differentiate between Traditional and Agile Software Development Models with respect to planning, requirements, development, testing, and delivery. (8M)**
 
-#### 1. Core Paradigm Shift
+### 1. Core Paradigm Shift
 - **Traditional (Plan-Driven / Predictive):** Assumes the problem domain and solution can be completely analyzed, documented, and frozen before execution starts.
 - **Agile (Value-Driven / Adaptive):** Assumes requirements change unpredictably; software evolves through iterative learning and frequent stakeholder feedback.
 
-#### 2. Detailed Dimension-by-Dimension Comparison
+### 2. Detailed Dimension-by-Dimension Comparison
 
 | Dimension | Traditional Model (e.g., Waterfall) | Agile Model (e.g., Scrum / XP) |
 |---|---|---|
@@ -220,17 +58,17 @@ Agile Management transitions organizations from mechanistic, bureaucratic comman
 | **4. Testing** | **Late Phase Activity:** Testing occurs in a dedicated phase after all coding is finished. High risk of discovering critical architectural defects late. | **Continuous & Integrated:** Testing begins on day one (TDD, automated regression, daily builds). Whole team owns quality. |
 | **5. Delivery** | **Monolithic \"Big Bang\":** Single deployment at project conclusion. Customer sees and verifies software after months/years. | **Iterative & Incremental:** Production-ready, working software increments delivered at the end of every 2–4 week iteration. |
 
-#### 3. Summary Workflow Comparison
+### 3. Summary Workflow Comparison
 - **Traditional:** `Plan ──► Specify (SRS) ──► Design ──► Code ──► Test ──► Deploy (Single End Delivery)`
 - **Agile:** `[Plan ──► Build ──► Test ──► Deploy Increment 1] ──► [Repeat for Increments 2, 3, ... N]`
 
 ---
 
-### 3. Four Values of the Agile Manifesto
+## 3. Four Values of the Agile Manifesto
 
 **Q3. Discuss the four values of the Agile Manifesto and illustrate each value with a suitable example. (8M)**
 
-#### 1. Background
+### 1. Background
 In February 2001, 17 software practitioners authored the **Agile Manifesto** to restore agility, human teamwork, and engineering pragmatism to software development:
 > *"While there is value in the items on the right, we value the items on the left more."*
 
@@ -245,7 +83,7 @@ In February 2001, 17 software practitioners authored the **Agile Manifesto** to 
    └───────────────────────────────────────────┴───────────────────────────────────────────┘
 ```
 
-#### 2. Detailed Explanation & Real-World Examples
+### 2. Detailed Explanation & Real-World Examples
 
 1. **Individuals and Interactions over Processes and Tools:**
    - *Meaning:* People and communication solve complex engineering problems, not fancy project management software or rigid standard operating procedures.
@@ -262,14 +100,14 @@ In February 2001, 17 software practitioners authored the **Agile Manifesto** to 
 
 ---
 
-### 4. Principles of the Agile Manifesto
+## 4. Principles of the Agile Manifesto
 
 **Q4. Analyze the principles of the Agile Manifesto and their contribution to iterative and customer-focused development. (8M)**
 
-#### 1. Overview
+### 1. Overview
 The Agile Manifesto defines **12 fundamental principles** that translate its four core values into actionable operational practices.
 
-#### 2. Categorization & Analysis of the 12 Principles
+### 2. Categorization & Analysis of the 12 Principles
 
 ```
                               12 AGILE PRINCIPLES
@@ -295,29 +133,29 @@ Customer Focus & Delivery      Teamwork & Culture           Engineering Excellen
    - *Principle 9 (Technical Excellence):* Continuous attention to technical excellence and good design enhances agility.
    - *Principle 10 (Simplicity):* Simplicity—the art of maximizing the amount of work not done—is essential.
 
-#### 3. Contribution to Iterative & Customer-Focused Development
+### 3. Contribution to Iterative & Customer-Focused Development
 - Short delivery loops eliminate the risk of building unneeded features.
 - Daily business interaction ensures that developed features directly solve live business problems.
 
 ---
 
-### 5. Classification of Major Agile Methods
+## 5. Classification of Major Agile Methods
 
 **Q5. Classify the major Agile methods and compare their key characteristics. (8M)**
 
-#### 1. Classification Taxonomy
+### 1. Classification Taxonomy
 Agile methods can be classified into two complementary categories:
 1. **Management / Workflow Frameworks:** Focus on team cadence, backlog organization, ceremonies, and flow (e.g., Scrum, Kanban, Lean).
 2. **Technical / Engineering Methodologies:** Focus on code design, automated verification, programming practices, and refactoring (e.g., Extreme Programming, TDD, FDD).
 
-#### 2. Overview of the 5 Major Methods
+### 2. Overview of the 5 Major Methods
 1. **Scrum:** Lightweight framework structured around 3 roles (Product Owner, Scrum Master, Developers), 3 artifacts (Product Backlog, Sprint Backlog, Increment), and 5 events (Sprint, Planning, Daily Standup, Review, Retrospective).
 2. **Extreme Programming (XP):** Engineering-focused method created by Kent Beck. Prescribes technical practices: Test-Driven Development (TDD), Pair Programming, Continuous Integration, Refactoring, and Small Releases.
 3. **Crystal Methodologies (Alistair Cockburn):** People-centric family of methods color-coded by team size and system criticality (Crystal Clear, Yellow, Orange, Red). Emphasizes human communication over technical constraints.
 4. **Feature Driven Development (FDD):** Client-centric method developed by Jeff De Luca. Focuses on short, feature-based iterations across 5 core steps (Develop model $\to$ Build feature list $\to$ Plan by feature $\to$ Design by feature $\to$ Build by feature).
 5. **Adaptive Software Development (ASD):** Jim Highsmith's method for complex, unpredictable systems. Replaces plan-build with the learning cycle: **Speculate $\to$ Collaborate $\to$ Learn**.
 
-#### 3. Cross-Method Comparison Table
+### 3. Cross-Method Comparison Table
 
 | Method | Primary Focus | Iteration Length | Key Practices / Artifacts | Ideal Context |
 |---|---|---|---|---|
@@ -329,11 +167,11 @@ Agile methods can be classified into two complementary categories:
 
 ---
 
-### 6. Agile Project Management: Team Interactions, Roles, Responsibilities
+## 6. Agile Project Management: Team Interactions, Roles, Responsibilities
 
 **Q6. Demonstrate how Agile Project Management supports team interactions, roles, and responsibilities. (8M)**
 
-#### 1. The Agile Project Management Paradigm
+### 1. The Agile Project Management Paradigm
 Agile Project Management (APM) replaces hierarchical management with a collaborative, servant-leadership model that maximizes team autonomy, transparency, and fast decision-making.
 
 ```
@@ -349,7 +187,7 @@ Agile Project Management (APM) replaces hierarchical management with a collabora
          [ Scrum Master / Coach ] ◄── (Servant Leader: Protects Team, Clears Obstacles)
 ```
 
-#### 2. Core Roles & Clear Responsibilities
+### 2. Core Roles & Clear Responsibilities
 1. **Product Owner (PO):**
    - *Role:* Voice of the customer and business value maximizer.
    - *Responsibilities:* Manages and grooms the Product Backlog, prioritizes user stories by business value, sets acceptance criteria, and accepts/rejects completed work increments.
@@ -360,7 +198,7 @@ Agile Project Management (APM) replaces hierarchical management with a collabora
    - *Role:* Self-organizing execution unit (developers, QA testers, UI/UX designers, database engineers).
    - *Responsibilities:* Collaboratively estimates effort (story points), commits to sprint scope, decides *how* to implement technical features, and delivers a potentially shippable increment.
 
-#### 3. Agile Team Interaction Mechanisms
+### 3. Agile Team Interaction Mechanisms
 - **Daily Stand-Up (15 mins):** Synchronizes activities, promotes peer accountability, and uncovers dependencies.
 - **Sprint Planning:** PO and Developers collaboratively negotiate the sprint goal and scope.
 - **Sprint Review:** Developers showcase live, working software to stakeholders to capture real user feedback.
@@ -368,39 +206,39 @@ Agile Project Management (APM) replaces hierarchical management with a collabora
 
 ---
 
-### 7. Ethics, Agility in Design & Testing, and Agile Documentation
+## 7. Ethics, Agility in Design, Testing, and Agile Documentation
 
 **Q7. Examine the importance of ethics, agility in design and testing, and Agile documentation within an Agile team. (8M)**
 
-#### 1. Ethics in Agile Teams
+### 1. Ethics in Agile Teams
 Because Agile relies heavily on self-organization, autonomy, and transparency rather than micromanagement, high ethical standards are vital:
 - **Intellectual Honesty:** Truthfully disclosing technical debt, security flaws, and missed estimates early instead of hiding them under pressure.
 - **Mutual Respect & Psychological Safety:** Encouraging blameless retrospectives where team members can discuss failures openly without fear of reprisal.
 - **Customer Data Privacy:** Upholding ethical data protection standards when handling sensitive user records during development and testing.
 
-#### 2. Agility in Software Design
+### 2. Agility in Software Design
 - **Evolutionary Architecture:** Eliminates Big Design Up Front (BDUF). Teams build simple, clean designs that satisfy current user stories, relying on automated test suites and refactoring to evolve the architecture gracefully.
 - **Adherence to Clean Code & SOLID:** Ensures classes and modules exhibit low coupling and high cohesion, making code modification rapid and safe.
 
-#### 3. Agility in Software Testing
+### 3. Agility in Software Testing
 - **Continuous & Integrated:** Testing is not an afterthought phase; testers collaborate with developers from day one.
 - **Shift-Left Testing & Automation:** Utilizing Test-Driven Development (TDD) and Behavior-Driven Development (BDD) to validate specifications before and during coding.
 - **Whole-Team Quality Ownership:** Quality is the collective responsibility of the entire team, not solely the QA department.
 
-#### 4. Agile Documentation
+### 4. Agile Documentation
 - **\"Just-Enough, Just-In-Time\":** Documentation is treated as a supporting asset, not the final goal. Teams write concise architectural blueprints and API specs only when necessary.
 - **Living Documentation:** Automated acceptance tests (e.g., Cucumber scenarios) and clean, self-documenting code serve as verified, permanently up-to-date documentation.
 
 ---
 
-### 8. Agile Implementation Plan for Retail Software Migration
+## 8. Agile Implementation Plan for Retail Software Migration
 
 **Q8. Design an Agile implementation plan for a retail software company migrating from Waterfall to Agile, covering Agile values, project management, team interaction, testing, and documentation. (8M)**
 
-#### 1. Organizational Context & Problem Statement
+### 1. Organizational Context & Problem Statement
 *RetailCorp* operates a legacy point-of-sale (POS) and inventory system built using the Waterfall model. Releases take 9–12 months, customer feature requests stall in change control queues, and late testing uncovers severe defects. Management seeks to transition to an Agile Scrum framework.
 
-#### 2. Five-Pillar Migration Plan
+### 2. Five-Pillar Migration Plan
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -414,7 +252,7 @@ Because Agile relies heavily on self-organization, autonomy, and transparency ra
 └────────────────────┴────────────────────┴──────────────────────────────┘
 ```
 
-#### 3. Detailed Execution Blueprint
+### 3. Detailed Execution Blueprint
 
 1. **Pillar 1: Cultural Alignment & Agile Values:**
    - Conduct workshop training on the 4 Agile Manifesto values.

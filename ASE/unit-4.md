@@ -408,8 +408,6 @@ Regression Testing is the process of rerunning previously executed tests after s
 - Supports frequent releases.
 - Provides confidence when code is modified or refactored.
 
-**Example:** After changing the shopping cart, test adding products, removing products and proceeding to checkout to make sure these existing functions still work.
-
 ### 3. Test Automation
 
 Test Automation uses tools or scripts to execute tests automatically and compare actual results with expected results.
@@ -430,14 +428,7 @@ Examples of automation tools include Selenium, JUnit, pytest and Cypress.
 - Automated regression suites can run after code changes or during a build.
 - Failed tests alert the team to possible defects.
 
-### 5. Example: E-commerce application
-
-A developer changes the payment feature.
-- Automated regression tests check login, product selection, cart and checkout.
-- If the cart or checkout test fails, the team investigates the problem.
-- After fixing the defect, the tests are run again before release.
-
-### 6. Advantages
+### 5. Advantages
 - Maintains existing functionality.
 - Detects defects introduced by changes.
 - Reduces repeated manual testing.
@@ -445,15 +436,13 @@ A developer changes the payment feature.
 - Supports continuous integration and frequent releases.
 - Improves confidence in software quality.
 
-### 7. Limitations / care needed
+### 6. Limitations / care needed
 - Automated tests need maintenance when the application changes.
 - Not every test is suitable for automation.
 - Poorly designed tests may produce unreliable results.
 - Human exploratory testing is still valuable.
 
-### 8. Conclusion
 
-Regression Testing checks whether existing features still work after changes. Test Automation makes repeated testing faster and more consistent. Together, they help Agile teams maintain quality during frequent iterations.
 
 **Memory trick: C--D--F--S = "Changes, Detect, Fast, Stable."**
 - Changes can affect old features.

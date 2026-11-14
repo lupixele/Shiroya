@@ -53,7 +53,7 @@
 
 **2. Scrum Master**
 - Helps everyone understand and follow Scrum.
-- Supports the team and helps remove impediments.
+- Supports the team and helps remove obstacles.
 - Encourages effective Scrum practices.
 
 **3. Developers**
@@ -81,19 +81,6 @@
 - **Daily Scrum:** Checks progress and coordinates work.
 - **Sprint Review:** Inspects the result and gathers feedback.
 - **Sprint Retrospective:** Identifies ways to improve.
-
-### 6. Example
-
-For a library application:
-- Product Backlog: login, book search, issue and return, fine calculation.
-- Sprint 1: develop login.
-- Sprint 2: develop book search.
-- Sprint 3: develop issue and return.
-- At each Sprint Review, librarians provide feedback.
-
-### 7. Conclusion
-
-Scrum provides a structured but flexible way to develop software through Sprints. Its roles, work products and events help teams collaborate, inspect progress and continuously improve.
 
 **Memory trick: L--R--A--P = "Lifecycle, Roles, Artifacts, Practices."**
 - Lifecycle: Backlog → Planning → Sprint → Daily Scrum → Review → Retrospective.
@@ -176,16 +163,8 @@ Typical responsibilities in an XP team include:
 
 **8. Coding standards:** Follow common coding rules to keep code consistent.
 
-### 6. Example
 
-For an online shopping system:
-- Customer writes a story: "As a customer, I want to add a product to my cart."
-- Developers estimate and select it.
-- A test is written first.
-- Developers implement the cart feature, integrate the code and run tests.
-- The feature is released and customer feedback is collected.
-
-### 7. Conclusion
+### 6. Conclusion
 
 XP combines short development cycles with disciplined engineering practices. Its focus on testing, pair programming, continuous integration and small releases helps produce high-quality software that can adapt to changing requirements.
 

@@ -1,233 +1,184 @@
 # Unit IV: Exploratory Data Analysis
 
 > **Course Code:** `2501CS34` — Fundamentals of Data Science (FDS) | Aditya University  
-> **Exam Scope:** Internal Examinations 2 (Mid-2)  
-> **Questions Map:** [`questions.md` — Unit IV](questions.md#unit-iv-exploratory-data-analysis)
+> **Source PDF:** [`raw/FDS Complete 8-Mark Exam Notes.pdf`](raw/FDS%20Complete%208-Mark%20Exam%20Notes.pdf)  
+> **Questions File:** [questions.md — Unit IV](questions.md#unit-iv-exploratory-data-analysis)
 
 ---
 
-## Question Overview & Revision Priority
+## 1. Describe the commonly used measures of descriptive statistics with suitable examples.
 
-| Q no. | Priority | Marks | Question Topic | Direct Answer Link |
-| :---: | :---: | :---: | :--- | :--- |
-| 1 | P1 | 8 | Measures of descriptive statistics (central tendency, dispersion, shape) | [→ Question 1](#question-1--measures-of-descriptive-statistics) |
-| 2 | P1 | 8 | Data visualization techniques in EDA (histogram, box plot, scatter, heatmap) | [→ Question 2](#question-2--data-visualization-techniques-in-eda) |
-| 3 | P1 | 8 | Correlation and covariance analysis techniques (formulas & interpretation) | [→ Question 3](#question-3--correlation-and-covariance-analysis-techniques) |
-| 4 | P1 | 8 | Univariate, Bivariate, and Multivariate analysis (comparison & plots) | [→ Question 4](#question-4--univariate-bivariate-and-multivariate-analysis) |
-| 5 | P2 | 8 | Anomaly detection and pattern identification (IQR rule, Z-score, trends) | [→ Question 5](#question-5--anomaly-detection-and-pattern-identification) |
+**Definition:** Descriptive statistics are numerical methods used to summarize and describe the main features of a dataset. They help explain the centre, spread and shape of data.
+
+### Measures of central tendency
+* **Mean:** Sum of all values divided by the number of values.  
+  $$\text{Mean} = \frac{\sum x}{n}$$  
+  *Example:* for 2, 4, 6, $\text{mean} = 12/3 = 4$.
+* **Median:** Middle value after arranging data in order. For 2, 4, 6, $\text{median} = 4$. For an even number of values, it is the average of the two middle values.
+* **Mode:** Most frequently occurring value. *Example:* 2, 3, 3, 5 has mode 3.
+
+### Measures of dispersion
+* **Range:** $\text{Maximum} - \text{Minimum}$. For 2, 4, 6, $\text{range} = 4$.
+* **Variance:** Measures average squared deviation from the mean.  
+  $$\text{Population variance: } \sigma^2 = \frac{\sum (x - \mu)^2}{N}$$
+* **Standard deviation:** The square root of variance: $\sigma = \sqrt{\sigma^2}$.
+* **Interquartile range (IQR):** $\text{IQR} = Q_3 - Q_1$; it measures the spread of the middle 50% of values.
+
+### Other useful measures
+* **Quartiles:** Divide ordered data into four parts.
+* **Percentiles:** Indicate the value below which a specified percentage of observations falls.
+* **Skewness:** Describes asymmetry in a distribution.
+* **Count and frequency:** Show how many observations or occurrences are present.
+
+**Example:** For marks 2, 4, 4, 6, 9: $\text{mean} = 5$, $\text{median} = 4$, $\text{mode} = 4$ and $\text{range} = 9 - 2 = 7$. These measures describe different aspects of the same dataset.
+
+![Concept diagram](figures/unit4_q1_descriptive_stats_barchart.png)
+
+**Conclusion:** Central tendency describes a typical value, while dispersion describes variation. Using several measures gives a clearer summary than using only the mean.
 
 ---
 
-## Question 1 — Measures of Descriptive Statistics
+## 2. Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples.
 
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Describe the commonly used measures of descriptive statistics with suitable examples.
+**Definition:** Data visualization is the graphical representation of information. In Exploratory Data Analysis (EDA), charts help identify distributions, comparisons, relationships, trends and unusual observations.
 
----
+### Common visualization techniques
+* **Bar chart:** Compares values across categories. *Example:* number of students in each department.
+* **Histogram:** Shows the distribution of numerical data using intervals or bins. *Example:* distribution of exam marks.
+* **Line chart:** Shows changes over time. *Example:* monthly sales.
+* **Pie chart:** Shows parts of a whole when there are a small number of categories. *Example:* share of expenses by category.
+* **Scatter plot:** Shows the relationship between two numerical variables. *Example:* study hours and marks.
+* **Box plot:** Displays median, quartiles, spread and possible outliers. *Example:* comparing marks across classes.
+* **Heatmap:** Uses colour intensity to show values in a matrix. *Example:* correlation between numerical features.
 
-### Step-by-Step Solution
-
-#### 1. Central Tendency, Dispersion & Shape Measures
-Descriptive statistics summarise a dataset using a few numbers. They are grouped into central tendency, dispersion and shape.
-
-1. **Mean:** sum of values divided by count. Affected by outliers.
-2. **Median:** middle value of sorted data. Not affected by outliers.
-3. **Mode:** most frequent value.
-4. **Range:** maximum minus minimum.
-5. **Variance and standard deviation:** average squared deviation from the mean, and its square root. They show how spread out the data is.
-6. **Quartiles and IQR:** Q1, Q2, Q3 divide sorted data into four parts. IQR = Q3 - Q1.
-7. **Skewness and kurtosis:** skewness shows asymmetry of the distribution. Kurtosis shows how heavy the tails are.
-
-#### 2. Worked Calculation Example
-Worked example for data 2, 4, 4, 6, 9:
-
-- Mean = 25/5 = 5. Median = 4. Mode = 4. Range = 9 - 2 = 7.
-- Squared deviations: 9, 1, 1, 1, 16. Sum = 28.
-- Sample variance = 28/4 = 7. Standard deviation = 2.65.
-
-#### 3. Python Implementation (`pandas` describe)
+### Example using Python
 ```python
-import pandas as pd
-
-df = pd.DataFrame({'Marks': [2, 4, 4, 6, 9]})
-
-print(df.describe())
-print(df['Marks'].skew())
-print(df['Marks'].kurt())
-```
-
-`describe()` returns count, mean, std, min, quartiles and max in one call.
-
----
-
-## Question 2 — Data Visualization Techniques in EDA
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Demonstrate different data visualization techniques used in Exploratory Data Analysis with suitable examples.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Core Visualization Plots (Histogram, Box, Scatter, Bar, Heatmap)
-Visualization shows the shape, spread, relationships and outliers of data that numbers alone may hide.
-
-1. **Histogram:** shows the distribution of one numeric variable using bins.
-2. **Box plot:** shows median, quartiles, spread and outliers.
-3. **Scatter plot:** shows the relationship between two numeric variables.
-4. **Bar chart:** compares values across categories.
-5. **Heatmap:** shows a matrix of values by colour, commonly a correlation matrix.
-
-#### 2. Python Code Implementation (`matplotlib` & `seaborn`)
-```python
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-x = np.random.normal(50, 10, 100)
-y = x * 0.5 + np.random.normal(0, 3, 100)
-
-df = pd.DataFrame({'x': x, 'y': y})
-
-plt.hist(x)                 # Distribution
-plt.show()
-
-plt.boxplot(x)              # Outliers
-plt.show()
-
-plt.scatter(x, y)           # Relationship
-plt.show()
-
-sns.heatmap(df.corr(), annot=True)  # Correlation
-plt.show()
-```
-
-#### 3. Interpretation of Graphical Outputs
-Reading the output: the histogram is bell shaped, the box plot shows the middle 50 percent of values, the scatter plot rises left to right (positive relationship), the bars show category totals, and the heatmap shows a high correlation between `a` and `c`.
-
----
-
-## Question 3 — Correlation and Covariance Analysis Techniques
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Analyze the correlation and covariance techniques by using suitable example.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Core Formulas & Concepts (Covariance vs. Correlation)
-Covariance and correlation measure how two variables change together.
-
-1. **Covariance:** cov(X, Y) = sum((xi - mean X)(yi - mean Y)) / (n - 1).
-2. **Covariance sign:** positive means both rise together, negative means one rises as the other falls, near zero means no linear relation.
-3. **Covariance limit:** its value depends on units, so the size is hard to compare.
-4. **Correlation:** r = cov(X, Y) / (sX x sY). It is covariance scaled by both standard deviations.
-5. **Range of r:** -1 to +1. +1 is perfect positive, -1 is perfect negative, 0 is no linear relation.
-6. **Strength:** about 0.7 or more in magnitude is strong, 0.3 to 0.7 moderate, below 0.3 weak.
-7. **Caution:** correlation does not prove causation. Spearman correlation suits ranked or non-linear monotonic data.
-
-#### 2. Worked Calculation Example
-Worked example: X = 1, 2, 3, 4, 5 and Y = 2, 4, 5, 4, 5.
-
-- Mean X = 3, mean Y = 4.
-- Products of deviations: 4, 0, 0, 0, 2. Sum = 6. Covariance = 6/4 = 1.5.
-- sX = 1.58, sY = 1.22. r = 1.5 / (1.58 x 1.22) = 0.77, a strong positive correlation.
-
-#### 3. Python Verification (`df.cov` & `df.corr`)
-```python
-import pandas as pd
-df = pd.DataFrame({"X": [1, 2, 3, 4, 5], "Y": [2, 4, 5, 4, 5]})
-print(df.cov())    # X-Y covariance 1.5
-print(df.corr())   # X-Y correlation 0.774597
-```
-
----
-
-## Question 4 — Univariate, Bivariate, and Multivariate Analysis
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Comprehensive Comparison Table
-| Basis | Univariate | Bivariate | Multivariate |
-|---|---|---|---|
-| Variables | One | Two | Three or more |
-| Aim | Describe one variable | Find relationship between two | Find patterns among many |
-| Methods | Mean, median, frequency, spread | Correlation, cross-tabulation, regression | Multiple regression, PCA, clustering |
-| Complexity | Lowest | Moderate | Highest |
-| Typical plots | Histogram, box plot, bar chart | Scatter plot, grouped bar, line plot | Pair plot, heatmap, 3D plot, bubble chart |
-| Question answered | How are marks distributed? | Do study hours affect marks? | How do study hours, attendance and sleep affect marks? |
-
-#### 2. Practical Examples & Plots
-Examples:
-
-- **Univariate:** distribution of students' marks shown with a histogram.
-- **Bivariate:** study hours against marks shown with a scatter plot.
-- **Multivariate:** study hours, attendance and sleep against marks shown with a pair plot or correlation heatmap.
-
----
-
-# Question 5 — Anomaly Detection and Pattern Identification (8 Marks)
-
-## 1. Meaning
-
-- **Anomaly:** A value that is very different from other values.
-- **Pattern:** A regular trend or relationship in data.
-
-## 2. Methods of Anomaly Detection
-
-1. **IQR Method:** Outliers are values below `Q1 - 1.5 * IQR` or above `Q3 + 1.5 * IQR`.
-2. **Z-score:** `z = (x - mean) / standard deviation`. Usually, `|z| > 3` indicates an outlier.
-3. **Box Plot:** Displays outliers as separate points.
-4. **Scatter Plot:** Shows unusual points away from the main group.
-
-**Example:** Dataset: `10, 12, 11, 13, 12, 11, 12, 14, 10, 13, 12, 11, 13, 12, 95`
-
-Here, **95 is an outlier** because it is much larger than the other values.
-
-## 3. Python Program
-
-```python
-import pandas as pd
 import matplotlib.pyplot as plt
 
-s = pd.Series([10, 12, 11, 13, 12, 11, 12, 14,
-               10, 13, 12, 11, 13, 12, 95])
+months = ["Jan", "Feb", "Mar"]
+sales = [20, 30, 25]
 
-q1 = s.quantile(0.25)
-q3 = s.quantile(0.75)
-iqr = q3 - q1
-
-print(s[(s < q1 - 1.5*iqr) | (s > q3 + 1.5*iqr)])
-
-plt.boxplot(s)
+plt.plot(months, sales)
+plt.xlabel("Month")
+plt.ylabel("Sales")
+plt.title("Monthly Sales")
 plt.show()
 ```
 
-**Output:**
+### Benefits and good practices
+* Makes large amounts of data easier to understand.
+* Helps detect trends, clusters and unusual values.
+* Supports comparison between groups.
+* Use clear titles, axis labels and units.
+* Choose a chart that matches the data; avoid misleading scales and unnecessary decoration.
 
-```
-[95]
-```
+![Concept diagram - Bar chart](figures/unit4_q2_visualization_barchart.png)
 
-## 4. Types of Patterns
+![Concept diagram - Pie chart](figures/unit4_q2_visualization_piechart.png)
 
-- **Trend:** Data increases or decreases over time.
-- **Seasonality:** A pattern repeats at regular intervals.
-- **Clusters:** Similar data points form groups.
-- **Correlation:** Shows the relationship between two variables.
+**Conclusion:** Different charts answer different questions. Selecting the correct visualization is an important part of effective EDA.
+
 ---
 
-## Quick Revision
+## 3. Analyze the correlation and covariance techniques by using suitable example.
 
-1. Mean is sensitive to outliers, median is not; sample variance divides by n - 1.
-2. describe() gives count, mean, std, min, quartiles and max.
-3. r = cov / (sX x sY), range -1 to +1; correlation is not causation.
-4. Univariate uses one variable, bivariate two, multivariate three or more.
-5. IQR rule limits are Q1 - 1.5 IQR and Q3 - 1.5 IQR; z-score outlier means |z| above 3.
+**Definition:** Covariance and correlation are statistical measures used to describe how two numerical variables change together.
+
+### Covariance
+* Indicates the direction of joint variation between two variables.
+* Positive covariance means the variables tend to move in the same direction.
+* Negative covariance means one tends to increase when the other decreases.
+* A value near zero indicates little linear co-variation, though a non-linear relationship may still exist.
+* **Population covariance formula:**
+  $$\text{Cov}(X, Y) = \frac{\sum (x_i - \mu_x)(y_i - \mu_y)}{N}$$
+
+### Correlation
+Pearson correlation standardizes covariance to a value between $-1$ and $+1$.
+* **Formula:**
+  $$r = \frac{\text{Cov}(X, Y)}{\sigma_x \times \sigma_y}$$
+* $r = +1$ indicates perfect positive linear relationship.
+* $r = -1$ indicates perfect negative linear relationship.
+* $r$ near $0$ indicates weak or no linear relationship.
+
+### Example and interpretation
+* Suppose study hours and marks are recorded for students. If students who study more generally obtain higher marks, the variables may show positive covariance and positive correlation.
+* If outdoor temperature rises while heater usage falls, the variables may show negative correlation.
+* Correlation describes association; it does not prove that one variable causes the other.
+
+**Difference:** Covariance depends on the units and scale of the variables, so its size is difficult to compare across datasets. Correlation is unit-free and always lies between $-1$ and $+1$, making it easier to interpret.
+
+**Applications:** Feature analysis, finance, scientific research, quality monitoring and identifying related variables. Check scatter plots and possible outliers before interpreting correlation.
+
+![Concept diagram](figures/unit4_q3_covariance_correlation_flow.png)
+
+**Conclusion:** Covariance shows the direction of joint movement; correlation gives a standardized measure of the strength and direction of a linear relationship.
+
+---
+
+## 4. Differentiate between Univariate, Bivariate and Multivariate analysis with suitable examples.
+
+**Definition:** Statistical analysis can be classified by the number of variables studied at one time: univariate uses one variable, bivariate uses two variables and multivariate uses more than two variables.
+
+### Univariate analysis
+* Studies one variable at a time.
+* **Purpose:** describe its distribution, centre and spread.
+* **Methods:** frequency table, mean, median, mode, histogram and box plot.
+* **Example:** analysing only the marks of students in one subject.
+
+### Bivariate analysis
+Studies two variables to understand whether they are related or how they differ together. Methods include scatter plots, correlation, cross-tabulation and grouped comparisons.  
+*Example:* study hours and exam marks.
+
+### Multivariate analysis
+* Studies three or more variables together.
+* Helps understand combined relationships and complex patterns.
+* Methods may include multiple regression, principal component analysis and clustering.
+* *Example:* studying marks using attendance, study hours, assignment scores and sleep duration together.
+
+### Comparison table
+| Analysis Type | Number of Variables | Primary Objective | Example |
+| :--- | :---: | :--- | :--- |
+| **Univariate** | 1 | Describes one feature in isolation | Age distribution |
+| **Bivariate** | 2 | Examines association or comparison | Age and income |
+| **Multivariate** | 3 or more | Examines combined patterns and interactions | Income, age, education, and spending |
+
+**Importance:** Univariate analysis is a useful first step; bivariate analysis explores relationships; multivariate analysis considers several factors at once. The choice depends on the question and data.
+
+![Concept diagram](figures/unit4_q4_analysis_dimensions_flow.png)
+
+**Conclusion:** The main difference is the number of variables analysed and the type of question being answered.
+
+---
+
+## 5. Analyze a dataset to identify possible Anomalies and Pattern Detection.
+
+**Definition:** An anomaly is an observation that differs noticeably from the general behaviour of the data. Pattern detection is the process of finding repeated trends, relationships, groups or structures in a dataset.
+
+### Steps to identify anomalies and patterns
+1. **Understand the data:** Check the meaning of columns, units, data types and expected ranges.
+2. **Clean the data:** Correct obvious errors and handle missing or duplicate records.
+3. **Summarize:** Calculate mean, median, standard deviation, quartiles and frequencies.
+4. **Visualize:** Use histograms, box plots, scatter plots and line charts to inspect distributions and trends.
+5. **Apply detection methods:** Use IQR, Z-scores or suitable clustering/anomaly-detection methods.
+6. **Investigate:** Check whether unusual observations are errors, rare valid events or important changes.
+7. **Report:** Explain the detected patterns and limitations.
+
+**IQR method:**
+$$\text{IQR} = Q_3 - Q_1$$
+A common rule flags values below $Q_1 - 1.5 \times \text{IQR}$ or above $Q_3 + 1.5 \times \text{IQR}$ as possible outliers. These are flags for investigation, not automatic proof of error.
+
+### Pattern detection examples
+* **Trend:** Sales increase over several months.
+* **Seasonality:** Ice-cream sales rise during hotter months.
+* **Association:** Two variables tend to change together.
+* **Clusters:** Customers form groups with similar purchase behaviour.
+* **Repeated behaviour:** A machine shows a similar usage pattern every day.
+
+**Example:** In daily electricity readings, most values may lie within a normal range. A sudden unusually high reading can be flagged. It may indicate a faulty sensor, a special event or a genuine increase in usage, so it should be checked before any conclusion.
+
+**Applications:** Fraud monitoring, equipment maintenance, quality control, network monitoring, sales analysis and scientific research.  
+**Precaution:** An unusual value is not necessarily wrong; domain knowledge is essential.
+
+![Concept diagram](figures/unit4_q5_anomaly_pattern_detection_flow.png)
+
+**Conclusion:** Visualization and statistical methods help reveal anomalies and patterns, while careful investigation gives them meaning.

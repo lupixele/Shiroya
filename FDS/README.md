@@ -3,75 +3,31 @@
 > **Course Code:** `2501CS34` | **Program:** B.Tech — III Semester CSE (Data Science) | Aditya University  
 > **Syllabus Reference:** [`ds-syllabus.md`](../ds-syllabus.md#912-2501cs34---fundamentals-of-data-science-l2-t0-p1-c3---iii-sem)
 
-This directory serves as the centralized academic exam preparation hub for **Fundamentals of Data Science**, containing comprehensive worked answers, verified question mappings, code demonstrations, and dark-mode conceptual diagrams for Units 3, 4, and 5 (Mid-2 / Semester scope), alongside archived Mid-1 materials.
+This directory serves as the centralized academic exam preparation hub for **Fundamentals of Data Science**, containing complete 8-mark important questions and answers across all five units, complete with code demonstrations and frameless dark-mode conceptual diagrams.
 
 ---
 
-## Current Study Set: IE 2 (Units 3, 4, 5)
+## Current Complete 8-Mark Exam Notes (Units 1–5)
 
-Priority-tagged questions (6 or 8 marks) with exam-ready answers. Study these first.
+Converted and split from the complete 8-mark semester exam notes:
 
-| File | Contents |
-| :--- | :--- |
-| [`questions.md`](questions.md) | The 18 IE 2 questions with priority (P1/P2/P3) and marks |
-| [`unit-3.md`](unit-3.md) | Unit III answers |
-| [`unit-4.md`](unit-4.md) | Unit IV answers |
-| [`unit-5.md`](unit-5.md) | Unit V answers |
-| [`prompt.md`](prompt.md) | Prompt that produces answers for these questions in any AI agent |
-
-Earlier sets are kept for reference:
-
-- [`archive/ie2-v1/`](archive/ie2-v1/): IE 2 question list before the answers were added.
-- [`archive/sessional-2-v1/`](archive/sessional-2-v1/): previous Sessional-II questions, answers and prompt.
-- [`sem imp/`](sem%20imp/): semester-important set (8-mark and 2-mark questions with answers).
-
----
-
-## Repository Index & Source Mapping (semester important set, now in `sem imp/`)
-
-| Document | Primary Raw Source(s) in [`raw/`](raw/) | Description |
+| Document | Unit Coverage | Questions Included |
 | :--- | :--- | :--- |
-| [`questions.md`](sem%20imp/questions.md) | [`raw/FDS 8M Sem Imp Questions.pdf`](raw/FDS%208M%20Sem%20Imp%20Questions.pdf)<br>[`raw/FDS 2M Sem Imp  Questions.pdf`](raw/FDS%202M%20Sem%20Imp%20%20Questions.pdf)<br>[`raw/III Sem FDS_Model Question Paper.pdf`](raw/III%20Sem%20FDS_Model%20Question%20Paper.pdf) | Master question index mapping all 8-mark descriptive and 2-mark short questions with direct navigation links to worked solutions. |
-| [`unit 3 answers.md`](sem%20imp/unit%203%20answers.md) | [`raw/UNIT 3 FDS PPT.pptx`](raw/UNIT%203%20FDS%20PPT.pptx)<br>[`raw/Basic_HTML_Tags_with_Examples (1).docx`](raw/Basic_HTML_Tags_with_Examples%20(1).docx) | **Unit 3 Answers:** Text file I/O, reading large files in pieces (chunking), delimited files, JSON, XML vs. HTML, BeautifulSoup web scraping, HDF5/Binary vs. flat files, MongoDB NoSQL CRUD operations. |
-| [`unit 4 answers.md`](sem%20imp/unit%204%20answers.md) | [`raw/FDS_UNIT_IV.pptx`](raw/FDS_UNIT_IV.pptx) | **Unit 4 Answers:** Descriptive statistics (central tendency & dispersion), EDA visualizations (histograms, box plots, scatter plots), correlation vs. covariance, univariate/bivariate/multivariate analysis, pattern detection & anomaly identification. |
-| [`unit 5 answers.md`](sem%20imp/unit%205%20answers.md) | [`raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf`](raw/Neo4j_Aura_Colab_Very_Clear_Plain_PDF.pdf)<br>[`raw/nltk library for text analytics - Colab.pdf`](raw/nltk%20library%20for%20text%20analytics%20-%20Colab.pdf) | **Unit 5 Answers:** Neo4j graph database architecture, Cypher query language CRUD, NLTK text mining pipeline, Neo4j vs. SQLite comparison, text analytics tools & SQLite Full-Text Search (FTS). |
-| [`figures/`](figures/) | — | Extracted, frameless dark-mode diagrams and plots for EDA, IQR box plots, and chunking. |
-| [`raw/`](raw/) | — | Cleanly archived original PDF question papers, slide decks, and teaching guides. |
-| [`PPTS/`](PPTS/) | — | Lecture slides and laboratory Python programs. |
+| [`questions.md`](questions.md) | **Units I–V** | Master Question Bank with direct links to all 32 questions |
+| [`unit-1.md`](unit-1.md) | **Unit I: Introduction to Data Science** | 6 questions (Scope, Evolution, Applications, Lifecycle, Data Structures, Tools) |
+| [`unit-2.md`](unit-2.md) | **Unit II: Data Collection & Pre-processing** | 8 questions (Collection, Pre-processing, Cleaning, Missing Values, Scaling, Feature Engineering, Integration & Aggregation) |
+| [`unit-3.md`](unit-3.md) | **Unit III: Data Loading, Storage & File Formats** | 8 questions (Text files, Chunking, Delimited formats, JSON, HTML/XML, Web Scraping, Binary/HDF5, MongoDB CRUD) |
+| [`unit-4.md`](unit-4.md) | **Unit IV: Exploratory Data Analysis (EDA)** | 5 questions (Descriptive Statistics, Visualizations, Covariance/Correlation, Univariate/Bivariate/Multivariate, Anomalies & Patterns) |
+| [`unit-5.md`](unit-5.md) | **Unit V: Data Science Tools** | 5 questions (Neo4j Architecture, Cypher Queries, NLTK Pipeline, Neo4j vs. SQLite, Text Analytics Tools) |
 
 ---
 
-## Unit-by-Unit Question Coverage
+## Directory Index
 
-### UNIT III — Data Loading, Storage and File Formats
-* **8M-Q1:** [Methods to read and write data in text files](sem%20imp/unit%203%20answers.md#8m-q1-describe-the-methods-used-to-read-and-write-data-in-text-files)
-* **8M-Q2:** [Reading large text files in pieces (Chunking)](sem%20imp/unit%203%20answers.md#8m-q2-explain-how-a-large-text-file-can-be-read-in-pieces)
-* **8M-Q3:** [Working with delimited data formats (CSV, TSV, custom)](sem%20imp/unit%203%20answers.md#8m-q3-demonstrate-how-to-work-with-delimited-data-formats-using-a-suitable-example)
-* **8M-Q4:** [Structure and uses of JSON data format](sem%20imp/unit%203%20answers.md#8m-q4-describe-the-structure-and-uses-of-json-data-format-with-a-suitable-example)
-* **8M-Q5:** [Main features of HTML and XML data formats](sem%20imp/unit%203%20answers.md#8m-q5-classify-the-main-features-of-html-and-xml-data-format-with-suitable-examples)
-* **8M-Q6:** [Web scraping workflow with BeautifulSoup](sem%20imp/unit%203%20answers.md#8m-q6-demonstrate-the-process-of-collecting-data-from-a-web-page-using-web-scraping)
-* **8M-Q7:** [Binary data formats (HDF5) vs. traditional files](sem%20imp/unit%203%20answers.md#8m-q7-distinguish-between-binary-data-formats-such-as-hdf5-and-traditional-file-formats-indicate-their-advantages-and-suitable-use-cases)
-* **8M-Q8:** [MongoDB NoSQL CRUD operations with Python](sem%20imp/unit%203%20answers.md#8m-q8-apply-nosql-mongo-db-crud-operations-to-store-and-retrieve-by-taking-suitable-data-as-an-example)
-* **2M Section:** [Unit 3 Two-Mark Short Questions & Answers](sem%20imp/unit%203%20answers.md#unit-iii--2-mark-short-questions--answers)
-
-### UNIT IV — Exploratory Data Analysis (EDA)
-* **8M-Q1:** [Commonly used measures of descriptive statistics](sem%20imp/unit%204%20answers.md#8m-q1-describe-the-commonly-used-measures-of-descriptive-statistics-with-suitable-examples)
-* **8M-Q2:** [Data visualization techniques in EDA](sem%20imp/unit%204%20answers.md#8m-q2-demonstrate-different-data-visualization-techniques-used-in-exploratory-data-analysis-with-suitable-examples)
-* **8M-Q3:** [Correlation and covariance analysis techniques](sem%20imp/unit%204%20answers.md#8m-q3-analyze-the-correlation-and-covariance-techniques-by-using-suitable-example)
-* **8M-Q4:** [Univariate, Bivariate, and Multivariate analysis](sem%20imp/unit%204%20answers.md#8m-q4-differentiate-between-univariate-bivariate-and-multivariate-analysis-with-suitable-examples)
-* **8M-Q5:** [Dataset analysis for Anomalies and Pattern Detection](sem%20imp/unit%204%20answers.md#8m-q5-analyze-a-dataset-to-identify-possible-anomalies-and-pattern-detection)
-* **2M Section:** [Unit 4 Two-Mark Short Questions & Answers](sem%20imp/unit%204%20answers.md#unit-iv--2-mark-short-questions--answers)
-
-### UNIT V — Data Science Tools
-* **8M-Q1:** [Neo4j architecture and basic features](sem%20imp/unit%205%20answers.md#8m-q1-describe-neo4j-and-its-basic-features-as-a-graph-database)
-* **8M-Q2:** [Demonstrating basic Cypher queries with examples](sem%20imp/unit%205%20answers.md#8m-q2-demonstrate-basic-cypher-queries-with-suitable-examples)
-* **8M-Q3:** [The role of NLTK in text mining and analytics](sem%20imp/unit%205%20answers.md#8m-q3-describe-the-role-of-nltk-in-text-mining-and-analytics-with-suitable-examples)
-* **8M-Q4:** [Differences between Neo4j and SQLite](sem%20imp/unit%205%20answers.md#8m-q4-analyze-the-differences-between-neo4j-and-sqlite-based-on-their-data-models-and-uses)
-* **8M-Q5:** [Tools for text analytics & managing text with SQLite](sem%20imp/unit%205%20answers.md#8m-q5-apply-different-tools-used-for-text-analytics-and-review-the-use-of-sqlite-in-managing-text-based-data)
-* **2M Section:** [Unit 5 Two-Mark Short Questions & Answers](sem%20imp/unit%205%20answers.md#unit-v--2-mark-short-questions--answers)
-
----
-
-## Units I & II (Archived in `raw/`)
-* **Questions & Mid-1 Paper:** [`raw/Mid - 1 IMP.pdf`](raw/Mid%20-%201%20IMP.pdf)
-* **Comprehensive Worked Answers:** [`raw/FDS-Imp(Q&A).pdf`](raw/FDS-Imp(Q&A).pdf) · [`raw/Data_Science_Unit_I_II_Answers_Font30.pdf`](raw/Data_Science_Unit_I_II_Answers_Font30.pdf) · [`raw/Mid-1 Answers.pdf`](raw/Mid-1%20Answers.pdf)
+* [`figures/`](figures/): Extracted, frameless dark-mode diagrams, workflows, charts, and data models.
+* [`raw/`](raw/): Original source PDFs, lecture slide decks (`.pptx`), and question papers.
+  * [`raw/FDS Complete 8-Mark Exam Notes.pdf`](raw/FDS%20Complete%208-Mark%20Exam%20Notes.pdf): The source document for the complete 8-mark notes.
+* [`archive/`](archive/): Earlier question sets and unit drafts moved for reference.
+  * `archive/questions.md`, `archive/unit-3.md`, `archive/unit-4.md`, `archive/unit-5.md`
+  * `archive/ie2-v1/`, `archive/sessional-2-v1/`
+* [`sem imp/`](sem%20imp/): Earlier semester important question set.

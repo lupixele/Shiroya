@@ -1,369 +1,350 @@
 # Unit III: Data Loading, Storage and File Formats
 
 > **Course Code:** `2501CS34` — Fundamentals of Data Science (FDS) | Aditya University  
-> **Exam Scope:** Internal Examinations 2 (Mid-2)  
-> **Questions Map:** [`questions.md` — Unit III](questions.md#unit-iii-data-loading-storage-and-file-formats)
+> **Source PDF:** [`raw/FDS Complete 8-Mark Exam Notes.pdf`](raw/FDS%20Complete%208-Mark%20Exam%20Notes.pdf)  
+> **Questions File:** [questions.md — Unit III](questions.md#unit-iii-data-loading-storage-and-file-formats)
 
 ---
 
-## Question Overview & Revision Priority
+## 1. Describe the methods used to read and write data in text files.
 
-| Q no. | Priority | Marks | Question Topic | Direct Answer Link |
-| :---: | :---: | :---: | :--- | :--- |
-| 1 | P1 | 8 | Methods to read and write data in text files (`open`, `read_csv`, `to_csv`) | [→ Question 1](#question-1--methods-to-read-and-write-data-in-text-files) |
-| 2 | P2 | 6 | Reading large text files in pieces (`chunksize`, `nrows`) | [→ Question 2](#question-2--reading-large-text-files-in-pieces-chunking) |
-| 3 | P2 | 6 | Working with delimited data formats (CSV, TSV, custom delimiters) | [→ Question 3](#question-3--working-with-delimited-data-formats) |
-| 4 | P1 | 8 | Structure and uses of JSON data format with examples (`json.loads/dumps`) | [→ Question 4](#question-4--structure-and-uses-of-json-data-format) |
-| 5 | P2 | 6 | Main features of HTML and XML data formats (comparison & parsing) | [→ Question 5](#question-5--main-features-of-html-and-xml-formats) |
-| 6 | P1 | 8 | Collecting data from web pages using web scraping (`requests`, BeautifulSoup) | [→ Question 6](#question-6--web-scraping-workflow-using-beautifulsoup) |
-| 7 | P2 | 8 | Binary data formats (HDF5) vs. traditional file formats | [→ Question 7](#question-7--binary-data-formats-hdf5-vs-traditional-formats) |
-| 8 | P1 | 8 | NoSQL MongoDB CRUD operations (`pymongo`: insert, find, update, delete) | [→ Question 8](#question-8--nosql-mongodb-crud-operations) |
+**Definition:** Text files store information as readable characters. Common examples include TXT, CSV and log files. Reading loads file contents into a program; writing saves program output to a file.
 
----
+### Common methods in Python
+* **`open()`:** Opens a file. Common modes are `'r'` for reading, `'w'` for writing (overwrites), `'a'` for appending and `'x'` for creating a new file.
+* **`read()`:** Reads the full file or a specified number of characters.
+* **`readline()`:** Reads one line at a time.
+* **`readlines()`:** Returns lines as a list.
+* **`write()`:** Writes a string to a file.
+* **`writelines()`:** Writes a sequence of strings.
 
-## Question 1 — Methods to Read and Write Data in Text Files
-
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Describe the methods used to read and write data in text files.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Core Concepts & Python Built-in File Handling (`open`)
-A text file stores data as plain characters. Python reads and writes it with the built-in `open()` function and with pandas functions.
-
-1. **open() modes:** `"r"` reads, `"w"` writes (overwrites), `"a"` appends. Use `with` so the file closes automatically.
-2. **Reading methods:** `read()` returns the whole file, `readline()` returns one line, `readlines()` returns a list of lines.
-3. **Writing methods:** `write()` writes a string, `writelines()` writes a list of strings.
-
-#### 2. pandas Methods & Delimited Text Handling
-4. **read_csv():** Loads comma-separated text into a DataFrame. Useful arguments are `header`, `names`, `index_col`, `usecols` and `na_values`.
-5. **read_table():** Same as `read_csv()` but the default separator is a tab.
-6. **to_csv():** Writes a DataFrame to a text file. Use `index=False` to skip the index, `sep` to change the delimiter.
-7. **Choice:** Use `open()` for free-form text and pandas for tabular text.
-
-#### 3. Python Code Example & Verification
+### Example
 ```python
-import pandas as pd
+# Reading a file
+with open("notes.txt", "r", encoding="utf-8") as f:
+    content = f.read()
 
-with open("notes.txt", "w") as f:
-    f.write("name,marks\nAsha,85\nRavi,72\n")
+# Writing a file
+with open("output.txt", "w", encoding="utf-8") as f:
+    f.write("Data Science")
 
-df = pd.read_csv("notes.txt")
-print(df)
-
-df.to_csv("out.csv", index=False)
+# Appending
+with open("output.txt", "a", encoding="utf-8") as f:
+    f.write("\nNew line")
 ```
 
+### Good practices
+* Use `with open()` so the file closes automatically.
+* Choose the correct file path and mode.
+* Specify encoding such as UTF-8 for text.
+* Handle possible errors such as missing files or permission problems.
+* Avoid mode `'w'` when existing contents must be preserved.
+
+**Applications:** Reading configuration files, processing logs, storing reports and exchanging simple data between programs.
+
+![Concept diagram](figures/unit3_q1_text_file_io_flow.png)
+
+**Conclusion:** Python file methods make it easy to read, create and update text files. The correct mode and safe file handling are important.
+
 ---
 
-## Question 2 — Reading Large Text Files in Pieces (Chunking)
+## 2. Explain how a large text file can be read in pieces.
 
-**Priority:** Priority 2 (Likely to Appear) | **Marks:** 6 Marks  
-**Question:** Explain how a large text file can be read in pieces.
+**Definition:** Reading a large text file in pieces means processing a file in smaller parts instead of loading the entire file into memory at once.
 
----
+### Methods
+* **Line-by-line reading:** Loop through the file object. Each line is read when needed, which is memory efficient.
+* **Fixed-size chunks:** Use `read(size)` to read a specified number of characters or bytes at a time.
+* **Chunked data loading:** For tabular CSV data, Pandas `read_csv()` supports `chunksize` to return smaller portions.
 
-### Step-by-Step Solution
-
-#### 1. Chunking Concepts (`nrows` vs. `chunksize`)
-A very large file may not fit in memory. pandas can read it in smaller parts instead of loading it whole.
-
-1. **nrows:** Reads only the first n rows. Used to preview a file.
-2. **chunksize:** Makes `read_csv` return an iterator of DataFrames, each with the given number of rows.
-3. **Processing:** Each chunk is processed and the partial results are combined, so memory use stays low.
-4. **Use cases:** Large logs, aggregation, filtering rows before saving.
-
-#### 2. Python Code Implementation & Verification
+### Python examples
 ```python
-import pandas as pd
+# Read one line at a time
+with open("large.txt", "r", encoding="utf-8") as f:
+    for line in f:
+        process(line)
 
-data = "id,val\n" + "\n".join(
-    f"{i},{i*2}" for i in range(1, 11)
-)
-
-with open("data.csv", "w") as f:
-    f.write(data)
-
-first = pd.read_csv("data.csv", nrows=3)
-
-total = 0
-for chunk in pd.read_csv("data.csv", chunksize=4):
-    total += chunk["val"].sum()
-
-print(total)  # 110
+# Read fixed-size chunks
+with open("large.txt", "r", encoding="utf-8") as f:
+    while True:
+        chunk = f.read(4096)
+        if not chunk:
+            break
+        process(chunk)
 ```
 
-The file is read in chunks of 4, 4 and 2 rows. The running total gives the same result as reading it whole.
-
----
-
-## Question 3 — Working with Delimited Data Formats
-
-**Priority:** Priority 2 (Likely to Appear) | **Marks:** 6 Marks  
-**Question:** Demonstrate how to work with delimited data formats using a suitable example.
-
----
-
-### Step-by-Step Solution
-
-#### 1. Delimited Format Concepts & Python Implementation
-A delimited file separates fields with a fixed character: comma (CSV), tab (TSV), pipe or semicolon. In pandas the `sep` argument tells the reader which delimiter to use.
-
+### Pandas CSV example
 ```python
 import pandas as pd
+for part in pd.read_csv('large.csv', chunksize=1000):
+    process(part)
+```
+Here, the file is processed in groups of 1,000 rows rather than being loaded all at once.
+
+**Advantages:** Uses less memory, can handle files larger than available memory, and allows processing to begin before the full file is read.
+
+![Concept diagram](figures/unit3_q2_chunking_flow.png)
+
+**Conclusion:** Line-by-line, fixed-size and chunk-based reading are useful methods for handling large files efficiently.
+
+---
+
+## 3. Demonstrate how to work with delimited data formats using a suitable example.
+
+**Definition:** A delimited file stores values separated by a special character called a delimiter. CSV commonly uses commas; TSV uses tabs. Other delimiters include semicolons and pipes.
+
+### Structure and features
+* Each line usually represents one record.
+* The delimiter separates fields or columns.
+* The first row may contain column headings.
+* Text values containing delimiters may be enclosed in quotation marks.
+* The format is simple and widely supported, but data types may need to be inferred or specified.
+
+### CSV example
+```text
+RollNo,Name,Marks
+101,Asha,85
+102,Ravi,78
+```
+
+### Read using Python csv module
+```python
 import csv
-
-df1 = pd.read_csv("data.csv")
-df2 = pd.read_csv("data.tsv", sep="\t")
-df3 = pd.read_csv("data.txt", sep="|")
-
-with open("data.csv") as f:
-    for row in csv.reader(f):
-        print(row)
+with open("students.csv", newline="") as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        print(row["Name"], row["Marks"])
 ```
 
-#### 2. Key Delimiter Rules & `csv` Module Methods
-Points:
+### Using Pandas
+```python
+import pandas as pd
+df = pd.read_csv('students.csv')
+df.to_csv('result.csv', index=False)
 
-1. **CSV:** default `sep=","`.
-2. **TSV:** use `sep="\t"`.
-3. **Custom delimiter:** any character, for example `sep="|"`. A regular expression such as `sep=r"\s+"` handles variable spaces.
-4. **csv module:** `csv.reader` gives each row as a list. `csv.writer` writes rows. `csv.DictReader` gives each row as a dictionary.
+# For tab-separated data
+df_tsv = pd.read_csv('data.tsv', sep='\t')
+
+# For a pipe delimiter
+df_pipe = pd.read_csv('data.txt', sep='|')
+```
+
+**Advantages and limitations:** Delimited formats are portable, readable and easy to exchange. However, they may not preserve complex data types or nested structures, and delimiters/quoting must be handled correctly.
+
+![Concept diagram](figures/unit3_q3_delimited_format_structure.png)
+
+**Conclusion:** CSV and other delimited formats are useful for exchanging tabular data between applications.
 
 ---
 
-## Question 4 — Structure and Uses of JSON Data Format
+## 4. Describe the structure and uses of JSON data format with a suitable example.
 
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Describe the structure and uses of JSON data format with a suitable example.
+**Definition:** JSON (JavaScript Object Notation) is a lightweight text-based data format used to store and exchange structured information. It is language-independent and widely used in web applications and APIs.
 
----
+### JSON structure
+* **Object:** A collection of key-value pairs enclosed in curly brackets `{ }`.
+* **Array:** An ordered list of values enclosed in square brackets `[ ]`.
+* **Values:** Can be strings, numbers, objects, arrays, true, false or null.
+* **Keys:** Are strings and are written in double quotation marks.
 
-### Step-by-Step Solution
-
-#### 1. JSON Data Structure & Core Rules
-JSON (JavaScript Object Notation) is a lightweight, text-based format for exchanging data. It is easy for humans to read and for machines to parse.
-
-1. **Object:** A set of key-value pairs inside `{ }`. Keys are strings.
-2. **Array:** An ordered list of values inside `[ ]`.
-3. **Values:** string, number, true/false, null, object or array. They can be nested.
-
-#### 2. Python Type Mapping, Uses & Advantages
-4. **Python mapping:** object to `dict`, array to `list`, null to `None`, true to `True`.
-5. **Uses:** Web APIs, configuration files, data exchange between server and client, and NoSQL storage such as MongoDB.
-6. **Advantage:** Language independent and lighter than XML.
-
-#### 3. JSON Sample & Python Implementation (`json` module)
-Example:
-
+### Example JSON
 ```json
-{"name": "Asha", "marks": [85, 90], "active": true, "address": {"city": "Kakinada"}}
+{
+  "student_id": 101,
+  "name": "Asha",
+  "marks": 85,
+  "subjects": ["FDS", "DBMS"],
+  "passed": true
+}
 ```
 
+### Reading and writing JSON in Python
 ```python
 import json
 
-d = json.loads('{"name":"Asha","marks":[85,90]}')
-print(d["marks"][0])  # 85
+# Reading from a JSON file
+with open('student.json', 'r') as f:
+    data = json.load(f)
 
-s = json.dumps(d, indent=2)
+# Writing to a JSON file
+with open('new.json', 'w') as f:
+    json.dump(data, f, indent=4)
 
-with open("s.json", "w") as f:
-    json.dump(d, f)
-
-with open("s.json", "r") as f:
-    d2 = json.load(f)
+# String serialization/deserialization
+# json.loads(text) converts a JSON string to a Python object
+# json.dumps(data) converts a Python object to a JSON string
 ```
 
-`loads` and `dumps` work on strings. `load` and `dump` work on files.
+**Uses:** Web APIs, application configuration, data exchange between services, storing nested records and transferring information between different programming languages.
+
+**Advantages:** Human-readable, compact, supports nested structures and is widely supported.  
+**Limitation:** It is text-based and may be less efficient than binary formats for some large or complex datasets.
+
+![Concept diagram](figures/unit3_q4_json_processing_flow.png)
+
+**Conclusion:** JSON is a common format for exchanging structured data, especially in web and API-based systems.
 
 ---
 
-## Question 5 — Main Features of HTML and XML Formats
+## 5. Classify the main features of HTML and XML data format with suitable examples.
 
-**Priority:** Priority 2 (Likely to Appear) | **Marks:** 6 Marks  
-**Question:** Classify the main features of HTML and XML data format with suitable examples.
+**Overview:** HTML (HyperText Markup Language) is used to structure and display content on web pages. XML (Extensible Markup Language) is used to store and transport structured data with user-defined tags.
 
----
+### HTML features
+* Uses predefined tags such as `<html>`, `<head>`, `<body>`, `<p>` and `<a>`.
+* Describes the structure of a web page, including headings, paragraphs, links, images and tables.
+* Browsers interpret HTML to display content.
+* HTML focuses on presentation and page structure.
 
-### Step-by-Step Solution
-
-#### 1. Feature Comparison Table (HTML vs. XML)
-| Basis | HTML | XML |
-|---|---|---|
-| Full form | HyperText Markup Language | eXtensible Markup Language |
-| Purpose | Display data in a browser | Store and transport data |
-| Tags | Predefined (`<p>`, `<a>`, `<table>`) | User-defined |
-| Strictness | Lenient, browser tolerates errors | Strict, must be well-formed |
-| Closing tags | Some optional | Always required |
-| Python tools | BeautifulSoup, `pd.read_html` | `xml.etree.ElementTree`, lxml, `pd.read_xml` |
-
-#### 2. Structural Code Samples & Parsing Characteristics
-HTML sample:
-
+#### HTML example
 ```html
-<table><tr><th>Name</th></tr><tr><td>Asha</td></tr></table>
+<html>
+<body>
+<h1>Student Details</h1>
+<p>Name: Asha</p>
+</body>
+</html>
 ```
 
-XML sample:
+### XML features
+* Allows users to define meaningful tags.
+* Stores data in a hierarchical, tree-like structure.
+* Tags must be properly nested and closed.
+* XML is case-sensitive and designed to describe and transport data.
+* Attributes can provide additional information about elements.
 
+#### XML example
 ```xml
-<students><student><name>Asha</name><marks>85</marks></student></students>
+<student>
+    <id>101</id>
+    <name>Asha</name>
+    <marks>85</marks>
+</student>
 ```
 
-HTML describes how content looks. XML describes what the content means. Both are tree structured and use nested tags.
+**Difference:** HTML uses a standard set of tags and focuses on displaying content. XML allows custom tags and focuses on describing and transporting data. HTML is generally used for web pages; XML is used for structured data exchange and configuration.
+
+**Conclusion:** HTML presents information to users, while XML describes structured information for storage and exchange.
 
 ---
 
-## Question 6 — Web Scraping Workflow Using BeautifulSoup
+## 6. Demonstrate the process of collecting data from a web page using web scraping.
 
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Demonstrate the process of collecting data from a web page using web scraping.
+**Definition:** Web scraping is the process of extracting information from web pages and converting it into a structured form for analysis. It should be performed only where permitted and in accordance with the website's terms and access rules.
 
----
+### Steps involved
+1. **Identify the page:** Select a page that publicly provides the required information and permits automated access.
+2. **Check rules:** Review the website terms, `robots.txt` guidance, rate limits and applicable privacy requirements.
+3. **Send a request:** A program may request the page using an HTTP library.
+4. **Parse HTML:** Use an HTML parser such as BeautifulSoup to examine the page structure.
+5. **Extract fields:** Select required text, links or table values using appropriate tags or selectors.
+6. **Clean and store:** Remove unwanted spaces, validate fields and save results as CSV or JSON.
 
-### Step-by-Step Solution
-
-#### 1. Web Scraping Lifecycle Steps
-Web scraping is the automatic extraction of data from web pages. `requests` fetches the page and BeautifulSoup parses the HTML.
-
-Steps:
-
-1. Choose the target URL and check the site's terms and robots.txt.
-2. Send an HTTP GET request with `requests.get()`.
-3. Check the status code (200 means success).
-4. Parse the HTML with BeautifulSoup.
-5. Locate elements by tag, class or id with `find()` and `find_all()`.
-6. Extract text, links and table rows.
-7. Store the result in a DataFrame or file.
-
-#### 2. Fetching & Parsing HTML (`requests` & BeautifulSoup)
-Fetch and parse:
-
+### Illustrative Python example
 ```python
 import requests
 from bs4 import BeautifulSoup
-response = requests.get("https://example.com")
+
+url = "https://example.com"
+response = requests.get(url, timeout=10)
+response.raise_for_status()
+
 soup = BeautifulSoup(response.text, "html.parser")
-print(response.status_code, soup.title.text)
+title = soup.title.get_text(strip=True)
+print(title)
 ```
+*This example reads a page title from a permitted example page; it does not bypass access controls.*
 
-#### 3. Extracting Elements (Text, Links & Tables)
-Extract text, links and a table (sample HTML used so it runs offline):
+### Uses and advantages
+* Collecting public product descriptions or public notices where permitted.
+* Monitoring publicly available information within allowed limits.
+* Creating datasets for research and text analysis.
+* Reduces repetitive manual copying.
 
-```python
-from bs4 import BeautifulSoup
-html = """<h1>Report</h1><a href="/a">Link A</a>
-<table><tr><th>Name</th></tr><tr><td>Asha</td><td>85</td></tr></table>"""
-soup = BeautifulSoup(html, "html.parser")
-print(soup.h1.text)                                  # Report
-print([a["href"] for a in soup.find_all("a")])       # ['/a']
-rows = [[c.text for c in r.find_all(["th", "td"])] for r in soup.find_all("tr")]
-print(rows)                                          # [['Name', 'Marks'], ['Asha', '85']]
-```
+**Limitations and precautions:** Websites may change their structure, block automated requests or restrict reuse. Do not collect private or personal information without a valid basis. Use reasonable request rates and prefer official APIs when available.
 
-The code shows how text comes from tags, links from the `href` attribute, and a table from `tr`, `th` and `td` tags.
+![Concept diagram](figures/unit3_q6_web_scraping_flow.png)
+
+**Conclusion:** Web scraping turns permitted web content into structured data through requesting, parsing, extraction, cleaning and storage.
 
 ---
 
-## Question 7 — Binary Data Formats (HDF5) vs. Traditional Formats
+## 7. Distinguish between Binary data formats such as HDF5 and traditional file formats. Indicate their advantages and suitable use cases.
 
-**Priority:** Priority 2 (Likely to Appear) | **Marks:** 8 Marks  
-**Question:** Distinguish between Binary data formats such as HDF5 and traditional file formats. Indicate their advantages and suitable use cases.
+**Definition:** A binary data format stores information as bytes in a structured machine-readable representation. HDF5 (Hierarchical Data Format version 5) is a binary format designed to store and organize large and complex scientific datasets.
+
+### HDF5 features
+* Stores datasets and groups in a hierarchical structure, similar to folders and files.
+* Can store large numerical arrays and metadata.
+* Supports compression and chunked storage.
+* Allows selected portions of a dataset to be accessed without reading everything.
+* Can organize related datasets in one file.
+
+**Traditional formats:** CSV and plain text are human-readable and easy to exchange. JSON and XML are text-based formats that can represent structured or nested data. These formats are often convenient for small and medium datasets and interoperability.
+
+### Comparison
+* **Readability:** CSV/text can be opened in a text editor; HDF5 is binary and usually needs a suitable library or viewer.
+* **Structure:** CSV is mainly tabular; HDF5 supports groups, datasets and metadata.
+* **Performance:** HDF5 can efficiently handle large numerical data and partial access; performance depends on layout and workload.
+* **Portability:** CSV and JSON are widely readable; HDF5 requires compatible software.
+* **Size:** HDF5 may reduce storage through compression, while text formats can be larger for numerical data.
+
+**Suitable use cases:** Use CSV for simple tables and data exchange; JSON for API messages and nested records; HDF5 for large scientific arrays, simulations, sensor measurements and research datasets.
+
+![Concept diagram](figures/unit3_q7_file_formats_comparison.png)
+
+**Conclusion:** Text formats prioritize readability and exchange, while HDF5 provides structured and efficient storage for large, complex datasets.
 
 ---
 
-### Step-by-Step Solution
+## 8. Apply NoSQL MongoDB CRUD operations to store and retrieve by taking suitable data as an example.
 
-#### 1. Architectural Comparison (HDF5 vs. CSV / TXT / JSON)
-HDF5 (Hierarchical Data Format) is a binary format for storing large numerical arrays and tables in a hierarchy of groups and datasets. Traditional formats are CSV, TXT and JSON, which store data as readable text.
+**Definition:** MongoDB is a NoSQL, document-oriented database. It stores records as BSON documents (a binary representation similar to JSON) inside collections. CRUD means Create, Read, Update and Delete.
 
-| Basis | HDF5 (binary) | CSV / TXT / JSON (text) |
-|---|---|---|
-| Storage | Binary bytes | Plain characters |
-| Readability | Not human readable | Human readable |
-| Speed | Fast read and write | Slower, needs parsing |
-| File size | Compact, supports compression | Larger |
-| Partial access | Read a slice without loading all | Must read sequentially |
-| Metadata | Stores types and attributes | No built-in types |
-| Structure | Groups and datasets | Flat rows or nested text |
-
-#### 2. Key Advantages & Suitable Use Cases
-Advantages of HDF5:
-
-1. Handles very large datasets efficiently.
-2. Reads only the required slice.
-3. Keeps data types and metadata.
-4. Supports compression.
-
-Use cases: scientific data, machine learning arrays, sensor data, repeated fast access. Text formats suit small data, sharing and manual editing.
-
-#### 3. Python Implementation Example (`h5py`)
-```python
-import h5py, numpy as np
-with h5py.File("data.h5", "w") as f:
-    f.create_dataset("scores", data=np.arange(10))
-with h5py.File("data.h5", "r") as f:
-    print(f["scores"][2:5])   # [2 3 4]
+### Example collection
+Assume a collection named `students`. A document may contain:
+```json
+{
+  "rollNo": 101,
+  "name": "Asha",
+  "marks": 85
+}
 ```
 
----
+### Operations
+* **Create:** Insert a new document using `insertOne()` or multiple documents using `insertMany()`.
+* **Read:** Retrieve documents using `find()` or one document using `findOne()`.
+* **Update:** Change fields using `updateOne()` or `updateMany()`, commonly with `$set`.
+* **Delete:** Remove a document using `deleteOne()` or multiple documents using `deleteMany()`.
 
-## Question 8 — NoSQL MongoDB CRUD Operations
+### MongoDB commands
+```javascript
+use college
 
-**Priority:** Priority 1 (Must Prepare) | **Marks:** 8 Marks  
-**Question:** Apply NoSQL Mongo DB CRUD operations to store and retrieve by taking suitable data as an example.
+// CREATE
+db.students.insertOne({rollNo: 101, name: "Asha", marks: 85})
 
----
+// READ
+db.students.find({rollNo: 101})
 
-### Step-by-Step Solution
+// UPDATE
+db.students.updateOne(
+  {rollNo: 101},
+  {$set: {marks: 90}}
+)
 
-#### 1. Overview & Setup
-MongoDB is a document-oriented NoSQL database. It stores data as JSON-like documents inside collections. CRUD means Create, Read, Update, Delete. A running MongoDB server on localhost is assumed. Sample data is a `students` collection.
-
-#### 2. CRUD Operations in Python (`pymongo`)
-Create:
-
-```python
-from pymongo import MongoClient
-
-col = MongoClient()["college"]["students"]
-
-# Create
-col.insert_one({"name": "Asha", "age": 20})
-
-# Read
-print(col.find_one({"name": "Asha"}))
-
-# Update
-col.update_one({"name": "Asha"}, {"$set": {"age": 21}})
-
-# Delete
-col.delete_one({"name": "Asha"})
+// DELETE
+db.students.deleteOne({rollNo: 101})
 ```
 
-##### Output
+### Advantages
+* Flexible document structure supports records with different fields.
+* Documents can represent nested objects and arrays.
+* CRUD operations are straightforward.
+* Can be suitable for applications with changing data structures.
 
-```output
-'name': 'Asha', 'age': 20}
-```
-#### 3. Key MongoDB Points & Rules
-Points:
+**Important points:** Use appropriate filters to avoid updating or deleting unintended documents. Add indexes for frequently searched fields when needed. Plan validation and access control for reliable database use.
 
-1. **insert_one / insert_many:** add one or many documents. MongoDB adds a unique `_id` automatically.
-2. **find / find_one:** retrieve documents using a filter. An empty filter returns all.
-3. **$set:** changes only the given fields.
-4. **delete_one:** removes the first matching document.
-5. **Schema-less:** documents in one collection can have different fields.
+![Concept diagram](figures/unit3_q8_mongodb_crud_flow.png)
 
----
-
-## Quick Revision
-
-1. open() modes r, w, a; read() readline() readlines(); write() writelines().
-2. read_csv uses comma, read_table uses tab; to_csv(index=False) writes output.
-3. chunksize gives an iterator of DataFrames; nrows previews the first rows.
-4. JSON: loads/dumps for strings, load/dump for files; object is dict, array is list.
-5. Scraping flow: requests.get, BeautifulSoup, find_all, extract, store; MongoDB CRUD: insert_one, find, update_one with $set, delete_one.
+**Conclusion:** MongoDB CRUD operations allow users to insert, retrieve, modify and remove documents in a collection.

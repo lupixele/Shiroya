@@ -7,13 +7,14 @@ This directory serves as the centralized academic exam preparation hub for **Fun
 
 ---
 
-## Current Complete 8-Mark Exam Notes (Units 1–5)
+## Exam Notes & Question Banks (Units 1–5)
 
-Converted and split from the complete 8-mark semester exam notes:
+Complete examination notes and question indices for Section A (2M Compulsory) and Section B (8M Long Questions):
 
-| Document | Unit Coverage | Questions Included |
+| Document | Unit Coverage | Content Included |
 | :--- | :--- | :--- |
-| [`questions.md`](questions.md) | **Units I–V** | Master Question Bank with direct links to all 32 questions |
+| [`questions.md`](questions.md) | **Units I–V** | Master Question Bank mapping all 32 eight-mark questions and 30 two-mark questions |
+| [`2-marks.md`](2-marks.md) | **Units I–V** | Section A: 30 Compulsory 2-Mark Short Q&As (6 questions per unit) |
 | [`unit-1.md`](unit-1.md) | **Unit I: Introduction to Data Science** | 6 questions (Scope, Evolution, Applications, Lifecycle, Data Structures, Tools) |
 | [`unit-2.md`](unit-2.md) | **Unit II: Data Collection & Pre-processing** | 8 questions (Collection, Pre-processing, Cleaning, Missing Values, Scaling, Feature Engineering, Integration & Aggregation) |
 | [`unit-3.md`](unit-3.md) | **Unit III: Data Loading, Storage & File Formats** | 8 questions (Text files, Chunking, Delimited formats, JSON, HTML/XML, Web Scraping, Binary/HDF5, MongoDB CRUD) |

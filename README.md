@@ -60,7 +60,7 @@ Shiroya/
 - CPP — Object Oriented Programming through C++ notes and worked answers (Units 1 to 5, 2-marks & model paper)
 - DBMS — Database Management Systems complete exam notes (Units 1 to 5 & 2-marks)
 - EMP — Quantitative aptitude and reasoning study materials
-- FDS — Fundamentals of Data Science notes and worked answers (Units 3, 4, 5)
+- FDS — Fundamentals of Data Science complete exam notes (Units 1 to 5 & 2-marks)
 - P&S — Probability and Statistics notes and worked solutions (Units 3, 4, 5)
 - Additional topic folders are continuously added by the community for other academic subjects and revision materials.
 
